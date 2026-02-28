@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifs & Réservations — ONTIME TRANSFERT</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
+  --black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;
+  --text:#e8e8e8;--text-dim:#ccc;--text-muted:#777;
+  --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.navbar.hidden{transform:translateY(-100%);}
+
+.nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;white-space:nowrap;text-decoration:none;}
+.nav-logo-hex{width:44px;height:44px;flex-shrink:0;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
+.nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.nav-logo-line{flex:1;height:1px;background:var(--gold);}
+.nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+
+.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;}
+.gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);background-size:200% 100%;animation:goldShimmer 4s ease-in-out infinite;}
+@keyframes goldShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.nav-links{display:flex !important;align-items:center;gap:32px;}
+.nav-link{font-size:.9rem;color:var(--text-dim);text-decoration:none;letter-spacing:.5px;font-weight:400;transition:color .3s;position:relative;}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s cubic-bezier(.16,1,.3,1);}
+.nav-link:hover{color:var(--gold);}.nav-link:hover::after{width:100%;}
+.nav-link.active{color:var(--gold);}.nav-link.active::after{width:100%;}
+
+.nav-cta{padding:11px 26px;border-radius:8px;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,169,110,.25);}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--gold-light);text-decoration:none;font-weight:400;}
+.nav-phone svg{width:16px;height:16px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:101;position:relative;background:none;border:none;}
+.hamburger span{display:block;height:1.5px;background:var(--gold);border-radius:1px;transition:all .4s cubic-bezier(.16,1,.3,1);}
+.hamburger span:nth-child(1){width:24px}.hamburger span:nth-child(2){width:18px;margin-left:auto}.hamburger span:nth-child(3){width:24px}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0;width:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s;}
+.sidebar-overlay.open{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:0;bottom:0;width:300px;z-index:99;background:linear-gradient(180deg,#0f0d0a,#0a0a0a);border-left:1px solid var(--border);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
+.sidebar.open{transform:translateX(0);}
+.sidebar-link{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid var(--border-light);cursor:pointer;transition:color .3s,padding-left .3s;text-decoration:none;display:block;}
+.sidebar-link:hover{color:var(--gold);padding-left:8px;}
+
+/* ══════════════════════════════════
+   PAGE HEADER
+══════════════════════════════════ */
+.page-header{
+  padding:160px 60px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.58rem;text-transform:uppercase;letter-spacing:3.5px;color:var(--gold);margin-bottom:16px;}
+.section-label::before{content:'';width:28px;height:1px;background:var(--gold);}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-sub{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:600px;line-height:1.8;margin:0 auto;}
+
+.sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.1;}
+
+/* ══════════════════════════════════
+   CONTENT SECTIONS
+══════════════════════════════════ */
+.content{max-width:900px;margin:0 auto;padding:0 40px 100px;}
+
+.block{
+  background:linear-gradient(145deg,rgba(20,18,14,.9),rgba(12,11,8,.95));
+  border:1px solid var(--border);border-radius:20px;
+  padding:48px;margin-bottom:32px;
+  opacity:0;transform:translateY(60px);filter:blur(6px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);
+}
+.block.vis{opacity:1;transform:translateY(0);filter:blur(0);}
+.block.d1{transition-delay:.05s}.block.d2{transition-delay:.1s}.block.d3{transition-delay:.15s}
+.block.d4{transition-delay:.2s}.block.d5{transition-delay:.25s}.block.d6{transition-delay:.3s}
+
+.block-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.04));
+  border:1px solid rgba(200,169,110,.15);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.block-icon svg{width:24px;height:24px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+
+.block-title{
+  font-family:'DM Serif Display',serif;font-size:1.5rem;color:#fff;margin-bottom:18px;line-height:1.3;
+}
+.block-title em{font-style:italic;color:var(--gold-light);}
+
+.block p{color:var(--text-dim);font-size:.92rem;line-height:1.85;margin-bottom:14px;font-weight:300;}
+.block p:last-child{margin-bottom:0;}
+.block strong{color:#fff;font-weight:600;}
+.block .gold{color:var(--gold);}
+
+/* Info rows */
+.info-row{
+  display:flex;align-items:flex-start;gap:14px;padding:14px 0;
+  border-bottom:1px solid var(--border-light);
+}
+.info-row:last-child{border-bottom:none;}
+.info-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;margin-top:7px;
+}
+.info-text{color:var(--text-dim);font-size:.9rem;line-height:1.7;font-weight:300;}
+.info-text strong{color:#fff;font-weight:500;}
+
+/* Highlight box */
+.highlight{
+  background:linear-gradient(135deg,rgba(200,169,110,.08),rgba(200,169,110,.02));
+  border:1px solid rgba(200,169,110,.18);border-radius:12px;
+  padding:20px 24px;margin:20px 0;
+}
+.highlight p{color:var(--gold-light);font-size:.88rem;margin:0;}
+
+/* Timeline annulation */
+.timeline{margin:20px 0;}
+.timeline-item{
+  display:flex;gap:16px;position:relative;padding-bottom:24px;
+}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-item::before{
+  content:'';position:absolute;left:15px;top:32px;bottom:0;width:1px;
+  background:var(--border);
+}
+.timeline-item:last-child::before{display:none;}
+.timeline-dot{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;
+}
+.timeline-dot.green{background:rgba(76,175,80,.15);color:#4caf50;border:1px solid rgba(76,175,80,.3);}
+.timeline-dot.orange{background:rgba(255,152,0,.15);color:#ff9800;border:1px solid rgba(255,152,0,.3);}
+.timeline-dot.red{background:rgba(244,67,54,.15);color:#f44336;border:1px solid rgba(244,67,54,.3);}
+.timeline-content{flex:1;}
+.timeline-label{font-size:.85rem;font-weight:600;color:#fff;margin-bottom:2px;}
+.timeline-desc{font-size:.82rem;color:var(--text-muted);font-weight:300;}
+
+/* CTA section */
+.cta-section{text-align:center;padding:60px 40px 120px;}
+.cta-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;margin-bottom:12px;}
+.cta-sub{color:var(--text-muted);font-size:.9rem;margin-bottom:32px;font-weight:300;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn{
+  padding:16px 36px;border-radius:10px;font-size:.95rem;font-weight:600;
+  text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;
+}
+.cta-btn.primary{
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);
+}
+.cta-btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
+.cta-btn.secondary{
+  background:transparent;color:var(--gold);border:1px solid rgba(200,169,110,.3);
+}
+.cta-btn.secondary:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 8px 30px rgba(200,169,110,.1);}
+.cta-btn svg{width:18px;height:18px;vertical-align:middle;margin-left:6px;fill:currentColor;}
+
+/* Engagements grid */
+.engage-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+.engage-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:10px;
+  background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.08);
+}
+.engage-check{color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+.engage-text{font-size:.85rem;color:var(--text-dim);font-weight:400;}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.footer{border-top:1px solid var(--border);padding:40px 60px 20px;margin-top:0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:20px;}
+.footer-logo{display:flex;align-items:center;gap:10px;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.75rem;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{text-align:center;font-size:.68rem;color:var(--text-muted);opacity:.5;}
+
+/* ══════════════════════════════════
+   WHATSAPP BUTTON
+══════════════════════════════════ */
+.wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s,box-shadow .3s;}
+.wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.45);}
+.wa svg{width:28px;height:28px;fill:#fff;}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:768px){
+  .navbar{padding:0 20px;height:64px;}
+  .gold-line{top:64px;}
+  .nav-links{display:none !important;}
+  .hamburger{display:flex;}
+  .page-header{padding:130px 24px 50px;}
+  .content{padding:0 20px 80px;}
+  .block{padding:28px 22px;}
+  .engage-grid{grid-template-columns:1fr;}
+  .cta-section{padding:40px 20px 80px;}
+  .footer{padding:30px 20px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-hex" viewBox="0 0 44 44" fill="none">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+      <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+      <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+      <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">ONTIME</span>
+      <div class="nav-logo-bar"><span class="nav-logo-line"></span><span class="nav-logo-sub">Transfert</span><span class="nav-logo-line"></span></div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="vehicules.html" class="nav-link">Véhicules</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link active">Tarifs</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="tel:+33760554460" class="nav-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      07 60 55 44 60
+    </a>
+    <a href="index.html#booking" class="nav-cta">Réserver</a>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="gold-line" id="goldLine"></div>
+
+<!-- SIDEBAR MOBILE -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<nav class="sidebar" id="sidebar">
+  <a href="index.html" class="sidebar-link">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link">Véhicules</a>
+  <a href="services.html" class="sidebar-link">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link" style="color:var(--gold);">Tarifs & Réservations</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+  <a href="index.html#booking" class="sidebar-link">Réserver</a>
+  <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+</nav>
+
+<!-- ═══ PAGE HEADER ═══ -->
+<header class="page-header">
+  <div class="section-label">Tarifs & Réservations</div>
+  <h1 class="section-title">Réservez en toute <em>transparence</em></h1>
+  <p class="section-sub">Prix fixe garanti, paiement sécurisé en ligne, annulation flexible. Tout est clair dès le départ, sans surprise à l'arrivée.</p>
+</header>
+
+<div class="sep"></div>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="content">
+
+  <!-- BLOCK 1 : COMMENT RÉSERVER -->
+  <div class="block d1">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    </div>
+    <div class="block-title">Comment <em>réserver</em> ?</div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Courses simples</strong> (aéroport, gare, trajet en ville) — Utilisez notre <strong>formulaire en ligne</strong> pour réserver en quelques clics. Il vous suffit d'indiquer votre trajet, la date et l'heure souhaitées, ainsi que le nombre de passagers. Pour les transferts aéroport ou gare, pensez à préciser votre numéro de vol ou de train.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Mise à disposition, Van VIP & Sprinter VIP</strong> — Contactez-nous directement par <strong>WhatsApp</strong> pour recevoir un devis personnalisé sous 2 heures.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Réservation le jour même</strong> — Possible avec un minimum de <strong>4 heures avant la course</strong>. Pour les demandes urgentes, privilégiez le WhatsApp pour un traitement plus rapide.</div>
+    </div>
+    <div class="highlight">
+      <p><strong>Confirmation immédiate</strong> par SMS et email dès la validation de votre réservation. Les informations de votre chauffeur (nom, modèle du véhicule, plaque d'immatriculation) vous sont envoyées <strong>la veille de la course</strong>.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 2 : ACCUEIL & ATTENTE -->
+  <div class="block d2">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <div class="block-title">Accueil & <em>ponctualité</em></div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Accueil avec pancarte nominative</strong> en aéroport et en gare pour les catégories Van et Berline de luxe.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Suivi de votre vol en temps réel</strong> — En cas de retard de votre avion, votre chauffeur adapte automatiquement son heure d'arrivée. Aucun supplément ne vous sera facturé.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>15 minutes d'attente offertes</strong> à compter de l'heure convenue (aéroport, gare ou adresse). Au-delà, un supplément de <strong class="gold">10 € par tranche de 20 minutes</strong> sera appliqué. Passé ce délai sans nouvelles, la course pourra être annulée.</div>
+    </div>
+    <div class="highlight">
+      <p>Les retards de vol et de train ne sont jamais facturés. Nous suivons votre transport en temps réel.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 3 : TARIFS -->
+  <div class="block d3">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    </div>
+    <div class="block-title">Nos <em>tarifs</em></div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Forfait fixe</strong> pour les transferts aéroport et gare — Le prix est calculé et affiché au moment de la réservation. Pas de compteur, pas de surprise.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Tarif au kilomètre</strong> pour les courses en banlieue et les trajets simples — Le montant exact est communiqué avant validation.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Supplément nuit & jours fériés</strong> — Une majoration de <strong class="gold">10 %</strong> s'applique sur les courses effectuées en horaires de nuit et les jours fériés.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Siège bébé / rehausseur</strong> — Mis à disposition <strong>gratuitement</strong> sur demande. Merci de le préciser lors de la réservation.</div>
+    </div>
+    <div class="info-row">
+      <div class="info-dot"></div>
+      <div class="info-text"><strong>Le nombre de passagers</strong> n'influence pas le tarif. Seule la catégorie de véhicule détermine le prix.</div>
+    </div>
+    <div class="highlight">
+      <p><strong>Prix garanti</strong> — Le tarif confirmé à la réservation est le tarif final. Aucun frais caché, aucune majoration à l'arrivée.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 4 : PAIEMENT -->
+  <div class="block d4">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    </div>
+    <div class="block-title">Paiement <em>sécurisé</em></div>
+    <p>Le paiement s'effectue <strong>en ligne par carte bancaire</strong> (Visa, Mastercard) au moment de la réservation. Le règlement est intégral et sécurisé via notre plateforme de paiement Stripe.</p>
+    <p>Une <strong>facture est envoyée automatiquement</strong> par email après chaque course. Idéal pour vos notes de frais professionnels.</p>
+  </div>
+
+  <!-- BLOCK 5 : MODIFICATION -->
+  <div class="block d5">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    </div>
+    <div class="block-title">Modifier une <em>réservation</em></div>
+    <p>Vous souhaitez changer l'heure, l'adresse ou la catégorie de véhicule ? Contactez notre support via <strong>WhatsApp</strong> et nous ajustons votre réservation en quelques minutes.</p>
+    <p>Toute modification est <strong>gratuite</strong> si elle intervient au moins <strong class="gold">2 heures avant l'heure de prise en charge</strong>.</p>
+  </div>
+
+  <!-- BLOCK 6 : ANNULATION -->
+  <div class="block d6">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    </div>
+    <div class="block-title">Politique d'<em>annulation</em></div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot green">✓</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Plus de 24h avant la course</div>
+          <div class="timeline-desc">Annulation 100 % gratuite. Remboursement intégral.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot orange">!</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Entre 24h et 2h avant la course</div>
+          <div class="timeline-desc">Frais d'annulation de 50 % du montant de la course.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot red">✕</div>
+        <div class="timeline-content">
+          <div class="timeline-label">Moins de 2h avant ou no-show</div>
+          <div class="timeline-desc">Course facturée intégralement (100 %). Aucun remboursement.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <p><strong>Annulation côté ONTIME</strong> — En cas de force majeure de notre part, vous bénéficiez d'un remboursement intégral et d'une remise sur votre prochaine course.</p>
+    </div>
+  </div>
+
+  <!-- BLOCK 7 : ENGAGEMENTS -->
+  <div class="block d1">
+    <div class="block-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="block-title">Nos <em>engagements</em></div>
+    <div class="engage-grid">
+      <div class="engage-item">
+        <span class="engage-check">✓</span>
+        <span class="engage-text">Ponctualité garantie</span>
+      </div>
+      <div class="engage-item">
+        <span class="engage-check">✓</span>
+        <span class="engage-text">Véhicules propres et récents</span>
+      </div>
+      <div class="engage-item">
+        <span class="engage-check">✓</span>
+        <span class="engage-text">Chauffeurs professionnels carte VTC</span>
+      </div>
+      <div class="engage-item">
+        <span class="engage-check">✓</span>
+        <span class="engage-text">Assurance passagers complète</span>
+      </div>
+      <div class="engage-item">
+        <span class="engage-check">✓</span>
+        <span class="engage-text">Prix fixe garanti sans surprise</span>
+      </div>
+      <div class="engage-item">
+        <span class="engage-check">✓</span>
+        <span class="engage-text">Service client 24h/24, 7j/7</span>
+      </div>
+    </div>
+    <div style="margin-top:20px;">
+      <p>Notre support est disponible <strong>24 heures sur 24, 7 jours sur 7</strong> par <strong>téléphone</strong> et <strong>WhatsApp</strong> au <strong class="gold">07 60 55 44 60</strong>.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ CTA SECTION ═══ -->
+<div class="sep"></div>
+<div class="cta-section">
+  <h2 class="cta-title">Prêt à réserver votre transfert ?</h2>
+  <p class="cta-sub">Prix fixe, confirmation immédiate, chauffeur professionnel.</p>
+  <div class="cta-buttons">
+    <a href="index.html#booking" class="cta-btn primary">Réserver maintenant</a>
+    <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20personnalis%C3%A9." class="cta-btn secondary" target="_blank" rel="noopener">
+      Devis sur WhatsApp
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 44 44" fill="none" width="28" height="28" style="flex-shrink:0;">
+        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+        <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+        <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+        <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+      </svg>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+    </div>
+    <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Confidentialité</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+// ═══ NAVBAR: hide on scroll down ═══
+const navbar=document.getElementById('navbar');
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y>lastScroll&&y>120)navbar.classList.add('hidden');
+  else navbar.classList.remove('hidden');
+  lastScroll=y;
+},{passive:true});
+
+// ═══ SIDEBAR ═══
+const hamburger=document.getElementById('hamburgerBtn'),sidebar=document.getElementById('sidebar'),overlay=document.getElementById('sidebarOverlay');
+function closeSidebar(){hamburger.classList.remove('open');sidebar.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';}
+hamburger.addEventListener('click',()=>{
+  const open=sidebar.classList.contains('open');
+  open?closeSidebar():(hamburger.classList.add('open'),sidebar.classList.add('open'),overlay.classList.add('open'),document.body.style.overflow='hidden');
+});
+overlay.addEventListener('click',closeSidebar);
+document.querySelectorAll('.sidebar-link').forEach(l=>l.addEventListener('click',closeSidebar));
+
+// ═══ SCROLL REVEAL ═══
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
+document.querySelectorAll('.block').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

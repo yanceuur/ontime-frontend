@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Véhicules — ONTIME TRANSFERT</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
+  --black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;
+  --text:#e8e8e8;--text-dim:#ccc;--text-muted:#777;
+  --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.navbar.hidden{transform:translateY(-100%);}
+
+.nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;white-space:nowrap;text-decoration:none;}
+.nav-logo-hex{width:44px;height:44px;flex-shrink:0;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
+.nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.nav-logo-line{flex:1;height:1px;background:var(--gold);}
+.nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+
+.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;}
+.gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);background-size:200% 100%;animation:goldShimmer 4s ease-in-out infinite;}
+@keyframes goldShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.nav-links{display:flex !important;align-items:center;gap:32px;}
+.nav-link{font-size:.9rem;color:var(--text-dim);text-decoration:none;letter-spacing:.5px;font-weight:400;transition:color .3s;position:relative;}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s cubic-bezier(.16,1,.3,1);}
+.nav-link:hover{color:var(--gold);}.nav-link:hover::after{width:100%;}
+.nav-link.active{color:var(--gold);}.nav-link.active::after{width:100%;}
+
+.nav-cta{padding:11px 26px;border-radius:8px;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,169,110,.25);}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--gold-light);text-decoration:none;font-weight:400;}
+.nav-phone svg{width:16px;height:16px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:101;position:relative;background:none;border:none;}
+.hamburger span{display:block;height:1.5px;background:var(--gold);border-radius:1px;transition:all .4s cubic-bezier(.16,1,.3,1);}
+.hamburger span:nth-child(1){width:24px}.hamburger span:nth-child(2){width:18px;margin-left:auto}.hamburger span:nth-child(3){width:24px}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0;width:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s;}
+.sidebar-overlay.open{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:0;bottom:0;width:300px;z-index:99;background:linear-gradient(180deg,#0f0d0a,#0a0a0a);border-left:1px solid var(--border);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
+.sidebar.open{transform:translateX(0);}
+.sidebar-link{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid var(--border-light);cursor:pointer;transition:color .3s,padding-left .3s;text-decoration:none;display:block;}
+.sidebar-link:hover{color:var(--gold);padding-left:8px;}
+
+/* ══════════════════════════════════
+   PAGE HEADER
+══════════════════════════════════ */
+.page-header{
+  padding:160px 60px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.58rem;text-transform:uppercase;letter-spacing:3.5px;color:var(--gold);margin-bottom:16px;}
+.section-label::before{content:'';width:28px;height:1px;background:var(--gold);}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-sub{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:560px;line-height:1.8;margin:0 auto;}
+
+.sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.1;}
+
+/* ══════════════════════════════════
+   VEHICLE CARDS
+══════════════════════════════════ */
+.fleet-section{padding:0 60px 120px;max-width:1200px;margin:0 auto;}
+
+.fleet-card{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-radius:20px;overflow:hidden;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,rgba(20,18,14,.9),rgba(12,11,8,.95));
+  margin-bottom:40px;
+  opacity:0;transform:translateY(80px);
+  transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1),box-shadow .5s,border-color .4s;
+  filter:blur(8px);
+}
+.fleet-card.vis{opacity:1;transform:translateY(0);filter:blur(0);}
+.fleet-card:hover{box-shadow:0 24px 60px rgba(0,0,0,.5);border-color:rgba(200,169,110,.25);}
+
+/* Alternate layout — even cards flip */
+.fleet-card:nth-child(even){direction:rtl;}
+.fleet-card:nth-child(even)>*{direction:ltr;}
+
+.fleet-card-img{
+  position:relative;overflow:hidden;min-height:380px;
+}
+.fleet-card-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);
+}
+.fleet-card:hover .fleet-card-img img{transform:scale(1.06);}
+
+.fleet-card-tag{
+  position:absolute;top:20px;left:20px;
+  font-size:.55rem;text-transform:uppercase;letter-spacing:2px;
+  padding:6px 14px;border-radius:8px;
+  background:rgba(10,10,10,.7);border:1px solid rgba(200,169,110,.3);
+  color:var(--gold);font-weight:600;backdrop-filter:blur(8px);
+}
+
+.fleet-card-body{
+  padding:48px 44px;display:flex;flex-direction:column;justify-content:center;
+}
+.fleet-card-name{
+  font-family:'DM Serif Display',serif;font-size:1.8rem;line-height:1.15;margin-bottom:6px;
+  background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.fleet-card-models{
+  font-size:.78rem;color:var(--gold);font-weight:500;margin-bottom:20px;letter-spacing:.3px;
+}
+.fleet-card-desc{
+  font-size:.82rem;color:var(--text-muted);line-height:1.8;font-weight:300;margin-bottom:28px;
+}
+
+/* Equipments */
+.equip-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.equip-item{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:8px;
+  background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);
+  font-size:.68rem;color:var(--text-dim);
+  transition:border-color .3s,color .3s;
+}
+.equip-item:hover{border-color:rgba(200,169,110,.25);color:var(--gold);}
+.equip-item svg{width:14px;height:14px;stroke:var(--gold);stroke-width:1.5;fill:none;flex-shrink:0;}
+
+/* Capacity badge */
+.capacity{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 18px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(200,169,110,.08),rgba(200,169,110,.02));
+  border:1px solid rgba(200,169,110,.15);
+  margin-bottom:28px;
+}
+.capacity-icon{font-size:1.2rem;}
+.capacity-text{font-size:.72rem;color:var(--text-dim);}
+.capacity-text strong{color:var(--gold-light);font-weight:600;}
+
+/* CTA */
+.fleet-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
+  color:var(--black);font-weight:600;font-size:.82rem;
+  text-decoration:none;letter-spacing:.3px;width:fit-content;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(200,169,110,.2);
+}
+.fleet-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
+.fleet-cta svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;}
+
+/* VIP banner */
+.vip-banner{
+  position:relative;border-radius:20px;overflow:hidden;
+  padding:60px;text-align:center;
+  border:1px solid rgba(200,169,110,.2);
+  background:linear-gradient(145deg,rgba(200,169,110,.06),rgba(200,169,110,.01));
+  margin-top:20px;
+}
+.vip-banner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(200,169,110,.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+.vip-title{
+  font-family:'DM Serif Display',serif;font-size:1.6rem;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:10px;position:relative;
+}
+.vip-text{font-size:.85rem;color:var(--text-muted);line-height:1.7;font-weight:300;max-width:500px;margin:0 auto 28px;position:relative;}
+.vip-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 32px;border-radius:10px;
+  background:transparent;border:1px solid var(--gold);
+  color:var(--gold);font-weight:600;font-size:.82rem;
+  text-decoration:none;letter-spacing:.3px;position:relative;
+  transition:all .3s;
+}
+.vip-cta:hover{background:var(--gold);color:var(--black);}
+.vip-cta svg{width:16px;height:16px;fill:currentColor;}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.footer{position:relative;z-index:1;padding:60px 60px 30px;border-top:1px solid var(--border-light);}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{display:flex;align-items:center;gap:10px;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:.7rem;color:var(--text-muted);text-decoration:none;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border-light);font-size:.6rem;color:var(--text-muted);max-width:1100px;margin-left:auto;margin-right:auto;}
+
+/* WHATSAPP */
+.wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);cursor:pointer;transition:transform .3s,box-shadow .3s;text-decoration:none;}
+.wa:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,.4);}
+.wa svg{width:28px;height:28px;fill:#fff;}
+
+/* Delay classes */
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:1024px){
+  .nav-links{display:none !important;}.hamburger{display:flex !important;}
+  .fleet-card{grid-template-columns:1fr;}
+  .fleet-card:nth-child(even){direction:ltr;}
+  .fleet-card-img{min-height:260px;}
+  .fleet-card-body{padding:36px 32px;}
+  .page-header{padding:140px 40px 60px;}
+  .fleet-section{padding:0 40px 80px;}
+}
+@media(max-width:640px){
+  .page-header{padding:120px 24px 48px;}
+  .fleet-section{padding:0 24px 60px;}
+  .fleet-card-body{padding:28px 24px;}
+  .fleet-card-name{font-size:1.4rem;}
+  .navbar{padding:0 20px;}
+  .footer{padding:40px 24px 20px;}.footer-inner{flex-direction:column;gap:16px;text-align:center;}
+  .vip-banner{padding:40px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-hex" viewBox="0 0 44 44" fill="none">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+      <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+      <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+      <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+    </svg>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">ONTIME</div>
+      <div class="nav-logo-bar"><div class="nav-logo-line"></div><div class="nav-logo-sub">Transfert</div><div class="nav-logo-line"></div></div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="vehicules.html" class="nav-link active">Véhicules</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link">Tarifs</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="tel:+33760554460" class="nav-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      07 60 55 44 60
+    </a>
+    <a href="index.html#booking" class="nav-cta">Réserver</a>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="gold-line" id="goldLine"></div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a href="index.html" class="sidebar-link">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link" style="color:var(--gold);">Véhicules</a>
+  <a href="services.html" class="sidebar-link">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link">Tarifs & Réservations</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+  <a href="index.html#booking" class="sidebar-link">Réserver</a>
+  <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+</aside>
+
+<!-- ═══ PAGE HEADER ═══ -->
+<div class="page-header">
+  <div class="section-label">Notre flotte</div>
+  <h1 class="section-title">Des véhicules à la hauteur<br>de vos <em>exigences</em></h1>
+  <p class="section-sub">Chaque véhicule est vérifié, nettoyé et préparé avec soin. Confort, sécurité et discrétion pour tous vos déplacements.</p>
+</div>
+
+<div class="sep"></div>
+
+<!-- ═══ VEHICLE CARDS ═══ -->
+<div class="fleet-section">
+
+  <!-- BERLINE CONFORT -->
+  <div class="fleet-card d1" id="confort">
+    <div class="fleet-card-img">
+      <img src="https://cfixe.com/img/jWI05NpUyiDMNSass7RSQaK5-NM=/1200x800/smart/filters:format(webp)/7383/presta/31012/e0e1ccaa-0336-47fc-b010-036f5d169feb.jpeg" alt="Tesla Model Y noir Paris" onerror="this.parentElement.style.background='#1a1a1a'">
+      <div class="fleet-card-tag">Confort</div>
+    </div>
+    <div class="fleet-card-body">
+      <div class="fleet-card-name">Berline Confort</div>
+      <div class="fleet-card-models">Tesla Model Y · Tesla Model 3</div>
+      <div class="capacity">
+        <span class="capacity-icon">👤</span>
+        <span class="capacity-text"><strong>1 à 3 passagers</strong> · 2 gros bagages + 1 petit</span>
+      </div>
+      <div class="fleet-card-desc">Véhicules récents, spacieux et parfaitement entretenus. Idéal pour les transferts aéroport, gare et courses en ville.</div>
+      <div class="equip-grid">
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Climatisation</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>Chargeurs USB</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Assurance complète</div>
+      </div>
+      <a href="index.html#booking" class="fleet-cta">Réserver une Berline Confort <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+
+  <!-- BERLINE PREMIUM -->
+  <div class="fleet-card d2" id="premium">
+    <div class="fleet-card-img">
+      <img src="https://images.pexels.com/photos/18369292/pexels-photo-18369292.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Mercedes Classe S" onerror="this.parentElement.style.background='#1a1a1a'">
+      <div class="fleet-card-tag">Premium</div>
+    </div>
+    <div class="fleet-card-body">
+      <div class="fleet-card-name">Berline Premium</div>
+      <div class="fleet-card-models">Mercedes Classe S · Mercedes Classe E · BMW Série 7</div>
+      <div class="capacity">
+        <span class="capacity-icon">👤</span>
+        <span class="capacity-text"><strong>1 à 3 passagers</strong> · 3 bagages max</span>
+      </div>
+      <div class="fleet-card-desc">Pour vos déplacements d'affaires et vos occasions spéciales. Véhicules haut de gamme, intérieur cuir, finitions soignées. Le raffinement à chaque trajet.</div>
+      <div class="equip-grid">
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Climatisation bi-zone</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>Wi-Fi 4G</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>Chargeurs USB-C</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Assurance complète</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Eau & presse</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Sièges cuir chauffants</div>
+      </div>
+      <a href="index.html#booking" class="fleet-cta">Réserver une Berline Premium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+
+  <!-- VAN / MINIBUS -->
+  <div class="fleet-card d3" id="van">
+    <div class="fleet-card-img">
+      <img src="https://images.pexels.com/photos/17455633/pexels-photo-17455633.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Mercedes Classe V" onerror="this.parentElement.style.background='#1a1a1a'">
+      <div class="fleet-card-tag">Groupe</div>
+    </div>
+    <div class="fleet-card-body">
+      <div class="fleet-card-name">Van & Minibus</div>
+      <div class="fleet-card-models">Mercedes Classe V · Mercedes Vito · VW Caravelle</div>
+      <div class="capacity">
+        <span class="capacity-icon">👥</span>
+        <span class="capacity-text"><strong>4 à 7 passagers</strong> · 7 bagages max</span>
+      </div>
+      <div class="fleet-card-desc">Parfait pour les familles, groupes d'amis ou équipes professionnelles. Espace généreux pour les passagers et les bagages, sans compromis sur le confort.</div>
+      <div class="equip-grid">
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Climatisation arrière</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>Wi-Fi</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>Chargeurs USB multiples</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Assurance complète</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Grand coffre</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Eau offerte</div>
+      </div>
+      <a href="index.html#booking" class="fleet-cta">Réserver un Van <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+
+  <!-- VIP BANNER -->
+  <div class="fleet-card d4" id="vip">
+    <div class="fleet-card-img">
+      <img src="https://rovelver.com/wp-content/uploads/2018/06/mercedes_v-class-full-luxury-starry-sky-0.jpg" alt="Intérieur Sprinter VIP" onerror="this.parentElement.style.background='#1a1a1a'">
+      <div class="fleet-card-tag">VIP</div>
+    </div>
+    <div class="fleet-card-body">
+      <div class="fleet-card-name">Sprinter & Van VIP</div>
+      <div class="fleet-card-models">Mercedes Sprinter VIP · Mercedes Classe V Long</div>
+      <div class="fleet-card-desc">Pour vos événements, mariages, séminaires ou groupes importants. Véhicules haut de gamme sur mesure, service blanc gants. Devis personnalisé sous 2h.</div>
+      <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20VIP%20Sprinter." class="fleet-cta" target="_blank" rel="noopener">Demander un devis VIP <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 44 44" fill="none" width="28" height="28" style="flex-shrink:0;">
+        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+        <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+        <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+        <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+      </svg>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+    </div>
+    <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Confidentialité</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+// ═══ NAVBAR: hide on scroll down ═══
+const navbar=document.getElementById('navbar');
+const goldLine=document.getElementById('goldLine');
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y>lastScroll&&y>120)navbar.classList.add('hidden');
+  else navbar.classList.remove('hidden');
+  lastScroll=y;
+},{passive:true});
+
+// ═══ SIDEBAR ═══
+const hamburger=document.getElementById('hamburgerBtn'),sidebar=document.getElementById('sidebar'),overlay=document.getElementById('sidebarOverlay');
+function closeSidebar(){hamburger.classList.remove('open');sidebar.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';}
+hamburger.addEventListener('click',()=>{
+  const open=sidebar.classList.contains('open');
+  open?closeSidebar():(hamburger.classList.add('open'),sidebar.classList.add('open'),overlay.classList.add('open'),document.body.style.overflow='hidden');
+});
+overlay.addEventListener('click',closeSidebar);
+document.querySelectorAll('.sidebar-link').forEach(l=>l.addEventListener('click',closeSidebar));
+
+// ═══ SCROLL REVEAL ═══
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
+document.querySelectorAll('.fleet-card,.vip-banner').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

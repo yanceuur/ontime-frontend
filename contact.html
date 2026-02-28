@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — ONTIME TRANSFERT</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
+  --black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;
+  --text:#e8e8e8;--text-dim:#ccc;--text-muted:#777;
+  --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+/* ══════════════════════════════════
+   NAVBAR
+══════════════════════════════════ */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.navbar.hidden{transform:translateY(-100%);}
+.nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;white-space:nowrap;text-decoration:none;}
+.nav-logo-hex{width:44px;height:44px;flex-shrink:0;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
+.nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.nav-logo-line{flex:1;height:1px;background:var(--gold);}
+.nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;}
+.gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);background-size:200% 100%;animation:goldShimmer 4s ease-in-out infinite;}
+@keyframes goldShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.nav-links{display:flex !important;align-items:center;gap:32px;}
+.nav-link{font-size:.9rem;color:var(--text-dim);text-decoration:none;letter-spacing:.5px;font-weight:400;transition:color .3s;position:relative;}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s cubic-bezier(.16,1,.3,1);}
+.nav-link:hover{color:var(--gold);}.nav-link:hover::after{width:100%;}
+.nav-link.active{color:var(--gold);}.nav-link.active::after{width:100%;}
+.nav-cta{padding:11px 26px;border-radius:8px;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,169,110,.25);}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--gold-light);text-decoration:none;font-weight:400;}
+.nav-phone svg{width:16px;height:16px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:101;position:relative;background:none;border:none;}
+.hamburger span{display:block;height:1.5px;background:var(--gold);border-radius:1px;transition:all .4s cubic-bezier(.16,1,.3,1);}
+.hamburger span:nth-child(1){width:24px}.hamburger span:nth-child(2){width:18px;margin-left:auto}.hamburger span:nth-child(3){width:24px}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0;width:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s;}
+.sidebar-overlay.open{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:0;bottom:0;width:300px;z-index:99;background:linear-gradient(180deg,#0f0d0a,#0a0a0a);border-left:1px solid var(--border);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
+.sidebar.open{transform:translateX(0);}
+.sidebar-link{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid var(--border-light);cursor:pointer;transition:color .3s,padding-left .3s;text-decoration:none;display:block;}
+.sidebar-link:hover{color:var(--gold);padding-left:8px;}
+
+/* ══════════════════════════════════
+   PAGE HEADER
+══════════════════════════════════ */
+.page-header{
+  padding:160px 60px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.58rem;text-transform:uppercase;letter-spacing:3.5px;color:var(--gold);margin-bottom:16px;}
+.section-label::before{content:'';width:28px;height:1px;background:var(--gold);}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-sub{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:560px;line-height:1.8;margin:0 auto;}
+.sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.1;}
+
+/* ══════════════════════════════════
+   CONTACT LAYOUT
+══════════════════════════════════ */
+.contact-wrapper{
+  max-width:1100px;margin:0 auto;padding:0 40px 100px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+}
+
+/* LEFT: INFO CARDS */
+.contact-info{display:flex;flex-direction:column;gap:20px;}
+.info-card{
+  background:linear-gradient(145deg,rgba(20,18,14,.9),rgba(12,11,8,.95));
+  border:1px solid var(--border);border-radius:16px;
+  padding:28px 28px;display:flex;align-items:flex-start;gap:18px;
+  opacity:0;transform:translateY(40px);filter:blur(6px);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1),filter .8s cubic-bezier(.16,1,.3,1);
+}
+.info-card.vis{opacity:1;transform:translateY(0);filter:blur(0);}
+.info-card.d1{transition-delay:.05s}.info-card.d2{transition-delay:.1s}.info-card.d3{transition-delay:.15s}.info-card.d4{transition-delay:.2s}
+
+.info-card-icon{
+  width:46px;height:46px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.04));
+  border:1px solid rgba(200,169,110,.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.info-card-icon svg{width:20px;height:20px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+.info-card-content{flex:1;}
+.info-card-label{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:4px;}
+.info-card-value{font-size:1rem;color:#fff;font-weight:500;}
+.info-card-value a{color:var(--gold-light);text-decoration:none;transition:color .3s;}
+.info-card-value a:hover{color:var(--gold);}
+.info-card-note{font-size:.8rem;color:var(--text-muted);margin-top:4px;font-weight:300;}
+
+/* RIGHT: FORM */
+.contact-form-card{
+  background:linear-gradient(145deg,rgba(20,18,14,.9),rgba(12,11,8,.95));
+  border:1px solid var(--border);border-radius:20px;
+  padding:40px;
+  opacity:0;transform:translateY(40px);filter:blur(6px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1) .1s,transform .9s cubic-bezier(.16,1,.3,1) .1s,filter .9s cubic-bezier(.16,1,.3,1) .1s;
+}
+.contact-form-card.vis{opacity:1;transform:translateY(0);filter:blur(0);}
+
+.form-title{
+  font-family:'DM Serif Display',serif;font-size:1.4rem;color:#fff;margin-bottom:6px;
+}
+.form-subtitle{font-size:.85rem;color:var(--text-muted);font-weight:300;margin-bottom:28px;}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:0;}
+.form-group.full{grid-column:1/-1;}
+.form-label{font-size:.78rem;color:var(--text-dim);font-weight:400;letter-spacing:.3px;}
+.form-input,.form-select,.form-textarea{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(200,169,110,.12);border-radius:10px;
+  padding:13px 16px;color:#fff;font-size:.9rem;font-family:'Inter',sans-serif;
+  transition:border-color .3s,box-shadow .3s;
+  outline:none;width:100%;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted);font-weight:300;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:rgba(200,169,110,.4);
+  box-shadow:0 0 0 3px rgba(200,169,110,.08);
+}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c8a96e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+.form-select option{background:#1a1a1a;color:#fff;}
+.form-textarea{resize:vertical;min-height:120px;}
+
+.form-submit{
+  width:100%;padding:15px;border:none;border-radius:10px;
+  font-size:.95rem;font-weight:600;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);
+  letter-spacing:.3px;margin-top:8px;
+  transition:transform .2s,box-shadow .2s,opacity .3s;
+}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* Status messages */
+.form-status{
+  text-align:center;padding:14px;border-radius:10px;margin-top:16px;
+  font-size:.88rem;font-weight:500;display:none;
+}
+.form-status.success{
+  display:block;
+  background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.25);color:#4caf50;
+}
+.form-status.error{
+  display:block;
+  background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.25);color:#f44336;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+.footer{border-top:1px solid var(--border);padding:40px 60px 20px;margin-top:0;}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:20px;}
+.footer-logo{display:flex;align-items:center;gap:10px;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.75rem;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{text-align:center;font-size:.68rem;color:var(--text-muted);opacity:.5;}
+
+/* WHATSAPP */
+.wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s,box-shadow .3s;}
+.wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.45);}
+.wa svg{width:28px;height:28px;fill:#fff;}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:768px){
+  .navbar{padding:0 20px;height:64px;}
+  .gold-line{top:64px;}
+  .nav-links{display:none !important;}
+  .hamburger{display:flex;}
+  .page-header{padding:130px 24px 50px;}
+  .contact-wrapper{grid-template-columns:1fr;padding:0 20px 80px;}
+  .form-row{grid-template-columns:1fr;}
+  .contact-form-card{padding:28px 22px;}
+  .footer{padding:30px 20px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-hex" viewBox="0 0 44 44" fill="none">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+      <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+      <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+      <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">ONTIME</span>
+      <div class="nav-logo-bar"><span class="nav-logo-line"></span><span class="nav-logo-sub">Transfert</span><span class="nav-logo-line"></span></div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="vehicules.html" class="nav-link">Véhicules</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link">Tarifs</a>
+    <a href="contact.html" class="nav-link active">Contact</a>
+    <a href="tel:+33760554460" class="nav-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      07 60 55 44 60
+    </a>
+    <a href="index.html#booking" class="nav-cta">Réserver</a>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="gold-line" id="goldLine"></div>
+
+<!-- SIDEBAR MOBILE -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<nav class="sidebar" id="sidebar">
+  <a href="index.html" class="sidebar-link">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link">Véhicules</a>
+  <a href="services.html" class="sidebar-link">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link">Tarifs & Réservations</a>
+  <a href="contact.html" class="sidebar-link" style="color:var(--gold);">Contact</a>
+  <a href="index.html#booking" class="sidebar-link">Réserver</a>
+  <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+</nav>
+
+<!-- ═══ PAGE HEADER ═══ -->
+<header class="page-header">
+  <div class="section-label">Contact</div>
+  <h1 class="section-title">Une question ? <em>Écrivez-nous</em></h1>
+  <p class="section-sub">Notre équipe est disponible 24h/24, 7j/7 pour répondre à toutes vos demandes.</p>
+</header>
+
+<div class="sep"></div>
+
+<!-- ═══ CONTACT CONTENT ═══ -->
+<div class="contact-wrapper">
+
+  <!-- LEFT: INFO CARDS -->
+  <div class="contact-info">
+
+    <div class="info-card d1">
+      <div class="info-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div class="info-card-content">
+        <div class="info-card-label">Téléphone</div>
+        <div class="info-card-value"><a href="tel:+33760554460">07 60 55 44 60</a></div>
+        <div class="info-card-note">Disponible 24h/24, 7j/7</div>
+      </div>
+    </div>
+
+    <div class="info-card d2">
+      <div class="info-card-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" style="fill:var(--gold);"/></svg>
+      </div>
+      <div class="info-card-content">
+        <div class="info-card-label">WhatsApp</div>
+        <div class="info-card-value"><a href="https://wa.me/33760554460" target="_blank" rel="noopener">07 60 55 44 60</a></div>
+        <div class="info-card-note">Réponse rapide — devis VIP & mise à disposition</div>
+      </div>
+    </div>
+
+    <div class="info-card d3">
+      <div class="info-card-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="info-card-content">
+        <div class="info-card-label">Email</div>
+        <div class="info-card-value"><a href="/cdn-cgi/l/email-protection#54373b3a20353720143b3a203d39312026353a27323126207a373b39"><span class="__cf_email__" data-cfemail="d4b7bbbaa0b5b7a094bbbaa0bdb9b1a0a6b5baa7b2b1a6a0fab7bbb9">[email&#160;protected]</span></a></div>
+        <div class="info-card-note">Réponse sous 2 heures</div>
+      </div>
+    </div>
+
+    <div class="info-card d4">
+      <div class="info-card-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="info-card-content">
+        <div class="info-card-label">Disponibilité</div>
+        <div class="info-card-value">24h/24 — 7j/7</div>
+        <div class="info-card-note">Réservations, modifications, urgences</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="contact-form-card" id="formCard">
+    <div class="form-title">Envoyez-nous un message</div>
+    <div class="form-subtitle">Nous vous répondons dans les meilleurs délais.</div>
+
+    <div id="contactForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="fname">Prénom</label>
+          <input type="text" id="fname" class="form-input" placeholder="Votre prénom" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lname">Nom</label>
+          <input type="text" id="lname" class="form-input" placeholder="Votre nom" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="votre@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Téléphone</label>
+          <input type="tel" id="phone" class="form-input" placeholder="+33 6 00 00 00 00">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label" for="subject">Sujet</label>
+          <select id="subject" class="form-select" required>
+            <option value="" disabled selected>Choisir un sujet</option>
+            <option value="Demande de devis">Demande de devis</option>
+            <option value="Réservation">Réservation</option>
+            <option value="Modification de course">Modification de course</option>
+            <option value="Réclamation">Réclamation</option>
+            <option value="Partenariat">Partenariat</option>
+            <option value="Autre">Autre</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full">
+          <label class="form-label" for="message">Message</label>
+          <textarea id="message" class="form-textarea" placeholder="Décrivez votre demande..." required></textarea>
+        </div>
+      </div>
+
+      <button type="button" class="form-submit" id="submitBtn" onclick="sendEmail()">Envoyer le message</button>
+
+      <div class="form-status" id="formStatus"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 44 44" fill="none" width="28" height="28" style="flex-shrink:0;">
+        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+        <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+        <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+        <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+      </svg>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+    </div>
+    <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGV</a><a href="#">Confidentialité</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+// ═══ NAVBAR: hide on scroll down ═══
+const navbar=document.getElementById('navbar');
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y>lastScroll&&y>120)navbar.classList.add('hidden');
+  else navbar.classList.remove('hidden');
+  lastScroll=y;
+},{passive:true});
+
+// ═══ SIDEBAR ═══
+const hamburger=document.getElementById('hamburgerBtn'),sidebar=document.getElementById('sidebar'),overlayEl=document.getElementById('sidebarOverlay');
+function closeSidebar(){hamburger.classList.remove('open');sidebar.classList.remove('open');overlayEl.classList.remove('open');document.body.style.overflow='';}
+hamburger.addEventListener('click',()=>{
+  const open=sidebar.classList.contains('open');
+  open?closeSidebar():(hamburger.classList.add('open'),sidebar.classList.add('open'),overlayEl.classList.add('open'),document.body.style.overflow='hidden');
+});
+overlayEl.addEventListener('click',closeSidebar);
+document.querySelectorAll('.sidebar-link').forEach(l=>l.addEventListener('click',closeSidebar));
+
+// ═══ SCROLL REVEAL ═══
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
+document.querySelectorAll('.info-card,.contact-form-card').forEach(el=>io.observe(el));
+
+// ═══ CONTACT FORM → BACKEND ═══
+const API_URL = 'https://ontime-backend.vercel.app';
+
+async function sendEmail(){
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('formStatus');
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const subject = document.getElementById('subject').value;
+  const message = document.getElementById('message').value.trim();
+
+  if(!fname || !lname || !email || !subject || !message){
+    status.className = 'form-status error';
+    status.textContent = 'Veuillez remplir tous les champs obligatoires.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours...';
+  status.className = 'form-status';
+  status.style.display = 'none';
+
+  try {
+    const res = await fetch(API_URL + '/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: fname + ' ' + lname,
+        email: email,
+        phone: phone || 'Non renseigné',
+        subject: subject,
+        message: message
+      })
+    });
+
+    if(res.ok){
+      status.className = 'form-status success';
+      status.textContent = 'Message envoyé avec succès. Nous vous répondons dans les meilleurs délais.';
+      btn.textContent = 'Message envoyé';
+      document.getElementById('fname').value = '';
+      document.getElementById('lname').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+      document.getElementById('subject').selectedIndex = 0;
+      document.getElementById('message').value = '';
+      setTimeout(()=>{ btn.disabled = false; btn.textContent = 'Envoyer le message'; }, 4000);
+    } else {
+      throw new Error('Erreur serveur');
+    }
+  } catch(err){
+    status.className = 'form-status error';
+    status.textContent = "Erreur lors de l'envoi. Veuillez réessayer ou nous contacter par téléphone.";
+    btn.disabled = false;
+    btn.textContent = 'Envoyer le message';
+    console.error('Contact error:', err);
+  }
+}
+</script>
+</body>
+</html>
