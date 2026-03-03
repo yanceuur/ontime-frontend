@@ -1567,7 +1567,7 @@ async function sendBookingNotifications(ref,fn,ln,ph,em){
     body:JSON.stringify({name:fn+' '+ln,email:em,phone:ph,subject:'🆕 Nouvelle réservation '+ref,message:details})});}catch{}
   // Email de confirmation au client
   try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:'ONTIME TRANSFERT',email:em,phone:ph,subject:'Confirmation de votre réservation '+ref,message:'Bonjour '+fn+',\n\nVotre réservation est confirmée.\n\n'+details+'\n\nVotre chauffeur vous sera communiqué la veille.\nPour toute question : 07 60 55 44 60 (WhatsApp)\n\nMerci de votre confiance,\nONTIME TRANSFERT'})});}catch{}
+    body:JSON.stringify({to:em,name:'ONTIME TRANSFERT',email:em,phone:ph,subject:'Confirmation de votre réservation '+ref,message:'Bonjour '+fn+',\n\nVotre réservation est confirmée.\n\n'+details+'\n\nVotre chauffeur vous sera communiqué la veille.\nPour toute question : 07 60 55 44 60 (WhatsApp)\n\nMerci de votre confiance,\nONTIME TRANSFERT'})});}catch{}
 }
 
 // ——— KNOWN COORDINATES (for airports, stations, lieux) ———
