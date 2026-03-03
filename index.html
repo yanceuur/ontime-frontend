@@ -805,10 +805,9 @@ textarea.form-input{
       <div class="pax-grid">
         <div class="pax-item"><label>Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
         <div class="pax-item"><label>Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+        <div class="pax-item"><label>Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+        <div class="pax-item"><label>Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
       </div>
-
-      <label class="form-label" style="margin-top:12px;">Siège enfant</label>
-      <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M12 2a2 2 0 110 4 2 2 0 010-4zm4 14H8l1-5h6l1 5z"/><path d="M8 10c0 0 1-2 4-2s4 2 4 2"/></svg><select class="form-select" id="inputChildSeat"><option value="">Aucun siège enfant</option><option value="Siège bébé (0-12 mois)">Siège bébé — 0 à 12 mois</option><option value="Siège enfant (1-10 ans)">Siège enfant — 1 à 10 ans (rehausseur)</option></select></div>
 
       <label class="form-label">Date &amp; heure</label>
       <div class="form-row">
@@ -1644,7 +1643,8 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
     booking.from=from;booking.to=to;booking.date=date;booking.time=time;
     booking.veh=veh;booking.pax=document.getElementById('inputPax').value;
     booking.bags=document.getElementById('inputBags').value;
-    booking.childSeat=document.getElementById('inputChildSeat').value;
+    booking.seatBaby=parseInt(document.getElementById('inputSeatBaby').value)||0;
+    booking.seatChild=parseInt(document.getElementById('inputSeatChild').value)||0;
 
     document.getElementById('distKm').textContent=km;
     document.getElementById('priceAmount').textContent=price+'€';
@@ -1674,7 +1674,10 @@ function goToStep2(){
   document.getElementById('recapVeh').textContent=vehNames[booking.veh]||booking.veh;
   document.getElementById('recapPax').textContent=booking.pax;
   document.getElementById('recapBags').textContent=booking.bags;
-  document.getElementById('recapChildSeat').textContent=booking.childSeat?' · '+booking.childSeat:'';
+  const seats=[];
+  if(booking.seatBaby>0)seats.push(booking.seatBaby+' siège bébé');
+  if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
+  document.getElementById('recapChildSeat').textContent=seats.length?' · '+seats.join(', '):'';
   document.getElementById('recapPrice').textContent=booking.price+'€';
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -1723,7 +1726,7 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
         amount:booking.price*100,currency:'eur',
         metadata:{from:booking.from,to:booking.to,date:booking.date,time:booking.time,
           name:fn+' '+ln,phone:ph,email:em,vehicle:booking.veh,
-          pax:booking.pax,bags:booking.bags,childSeat:booking.childSeat||'Aucun',flight:booking.flight,note:booking.note,
+          pax:booking.pax,bags:booking.bags,seatBaby:booking.seatBaby,seatChild:booking.seatChild,flight:booking.flight,note:booking.note,
           distKm:booking.distKm}
       })
     });
