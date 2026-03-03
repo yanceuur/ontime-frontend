@@ -56,8 +56,6 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .gold-line::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);
-  background-size:200% 100%;
-  animation:goldShimmer 4s ease-in-out infinite;
 }
 @keyframes goldShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
@@ -1038,10 +1036,8 @@ textarea.form-input{
   </div>
 </section>
 
-<div class="sep"></div>
-
 <!-- ——— VÉHICULES ——— -->
-<section class="veh-section" id="vehicules">
+<section class="veh-section" id="vehicules" style="display:none;">
   <div style="max-width:1100px;margin:0 auto 52px;">
     <div class="anim-fade" style="display:flex;flex-direction:column;align-items:flex-start;">
       <div class="section-label">Notre flotte</div>
@@ -1411,6 +1407,12 @@ textarea.form-input{
         <input type="text" class="form-input" id="b2bSociete" placeholder="Nom de votre entreprise">
       </div>
 
+      <label class="form-label">SIRET</label>
+      <div class="field-wrap">
+        <svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <input type="text" class="form-input" id="b2bSiret" placeholder="XXX XXX XXX XXXXX" maxlength="17">
+      </div>
+
       <label class="form-label">Nom du contact *</label>
       <div class="field-wrap">
         <svg class="f-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -1480,19 +1482,15 @@ textarea.form-input{
 <script>
 // ——— NAVBAR: hide on scroll down, show on scroll up ———
 const navbar=document.getElementById('navbar');
-const goldLine=document.getElementById('goldLine');
 let lastScroll=0;
 
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
   navbar.classList.toggle('top',y<80);
-  goldLine.style.opacity=y<80?'0':'1';
   if(y>lastScroll&&y>120){
     navbar.classList.add('hidden');
-    goldLine.style.transform='translateY(-74px)';
   }else{
     navbar.classList.remove('hidden');
-    goldLine.style.transform='translateY(0)';
   }
   lastScroll=y;
 },{passive:true});
@@ -1856,6 +1854,7 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
 // ——— B2B FORM SUBMIT ———
 async function submitB2B(){
   const societe=document.getElementById('b2bSociete').value.trim();
+  const siret  =document.getElementById('b2bSiret').value.trim();
   const contact=document.getElementById('b2bContact').value.trim();
   const email  =document.getElementById('b2bEmail').value.trim();
   const tel    =document.getElementById('b2bTel').value.trim();
@@ -1876,7 +1875,7 @@ async function submitB2B(){
       body:JSON.stringify({
         name:contact,email,phone:tel||'Non renseigné',
         subject:'Demande compte entreprise – '+societe,
-        message:'Société: '+societe+'\nVolume: '+(volume||'Non précisé')+'\n\n'+message
+        message:'Société: '+societe+'\nSIRET: '+(siret||'Non renseigné')+'\nVolume: '+(volume||'Non précisé')+'\n\n'+message
       })
     });
     if(res.ok){
