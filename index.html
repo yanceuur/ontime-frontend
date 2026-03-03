@@ -663,11 +663,19 @@ textarea.form-input{
 /* ————————————————————————————————
    RESPONSIVE
 ———————————————————————————————— */
+/* STEP INDICATOR */
+.step-indicator{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:20px;}
+.step-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);color:var(--text-muted);font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:.3s;flex-shrink:0;}
+.step-dot.active{border-color:var(--gold);color:var(--gold);background:rgba(200,169,110,.1);}
+.step-dot.done{border-color:var(--gold);background:var(--gold);color:var(--black);}
+.step-line{width:28px;height:1px;background:var(--border);}
+
 @media(max-width:1024px){
   .nav-links{display:none !important;}
   .hamburger{display:flex !important;}
   .hero{grid-template-columns:1fr;min-height:auto;}.hero::before{display:none;}
   .hero-left{padding:120px 40px 40px;}.hero-right{padding:0 40px 60px;}
+  .booking-card{max-width:100%;}
   .services-grid{grid-template-columns:1fr 1fr;}
   .gar-wrap{grid-template-columns:1fr;}.gar-visual{order:-1;}.gar-badge{width:200px;height:200px;}
   .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section{padding:80px 40px;}
@@ -691,6 +699,10 @@ textarea.form-input{
   .trust-strip{padding:14px 24px;}
   .tbadge{min-width:120px;}
   .avis-header{flex-direction:column;}
+}
+@media(max-width:380px){
+  #priceDisplay>div:first-child{flex-wrap:wrap;gap:10px;}
+  .pax-item label{font-size:.62rem;}
 }
 </style>
 </head>
@@ -782,6 +794,15 @@ textarea.form-input{
 
   <div class="hero-right" id="booking">
     <div class="booking-card">
+      <!-- STEP INDICATOR -->
+      <div class="step-indicator" id="stepIndicator">
+        <div class="step-dot active" id="stepDot1">1</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="stepDot2">2</div>
+        <div class="step-line"></div>
+        <div class="step-dot" id="stepDot3">3</div>
+      </div>
+
       <!-- ——— STEP 1: FORMULAIRE ——— -->
       <div id="bookingStep1">
       <div class="booking-title">Réservez en ligne</div>
@@ -945,6 +966,7 @@ textarea.form-input{
           <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;">Réservation confirmée</div>
+        <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--gold);font-weight:600;"></div>
         <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
         <div style="margin-top:20px;font-size:.82rem;color:var(--gold);">Merci de votre confiance</div>
       </div>
@@ -1491,12 +1513,32 @@ const io=new IntersectionObserver((entries)=>{
 },{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.anim-fade,.anim-scale,.anim-left,.anim-right').forEach(el=>io.observe(el));
 
-// ——— SET MIN DATE & POPULATE TIME ———
+// ——— SET MIN DATE & POPULATE TIME (4h minimum) ———
 const dateInput=document.getElementById('inputDate');
+const timeSelect=document.getElementById('inputTime');
 const today=new Date().toISOString().split('T')[0];
 dateInput.min=today;dateInput.value=today;
-const timeSelect=document.getElementById('inputTime');
-for(let h=0;h<24;h++){for(let m=0;m<60;m+=30){const v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');timeSelect.innerHTML+='<option value="'+v+'">'+v+'</option>';}}
+function updateTimeOptions(){
+  const selDate=dateInput.value;
+  const isToday=selDate===new Date().toISOString().split('T')[0];
+  let minSlot=0;
+  if(isToday){
+    const now=new Date();
+    const totalMin=now.getHours()*60+now.getMinutes()+4*60;
+    minSlot=Math.ceil(totalMin/30)*30;
+  }
+  const prev=timeSelect.value;
+  timeSelect.innerHTML='<option value="" disabled selected>Heure</option>';
+  for(let h=0;h<24;h++){for(let m=0;m<60;m+=30){
+    const slot=h*60+m;
+    if(isToday&&slot<minSlot)continue;
+    const v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+    timeSelect.innerHTML+='<option value="'+v+'">'+v+'</option>';
+  }}
+  if(prev)timeSelect.value=prev;
+}
+updateTimeOptions();
+dateInput.addEventListener('change',updateTimeOptions);
 
 // ——— BOOKING STATE ———
 const BACKEND='https://ontime-backend.vercel.app';
@@ -1697,11 +1739,13 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
     const {price,isNight,horaire}=calcPrice(km,veh,time,from,to);
     booking.distKm=km;booking.price=price;
     booking.from=from;booking.to=to;booking.date=date;booking.time=time;
-    booking.veh=veh;booking.pax=document.getElementById('inputPax').value;
+    booking.veh=veh;booking.pax=parseInt(document.getElementById('inputPax').value);
     booking.bags=document.getElementById('inputBags').value;
     const childOn=document.getElementById('toggleChildSeat').checked;
     booking.seatBaby=childOn?parseInt(document.getElementById('inputSeatBaby').value)||0:0;
     booking.seatChild=childOn?parseInt(document.getElementById('inputSeatChild').value)||0:0;
+    const totalSeats=booking.seatBaby+booking.seatChild;
+    if(totalSeats>booking.pax){showError('Le nombre de sièges enfant ('+totalSeats+') dépasse le nombre de passagers ('+booking.pax+').');btn.textContent='Voir le tarif';btn.disabled=false;return;}
 
     document.getElementById('distKm').textContent=km;
     document.getElementById('priceAmount').textContent=price+'€';
@@ -1718,6 +1762,30 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
     btn.textContent='Voir le tarif';btn.disabled=false;
   }
 });
+
+// ——— STEP INDICATOR ———
+function setStep(n){
+  [1,2,3].forEach(i=>{
+    const d=document.getElementById('stepDot'+i);
+    if(i<n)d.className='step-dot done';
+    else if(i===n)d.className='step-dot active';
+    else d.className='step-dot';
+  });
+  document.getElementById('stepIndicator').style.display=n>3?'none':'flex';
+}
+
+// ——— RESET TARIF BUTTON ———
+function resetTarifBtn(){
+  const btn=document.getElementById('btnVoirTarif');
+  if(btn.textContent==='Réserver maintenant'){
+    btn.textContent='Voir le tarif';btn.onclick=null;
+    document.getElementById('priceDisplay').style.display='none';
+  }
+}
+['inputDate','inputTime','inputVehicle','inputPax','inputBags'].forEach(id=>document.getElementById(id).addEventListener('change',resetTarifBtn));
+document.getElementById('depAdresseInput')?.addEventListener('input',resetTarifBtn);
+document.getElementById('arrAdresseInput')?.addEventListener('input',resetTarifBtn);
+document.querySelectorAll('.cat-tab').forEach(t=>t.addEventListener('click',resetTarifBtn));
 
 // ——— STEP NAVIGATION ———
 const vehNames={confort:'Berline Confort',premium:'Berline Premium',van:'Van / Minibus'};
@@ -1737,12 +1805,14 @@ function goToStep2(){
   if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
   document.getElementById('recapChildSeat').textContent=seats.length?' · '+seats.join(', '):'';
   document.getElementById('recapPrice').textContent=booking.price+'€';
+  setStep(2);
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 document.getElementById('btnBackStep1').addEventListener('click',()=>{
   document.getElementById('bookingStep2').style.display='none';
   document.getElementById('bookingStep1').style.display='block';
+  setStep(1);
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
@@ -1796,12 +1866,15 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
     cardCvcEl.mount('#card-cvc');
     cardMounted=true;
   }
+  setStep(3);
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
 document.getElementById('btnBackStep2').addEventListener('click',()=>{
+  if(!confirm('Retourner aux coordonnées ? La saisie de votre carte sera perdue.'))return;
   document.getElementById('bookingStep3').style.display='none';
   document.getElementById('bookingStep2').style.display='block';
+  setStep(2);
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
@@ -1815,8 +1888,10 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
   document.getElementById('payError').style.display='none';
 
   try{
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(),15000);
     const res=await fetch(BACKEND+'/api/create-payment-intent',{
-      method:'POST',headers:{'Content-Type':'application/json'},
+      method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,
       body:JSON.stringify({
         amount:booking.price*100,currency:'eur',
         metadata:{from:booking.from,to:booking.to,date:booking.date,time:booking.time,
@@ -1825,6 +1900,7 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
           distKm:booking.distKm}
       })
     });
+    clearTimeout(to);
     const data=await res.json();
     if(data.clientSecret){
       const cardHolder=(document.getElementById('inputCardName').value.trim())||fn+' '+ln;
@@ -1835,6 +1911,9 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
         document.getElementById('card-errors').textContent=result.error.message;
         btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
       } else if(result.paymentIntent.status==='succeeded'){
+        const ref='OT-'+Date.now().toString(36).toUpperCase();
+        document.getElementById('confirmRef').textContent='Réf. '+ref;
+        setStep(4);
         document.getElementById('bookingStep3').style.display='none';
         document.getElementById('bookingStep4').style.display='block';
         document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
@@ -1843,7 +1922,8 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
       throw new Error(data.error||'Erreur serveur');
     }
   }catch(err){
-    document.getElementById('payError').textContent='Erreur: '+err.message;
+    const msg=err.name==='AbortError'?'Délai dépassé. Vérifiez votre connexion et réessayez.':'Erreur: '+err.message;
+    document.getElementById('payError').textContent=msg;
     document.getElementById('payError').style.display='block';
     btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
   }

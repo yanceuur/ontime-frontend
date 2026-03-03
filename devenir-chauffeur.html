@@ -635,9 +635,12 @@ document.getElementById('btnSubmitDriver').addEventListener('click',async()=>{
       subject:'Candidature chauffeur'
     };
 
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(),15000);
     const res=await fetch('https://ontime-backend.vercel.app/api/contact',{
-      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)
+      method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify(body)
     });
+    clearTimeout(to);
 
     if(res.ok){
       status.className='form-status success';
@@ -647,7 +650,7 @@ document.getElementById('btnSubmitDriver').addEventListener('click',async()=>{
     } else {throw new Error();}
   }catch(e){
     status.className='form-status error';
-    status.textContent="Erreur lors de l'envoi. Contactez-nous par WhatsApp.";
+    status.textContent=e.name==='AbortError'?"Délai dépassé. Vérifiez votre connexion.":"Erreur lors de l'envoi. Contactez-nous par WhatsApp.";
     status.style.display='block';
     btn.disabled=false;btn.textContent='Envoyer ma candidature';
   }

@@ -501,7 +501,10 @@ async function sendEmail(){
   btn.disabled=true;btn.textContent='Envoi en cours...';
   status.className='form-status';status.style.display='none';
   try{
-    const res=await fetch(API_URL+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fname+' '+lname,email,phone:phone||'Non renseigné',subject,message})});
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(),15000);
+    const res=await fetch(API_URL+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({name:fname+' '+lname,email,phone:phone||'Non renseigné',subject,message})});
+    clearTimeout(to);
     if(res.ok){
       status.className='form-status success';
       status.textContent='Message envoyé avec succès. Nous vous répondons dans les meilleurs délais.';
@@ -512,7 +515,7 @@ async function sendEmail(){
     } else {throw new Error();}
   }catch(err){
     status.className='form-status error';
-    status.textContent="Erreur lors de l'envoi. Veuillez réessayer ou nous contacter par téléphone.";
+    status.textContent=err.name==='AbortError'?"Délai dépassé. Vérifiez votre connexion.":"Erreur lors de l'envoi. Veuillez réessayer ou nous contacter par téléphone.";
     btn.disabled=false;btn.textContent='Envoyer le message';
   }
 }
@@ -533,14 +536,22 @@ async function submitB2B(){
     errEl.textContent='Veuillez remplir les champs obligatoires (Société, Contact, Email).';
     errEl.style.display='block';return;
   }
+  const siretClean=siret.replace(/[\s\-]/g,'');
+  if(siretClean&&!/^\d{14}$/.test(siretClean)){
+    errEl.textContent='Le numéro SIRET doit contenir exactement 14 chiffres.';
+    errEl.style.display='block';return;
+  }
   const btn=document.getElementById('btnB2B');
   btn.disabled=true;btn.textContent='Envoi en cours...';
   try{
-    const res=await fetch(API_URL+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:contact,email,phone:tel||'Non renseigné',subject:'Demande compte entreprise – '+societe,message:'Société: '+societe+'\nSIRET: '+(siret||'Non renseigné')+'\nVolume: '+(volume||'Non précisé')+'\n\n'+message})});
+    const ctrl=new AbortController();
+    const to=setTimeout(()=>ctrl.abort(),15000);
+    const res=await fetch(API_URL+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,body:JSON.stringify({name:contact,email,phone:tel||'Non renseigné',subject:'Demande compte entreprise – '+societe,message:'Société: '+societe+'\nSIRET: '+(siretClean||'Non renseigné')+'\nVolume: '+(volume||'Non précisé')+'\n\n'+message})});
+    clearTimeout(to);
     if(res.ok){succEl.style.display='block';btn.textContent='Demande envoyée';}
     else{throw new Error();}
-  }catch{
-    errEl.textContent="Erreur lors de l'envoi. Contactez-nous directement par WhatsApp.";
+  }catch(err){
+    errEl.textContent=err.name==='AbortError'?"Délai dépassé. Vérifiez votre connexion.":"Erreur lors de l'envoi. Contactez-nous directement par WhatsApp.";
     errEl.style.display='block';btn.disabled=false;btn.textContent='Envoyer la demande';
   }
 }
