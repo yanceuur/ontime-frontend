@@ -258,6 +258,16 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   background-repeat:no-repeat;background-position:right 5px center;padding-right:18px;
 }
 .pax-select option{background:#1a1a1a;color:var(--text);}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:0 2px;}
+.toggle-row-label{font-size:.68rem;color:var(--text-muted);}
+.toggle-switch{position:relative;display:inline-block;width:40px;height:22px;flex-shrink:0;}
+.toggle-switch input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:22px;transition:.3s;}
+.toggle-slider::before{content:'';position:absolute;height:16px;width:16px;left:2px;bottom:2px;background:#666;border-radius:50%;transition:.3s;}
+.toggle-switch input:checked+.toggle-slider{background:var(--gold);border-color:var(--gold);}
+.toggle-switch input:checked+.toggle-slider::before{transform:translateX(18px);background:var(--black);}
+.child-seat-panel{margin-top:10px;animation:fadeIn .25s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px);}to{opacity:1;transform:translateY(0);}}
 
 .btn-primary{
   width:100%;background:linear-gradient(135deg,var(--gold-light),var(--gold),var(--gold-dark));
@@ -805,8 +815,19 @@ textarea.form-input{
       <div class="pax-grid">
         <div class="pax-item"><label>Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
         <div class="pax-item"><label>Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
-        <div class="pax-item"><label>Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
-        <div class="pax-item"><label>Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-row-label">Siège enfant requis ?</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggleChildSeat" onchange="document.getElementById('childSeatPanel').style.display=this.checked?'block':'none'">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="child-seat-panel" id="childSeatPanel" style="display:none;">
+        <div class="pax-grid">
+          <div class="pax-item"><label>Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+          <div class="pax-item"><label>Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+        </div>
       </div>
 
       <label class="form-label">Date &amp; heure</label>
@@ -1643,8 +1664,9 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
     booking.from=from;booking.to=to;booking.date=date;booking.time=time;
     booking.veh=veh;booking.pax=document.getElementById('inputPax').value;
     booking.bags=document.getElementById('inputBags').value;
-    booking.seatBaby=parseInt(document.getElementById('inputSeatBaby').value)||0;
-    booking.seatChild=parseInt(document.getElementById('inputSeatChild').value)||0;
+    const childOn=document.getElementById('toggleChildSeat').checked;
+    booking.seatBaby=childOn?parseInt(document.getElementById('inputSeatBaby').value)||0:0;
+    booking.seatChild=childOn?parseInt(document.getElementById('inputSeatChild').value)||0:0;
 
     document.getElementById('distKm').textContent=km;
     document.getElementById('priceAmount').textContent=price+'€';
