@@ -915,8 +915,22 @@ textarea.form-input{
             <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
           </div>
         </div>
-        <label class="form-label" style="margin-top:16px;">Carte bancaire</label>
-        <div id="card-element" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:12px;"></div>
+        <label class="form-label" style="margin-top:16px;">Nom du titulaire</label>
+        <input type="text" class="form-input" id="inputCardName" placeholder="NOM PRÉNOM" style="padding-left:12px;letter-spacing:.5px;">
+
+        <label class="form-label" style="margin-top:12px;">Numéro de carte</label>
+        <div id="card-number" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
+
+        <div class="form-row" style="margin-top:12px;">
+          <div>
+            <label class="form-label">Date d'expiration</label>
+            <div id="card-expiry" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
+          </div>
+          <div>
+            <label class="form-label">CVC</label>
+            <div id="card-cvc" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
+          </div>
+        </div>
         <div id="card-errors" style="color:#f44336;font-size:.76rem;margin-top:6px;min-height:18px;"></div>
         <button class="btn-primary" id="btnPay" style="margin-top:12px;">
           <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(10,10,10,.2);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
@@ -1734,15 +1748,19 @@ document.getElementById('btnBackStep1').addEventListener('click',()=>{
 
 // ——— STRIPE INIT (sans mount) ———
 const stripe=Stripe(STRIPE_PK);
-const elements=stripe.elements({
-  appearance:{
-    theme:'night',
-    variables:{colorPrimary:'#c8a96e',colorBackground:'rgba(200,169,110,0.04)',colorText:'#e8e8e8',borderRadius:'8px',fontFamily:'Inter, sans-serif'}
-  }
-});
-const cardElement=elements.create('card');
+const stripeStyle={
+  base:{color:'#e8e8e8',fontFamily:'Inter, sans-serif',fontSize:'14px',fontSmoothing:'antialiased','::placeholder':{color:'#555'},iconColor:'#c8a96e'},
+  invalid:{color:'#f44336',iconColor:'#f44336'}
+};
+const elements=stripe.elements();
+const cardNumberEl=elements.create('cardNumber',{style:stripeStyle,showIcon:true});
+const cardExpiryEl=elements.create('cardExpiry',{style:stripeStyle});
+const cardCvcEl=elements.create('cardCvc',{style:stripeStyle});
 let cardMounted=false;
-cardElement.on('change',e=>{document.getElementById('card-errors').textContent=e.error?e.error.message:'';});
+const onStripeErr=e=>{document.getElementById('card-errors').textContent=e.error?e.error.message:'';};
+cardNumberEl.on('change',onStripeErr);
+cardExpiryEl.on('change',onStripeErr);
+cardCvcEl.on('change',onStripeErr);
 
 // ——— ÉTAPE 2 → ÉTAPE 3 ———
 document.getElementById('btnContinuePay').addEventListener('click',()=>{
@@ -1771,8 +1789,13 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
   document.getElementById('p3Veh').textContent=vehNames[booking.veh]||booking.veh;
   document.getElementById('p3Price').textContent=booking.price+'€';
 
-  // Monter Stripe ici (element visible) — c'est le fix principal
-  if(!cardMounted){cardElement.mount('#card-element');cardMounted=true;}
+  // Monter Stripe ici (éléments visibles) — fix principal
+  if(!cardMounted){
+    cardNumberEl.mount('#card-number');
+    cardExpiryEl.mount('#card-expiry');
+    cardCvcEl.mount('#card-cvc');
+    cardMounted=true;
+  }
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
@@ -1804,8 +1827,9 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
     });
     const data=await res.json();
     if(data.clientSecret){
+      const cardHolder=(document.getElementById('inputCardName').value.trim())||fn+' '+ln;
       const result=await stripe.confirmCardPayment(data.clientSecret,{
-        payment_method:{card:cardElement,billing_details:{name:fn+' '+ln,email:em,phone:ph}}
+        payment_method:{card:cardNumberEl,billing_details:{name:cardHolder,email:em,phone:ph}}
       });
       if(result.error){
         document.getElementById('card-errors').textContent=result.error.message;
