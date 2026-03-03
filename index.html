@@ -824,7 +824,7 @@ textarea.form-input{
           <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Distance estimée</span><br><span id="distKm" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
           <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Prix fixe</span><br><span id="priceAmount" style="font-family:'DM Serif Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
         </div>
-        <div id="nightSurcharge" style="display:none;margin-top:8px;font-size:.72rem;color:var(--gold);opacity:.8;">Supplément nuit (+15%) inclus</div>
+        <div id="nightSurcharge" style="display:none;margin-top:8px;font-size:.72rem;color:var(--gold);opacity:.8;">Supplément nuit (+10%) inclus</div>
       </div>
 
       <button class="btn-primary" id="btnVoirTarif">Voir le tarif</button>
@@ -1576,12 +1576,72 @@ const KNOWN_COORDS={
 
 // ——— GOOGLE MAPS AUTOCOMPLETE ———
 let acDep,acArr;
+const _geo_={};
 function initMap(){
   const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
-  acDep=new google.maps.places.Autocomplete(document.getElementById('depAdresseInput'),opts);
-  acArr=new google.maps.places.Autocomplete(document.getElementById('arrAdresseInput'),opts);
+  const depInput=document.getElementById('depAdresseInput');
+  const arrInput=document.getElementById('arrAdresseInput');
+  acDep=new google.maps.places.Autocomplete(depInput,opts);
+  acArr=new google.maps.places.Autocomplete(arrInput,opts);
   acDep.addListener('place_changed',()=>{window._placeDep=acDep.getPlace();});
   acArr.addListener('place_changed',()=>{window._placeArr=acArr.getPlace();});
+  // Reset quand l'utilisateur retape manuellement
+  depInput.addEventListener('input',()=>{window._placeDep=null;});
+  arrInput.addEventListener('input',()=>{window._placeArr=null;});
+  // Sélection auto du premier résultat sur Entrée
+  bindEnterSelect(depInput);
+  bindEnterSelect(arrInput);
+  // Geocoder fallback au blur
+  depInput.addEventListener('blur',()=>geocodeFallback(depInput,'_placeDep'));
+  arrInput.addEventListener('blur',()=>geocodeFallback(arrInput,'_placeArr'));
+}
+// Simule ArrowDown + Enter pour sélectionner la 1ère suggestion
+function bindEnterSelect(input){
+  let _busy=false;
+  input.addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.keyCode===13)&&!_busy){
+      if(document.querySelector('.pac-item')){
+        e.preventDefault();e.stopPropagation();
+        _busy=true;
+        input.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',keyCode:40,which:40,bubbles:true,cancelable:true}));
+        setTimeout(()=>{
+          input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',keyCode:13,which:13,bubbles:true,cancelable:true}));
+          _busy=false;
+        },30);
+      }
+    }
+  },true);
+}
+// Geocode le texte tapé si aucune suggestion n'a été sélectionnée
+function geocodeFallback(input,placeKey){
+  const val=input.value.trim();
+  if(!val)return;
+  setTimeout(()=>{
+    if(window[placeKey]&&window[placeKey].geometry)return;
+    if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
+    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
+      if(status==='OK'&&results[0]){
+        window[placeKey]=results[0];
+        input.value=results[0].formatted_address;
+      }
+    });
+  },200);
+}
+// Geocode à la demande (si blur n'a pas encore résolu)
+function resolveAddress(input,placeKey){
+  return new Promise(resolve=>{
+    if(window[placeKey]&&window[placeKey].geometry){resolve(true);return;}
+    const val=input.value.trim();
+    if(!val){resolve(false);return;}
+    if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
+    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
+      if(status==='OK'&&results[0]){
+        window[placeKey]=results[0];
+        input.value=results[0].formatted_address;
+        resolve(true);
+      } else {resolve(false);}
+    });
+  });
 }
 
 // ——— GET DEPARTURE / ARRIVAL VALUE ———
@@ -1635,7 +1695,7 @@ const TARIF={
   base:{confort:28,premium:44,van:48},
   km:  {confort:1.37,premium:1.90,van:2.12},
   aero:{confort:6,premium:10,van:10},
-  coef:{jour:1.0,nuit:1.15,pointe:1.20,dimanche:1.12}
+  coef:{jour:1.0,nuit:1.10,pointe:1.20,dimanche:1.12}
 };
 function calcPrice(km,veh,time,from,to){
   const base=TARIF.base[veh]||28;
@@ -1670,14 +1730,16 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
   const veh=document.getElementById('inputVehicle').value;
   if(!veh){showError('Veuillez choisir un véhicule.');return;}
 
-  if(depCat==='adresse'&&(!window._placeDep||!window._placeDep.geometry)){
-    showError('Veuillez sélectionner une adresse dans les suggestions Google.');return;
-  }
-  if(arrCat==='adresse'&&(!window._placeArr||!window._placeArr.geometry)){
-    showError('Veuillez sélectionner une adresse dans les suggestions Google.');return;
-  }
-
   const btn=document.getElementById('btnVoirTarif');
+  // Géocode les adresses si l'utilisateur n'a pas cliqué sur une suggestion
+  if(depCat==='adresse'){
+    const ok=await resolveAddress(document.getElementById('depAdresseInput'),'_placeDep');
+    if(!ok){showError('Adresse de départ introuvable. Soyez plus précis.');return;}
+  }
+  if(arrCat==='adresse'){
+    const ok=await resolveAddress(document.getElementById('arrAdresseInput'),'_placeArr');
+    if(!ok){showError('Adresse de destination introuvable. Soyez plus précis.');return;}
+  }
   btn.textContent='Calcul en cours...';btn.disabled=true;
 
   try{
@@ -1691,7 +1753,7 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
     document.getElementById('distKm').textContent=km;
     document.getElementById('priceAmount').textContent=price+'€';
     const nightEl=document.getElementById('nightSurcharge');
-    if(horaire==='nuit'){nightEl.textContent='Supplément nuit (+15%) inclus';nightEl.style.display='block';}
+    if(horaire==='nuit'){nightEl.textContent='Supplément nuit (+10%) inclus';nightEl.style.display='block';}
     else if(horaire==='pointe'){nightEl.textContent='Supplément heure de pointe (+20%) inclus';nightEl.style.display='block';}
     else{nightEl.style.display='none';}
     document.getElementById('priceDisplay').style.display='block';
