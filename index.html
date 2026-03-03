@@ -895,20 +895,38 @@ textarea.form-input{
           </div>
         </div>
 
-        <!-- STRIPE CARD ELEMENT -->
+        <button class="btn-primary" id="btnContinuePay" style="margin-top:16px;">Continuer vers le paiement →</button>
+        <div id="step2Error" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+      </div>
+
+      <!-- ——— STEP 3: PAIEMENT ——— -->
+      <div id="bookingStep3" style="display:none;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;cursor:pointer;" id="btnBackStep2">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--gold);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span style="font-size:.8rem;color:var(--gold);">Retour</span>
+        </div>
+        <div class="booking-title">Paiement sécurisé</div>
+        <div class="booking-sub">Vos données sont protégées par chiffrement SSL via Stripe.</div>
+        <div style="margin-top:14px;background:rgba(200,169,110,.06);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
+          <span id="p3From">—</span> → <span id="p3To">—</span><br>
+          <span id="p3Date">—</span> à <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
+          <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:.7rem;color:var(--text-muted);">Total à payer</span>
+            <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
+          </div>
+        </div>
         <label class="form-label" style="margin-top:16px;">Carte bancaire</label>
         <div id="card-element" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:12px;"></div>
         <div id="card-errors" style="color:#f44336;font-size:.76rem;margin-top:6px;min-height:18px;"></div>
-
         <button class="btn-primary" id="btnPay" style="margin-top:12px;">
-          <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(10,10,10,.2);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px;"></span>
+          <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(10,10,10,.2);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
           Payer et confirmer
         </button>
         <div id="payError" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
       </div>
 
-      <!-- ——— STEP 3: CONFIRMATION ——— -->
-      <div id="bookingStep3" style="display:none;text-align:center;padding:40px 20px;">
+      <!-- ——— STEP 4: CONFIRMATION ——— -->
+      <div id="bookingStep4" style="display:none;text-align:center;padding:40px 20px;">
         <div style="width:64px;height:64px;border-radius:50%;background:rgba(76,175,80,.12);border:2px solid rgba(76,175,80,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
           <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
@@ -1685,6 +1703,8 @@ document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
 });
 
 // ——— STEP NAVIGATION ———
+const vehNames={confort:'Berline Confort',premium:'Berline Premium',van:'Van / Minibus'};
+
 function goToStep2(){
   document.getElementById('bookingStep1').style.display='none';
   document.getElementById('bookingStep2').style.display='block';
@@ -1692,7 +1712,6 @@ function goToStep2(){
   document.getElementById('recapTo').textContent=booking.to;
   document.getElementById('recapDate').textContent=booking.date;
   document.getElementById('recapTime').textContent=booking.time;
-  const vehNames={confort:'Berline Confort',premium:'Berline Premium',van:'Van / Minibus'};
   document.getElementById('recapVeh').textContent=vehNames[booking.veh]||booking.veh;
   document.getElementById('recapPax').textContent=booking.pax;
   document.getElementById('recapBags').textContent=booking.bags;
@@ -1710,7 +1729,7 @@ document.getElementById('btnBackStep1').addEventListener('click',()=>{
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
-// ——— STRIPE PAYMENT ———
+// ——— STRIPE INIT (sans mount) ———
 const stripe=Stripe(STRIPE_PK);
 const elements=stripe.elements({
   appearance:{
@@ -1719,22 +1738,50 @@ const elements=stripe.elements({
   }
 });
 const cardElement=elements.create('card');
-cardElement.mount('#card-element');
+let cardMounted=false;
 cardElement.on('change',e=>{document.getElementById('card-errors').textContent=e.error?e.error.message:'';});
 
-document.getElementById('btnPay').addEventListener('click',async()=>{
+// ——— ÉTAPE 2 → ÉTAPE 3 ———
+document.getElementById('btnContinuePay').addEventListener('click',()=>{
   const fn=document.getElementById('inputFirstName').value.trim();
   const ln=document.getElementById('inputLastName').value.trim();
   const ph=document.getElementById('inputPhone').value.trim();
   const em=document.getElementById('inputEmail').value.trim();
+  const errEl=document.getElementById('step2Error');
   if(!fn||!ln||!ph||!em){
-    document.getElementById('payError').textContent='Veuillez remplir tous les champs obligatoires.';
-    document.getElementById('payError').style.display='block';return;
+    errEl.textContent='Veuillez remplir tous les champs obligatoires.';
+    errEl.style.display='block';return;
   }
+  errEl.style.display='none';
   booking.firstName=fn;booking.lastName=ln;booking.phone=ph;booking.email=em;
   booking.flight=document.getElementById('inputFlight').value;
   booking.note=document.getElementById('inputNote').value;
 
+  document.getElementById('bookingStep2').style.display='none';
+  document.getElementById('bookingStep3').style.display='block';
+
+  // Récap étape 3
+  document.getElementById('p3From').textContent=booking.from;
+  document.getElementById('p3To').textContent=booking.to;
+  document.getElementById('p3Date').textContent=booking.date;
+  document.getElementById('p3Time').textContent=booking.time;
+  document.getElementById('p3Veh').textContent=vehNames[booking.veh]||booking.veh;
+  document.getElementById('p3Price').textContent=booking.price+'€';
+
+  // Monter Stripe ici (element visible) — c'est le fix principal
+  if(!cardMounted){cardElement.mount('#card-element');cardMounted=true;}
+  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+document.getElementById('btnBackStep2').addEventListener('click',()=>{
+  document.getElementById('bookingStep3').style.display='none';
+  document.getElementById('bookingStep2').style.display='block';
+  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// ——— PAIEMENT STRIPE ———
+document.getElementById('btnPay').addEventListener('click',async()=>{
+  const fn=booking.firstName,ln=booking.lastName,ph=booking.phone,em=booking.email;
   const btn=document.getElementById('btnPay');
   const spinner=document.getElementById('paySpinner');
   btn.disabled=true;spinner.style.display='inline-block';
@@ -1761,8 +1808,8 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
         document.getElementById('card-errors').textContent=result.error.message;
         btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
       } else if(result.paymentIntent.status==='succeeded'){
-        document.getElementById('bookingStep2').style.display='none';
-        document.getElementById('bookingStep3').style.display='block';
+        document.getElementById('bookingStep3').style.display='none';
+        document.getElementById('bookingStep4').style.display='block';
         document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
       }
     } else {
