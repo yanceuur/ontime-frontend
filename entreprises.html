@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compte Entreprise — ONTIME TRANSFERT</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
+  --black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;
+  --text:#e8e8e8;--text-dim:#ccc;--text-muted:#777;
+  --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  background:rgba(10,10,10,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.navbar.hidden{transform:translateY(-100%);}
+.nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;white-space:nowrap;text-decoration:none;}
+.nav-logo-hex{width:44px;height:44px;flex-shrink:0;}
+.nav-logo-text{display:flex;flex-direction:column;}
+.nav-logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
+.nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
+.nav-logo-line{flex:1;height:1px;background:var(--gold);}
+.nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;}
+.gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);}
+.nav-links{display:flex !important;align-items:center;gap:32px;}
+.nav-link{font-size:.9rem;color:var(--text-dim);text-decoration:none;letter-spacing:.5px;font-weight:400;transition:color .3s;position:relative;}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s cubic-bezier(.16,1,.3,1);}
+.nav-link:hover{color:var(--gold);}.nav-link:hover::after{width:100%;}
+.nav-link.active{color:var(--gold);}.nav-link.active::after{width:100%;}
+.nav-cta{padding:11px 26px;border-radius:8px;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,169,110,.25);}
+.nav-phone{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--gold-light);text-decoration:none;font-weight:400;}
+.nav-phone svg{width:16px;height:16px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:101;position:relative;background:none;border:none;}
+.hamburger span{display:block;height:1.5px;background:var(--gold);border-radius:1px;transition:all .4s cubic-bezier(.16,1,.3,1);}
+.hamburger span:nth-child(1){width:24px}.hamburger span:nth-child(2){width:18px;margin-left:auto}.hamburger span:nth-child(3){width:24px}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0;width:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s;}
+.sidebar-overlay.open{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:0;bottom:0;width:300px;z-index:99;background:linear-gradient(180deg,#0f0d0a,#0a0a0a);border-left:1px solid var(--border);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
+.sidebar.open{transform:translateX(0);}
+.sidebar-link{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid var(--border-light);cursor:pointer;transition:color .3s,padding-left .3s;text-decoration:none;display:block;}
+.sidebar-link:hover{color:var(--gold);padding-left:8px;}
+
+/* PAGE HEADER */
+.page-header{
+  padding:160px 60px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.58rem;text-transform:uppercase;letter-spacing:3.5px;color:var(--gold);margin-bottom:16px;}
+.section-label::before{content:'';width:28px;height:1px;background:var(--gold);}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-sub{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:560px;line-height:1.8;margin:0 auto;}
+.sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.1;}
+
+/* B2B */
+.b2b-section{padding:80px 60px 120px;position:relative;z-index:1;}
+.b2b-wrap{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+}
+.b2b-perks{display:flex;flex-direction:column;gap:22px;margin-top:8px;}
+.b2b-perk{display:flex;gap:16px;align-items:flex-start;}
+.b2b-perk-icon{
+  width:42px;height:42px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));
+  border:1px solid rgba(200,169,110,.15);
+  display:flex;align-items:center;justify-content:center;
+}
+.b2b-perk-icon svg{width:19px;height:19px;stroke:var(--gold);stroke-width:1.5;fill:none;}
+.b2b-perk-title{font-weight:600;font-size:.85rem;color:var(--text);margin-bottom:3px;}
+.b2b-perk-desc{font-size:.74rem;color:var(--text-muted);line-height:1.65;font-weight:300;}
+
+.b2b-form-wrap{
+  background:linear-gradient(145deg,rgba(22,19,13,.9),rgba(10,10,8,.95));
+  border:1px solid rgba(200,169,110,.14);border-radius:20px;padding:32px;
+}
+.b2b-form-title{font-family:'DM Serif Display',serif;font-size:1.2rem;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
+.b2b-form-sub{font-size:.68rem;color:var(--text-muted);margin-bottom:22px;line-height:1.6;}
+
+.form-label{font-size:.58rem;text-transform:uppercase;letter-spacing:1.8px;color:var(--gold);margin-bottom:6px;display:block;margin-top:14px;}
+.form-label:first-of-type{margin-top:0;}
+.field-wrap{position:relative;}
+.field-wrap svg.f-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--gold);stroke-width:1.5;fill:none;opacity:.5;pointer-events:none;z-index:1;}
+.form-select,.form-input{
+  width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(200,169,110,.12);
+  border-radius:10px;padding:12px 14px 12px 38px;color:var(--text);
+  font-family:'Inter',sans-serif;font-size:.83rem;outline:none;
+  transition:border-color .3s,box-shadow .3s;
+}
+.form-select{appearance:none;padding-left:38px;}
+.form-select option{background:#1a1a1a;color:var(--text);}
+.form-select:focus,.form-input:focus{border-color:var(--gold);box-shadow:0 0 16px rgba(200,169,110,.08);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+textarea.form-input{resize:vertical;min-height:90px;padding-top:11px;padding-bottom:11px;padding-left:14px;line-height:1.6;}
+
+.btn-primary{
+  width:100%;margin-top:20px;padding:15px;border:none;border-radius:10px;
+  font-size:.88rem;font-weight:700;letter-spacing:.5px;cursor:pointer;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);
+  transition:transform .2s,box-shadow .2s,opacity .3s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;padding:60px 60px 30px;border-top:1px solid var(--border-light);}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{display:flex;align-items:center;gap:10px;}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:.7rem;color:var(--text-muted);text-decoration:none;transition:color .3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border-light);font-size:.6rem;color:var(--text-muted);max-width:1100px;margin-left:auto;margin-right:auto;}
+
+/* WHATSAPP */
+.wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);cursor:pointer;transition:transform .3s,box-shadow .3s;text-decoration:none;}
+.wa:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,.4);}
+.wa svg{width:28px;height:28px;fill:#fff;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .nav-links{display:none !important;}
+  .hamburger{display:flex !important;}
+  .b2b-wrap{grid-template-columns:1fr;}
+  .b2b-section{padding:80px 40px;}
+}
+@media(max-width:640px){
+  .navbar{padding:0 20px;}
+  .gold-line{top:64px;}
+  .page-header{padding:130px 24px 50px;}
+  .b2b-section{padding:64px 24px 80px;}
+  .form-row{grid-template-columns:1fr;}
+  .footer{padding:40px 24px 20px;}.footer-inner{flex-direction:column;gap:16px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-hex" viewBox="0 0 44 44" fill="none">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+      <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+      <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+      <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">ONTIME</span>
+      <div class="nav-logo-bar"><span class="nav-logo-line"></span><span class="nav-logo-sub">Transfert</span><span class="nav-logo-line"></span></div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Accueil</a>
+    <a href="vehicules.html" class="nav-link">Véhicules</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link">Tarifs</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <a href="entreprises.html" class="nav-link active">Entreprises</a>
+    <a href="devenir-chauffeur.html" class="nav-link">Devenir chauffeur</a>
+    <a href="tel:+33760554460" class="nav-phone">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      07 60 55 44 60
+    </a>
+    <a href="index.html#booking" class="nav-cta">Réserver</a>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="gold-line"></div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<nav class="sidebar" id="sidebar">
+  <a href="index.html" class="sidebar-link">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link">Véhicules</a>
+  <a href="services.html" class="sidebar-link">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link">Tarifs & Réservations</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+  <a href="entreprises.html" class="sidebar-link" style="color:var(--gold);">Entreprises</a>
+  <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
+  <a href="index.html#booking" class="sidebar-link">Réserver</a>
+  <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="section-label">Entreprises</div>
+  <h1 class="section-title">Votre compte <em>entreprise</em></h1>
+  <p class="section-sub">Simplifiez vos déplacements professionnels avec un compte dédié, une facturation centralisée et des tarifs négociés.</p>
+</header>
+
+<div class="sep"></div>
+
+<!-- B2B CONTENT -->
+<section class="b2b-section">
+  <div class="b2b-wrap">
+    <div>
+      <div class="b2b-perks">
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <div>
+            <div class="b2b-perk-title">Facturation mensuelle</div>
+            <div class="b2b-perk-desc">Une seule facture récapitulative par mois pour tous vos trajets. Accepté par votre service comptabilité.</div>
+          </div>
+        </div>
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div>
+            <div class="b2b-perk-title">Contrat dédié</div>
+            <div class="b2b-perk-desc">Un interlocuteur unique, des chauffeurs habitués à vos exigences, disponibilité prioritaire.</div>
+          </div>
+        </div>
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div>
+            <div class="b2b-perk-title">Tarifs préférentiels</div>
+            <div class="b2b-perk-desc">Réductions dès 10 courses/mois. Tarifs dégressifs selon votre volume mensuel.</div>
+          </div>
+        </div>
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div>
+            <div class="b2b-perk-title">Reporting mensuel</div>
+            <div class="b2b-perk-desc">Tableau de bord avec historique des courses, dépenses et statistiques par collaborateur.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="b2b-form-wrap">
+      <div class="b2b-form-title">Ouvrir un compte entreprise</div>
+      <div class="b2b-form-sub">Réponse sous 24h par notre équipe commerciale.</div>
+
+      <div id="b2bError" style="display:none;margin-bottom:12px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+      <div id="b2bSuccess" style="display:none;margin-bottom:12px;padding:14px 18px;border-radius:8px;background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.2);font-size:.82rem;color:#81c784;text-align:center;">
+        Demande envoyée ! Nous vous contactons sous 24h.
+      </div>
+
+      <label class="form-label">Société *</label>
+      <div class="field-wrap">
+        <svg class="f-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        <input type="text" class="form-input" id="b2bSociete" placeholder="Nom de votre entreprise">
+      </div>
+
+      <label class="form-label">SIRET</label>
+      <div class="field-wrap">
+        <svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <input type="text" class="form-input" id="b2bSiret" placeholder="XXX XXX XXX XXXXX" maxlength="17">
+      </div>
+
+      <label class="form-label">Nom du contact *</label>
+      <div class="field-wrap">
+        <svg class="f-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input type="text" class="form-input" id="b2bContact" placeholder="Prénom et Nom">
+      </div>
+
+      <div class="form-row" style="margin-top:0;">
+        <div>
+          <label class="form-label">Email *</label>
+          <div class="field-wrap">
+            <svg class="f-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" class="form-input" id="b2bEmail" placeholder="contact@societe.fr">
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Téléphone</label>
+          <div class="field-wrap">
+            <svg class="f-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <input type="tel" class="form-input" id="b2bTel" placeholder="06 12 34 56 78">
+          </div>
+        </div>
+      </div>
+
+      <label class="form-label">Volume mensuel estimé</label>
+      <div class="field-wrap">
+        <svg class="f-icon" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <select class="form-select" id="b2bVolume">
+          <option value="" disabled selected>Nombre de courses / mois</option>
+          <option value="5-10">5 à 10 courses</option>
+          <option value="10-30">10 à 30 courses</option>
+          <option value="30-50">30 à 50 courses</option>
+          <option value="50+">Plus de 50 courses</option>
+        </select>
+      </div>
+
+      <label class="form-label">Message (optionnel)</label>
+      <textarea class="form-input" id="b2bMessage" placeholder="Vos besoins spécifiques, questions…"></textarea>
+
+      <button class="btn-primary" id="btnB2B" onclick="submitB2B()">Envoyer la demande</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 44 44" fill="none" width="28" height="28" style="flex-shrink:0;">
+        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
+        <polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/>
+        <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+        <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+      </svg>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+    </div>
+    <div class="footer-links">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="mentions-legales.html#cgv">CGV</a>
+      <a href="mentions-legales.html#cookies">Confidentialité</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// NAVBAR hide on scroll
+const navbar=document.getElementById('navbar');
+let lastScroll=0;
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y>lastScroll&&y>120)navbar.classList.add('hidden');
+  else navbar.classList.remove('hidden');
+  lastScroll=y;
+},{passive:true});
+
+// SIDEBAR
+const hamburger=document.getElementById('hamburgerBtn'),sidebar=document.getElementById('sidebar'),overlayEl=document.getElementById('sidebarOverlay');
+function closeSidebar(){hamburger.classList.remove('open');sidebar.classList.remove('open');overlayEl.classList.remove('open');document.body.style.overflow='';}
+hamburger.addEventListener('click',()=>{
+  const open=sidebar.classList.contains('open');
+  open?closeSidebar():(hamburger.classList.add('open'),sidebar.classList.add('open'),overlayEl.classList.add('open'),document.body.style.overflow='hidden');
+});
+overlayEl.addEventListener('click',closeSidebar);
+document.querySelectorAll('.sidebar-link').forEach(l=>l.addEventListener('click',closeSidebar));
+
+// B2B FORM
+const BACKEND='https://ontime-backend.vercel.app';
+async function submitB2B(){
+  const societe=document.getElementById('b2bSociete').value.trim();
+  const siret  =document.getElementById('b2bSiret').value.trim();
+  const contact=document.getElementById('b2bContact').value.trim();
+  const email  =document.getElementById('b2bEmail').value.trim();
+  const tel    =document.getElementById('b2bTel').value.trim();
+  const volume =document.getElementById('b2bVolume').value;
+  const message=document.getElementById('b2bMessage').value.trim();
+  const errEl  =document.getElementById('b2bError');
+  const succEl =document.getElementById('b2bSuccess');
+  errEl.style.display='none';
+  if(!societe||!contact||!email){
+    errEl.textContent='Veuillez remplir les champs obligatoires (Société, Contact, Email).';
+    errEl.style.display='block';return;
+  }
+  const btn=document.getElementById('btnB2B');
+  btn.disabled=true;btn.textContent='Envoi en cours...';
+  try{
+    const res=await fetch(BACKEND+'/api/contact',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        name:contact,email,phone:tel||'Non renseigné',
+        subject:'Demande compte entreprise – '+societe,
+        message:'Société: '+societe+'\nSIRET: '+(siret||'Non renseigné')+'\nVolume: '+(volume||'Non précisé')+'\n\n'+message
+      })
+    });
+    if(res.ok){
+      succEl.style.display='block';
+      btn.textContent='Demande envoyée';
+    } else {throw new Error();}
+  }catch{
+    errEl.textContent='Erreur lors de l\'envoi. Contactez-nous directement par WhatsApp.';
+    errEl.style.display='block';
+    btn.disabled=false;btn.textContent='Envoyer la demande';
+  }
+}
+</script>
+</body>
+</html>
