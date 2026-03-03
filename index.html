@@ -894,13 +894,11 @@ textarea.form-input{
           <div><label class="form-label">Nom</label><input type="text" class="form-input" id="inputLastName" placeholder="Nom" style="padding-left:12px;"></div>
         </div>
         <label class="form-label">Téléphone</label>
-        <input type="tel" class="form-input" id="inputPhone" placeholder="06 12 34 56 78" style="padding-left:12px;">
+        <input type="tel" class="form-input" id="inputPhone" placeholder="06 12 34 56 78" style="padding-left:12px;" pattern="[\+0-9][0-9 \.\-\(\)]{7,}" title="Numéro valide (ex : 06 12 34 56 78)">
         <label class="form-label">Email</label>
         <input type="email" class="form-input" id="inputEmail" placeholder="votre@email.com" style="padding-left:12px;">
         <label class="form-label">N° de vol / train (optionnel)</label>
         <input type="text" class="form-input" id="inputFlight" placeholder="Ex: AF1234, TGV 6789" style="padding-left:12px;">
-        <label class="form-label">Note (optionnel)</label>
-        <input type="text" class="form-input" id="inputNote" placeholder="Siège bébé, accueil pancarte..." style="padding-left:12px;">
 
         <!-- RECAP -->
         <div style="margin-top:18px;background:rgba(200,169,110,.06);border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
@@ -1517,7 +1515,8 @@ document.querySelectorAll('.anim-fade,.anim-scale,.anim-left,.anim-right').forEa
 const dateInput=document.getElementById('inputDate');
 const timeSelect=document.getElementById('inputTime');
 const today=new Date().toISOString().split('T')[0];
-dateInput.min=today;dateInput.value=today;
+const maxDate=new Date();maxDate.setFullYear(maxDate.getFullYear()+1);
+dateInput.min=today;dateInput.max=maxDate.toISOString().split('T')[0];dateInput.value=today;
 function updateTimeOptions(){
   const selDate=dateInput.value;
   const isToday=selDate===new Date().toISOString().split('T')[0];
@@ -1543,7 +1542,33 @@ dateInput.addEventListener('change',updateTimeOptions);
 // ——— BOOKING STATE ———
 const BACKEND='https://ontime-backend.vercel.app';
 const STRIPE_PK='pk_test_51T4mwLDBDY6q70mKum1sIQyVvfUGEVnGn2TiqdpSizarS9tipNLYhHEY1omlS97251QoBBB6GwUdRE9k4pODLmsf00CiPDhOoU';
-let booking={from:'',to:'',distKm:0,date:'',time:'',pax:1,bags:0,veh:'confort',price:0,firstName:'',lastName:'',phone:'',email:'',flight:'',note:''};
+let booking={from:'',to:'',distKm:0,date:'',time:'',pax:1,bags:0,veh:'confort',price:0,firstName:'',lastName:'',phone:'',email:'',flight:''};
+
+// ——— NOTIFICATIONS APRÈS PAIEMENT ———
+async function sendBookingNotifications(ref,fn,ln,ph,em){
+  const seats=[];
+  if(booking.seatBaby>0)seats.push(booking.seatBaby+' siège bébé');
+  if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
+  const vehNames={confort:'Berline Confort',premium:'Berline Premium',van:'Van / Minibus'};
+  const details=[
+    '📋 Réf. '+ref,
+    '📍 '+booking.from+' → '+booking.to,
+    '📅 '+booking.date+' à '+booking.time,
+    '🚗 '+vehNames[booking.veh]+' · '+booking.pax+' pax · '+booking.bags+' bag.',
+    seats.length?'🪑 '+seats.join(', '):'',
+    booking.flight?'✈️ Vol/Train : '+booking.flight:'',
+    '💶 Prix : '+booking.price+'€',
+    '👤 Client : '+fn+' '+ln,
+    '📱 Tél : '+ph,
+    '📧 Email : '+em
+  ].filter(Boolean).join('\n');
+  // Email au propriétaire (notification nouvelle réservation)
+  try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:fn+' '+ln,email:em,phone:ph,subject:'🆕 Nouvelle réservation '+ref,message:details})});}catch{}
+  // Email de confirmation au client
+  try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:'ONTIME TRANSFERT',email:em,phone:ph,subject:'Confirmation de votre réservation '+ref,message:'Bonjour '+fn+',\n\nVotre réservation est confirmée.\n\n'+details+'\n\nVotre chauffeur vous sera communiqué la veille.\nPour toute question : 07 60 55 44 60 (WhatsApp)\n\nMerci de votre confiance,\nONTIME TRANSFERT'})});}catch{}
+}
 
 // ——— KNOWN COORDINATES (for airports, stations, lieux) ———
 const KNOWN_COORDS={
@@ -1843,10 +1868,13 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
     errEl.textContent='Veuillez remplir tous les champs obligatoires.';
     errEl.style.display='block';return;
   }
+  if(ph.replace(/[\s\+\-\.\(\)]/g,'').length<8||!/^[\+0-9]/.test(ph)){
+    errEl.textContent='Numéro de téléphone invalide (ex : 06 12 34 56 78).';
+    errEl.style.display='block';return;
+  }
   errEl.style.display='none';
   booking.firstName=fn;booking.lastName=ln;booking.phone=ph;booking.email=em;
   booking.flight=document.getElementById('inputFlight').value;
-  booking.note=document.getElementById('inputNote').value;
 
   document.getElementById('bookingStep2').style.display='none';
   document.getElementById('bookingStep3').style.display='block';
@@ -1896,7 +1924,7 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
         amount:booking.price*100,currency:'eur',
         metadata:{from:booking.from,to:booking.to,date:booking.date,time:booking.time,
           name:fn+' '+ln,phone:ph,email:em,vehicle:booking.veh,
-          pax:booking.pax,bags:booking.bags,seatBaby:booking.seatBaby,seatChild:booking.seatChild,flight:booking.flight,note:booking.note,
+          pax:booking.pax,bags:booking.bags,seatBaby:booking.seatBaby,seatChild:booking.seatChild,flight:booking.flight,
           distKm:booking.distKm}
       })
     });
@@ -1917,6 +1945,8 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
         document.getElementById('bookingStep3').style.display='none';
         document.getElementById('bookingStep4').style.display='block';
         document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+        // Notifications email + WhatsApp
+        sendBookingNotifications(ref,fn,ln,ph,em);
       }
     } else {
       throw new Error(data.error||'Erreur serveur');
