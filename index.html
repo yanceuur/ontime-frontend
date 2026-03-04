@@ -49,10 +49,15 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 
 /* ——— GOLD SHIMMER LINE ——— */
 .gold-line{
-  position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;
+  position:absolute;bottom:0;left:0;right:0;z-index:3;height:2px;
   overflow:hidden;
-  transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .4s;
 }
+/* ——— PHONE ROW ——— */
+.phone-row{display:flex;gap:6px;align-items:center;}
+.phone-prefix{width:112px;flex-shrink:0;}
+/* ——— LANG BUTTON ——— */
+.lang-btn{font-size:.72rem;font-weight:700;letter-spacing:1.2px;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .2s;line-height:1;margin-right:-8px;}
+.lang-btn:hover,.lang-btn.active-en{color:var(--gold);border-color:rgba(200,169,110,.35);background:rgba(200,169,110,.06);}
 .gold-line::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);
@@ -729,23 +734,21 @@ textarea.form-input{
     </div>
   </a>
   <div class="nav-links">
-    <a href="index.html" class="nav-link active">Accueil</a>
-    <a href="vehicules.html" class="nav-link">Véhicules</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="tarifs-reservations.html" class="nav-link">Tarifs</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-    <a href="devenir-chauffeur.html" class="nav-link">Devenir chauffeur</a>
+    <a href="index.html" class="nav-link active" data-i18n="nav-home">Accueil</a>
+    <a href="vehicules.html" class="nav-link" data-i18n="nav-vehicles">Véhicules</a>
+    <a href="services.html" class="nav-link" data-i18n="nav-services">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link" data-i18n="nav-rates">Tarifs</a>
+    <a href="contact.html" class="nav-link" data-i18n="nav-contact">Contact</a>
+    <a href="devenir-chauffeur.html" class="nav-link" data-i18n="nav-driver">Devenir chauffeur</a>
     <a href="tel:+33760554460" class="nav-phone">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       07 60 55 44 60
     </a>
-    <a href="#booking" class="nav-cta">Réserver</a>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+    <a href="#booking" class="nav-cta" data-i18n="nav-book">Réserver</a>
   </div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-
-<!-- ——— GOLD SHIMMER LINE ——— -->
-<div class="gold-line" id="goldLine"></div>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar">
@@ -805,10 +808,10 @@ textarea.form-input{
 
       <!-- ——— STEP 1: FORMULAIRE ——— -->
       <div id="bookingStep1">
-      <div class="booking-title">Réservez en ligne</div>
-      <div class="booking-sub">Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--gold)">07 60 55 44 60</strong>.</div>
+      <div class="booking-title" data-i18n="book-title1">Réservez en ligne</div>
+      <div class="booking-sub" data-i18n="book-sub1">Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--gold)">07 60 55 44 60</strong>.</div>
 
-      <label class="form-label">Départ</label>
+      <label class="form-label" data-i18n="lbl-from">Départ</label>
       <div class="cat-tabs">
         <button class="cat-tab active" data-cat="adresse" data-target="dep"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg>Adresse</button>
         <button class="cat-tab" data-cat="aeroport" data-target="dep"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>Aéroport</button>
@@ -820,7 +823,7 @@ textarea.form-input{
       <div id="dep-gare" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><select class="form-select" id="depGareSelect"><option value="" disabled selected>Choisir une gare</option><option value="Gare du Nord">Gare du Nord</option><option value="Gare de Lyon">Gare de Lyon</option><option value="Gare Montparnasse">Gare Montparnasse</option><option value="Gare de l'Est">Gare de l'Est</option><option value="Gare Saint-Lazare">Gare Saint-Lazare</option><option value="Gare d'Austerlitz">Gare d'Austerlitz</option><option value="Gare de Bercy">Gare de Bercy</option><option value="Gare Massy TGV">Gare Massy TGV</option><option value="Gare Marne-la-Vallée Chessy">Gare Marne-la-Vallée Chessy</option></select></div></div>
       <div id="dep-lieu" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><select class="form-select" id="depLieuSelect"><option value="" disabled selected>Choisir un lieu</option><option value="Disneyland Paris">Disneyland Paris</option><option value="Château de Versailles">Château de Versailles</option><option value="Parc Astérix">Parc Astérix</option><option value="La Défense">La Défense</option></select></div></div>
 
-      <label class="form-label">Destination</label>
+      <label class="form-label" data-i18n="lbl-to">Destination</label>
       <div class="cat-tabs">
         <button class="cat-tab active" data-cat="adresse" data-target="arr"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg>Adresse</button>
         <button class="cat-tab" data-cat="aeroport" data-target="arr"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>Aéroport</button>
@@ -832,13 +835,13 @@ textarea.form-input{
       <div id="arr-gare" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><select class="form-select" id="arrGareSelect"><option value="" disabled selected>Choisir une gare</option><option value="Gare du Nord">Gare du Nord</option><option value="Gare de Lyon">Gare de Lyon</option><option value="Gare Montparnasse">Gare Montparnasse</option><option value="Gare de l'Est">Gare de l'Est</option><option value="Gare Saint-Lazare">Gare Saint-Lazare</option><option value="Gare d'Austerlitz">Gare d'Austerlitz</option><option value="Gare de Bercy">Gare de Bercy</option><option value="Gare Massy TGV">Gare Massy TGV</option><option value="Gare Marne-la-Vallée Chessy">Gare Marne-la-Vallée Chessy</option></select></div></div>
       <div id="arr-lieu" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><select class="form-select" id="arrLieuSelect"><option value="" disabled selected>Choisir un lieu</option><option value="Disneyland Paris">Disneyland Paris</option><option value="Château de Versailles">Château de Versailles</option><option value="Parc Astérix">Parc Astérix</option><option value="La Défense">La Défense</option></select></div></div>
 
-      <label class="form-label">Passagers &amp; bagages</label>
+      <label class="form-label" data-i18n="lbl-paxbags">Passagers &amp; bagages</label>
       <div class="pax-grid">
-        <div class="pax-item"><label>Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
-        <div class="pax-item"><label>Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+        <div class="pax-item"><label data-i18n="lbl-pax">Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
+        <div class="pax-item"><label data-i18n="lbl-bags">Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
       </div>
       <div class="toggle-row">
-        <span class="toggle-row-label">Siège enfant requis ?</span>
+        <span class="toggle-row-label" data-i18n="lbl-childseat">Siège enfant requis ?</span>
         <label class="toggle-switch">
           <input type="checkbox" id="toggleChildSeat" onchange="document.getElementById('childSeatPanel').style.display=this.checked?'block':'none'">
           <span class="toggle-slider"></span>
@@ -887,17 +890,34 @@ textarea.form-input{
           <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--gold);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           <span style="font-size:.8rem;color:var(--gold);">Retour</span>
         </div>
-        <div class="booking-title">Vos coordonnées</div>
-        <div class="booking-sub">Pour finaliser votre réservation</div>
+        <div class="booking-title" data-i18n="book-title2">Vos coordonnées</div>
+        <div class="booking-sub" data-i18n="book-sub2">Pour finaliser votre réservation</div>
         <div class="form-row">
-          <div><label class="form-label">Prénom</label><input type="text" class="form-input" id="inputFirstName" placeholder="Prénom" style="padding-left:12px;"></div>
-          <div><label class="form-label">Nom</label><input type="text" class="form-input" id="inputLastName" placeholder="Nom" style="padding-left:12px;"></div>
+          <div><label class="form-label" data-i18n="lbl-firstname">Prénom</label><input type="text" class="form-input" id="inputFirstName" placeholder="Prénom" style="padding-left:12px;"></div>
+          <div><label class="form-label" data-i18n="lbl-lastname">Nom</label><input type="text" class="form-input" id="inputLastName" placeholder="Nom" style="padding-left:12px;"></div>
         </div>
-        <label class="form-label">Téléphone</label>
-        <input type="tel" class="form-input" id="inputPhone" placeholder="06 12 34 56 78" style="padding-left:12px;" pattern="[\+0-9][0-9 \.\-\(\)]{7,}" title="Numéro valide (ex : 06 12 34 56 78)">
-        <label class="form-label">Email</label>
+        <label class="form-label" data-i18n="lbl-phone">Téléphone</label>
+        <div class="phone-row">
+          <select class="form-select phone-prefix" id="inputPhonePrefix">
+            <option value="+33">🇫🇷 +33</option>
+            <option value="+32">🇧🇪 +32</option>
+            <option value="+41">🇨🇭 +41</option>
+            <option value="+352">🇱🇺 +352</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+39">🇮🇹 +39</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+351">🇵🇹 +351</option>
+            <option value="+212">🇲🇦 +212</option>
+            <option value="+213">🇩🇿 +213</option>
+            <option value="+216">🇹🇳 +216</option>
+          </select>
+          <input type="tel" class="form-input" id="inputPhone" placeholder="6 12 34 56 78" title="Numéro valide" style="flex:1;">
+        </div>
+        <label class="form-label" data-i18n="lbl-email" style="margin-top:8px;">Email</label>
         <input type="email" class="form-input" id="inputEmail" placeholder="votre@email.com" style="padding-left:12px;">
-        <label class="form-label">N° de vol / train (optionnel)</label>
+        <label class="form-label" data-i18n="lbl-flight">N° de vol / train (optionnel)</label>
         <input type="text" class="form-input" id="inputFlight" placeholder="Ex: AF1234, TGV 6789" style="padding-left:12px;">
 
         <!-- RECAP -->
@@ -914,7 +934,7 @@ textarea.form-input{
           </div>
         </div>
 
-        <button class="btn-primary" id="btnContinuePay" style="margin-top:16px;">Continuer vers le paiement →</button>
+        <button class="btn-primary" id="btnContinuePay" style="margin-top:16px;" data-i18n="btn-continue">Continuer vers le paiement →</button>
         <div id="step2Error" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
       </div>
 
@@ -924,8 +944,8 @@ textarea.form-input{
           <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--gold);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           <span style="font-size:.8rem;color:var(--gold);">Retour</span>
         </div>
-        <div class="booking-title">Paiement sécurisé</div>
-        <div class="booking-sub">Vos données sont protégées par chiffrement SSL via Stripe.</div>
+        <div class="booking-title" data-i18n="book-title3">Paiement sécurisé</div>
+        <div class="booking-sub" data-i18n="book-sub3">Vos données sont protégées par chiffrement SSL via Stripe.</div>
         <div style="margin-top:14px;background:rgba(200,169,110,.06);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
           <span id="p3From">—</span> → <span id="p3To">—</span><br>
           <span id="p3Date">—</span> à <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
@@ -934,15 +954,15 @@ textarea.form-input{
             <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
           </div>
         </div>
-        <label class="form-label" style="margin-top:16px;">Nom du titulaire</label>
+        <label class="form-label" data-i18n="lbl-cardholder" style="margin-top:16px;">Nom du titulaire</label>
         <input type="text" class="form-input" id="inputCardName" placeholder="NOM PRÉNOM" style="padding-left:12px;letter-spacing:.5px;">
 
-        <label class="form-label" style="margin-top:12px;">Numéro de carte</label>
+        <label class="form-label" data-i18n="lbl-cardnumber" style="margin-top:12px;">Numéro de carte</label>
         <div id="card-number" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
 
         <div class="form-row" style="margin-top:12px;">
           <div>
-            <label class="form-label">Date d'expiration</label>
+            <label class="form-label" data-i18n="lbl-expiry">Date d'expiration</label>
             <div id="card-expiry" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
           </div>
           <div>
@@ -976,6 +996,7 @@ textarea.form-input{
     <span>Découvrir</span>
     <div class="scroll-line"></div>
   </div>
+  <div class="gold-line" id="goldLine"></div>
 </section>
 
 <!-- ——— TRUST STRIP ——— -->
@@ -1861,15 +1882,18 @@ cardCvcEl.on('change',onStripeErr);
 document.getElementById('btnContinuePay').addEventListener('click',()=>{
   const fn=document.getElementById('inputFirstName').value.trim();
   const ln=document.getElementById('inputLastName').value.trim();
-  const ph=document.getElementById('inputPhone').value.trim();
+  const rawPh=document.getElementById('inputPhone').value.trim();
+  const prefix=document.getElementById('inputPhonePrefix').value;
+  const phDigits=rawPh.replace(/^0/,'').replace(/[\s\.\-]/g,'');
+  const ph=prefix+phDigits;
   const em=document.getElementById('inputEmail').value.trim();
   const errEl=document.getElementById('step2Error');
-  if(!fn||!ln||!ph||!em){
+  if(!fn||!ln||!rawPh||!em){
     errEl.textContent='Veuillez remplir tous les champs obligatoires.';
     errEl.style.display='block';return;
   }
-  if(ph.replace(/[\s\+\-\.\(\)]/g,'').length<8||!/^[\+0-9]/.test(ph)){
-    errEl.textContent='Numéro de téléphone invalide (ex : 06 12 34 56 78).';
+  if(phDigits.replace(/\D/g,'').length<6){
+    errEl.textContent='Numéro de téléphone invalide.';
     errEl.style.display='block';return;
   }
   errEl.style.display='none';
@@ -1995,6 +2019,66 @@ async function submitB2B(){
     errEl.style.display='block';
     btn.disabled=false;btn.textContent='Envoyer la demande';
   }
+}
+
+// ——— LANGUE FR / EN ———
+let currentLang='fr';
+const i18n={
+  en:{
+    'nav-home':'Home','nav-vehicles':'Vehicles','nav-services':'Services',
+    'nav-rates':'Rates','nav-contact':'Contact','nav-driver':'Become a driver','nav-book':'Book',
+    'book-title1':'Book online',
+    'book-sub1':'Fixed & instant price. Booking at least 4h in advance, or call <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
+    'lbl-from':'Departure','lbl-to':'Destination',
+    'lbl-paxbags':'Passengers &amp; luggage','lbl-pax':'Passengers','lbl-bags':'Luggage',
+    'lbl-childseat':'Child seat needed?',
+    'book-title2':'Your details','book-sub2':'To finalize your booking',
+    'lbl-firstname':'First name','lbl-lastname':'Last name',
+    'lbl-phone':'Phone','lbl-email':'Email','lbl-flight':'Flight / train number (optional)',
+    'btn-continue':'Continue to payment →',
+    'book-title3':'Secure payment',
+    'book-sub3':'Your data is protected by SSL encryption via Stripe.',
+    'lbl-cardholder':'Cardholder name','lbl-cardnumber':'Card number','lbl-expiry':'Expiry date'
+  },
+  fr:{
+    'nav-home':'Accueil','nav-vehicles':'Véhicules','nav-services':'Services',
+    'nav-rates':'Tarifs','nav-contact':'Contact','nav-driver':'Devenir chauffeur','nav-book':'Réserver',
+    'book-title1':'Réservez en ligne',
+    'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
+    'lbl-from':'Départ','lbl-to':'Destination',
+    'lbl-paxbags':'Passagers &amp; bagages','lbl-pax':'Passagers','lbl-bags':'Bagages',
+    'lbl-childseat':'Siège enfant requis ?',
+    'book-title2':'Vos coordonnées','book-sub2':'Pour finaliser votre réservation',
+    'lbl-firstname':'Prénom','lbl-lastname':'Nom',
+    'lbl-phone':'Téléphone','lbl-email':'Email','lbl-flight':'N° de vol / train (optionnel)',
+    'btn-continue':'Continuer vers le paiement →',
+    'book-title3':'Paiement sécurisé',
+    'book-sub3':'Vos données sont protégées par chiffrement SSL via Stripe.',
+    'lbl-cardholder':'Nom du titulaire','lbl-cardnumber':'Numéro de carte','lbl-expiry':'Date d\'expiration'
+  }
+};
+function toggleLang(){setLang(currentLang==='fr'?'en':'fr');}
+function setLang(lang){
+  currentLang=lang;
+  const btn=document.getElementById('langBtn');
+  if(btn){btn.textContent=lang==='fr'?'EN':'FR';btn.classList.toggle('active-en',lang==='en');}
+  const dict=i18n[lang]||{};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.dataset.i18n;
+    if(dict[k]!==undefined)el.innerHTML=dict[k];
+  });
+  // Placeholders
+  const ph=lang==='en';
+  const ip=document.getElementById('inputPhone');
+  if(ip)ip.placeholder=ph?'6 12 34 56 78':'6 12 34 56 78';
+  const fn=document.getElementById('inputFirstName');if(fn)fn.placeholder=ph?'First name':'Prénom';
+  const ln=document.getElementById('inputLastName');if(ln)ln.placeholder=ph?'Last name':'Nom';
+  const fl=document.getElementById('inputFlight');if(fl)fl.placeholder=ph?'e.g. AF1234, TGV 6789':'Ex: AF1234, TGV 6789';
+  const cn=document.getElementById('inputCardName');if(cn)cn.placeholder=ph?'FULL NAME':'NOM PRÉNOM';
+  // Voir le tarif button if still in initial state
+  const vt=document.getElementById('btnVoirTarif');
+  if(vt&&(vt.textContent==='Voir le tarif'||vt.textContent==='Get a quote'))
+    vt.textContent=ph?'Get a quote':'Voir le tarif';
 }
 </script>
 
