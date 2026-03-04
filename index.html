@@ -49,15 +49,17 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 
 /* ——— GOLD SHIMMER LINE ——— */
 .gold-line{
-  position:absolute;bottom:0;left:0;right:0;z-index:3;height:2px;
-  overflow:hidden;
+  position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;
+  opacity:1;transition:opacity .5s ease;
 }
 /* ——— PHONE ROW ——— */
 .phone-row{display:flex;gap:6px;align-items:center;}
 .phone-prefix{width:112px;flex-shrink:0;}
 /* ——— LANG BUTTON ——— */
-.lang-btn{font-size:.72rem;font-weight:700;letter-spacing:1.2px;color:var(--text-muted);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;transition:all .2s;line-height:1;margin-right:-8px;}
-.lang-btn:hover,.lang-btn.active-en{color:var(--gold);border-color:rgba(200,169,110,.35);background:rgba(200,169,110,.06);}
+.lang-btn{display:flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;letter-spacing:.8px;color:var(--text-dim);background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.35);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .25s;line-height:1;margin-right:-4px;}
+.lang-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.5;fill:none;opacity:.7;}
+.lang-btn:hover,.lang-btn.active-en{color:var(--gold);border-color:var(--gold);background:rgba(200,169,110,.12);}
+.lang-btn.active-en svg{opacity:1;}
 .gold-line::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);
@@ -744,11 +746,17 @@ textarea.form-input{
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       07 60 55 44 60
     </a>
-    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span id="langBtnText">EN</span>
+    </button>
     <a href="#booking" class="nav-cta" data-i18n="nav-book">Réserver</a>
   </div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+
+<!-- ——— GOLD SHIMMER LINE ——— -->
+<div class="gold-line" id="goldLine"></div>
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar">
@@ -775,23 +783,23 @@ textarea.form-input{
   <div class="hero-left">
     <div class="hero-badge">
       <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="none"/></svg>
-      Chauffeur privé VTC
+      <span data-i18n="hero-badge">Chauffeur privé VTC</span>
     </div>
     <h1 class="hero-title">
-      <span class="line">Votre chauffeur,</span>
-      <span class="line">à l'heure. <em>Garanti.</em></span>
+      <span class="line" data-i18n="hero-line1">Votre chauffeur,</span>
+      <span class="line" data-i18n="hero-line2">à l'heure. <em>Garanti.</em></span>
     </h1>
-    <div class="hero-text">
+    <div class="hero-text" data-i18n="hero-text">
       Pas de compteur. <strong>Un tarif fixe</strong>.<br>
       Pas d'attente. <strong>Un chauffeur déjà sur place</strong>.<br>
       Pas de doute. <strong>Un suivi de vol et de train en temps réel</strong>.<br><br>
       ONTIME Transfert, c'est la <strong>ponctualité</strong>, le <strong>confort</strong> et la <strong>sécurité</strong> — pour chaque aéroport, chaque gare, chaque trajet, à toute heure.
     </div>
-    <div class="hero-signature">À très vite, à bord de l'un de nos véhicules.</div>
+    <div class="hero-signature" data-i18n="hero-sig">À très vite, à bord de l'un de nos véhicules.</div>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Disponible</div></div>
+      <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label" data-i18n="stat-avail">Disponible</div></div>
       <div class="stat-item"><div class="stat-number">4.9★</div><div class="stat-label">Google</div></div>
-      <div class="stat-item"><div class="stat-number">200+</div><div class="stat-label">Avis clients</div></div>
+      <div class="stat-item"><div class="stat-number">200+</div><div class="stat-label" data-i18n="stat-reviews">Avis clients</div></div>
     </div>
   </div>
 
@@ -993,10 +1001,9 @@ textarea.form-input{
   </div>
   </div>
   <div class="scroll-hint">
-    <span>Découvrir</span>
+    <span data-i18n="scroll-hint">Découvrir</span>
     <div class="scroll-line"></div>
   </div>
-  <div class="gold-line" id="goldLine"></div>
 </section>
 
 <!-- ——— TRUST STRIP ——— -->
@@ -1004,11 +1011,11 @@ textarea.form-input{
   <div class="trust-strip-inner">
     <div class="tbadge">
       <div class="tbadge-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <div class="tbadge-text">Carte VTC officielle</div>
+      <div class="tbadge-text" data-i18n="trust-vtc">Carte VTC officielle</div>
     </div>
     <div class="tbadge">
       <div class="tbadge-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
-      <div class="tbadge-text">Suivi vol &amp; train</div>
+      <div class="tbadge-text" data-i18n="trust-tracking">Suivi vol &amp; train</div>
     </div>
     <div class="tbadge">
       <div class="tbadge-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="var(--gold)" stroke="none"/></svg></div>
@@ -1016,15 +1023,15 @@ textarea.form-input{
     </div>
     <div class="tbadge">
       <div class="tbadge-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-      <div class="tbadge-text">Paiement SSL sécurisé</div>
+      <div class="tbadge-text" data-i18n="trust-payment">Paiement SSL sécurisé</div>
     </div>
     <div class="tbadge">
       <div class="tbadge-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-      <div class="tbadge-text">Annulation −24h gratuite</div>
+      <div class="tbadge-text" data-i18n="trust-cancel">Annulation −24h gratuite</div>
     </div>
     <div class="tbadge">
       <div class="tbadge-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-      <div class="tbadge-text">Chauffeur dédié</div>
+      <div class="tbadge-text" data-i18n="trust-driver">Chauffeur dédié</div>
     </div>
   </div>
 </div>
@@ -1034,9 +1041,9 @@ textarea.form-input{
 <!-- ——— SERVICES ——— -->
 <section class="section" id="services">
   <div class="anim-fade" style="text-align:center;display:flex;flex-direction:column;align-items:center;">
-    <div class="section-label">Nos prestations</div>
-    <h2 class="section-title">Un service pour chaque <em>occasion</em></h2>
-    <p class="section-sub" style="text-align:center;">Aéroports, gares, Paris, longues distances, événements — le même niveau d'exigence.</p>
+    <div class="section-label" data-i18n="svc-label">Nos prestations</div>
+    <h2 class="section-title" data-i18n="svc-title">Un service pour chaque <em>occasion</em></h2>
+    <p class="section-sub" data-i18n="svc-sub" style="text-align:center;">Aéroports, gares, Paris, longues distances, événements — le même niveau d'exigence.</p>
   </div>
   <div class="svc-banners">
 
@@ -1046,8 +1053,8 @@ textarea.form-input{
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
         <div class="svc-banner-text">
-          <h3>Transferts Aéroport</h3>
-          <p>CDG, Orly, Beauvais, Le Bourget — votre chauffeur suit votre vol en temps réel et s'adapte automatiquement aux retards. Accueil professionnel, aide aux bagages, véhicule sur place à votre arrivée.</p>
+          <h3 data-i18n="svc1-h">Transferts Aéroport</h3>
+          <p data-i18n="svc1-p">CDG, Orly, Beauvais, Le Bourget — votre chauffeur suit votre vol en temps réel et s'adapte automatiquement aux retards. Accueil professionnel, aide aux bagages, véhicule sur place à votre arrivée.</p>
         </div>
         <div class="svc-banner-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
@@ -1059,8 +1066,8 @@ textarea.form-input{
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg></div>
         <div class="svc-banner-text">
-          <h3>Transferts Gare</h3>
-          <p>Gare du Nord, Lyon, Montparnasse, Est, Saint-Lazare — suivi SNCF intégré. Votre chauffeur vous attend à la sortie de votre train, prise en charge immédiate de vos bagages.</p>
+          <h3 data-i18n="svc2-h">Transferts Gare</h3>
+          <p data-i18n="svc2-p">Gare du Nord, Lyon, Montparnasse, Est, Saint-Lazare — suivi SNCF intégré. Votre chauffeur vous attend à la sortie de votre train, prise en charge immédiate de vos bagages.</p>
         </div>
         <div class="svc-banner-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
@@ -1072,8 +1079,8 @@ textarea.form-input{
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg></div>
         <div class="svc-banner-text">
-          <h3>Courses Paris &amp; Île-de-France</h3>
-          <p>Rendez-vous d'affaires, soirées, shopping, déplacements médicaux — votre chauffeur privé partout dans Paris et toute l'Île-de-France, disponible 24h/24.</p>
+          <h3 data-i18n="svc3-h">Courses Paris &amp; Île-de-France</h3>
+          <p data-i18n="svc3-p">Rendez-vous d'affaires, soirées, shopping, déplacements médicaux — votre chauffeur privé partout dans Paris et toute l'Île-de-France, disponible 24h/24.</p>
         </div>
         <div class="svc-banner-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
@@ -1085,8 +1092,8 @@ textarea.form-input{
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <div class="svc-banner-text">
-          <h3>Longues distances</h3>
-          <p>Paris vers toute la France et au-delà. Bruxelles, Lyon, Bordeaux, Normandie — tarif fixe garanti, réduction aller-retour si réservé ensemble.</p>
+          <h3 data-i18n="svc4-h">Longues distances</h3>
+          <p data-i18n="svc4-p">Paris vers toute la France et au-delà. Bruxelles, Lyon, Bordeaux, Normandie — tarif fixe garanti, réduction aller-retour si réservé ensemble.</p>
         </div>
         <div class="svc-banner-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
@@ -1098,8 +1105,8 @@ textarea.form-input{
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg></div>
         <div class="svc-banner-text">
-          <h3>Mise à disposition</h3>
-          <p>Chauffeur dédié à la demi-journée ou journée entière. Mariages, événements, circuits touristiques, multi-arrêts — votre programme, notre flexibilité.</p>
+          <h3 data-i18n="svc5-h">Mise à disposition</h3>
+          <p data-i18n="svc5-p">Chauffeur dédié à la demi-journée ou journée entière. Mariages, événements, circuits touristiques, multi-arrêts — votre programme, notre flexibilité.</p>
         </div>
         <div class="svc-banner-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
       </div>
@@ -1114,19 +1121,19 @@ textarea.form-input{
 <section class="gar" id="garantie">
   <div class="gar-wrap">
     <div>
-      <div class="anim-fade"><div class="section-label">Notre engagement</div><h2 class="section-title">La ponctualité, <em>ce n'est pas une option.</em></h2></div>
-      <p class="gar-promise anim-fade d1">Votre chauffeur est toujours <em>en avance</em>. En cas de retard imprévu, vous êtes prévenu immédiatement et votre prochaine course est <em>offerte.</em></p>
+      <div class="anim-fade"><div class="section-label" data-i18n="gar-label">Notre engagement</div><h2 class="section-title" data-i18n="gar-title">La ponctualité, <em>ce n'est pas une option.</em></h2></div>
+      <p class="gar-promise anim-fade d1" data-i18n="gar-promise">Votre chauffeur est toujours <em>en avance</em>. En cas de retard imprévu, vous êtes prévenu immédiatement et votre prochaine course est <em>offerte.</em></p>
       <div class="gar-items">
-        <div class="gar-item anim-left d2"><div class="gar-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="gar-item-title">Suivi de vol en temps réel</div><div class="gar-item-desc">Votre chauffeur suit votre vol et s'adapte automatiquement aux retards.</div></div></div>
-        <div class="gar-item anim-left d3"><div class="gar-item-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="gar-item-title">Chauffeurs carte VTC</div><div class="gar-item-desc">Tous titulaires de la carte professionnelle VTC délivrée par le préfet.</div></div></div>
-        <div class="gar-item anim-left d4"><div class="gar-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div><div class="gar-item-title">Paiement 100% sécurisé</div><div class="gar-item-desc">Chiffrement SSL via Stripe. Annulation gratuite jusqu'à 24h avant.</div></div></div>
+        <div class="gar-item anim-left d2"><div class="gar-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="gar-item-title" data-i18n="gar-i1-t">Suivi de vol en temps réel</div><div class="gar-item-desc" data-i18n="gar-i1-d">Votre chauffeur suit votre vol et s'adapte automatiquement aux retards.</div></div></div>
+        <div class="gar-item anim-left d3"><div class="gar-item-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="gar-item-title" data-i18n="gar-i2-t">Chauffeurs carte VTC</div><div class="gar-item-desc" data-i18n="gar-i2-d">Tous titulaires de la carte professionnelle VTC délivrée par le préfet.</div></div></div>
+        <div class="gar-item anim-left d4"><div class="gar-item-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div><div class="gar-item-title" data-i18n="gar-i3-t">Paiement 100% sécurisé</div><div class="gar-item-desc" data-i18n="gar-i3-d">Chiffrement SSL via Stripe. Annulation gratuite jusqu'à 24h avant.</div></div></div>
       </div>
     </div>
     <div class="gar-visual anim-scale d2">
       <div class="gar-badge">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        <div class="gar-badge-title">Ponctualité garantie</div>
-        <div class="gar-badge-sub">Votre chauffeur en avance, toujours</div>
+        <div class="gar-badge-title" data-i18n="gar-badge-t">Ponctualité garantie</div>
+        <div class="gar-badge-sub" data-i18n="gar-badge-s">Votre chauffeur en avance, toujours</div>
       </div>
     </div>
   </div>
@@ -1136,9 +1143,9 @@ textarea.form-input{
 <section class="veh-section" id="vehicules" style="display:none;">
   <div style="max-width:1100px;margin:0 auto 52px;">
     <div class="anim-fade" style="display:flex;flex-direction:column;align-items:flex-start;">
-      <div class="section-label">Notre flotte</div>
-      <h2 class="section-title">Des véhicules <em>haut de gamme</em></h2>
-      <p class="section-sub">Berline confort, premium ou van — chaque trajet avec le véhicule adapté à vos besoins.</p>
+      <div class="section-label" data-i18n="veh-label">Notre flotte</div>
+      <h2 class="section-title" data-i18n="veh-title">Des véhicules <em>haut de gamme</em></h2>
+      <p class="section-sub" data-i18n="veh-sub">Berline confort, premium ou van — chaque trajet avec le véhicule adapté à vos besoins.</p>
     </div>
   </div>
   <div class="veh-grid">
@@ -1152,17 +1159,17 @@ textarea.form-input{
         <div class="veh-card-name">Confort</div>
         <div class="veh-card-sub">Tesla Model Y &amp; équivalent</div>
         <div class="veh-card-features">
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1 à 3 passagers</div>
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="16 3 12 7 8 3"/></svg>2 bagages cabine</div>
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Wi-Fi &amp; chargeur</div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="vf-pax13">1 à 3 passagers</span></div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="16 3 12 7 8 3"/></svg><span data-i18n="vf-bags2">2 bagages cabine</span></div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="vf-wifi">Wi-Fi &amp; chargeur</span></div>
         </div>
         <div class="veh-card-price">
           <div>
-            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">À partir de</div>
+            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
             <div class="veh-card-amount">28€</div>
             <div class="veh-card-km">+ 1,37€/km</div>
           </div>
-          <div class="veh-card-badge veh-badge-pop">Populaire</div>
+          <div class="veh-card-badge veh-badge-pop" data-i18n="veh-popular">Populaire</div>
         </div>
       </div>
     </div>
@@ -1176,13 +1183,13 @@ textarea.form-input{
         <div class="veh-card-name">Business Premium</div>
         <div class="veh-card-sub">Mercedes Classe S / BMW Série 7</div>
         <div class="veh-card-features">
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>1 à 3 passagers</div>
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="16 3 12 7 8 3"/></svg>3 bagages</div>
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="var(--gold)" stroke="none"/></svg>Intérieur cuir, eau offerte</div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="vf-pax13">1 à 3 passagers</span></div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="16 3 12 7 8 3"/></svg><span data-i18n="vf-bags3">3 bagages</span></div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="var(--gold)" stroke="none"/></svg><span data-i18n="vf-leather">Intérieur cuir, eau offerte</span></div>
         </div>
         <div class="veh-card-price">
           <div>
-            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">À partir de</div>
+            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
             <div class="veh-card-amount">44€</div>
             <div class="veh-card-km">+ 1,90€/km</div>
           </div>
@@ -1200,13 +1207,13 @@ textarea.form-input{
         <div class="veh-card-name">Grand Espace</div>
         <div class="veh-card-sub">Mercedes Classe V</div>
         <div class="veh-card-features">
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>4 à 7 passagers</div>
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="16 3 12 7 8 3"/></svg>7 bagages</div>
-          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Groupes &amp; familles</div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="vf-pax47">4 à 7 passagers</span></div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="13" rx="2"/><polyline points="16 3 12 7 8 3"/></svg><span data-i18n="vf-bags7">7 bagages</span></div>
+          <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="vf-groups">Groupes &amp; familles</span></div>
         </div>
         <div class="veh-card-price">
           <div>
-            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">À partir de</div>
+            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
             <div class="veh-card-amount">48€</div>
             <div class="veh-card-km">+ 2,12€/km</div>
           </div>
@@ -1217,7 +1224,7 @@ textarea.form-input{
   </div>
   <div style="text-align:center;margin-top:36px;" class="anim-fade d4">
     <a href="vehicules.html" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid rgba(200,169,110,.25);border-radius:10px;font-size:.8rem;color:var(--gold-light);text-decoration:none;transition:all .3s;">
-      Voir tous nos véhicules
+      <span data-i18n="veh-see-all">Voir tous nos véhicules</span>
       <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--gold);stroke-width:2;fill:none;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
@@ -1229,9 +1236,9 @@ textarea.form-input{
 <section class="avis-section" id="avis">
   <div class="avis-header">
     <div class="anim-left">
-      <div class="section-label">Témoignages</div>
-      <h2 class="section-title">Ce que disent <em>nos clients</em></h2>
-      <p class="section-sub" style="margin-bottom:0;">200+ avis vérifiés. La qualité, confirmée par ceux qui nous font confiance.</p>
+      <div class="section-label" data-i18n="avis-label">Témoignages</div>
+      <h2 class="section-title" data-i18n="avis-title">Ce que disent <em>nos clients</em></h2>
+      <p class="section-sub" style="margin-bottom:0;" data-i18n="avis-sub">200+ avis vérifiés. La qualité, confirmée par ceux qui nous font confiance.</p>
     </div>
     <div class="avis-google-badge anim-right">
       <div>
@@ -1243,7 +1250,7 @@ textarea.form-input{
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-        <div class="avis-count">200+ avis Google</div>
+        <div class="avis-count" data-i18n="avis-count">200+ avis Google</div>
       </div>
       <div style="padding-left:20px;border-left:1px solid rgba(200,169,110,.15);">
         <svg viewBox="0 0 24 24" style="width:32px;height:32px;fill:none;stroke:var(--gold);stroke-width:1.2;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1371,9 +1378,9 @@ textarea.form-input{
 <section class="zone-section" id="zones">
   <div style="max-width:1100px;margin:0 auto 52px;">
     <div class="anim-fade" style="text-align:center;display:flex;flex-direction:column;align-items:center;">
-      <div class="section-label">Couverture</div>
-      <h2 class="section-title">Partout en <em>Île-de-France</em></h2>
-      <p class="section-sub" style="text-align:center;">Aéroports, gares, lieux touristiques, centres d'affaires — nous couvrons toute la région et au-delà.</p>
+      <div class="section-label" data-i18n="zone-label">Couverture</div>
+      <h2 class="section-title" data-i18n="zone-title">Partout en <em>Île-de-France</em></h2>
+      <p class="section-sub" style="text-align:center;" data-i18n="zone-sub">Aéroports, gares, lieux touristiques, centres d'affaires — nous couvrons toute la région et au-delà.</p>
     </div>
   </div>
   <div class="zone-grid">
@@ -1382,7 +1389,7 @@ textarea.form-input{
       <div class="zone-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
       <div>
         <div class="zone-name">CDG — Roissy</div>
-        <div class="zone-detail">Terminal 1, 2 &amp; 3. Toutes compagnies.</div>
+        <div class="zone-detail" data-i18n="zd-cdg">Terminal 1, 2 &amp; 3. Toutes compagnies.</div>
       </div>
     </div>
 
@@ -1390,15 +1397,15 @@ textarea.form-input{
       <div class="zone-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
       <div>
         <div class="zone-name">Orly</div>
-        <div class="zone-detail">Orly Sud, Ouest &amp; Internationale.</div>
+        <div class="zone-detail" data-i18n="zd-orly">Orly Sud, Ouest &amp; Internationale.</div>
       </div>
     </div>
 
     <div class="zone-card anim-fade d3">
       <div class="zone-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg></div>
       <div>
-        <div class="zone-name">Gares parisiennes</div>
-        <div class="zone-detail">Nord, Lyon, Montparnasse, Est, Saint-Lazare.</div>
+        <div class="zone-name" data-i18n="zn-gares">Gares parisiennes</div>
+        <div class="zone-detail" data-i18n="zd-gares">Nord, Lyon, Montparnasse, Est, Saint-Lazare.</div>
       </div>
     </div>
 
@@ -1406,15 +1413,15 @@ textarea.form-input{
       <div class="zone-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <div>
         <div class="zone-name">Disneyland Paris</div>
-        <div class="zone-detail">Entrée principale, hôtels du parc.</div>
+        <div class="zone-detail" data-i18n="zd-disney">Entrée principale, hôtels du parc.</div>
       </div>
     </div>
 
     <div class="zone-card anim-fade d1">
       <div class="zone-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg></div>
       <div>
-        <div class="zone-name">Paris intra-muros</div>
-        <div class="zone-detail">Tous arrondissements, 24h/24.</div>
+        <div class="zone-name" data-i18n="zn-paris">Paris intra-muros</div>
+        <div class="zone-detail" data-i18n="zd-paris">Tous arrondissements, 24h/24.</div>
       </div>
     </div>
 
@@ -1422,7 +1429,7 @@ textarea.form-input{
       <div class="zone-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
       <div>
         <div class="zone-name">Versailles</div>
-        <div class="zone-detail">Château, Trianon, centre-ville.</div>
+        <div class="zone-detail" data-i18n="zd-versailles">Château, Trianon, centre-ville.</div>
       </div>
     </div>
 
@@ -1430,15 +1437,15 @@ textarea.form-input{
       <div class="zone-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
       <div>
         <div class="zone-name">La Défense</div>
-        <div class="zone-detail">Tours, CNIT, Grande Arche.</div>
+        <div class="zone-detail" data-i18n="zd-defense">Tours, CNIT, Grande Arche.</div>
       </div>
     </div>
 
     <div class="zone-card anim-fade d4">
       <div class="zone-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
       <div>
-        <div class="zone-name">Longues distances</div>
-        <div class="zone-detail">Lyon, Bruxelles, Normandie, Bordeaux…</div>
+        <div class="zone-name" data-i18n="zn-long">Longues distances</div>
+        <div class="zone-detail" data-i18n="zd-long">Lyon, Bruxelles, Normandie, Bordeaux…</div>
       </div>
     </div>
 
@@ -1461,9 +1468,9 @@ textarea.form-input{
       <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
       <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
-    <div class="footer-links"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#cgv">CGV</a><a href="mentions-legales.html#cookies">Confidentialité</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a><a href="mentions-legales.html#cgv" data-i18n="ft-cgv">CGV</a><a href="mentions-legales.html#cookies" data-i18n="ft-privacy">Confidentialité</a><a href="contact.html" data-i18n="ft-contact">Contact</a></div>
   </div>
-  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </footer>
 
 <!-- STRIPE (doit être chargé avant le script inline) -->
@@ -1486,6 +1493,9 @@ window.addEventListener('scroll',()=>{
     navbar.classList.remove('hidden');
   }
   lastScroll=y;
+  // Gold line fade
+  const gl=document.getElementById('goldLine');
+  if(gl)gl.style.opacity=y>80?'0':'1';
 },{passive:true});
 
 // ——— HERO PARALLAX ———
@@ -2025,10 +2035,67 @@ async function submitB2B(){
 let currentLang='fr';
 const i18n={
   en:{
+    // Nav
     'nav-home':'Home','nav-vehicles':'Vehicles','nav-services':'Services',
     'nav-rates':'Rates','nav-contact':'Contact','nav-driver':'Become a driver','nav-book':'Book',
+    // Hero
+    'hero-badge':'Private VTC Driver',
+    'hero-line1':'Your driver,',
+    'hero-line2':'on time. <em>Guaranteed.</em>',
+    'hero-text':'No meter. <strong>A fixed price</strong>.<br>No waiting. <strong>Your driver already on site</strong>.<br>No doubt. <strong>Real-time flight & train tracking</strong>.<br><br>ONTIME Transfert means <strong>punctuality</strong>, <strong>comfort</strong> and <strong>safety</strong> — for every airport, every station, every journey, around the clock.',
+    'hero-sig':'See you soon, aboard one of our vehicles.',
+    'stat-avail':'Available','stat-reviews':'Client reviews',
+    'scroll-hint':'Discover',
+    // Trust strip
+    'trust-vtc':'Official VTC licence','trust-tracking':'Flight & train tracking',
+    'trust-payment':'SSL secure payment','trust-cancel':'Free cancellation −24h','trust-driver':'Dedicated driver',
+    // Services
+    'svc-label':'Our services','svc-title':'A service for every <em>occasion</em>',
+    'svc-sub':'Airports, stations, Paris, long distances, events — the same level of excellence.',
+    'svc1-h':'Airport Transfers',
+    'svc1-p':'CDG, Orly, Beauvais, Le Bourget — your driver tracks your flight in real time and automatically adjusts to delays. Professional meet & greet, luggage assistance, vehicle ready on arrival.',
+    'svc2-h':'Train Station Transfers',
+    'svc2-p':'Gare du Nord, Lyon, Montparnasse, Est, Saint-Lazare — integrated SNCF tracking. Your driver waits at the platform exit, immediate luggage handling.',
+    'svc3-h':'Paris &amp; Île-de-France Rides',
+    'svc3-p':'Business meetings, evenings out, shopping, medical appointments — your private driver anywhere in Paris and greater Île-de-France, available 24/7.',
+    'svc4-h':'Long Distance',
+    'svc4-p':'Paris to anywhere in France and beyond. Brussels, Lyon, Bordeaux, Normandy — guaranteed fixed fare, round-trip discount when booked together.',
+    'svc5-h':'Chauffeur on Standby',
+    'svc5-p':'Dedicated driver for a half-day or full day. Weddings, events, tourist circuits, multi-stops — your agenda, our flexibility.',
+    // Garantie
+    'gar-label':'Our commitment','gar-title':'Punctuality, <em>it\'s not optional.</em>',
+    'gar-promise':'Your driver is always <em>early</em>. In the event of an unexpected delay, you are notified immediately and your next ride is <em>on us.</em>',
+    'gar-i1-t':'Real-time flight tracking','gar-i1-d':'Your driver monitors your flight and automatically adjusts to delays.',
+    'gar-i2-t':'Licensed VTC drivers','gar-i2-d':'All hold the professional VTC card issued by the prefecture.',
+    'gar-i3-t':'100% secure payment','gar-i3-d':'SSL encryption via Stripe. Free cancellation up to 24h before.',
+    'gar-badge-t':'Punctuality guaranteed','gar-badge-s':'Your driver early, every time.',
+    // Vehicles
+    'veh-label':'Our fleet','veh-title':'Premium <em>vehicles</em>',
+    'veh-sub':'Comfort sedan, premium or van — every journey with the vehicle suited to your needs.',
+    'vf-pax13':'1 to 3 passengers','vf-bags2':'2 cabin bags','vf-wifi':'Wi-Fi &amp; charger',
+    'vf-bags3':'3 bags','vf-leather':'Leather interior, water included',
+    'vf-pax47':'4 to 7 passengers','vf-bags7':'7 bags','vf-groups':'Groups &amp; families',
+    'veh-from':'From','veh-popular':'Popular','veh-see-all':'View all vehicles',
+    // Avis
+    'avis-label':'Reviews','avis-title':'What <em>our clients</em> say',
+    'avis-sub':'200+ verified reviews. Quality, confirmed by those who trust us.',
+    'avis-count':'200+ Google reviews',
+    // Zones
+    'zone-label':'Coverage','zone-title':'Everywhere in <em>Île-de-France</em>',
+    'zone-sub':'Airports, stations, tourist sites, business districts — we cover the whole region and beyond.',
+    'zd-cdg':'Terminal 1, 2 &amp; 3. All airlines.','zd-orly':'Orly South, West &amp; International.',
+    'zn-gares':'Paris Stations','zd-gares':'Nord, Lyon, Montparnasse, Est, Saint-Lazare.',
+    'zd-disney':'Main entrance, park hotels.',
+    'zn-paris':'Paris city centre','zd-paris':'All arrondissements, 24/7.',
+    'zd-versailles':'Palace, Trianon, town centre.',
+    'zd-defense':'Towers, CNIT, Grande Arche.',
+    'zn-long':'Long distances','zd-long':'Lyon, Brussels, Normandy, Bordeaux…',
+    // Footer
+    'ft-legal':'Legal notice','ft-cgv':'T&amp;Cs','ft-privacy':'Privacy','ft-contact':'Contact',
+    'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.',
+    // Booking form
     'book-title1':'Book online',
-    'book-sub1':'Fixed & instant price. Booking at least 4h in advance, or call <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
+    'book-sub1':'Fixed &amp; instant price. Booking at least 4h in advance, or call <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
     'lbl-from':'Departure','lbl-to':'Destination',
     'lbl-paxbags':'Passengers &amp; luggage','lbl-pax':'Passengers','lbl-bags':'Luggage',
     'lbl-childseat':'Child seat needed?',
@@ -2041,8 +2108,65 @@ const i18n={
     'lbl-cardholder':'Cardholder name','lbl-cardnumber':'Card number','lbl-expiry':'Expiry date'
   },
   fr:{
+    // Nav
     'nav-home':'Accueil','nav-vehicles':'Véhicules','nav-services':'Services',
     'nav-rates':'Tarifs','nav-contact':'Contact','nav-driver':'Devenir chauffeur','nav-book':'Réserver',
+    // Hero
+    'hero-badge':'Chauffeur privé VTC',
+    'hero-line1':'Votre chauffeur,',
+    'hero-line2':'à l\'heure. <em>Garanti.</em>',
+    'hero-text':'Pas de compteur. <strong>Un tarif fixe</strong>.<br>Pas d\'attente. <strong>Un chauffeur déjà sur place</strong>.<br>Pas de doute. <strong>Un suivi de vol et de train en temps réel</strong>.<br><br>ONTIME Transfert, c\'est la <strong>ponctualité</strong>, le <strong>confort</strong> et la <strong>sécurité</strong> — pour chaque aéroport, chaque gare, chaque trajet, à toute heure.',
+    'hero-sig':'À très vite, à bord de l\'un de nos véhicules.',
+    'stat-avail':'Disponible','stat-reviews':'Avis clients',
+    'scroll-hint':'Découvrir',
+    // Trust strip
+    'trust-vtc':'Carte VTC officielle','trust-tracking':'Suivi vol &amp; train',
+    'trust-payment':'Paiement SSL sécurisé','trust-cancel':'Annulation −24h gratuite','trust-driver':'Chauffeur dédié',
+    // Services
+    'svc-label':'Nos prestations','svc-title':'Un service pour chaque <em>occasion</em>',
+    'svc-sub':'Aéroports, gares, Paris, longues distances, événements — le même niveau d\'exigence.',
+    'svc1-h':'Transferts Aéroport',
+    'svc1-p':'CDG, Orly, Beauvais, Le Bourget — votre chauffeur suit votre vol en temps réel et s\'adapte automatiquement aux retards. Accueil professionnel, aide aux bagages, véhicule sur place à votre arrivée.',
+    'svc2-h':'Transferts Gare',
+    'svc2-p':'Gare du Nord, Lyon, Montparnasse, Est, Saint-Lazare — suivi SNCF intégré. Votre chauffeur vous attend à la sortie de votre train, prise en charge immédiate de vos bagages.',
+    'svc3-h':'Courses Paris &amp; Île-de-France',
+    'svc3-p':'Rendez-vous d\'affaires, soirées, shopping, déplacements médicaux — votre chauffeur privé partout dans Paris et toute l\'Île-de-France, disponible 24h/24.',
+    'svc4-h':'Longues distances',
+    'svc4-p':'Paris vers toute la France et au-delà. Bruxelles, Lyon, Bordeaux, Normandie — tarif fixe garanti, réduction aller-retour si réservé ensemble.',
+    'svc5-h':'Mise à disposition',
+    'svc5-p':'Chauffeur dédié à la demi-journée ou journée entière. Mariages, événements, circuits touristiques, multi-arrêts — votre programme, notre flexibilité.',
+    // Garantie
+    'gar-label':'Notre engagement','gar-title':'La ponctualité, <em>ce n\'est pas une option.</em>',
+    'gar-promise':'Votre chauffeur est toujours <em>en avance</em>. En cas de retard imprévu, vous êtes prévenu immédiatement et votre prochaine course est <em>offerte.</em>',
+    'gar-i1-t':'Suivi de vol en temps réel','gar-i1-d':'Votre chauffeur suit votre vol et s\'adapte automatiquement aux retards.',
+    'gar-i2-t':'Chauffeurs carte VTC','gar-i2-d':'Tous titulaires de la carte professionnelle VTC délivrée par le préfet.',
+    'gar-i3-t':'Paiement 100% sécurisé','gar-i3-d':'Chiffrement SSL via Stripe. Annulation gratuite jusqu\'à 24h avant.',
+    'gar-badge-t':'Ponctualité garantie','gar-badge-s':'Votre chauffeur en avance, toujours',
+    // Vehicles
+    'veh-label':'Notre flotte','veh-title':'Des véhicules <em>haut de gamme</em>',
+    'veh-sub':'Berline confort, premium ou van — chaque trajet avec le véhicule adapté à vos besoins.',
+    'vf-pax13':'1 à 3 passagers','vf-bags2':'2 bagages cabine','vf-wifi':'Wi-Fi &amp; chargeur',
+    'vf-bags3':'3 bagages','vf-leather':'Intérieur cuir, eau offerte',
+    'vf-pax47':'4 à 7 passagers','vf-bags7':'7 bagages','vf-groups':'Groupes &amp; familles',
+    'veh-from':'À partir de','veh-popular':'Populaire','veh-see-all':'Voir tous nos véhicules',
+    // Avis
+    'avis-label':'Témoignages','avis-title':'Ce que disent <em>nos clients</em>',
+    'avis-sub':'200+ avis vérifiés. La qualité, confirmée par ceux qui nous font confiance.',
+    'avis-count':'200+ avis Google',
+    // Zones
+    'zone-label':'Couverture','zone-title':'Partout en <em>Île-de-France</em>',
+    'zone-sub':'Aéroports, gares, lieux touristiques, centres d\'affaires — nous couvrons toute la région et au-delà.',
+    'zd-cdg':'Terminal 1, 2 &amp; 3. Toutes compagnies.','zd-orly':'Orly Sud, Ouest &amp; Internationale.',
+    'zn-gares':'Gares parisiennes','zd-gares':'Nord, Lyon, Montparnasse, Est, Saint-Lazare.',
+    'zd-disney':'Entrée principale, hôtels du parc.',
+    'zn-paris':'Paris intra-muros','zd-paris':'Tous arrondissements, 24h/24.',
+    'zd-versailles':'Château, Trianon, centre-ville.',
+    'zd-defense':'Tours, CNIT, Grande Arche.',
+    'zn-long':'Longues distances','zd-long':'Lyon, Bruxelles, Normandie, Bordeaux…',
+    // Footer
+    'ft-legal':'Mentions légales','ft-cgv':'CGV','ft-privacy':'Confidentialité','ft-contact':'Contact',
+    'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.',
+    // Booking form
     'book-title1':'Réservez en ligne',
     'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
     'lbl-from':'Départ','lbl-to':'Destination',
@@ -2061,7 +2185,9 @@ function toggleLang(){setLang(currentLang==='fr'?'en':'fr');}
 function setLang(lang){
   currentLang=lang;
   const btn=document.getElementById('langBtn');
-  if(btn){btn.textContent=lang==='fr'?'EN':'FR';btn.classList.toggle('active-en',lang==='en');}
+  const btnTxt=document.getElementById('langBtnText');
+  if(btnTxt)btnTxt.textContent=lang==='fr'?'EN':'FR';
+  if(btn)btn.classList.toggle('active-en',lang==='en');
   const dict=i18n[lang]||{};
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.dataset.i18n;
