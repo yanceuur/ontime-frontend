@@ -191,14 +191,6 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .form-select{cursor:pointer;}
 .form-select option{background:#1a1a1a;color:var(--text);}
 
-.file-upload{
-  border:2px dashed rgba(200,169,110,.15);border-radius:10px;padding:20px;
-  text-align:center;cursor:pointer;transition:border-color .3s,background .3s;
-}
-.file-upload:hover{border-color:rgba(200,169,110,.35);background:rgba(200,169,110,.03);}
-.file-upload-label{font-size:.82rem;color:var(--text-muted);font-weight:300;}
-.file-upload-label strong{color:var(--gold);font-weight:500;}
-.file-upload input[type="file"]{display:none;}
 
 .btn-submit{
   width:100%;padding:16px;border:none;border-radius:10px;
@@ -539,52 +531,13 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Ville / Secteur</label>
-          <input type="text" class="form-input" id="driverCity" placeholder="Ex: Paris, Créteil, Évry...">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Expérience VTC</label>
-          <select class="form-select" id="driverExperience">
-            <option value="" disabled selected>Années d'expérience</option>
-            <option value="Moins d'1 an">Moins d'1 an</option>
-            <option value="1 à 3 ans">1 à 3 ans</option>
-            <option value="3 à 5 ans">3 à 5 ans</option>
-            <option value="Plus de 5 ans">Plus de 5 ans</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Marque & modèle du véhicule</label>
+          <label class="form-label">Marque &amp; modèle du véhicule</label>
           <input type="text" class="form-input" id="driverVehicle" placeholder="Ex: Mercedes Classe E, Tesla Model Y...">
         </div>
         <div class="form-group">
-          <label class="form-label">Année du véhicule</label>
-          <input type="text" class="form-input" id="driverYear" placeholder="Ex: 2023">
+          <label class="form-label">N° de carte VTC</label>
+          <input type="text" class="form-input" id="driverVTC" placeholder="N° carte professionnelle VTC">
         </div>
-      </div>
-
-      <div class="form-group full" style="margin-bottom:16px;">
-        <label class="form-label">N° de carte VTC</label>
-        <input type="text" class="form-input" id="driverVTC" placeholder="Numéro de votre carte professionnelle VTC">
-      </div>
-
-      <div class="form-group full" style="margin-bottom:16px;">
-        <label class="form-label">Documents (carte VTC, permis, assurance, carte grise, KBIS, photos véhicule)</label>
-        <div class="file-upload" id="fileDropZone">
-          <label class="file-upload-label" for="driverFiles">
-            <strong>Cliquez ici</strong> ou glissez-déposez vos fichiers<br>
-            <span style="font-size:.75rem;color:var(--text-muted);">PDF, JPG, PNG — max 10 Mo par fichier</span>
-          </label>
-          <input type="file" id="driverFiles" multiple accept=".pdf,.jpg,.jpeg,.png">
-        </div>
-        <div id="fileList" style="margin-top:8px;font-size:.8rem;color:var(--text-muted);"></div>
-      </div>
-
-      <div class="form-group full" style="margin-bottom:0;">
-        <label class="form-label">Message (optionnel)</label>
-        <textarea class="form-textarea" id="driverMessage" placeholder="Présentez-vous brièvement, vos disponibilités, vos motivations..."></textarea>
       </div>
 
       <button type="button" class="btn-submit" id="btnSubmitDriver">Envoyer ma candidature</button>
@@ -661,30 +614,6 @@ const io=new IntersectionObserver((entries)=>{
 },{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.block,.avantage-card').forEach(el=>io.observe(el));
 
-// FILE UPLOAD
-const fileInput=document.getElementById('driverFiles');
-const fileList=document.getElementById('fileList');
-const dropZone=document.getElementById('fileDropZone');
-
-fileInput.addEventListener('change',()=>updateFileList());
-dropZone.addEventListener('dragover',(e)=>{e.preventDefault();dropZone.style.borderColor='rgba(200,169,110,.5)';dropZone.style.background='rgba(200,169,110,.06)';});
-dropZone.addEventListener('dragleave',()=>{dropZone.style.borderColor='';dropZone.style.background='';});
-dropZone.addEventListener('drop',(e)=>{
-  e.preventDefault();dropZone.style.borderColor='';dropZone.style.background='';
-  fileInput.files=e.dataTransfer.files;updateFileList();
-});
-
-function updateFileList(){
-  const files=fileInput.files;
-  if(!files.length){fileList.innerHTML='';return;}
-  let html='';
-  for(let i=0;i<files.length;i++){
-    const size=(files[i].size/1024/1024).toFixed(1);
-    html+=`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="color:var(--gold);">📎</span> ${files[i].name} <span style="opacity:.5;">(${size} Mo)</span></div>`;
-  }
-  fileList.innerHTML=html;
-}
-
 // FORM SUBMIT
 document.getElementById('btnSubmitDriver').addEventListener('click',async()=>{
   const fn=document.getElementById('driverFirstName').value.trim();
@@ -705,12 +634,8 @@ document.getElementById('btnSubmitDriver').addEventListener('click',async()=>{
   try{
     const body={
       firstName:fn,lastName:ln,phone:ph,email:em,
-      city:document.getElementById('driverCity').value,
-      experience:document.getElementById('driverExperience').value,
       vehicle:document.getElementById('driverVehicle').value,
-      year:document.getElementById('driverYear').value,
       vtcNumber:document.getElementById('driverVTC').value,
-      message:document.getElementById('driverMessage').value,
       subject:'Candidature chauffeur'
     };
 
