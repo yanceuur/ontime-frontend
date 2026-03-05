@@ -1205,14 +1205,14 @@ textarea.form-input{
     <div class="anim-fade" style="display:flex;flex-direction:column;align-items:flex-start;">
       <div class="section-label" data-i18n="veh-label">Notre flotte</div>
       <h2 class="section-title" data-i18n="veh-title">Des véhicules <em>haut de gamme</em></h2>
-      <p class="section-sub" data-i18n="veh-sub">Berline confort, premium ou van — chaque trajet avec le véhicule adapté à vos besoins.</p>
+      <p class="section-sub" data-i18n="veh-sub">Confort, Business ou Van — chaque trajet avec le véhicule adapté à vos besoins.</p>
     </div>
   </div>
   <div class="veh-grid">
 
     <div class="veh-card anim-fade d1">
       <div class="veh-card-img">
-        <img src="https://images.pexels.com/photos/1007410/pexels-photo-1007410.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Berline Confort" onerror="this.style.display='none'">
+        <img src="https://images.pexels.com/photos/1007410/pexels-photo-1007410.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Confort" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Berline</div>
@@ -1236,11 +1236,11 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d2">
       <div class="veh-card-img">
-        <img src="https://images.pexels.com/photos/3786091/pexels-photo-3786091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Berline Premium" onerror="this.style.display='none'">
+        <img src="https://images.pexels.com/photos/3786091/pexels-photo-3786091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Business" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Berline</div>
-        <div class="veh-card-name">Business Premium</div>
+        <div class="veh-card-name">Business</div>
         <div class="veh-card-sub">Mercedes Classe S / BMW Série 7</div>
         <div class="veh-card-features">
           <div class="veh-feat"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="vf-pax13">1 à 3 passagers</span></div>
@@ -1253,7 +1253,7 @@ textarea.form-input{
             <div class="veh-card-amount">44€</div>
             <div class="veh-card-km">+ 1,90€/km</div>
           </div>
-          <div class="veh-card-badge veh-badge-pre">Premium</div>
+          <div class="veh-card-badge veh-badge-pre">Business</div>
         </div>
       </div>
     </div>
@@ -1648,7 +1648,7 @@ async function sendBookingNotifications(ref,fn,ln,ph,em){
   const seats=[];
   if(booking.seatBaby>0)seats.push(booking.seatBaby+' siège bébé');
   if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
-  const vehNames={confort:'Berline Confort',premium:'Berline Premium',van:'Van / Minibus'};
+  const vehNames={confort:'Confort',premium:'Business',van:'Van / Minibus'};
   const details=[
     '📋 Réf. '+ref,
     '📍 '+booking.from+' → '+booking.to,
@@ -1912,7 +1912,7 @@ document.getElementById('arrAdresseInput')?.addEventListener('input',resetTarifB
 document.querySelectorAll('.cat-tab').forEach(t=>t.addEventListener('click',resetTarifBtn));
 
 // ——— STEP NAVIGATION ———
-const vehNames={confort:'Berline Confort',premium:'Berline Premium',van:'Van / Minibus'};
+const vehNames={confort:'Confort',premium:'Business',van:'Van / Minibus'};
 
 function goToStep2(){
   document.getElementById('bookingStep1').style.display='none';
@@ -2240,7 +2240,7 @@ const i18n={
     'gar-badge-t':'Ponctualité garantie','gar-badge-s':'Votre chauffeur en avance, toujours',
     // Vehicles
     'veh-label':'Notre flotte','veh-title':'Des véhicules <em>haut de gamme</em>',
-    'veh-sub':'Berline confort, premium ou van — chaque trajet avec le véhicule adapté à vos besoins.',
+    'veh-sub':'Confort, Business ou Van — chaque trajet avec le véhicule adapté à vos besoins.',
     'vf-pax13':'1 à 3 passagers','vf-bags2':'2 bagages cabine','vf-wifi':'Wi-Fi &amp; chargeur',
     'vf-bags3':'3 bagages','vf-leather':'Intérieur cuir, eau offerte',
     'vf-pax47':'4 à 7 passagers','vf-bags7':'7 bagages','vf-groups':'Groupes &amp; familles',
@@ -2342,8 +2342,8 @@ function setLang(lang){
   const iv=document.getElementById('inputVehicle');
   if(iv){
     const vt=ph
-      ?['Choose a vehicle','Comfort Sedan (1-3 passengers)','Premium Sedan (1-3 passengers)','Van / Minibus (4-7 passengers)']
-      :['Choisir un véhicule','Berline Confort (1-3 passagers)','Berline Premium (1-3 passagers)','Van / Minibus (4-7 passagers)'];
+      ?['Choose a vehicle','Confort (1-3 passengers)','Business (1-3 passengers)','Van / Minibus (4-7 passengers)']
+      :['Choisir un véhicule','Confort (1-3 passagers)','Business (1-3 passagers)','Van / Minibus (4-7 passagers)'];
     Array.from(iv.options).forEach((o,i)=>{if(vt[i])o.text=vt[i];});
   }
   // Time select placeholder
