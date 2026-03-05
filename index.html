@@ -54,7 +54,8 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 }
 /* ——— PHONE ROW ——— */
 .phone-row{display:flex;gap:6px;align-items:center;}
-.phone-prefix{width:112px;flex-shrink:0;}
+/* Spécificité plus haute pour ne pas être écrasé par .form-select{width:100%} */
+.phone-row .phone-prefix{width:84px;flex-shrink:0;padding-left:10px;padding-right:24px;}
 /* ——— LANG BUTTON ——— */
 .lang-btn{display:flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;letter-spacing:.8px;color:var(--text-dim);background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.35);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .25s;line-height:1;margin-right:-4px;}
 .lang-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.5;fill:none;opacity:.7;}
@@ -945,19 +946,19 @@ textarea.form-input{
         <label class="form-label" data-i18n="lbl-phone">Téléphone</label>
         <div class="phone-row">
           <select class="form-select phone-prefix" id="inputPhonePrefix">
-            <option value="+33">🇫🇷 +33</option>
-            <option value="+32">🇧🇪 +32</option>
-            <option value="+41">🇨🇭 +41</option>
-            <option value="+352">🇱🇺 +352</option>
-            <option value="+44">🇬🇧 +44</option>
-            <option value="+1">🇺🇸 +1</option>
-            <option value="+49">🇩🇪 +49</option>
-            <option value="+39">🇮🇹 +39</option>
-            <option value="+34">🇪🇸 +34</option>
-            <option value="+351">🇵🇹 +351</option>
-            <option value="+212">🇲🇦 +212</option>
-            <option value="+213">🇩🇿 +213</option>
-            <option value="+216">🇹🇳 +216</option>
+            <option value="+33">+33 FR</option>
+            <option value="+32">+32 BE</option>
+            <option value="+41">+41 CH</option>
+            <option value="+352">+352 LU</option>
+            <option value="+44">+44 GB</option>
+            <option value="+1">+1 US</option>
+            <option value="+49">+49 DE</option>
+            <option value="+39">+39 IT</option>
+            <option value="+34">+34 ES</option>
+            <option value="+351">+351 PT</option>
+            <option value="+212">+212 MA</option>
+            <option value="+213">+213 DZ</option>
+            <option value="+216">+216 TN</option>
           </select>
           <input type="tel" class="form-input" id="inputPhone" placeholder="6 12 34 56 78" title="Numéro valide" style="flex:1;">
         </div>
