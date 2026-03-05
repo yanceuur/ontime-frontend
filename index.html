@@ -708,8 +708,11 @@ textarea.form-input{
   /* Booking form — iOS zoom fix (font-size ≥ 16px sinon Safari zoome) */
   .form-select,.form-input{font-size:1rem;}
   .pax-select{font-size:1rem;}
-  /* Date input : empêche le débordement sur iOS */
-  input[type="date"].form-input{width:100%;max-width:100%;box-sizing:border-box;}
+  /* Date input : appearance:none supprime le bouton natif iOS qui fait déborder le champ */
+  /* Le picker date s'ouvre quand même au tap sur iOS */
+  input[type="date"].form-input{-webkit-appearance:none;appearance:none;width:100%;min-width:0;}
+  /* Conteneur du champ : contraindre la largeur */
+  .field-wrap{width:100%;overflow:hidden;min-width:0;}
   .form-row{grid-template-columns:1fr;}
 
   /* Sections */
