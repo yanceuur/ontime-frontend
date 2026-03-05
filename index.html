@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chauffeur privé VTC Paris — ONTIME TRANSFERT. Transferts aéroport CDG, Orly, gares parisiennes, Disneyland. Tarif fixe garanti, réservation en ligne 24h/24. 07 60 55 44 60.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ontime-frontend.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ONTIME TRANSFERT — Chauffeur Privé VTC Paris">
+<meta property="og:description" content="Votre chauffeur privé VTC à Paris. Transferts CDG, Orly, gares, Disneyland. Tarif fixe, ponctualité garantie. Réservez en ligne.">
+<meta property="og:url" content="https://ontime-frontend.vercel.app/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="ONTIME TRANSFERT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ONTIME TRANSFERT — Chauffeur Privé VTC Paris">
+<meta name="twitter:description" content="Transferts VTC Paris. Tarif fixe, ponctualité garantie. CDG, Orly, gares, Disneyland.">
 <title>ONTIME TRANSFERT — Chauffeur Privé VTC Paris</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
@@ -924,7 +936,7 @@ textarea.form-input{
       <button class="btn-primary" id="btnVoirTarif" data-i18n="btn-voir-tarif">Voir le tarif</button>
 
       <!-- ERROR MSG -->
-      <div id="bookingError" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+      <div id="bookingError" role="alert" aria-live="polite" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
 
       <div class="booking-trust">
         <div class="trust-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="trust-pay">Paiement sécurisé</span></div>
@@ -984,7 +996,7 @@ textarea.form-input{
         </div>
 
         <button class="btn-primary" id="btnContinuePay" style="margin-top:16px;" data-i18n="btn-continue">Continuer vers le paiement →</button>
-        <div id="step2Error" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+        <div id="step2Error" role="alert" aria-live="polite" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
       </div>
 
       <!-- ——— STEP 3: PAIEMENT ——— -->
@@ -1024,7 +1036,7 @@ textarea.form-input{
           <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(10,10,10,.2);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
           <span data-i18n="btn-pay">Payer et confirmer</span>
         </button>
-        <div id="payError" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+        <div id="payError" role="alert" aria-live="polite" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
         <div class="card-logos-row">
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-style="italic" font-weight="900" font-size="12" fill="white">VISA</text></svg>
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>

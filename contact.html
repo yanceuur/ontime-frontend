@@ -3,6 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contactez ONTIME TRANSFERT : 07 60 55 44 60, WhatsApp, email. Disponible 24h/24, 7j/7. Devis sur mesure pour entreprises et groupes. Paris & Île-de-France.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ontime-frontend.vercel.app/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — ONTIME TRANSFERT">
+<meta property="og:description" content="Contactez ONTIME TRANSFERT par téléphone, WhatsApp ou email. Disponible 24h/24. Devis entreprises sur mesure.">
+<meta property="og:url" content="https://ontime-frontend.vercel.app/contact.html">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="ONTIME TRANSFERT">
 <title>Contact — ONTIME TRANSFERT</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
@@ -331,7 +340,7 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
         </div>
       </div>
       <button type="button" class="form-submit" id="submitBtn" onclick="sendEmail()" data-i18n="cf-submit">Envoyer le message</button>
-      <div class="form-status" id="formStatus"></div>
+      <div class="form-status" id="formStatus" role="alert" aria-live="polite"></div>
     </div>
 
   </div>
@@ -371,7 +380,7 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
     <div class="b2b-form-wrap">
       <div class="b2b-form-title" data-i18n="cb2b-title">Ouvrir un compte entreprise</div>
       <div class="b2b-form-sub" data-i18n="cb2b-sub">Réponse sous 24h par notre équipe commerciale.</div>
-      <div class="b2b-msg err" id="b2bError"></div>
+      <div class="b2b-msg err" id="b2bError" role="alert" aria-live="polite"></div>
       <div class="b2b-msg ok" id="b2bSuccess">Demande envoyée ! Nous vous contactons sous 24h.</div>
       <label class="b2b-field-label" data-i18n="cb2b-societe">Société *</label>
       <div class="b2b-field-wrap">
