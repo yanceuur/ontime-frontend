@@ -227,19 +227,84 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .wa svg{width:28px;height:28px;fill:#fff;}
 
 @media(max-width:768px){
-  .navbar{padding:0 20px;height:64px;}
+  /* Navbar */
+  .navbar{padding:0 16px;height:64px;}
   .gold-line{top:64px;}
   .nav-links{display:none !important;}
   .hamburger{display:flex;}
-  .page-header{padding:130px 24px 50px;}
-  .content{padding:0 20px 60px;}
-  .block{padding:28px 22px;}
-  .avantages-grid{grid-template-columns:1fr;}
-  .stats-bar{gap:28px;}
-  .steps{flex-direction:column;gap:16px;}
+
+  /* Sidebar: adaptatif sur très petits écrans */
+  .sidebar{width:min(300px,85vw);}
+
+  /* Header */
+  .page-header{padding:110px 20px 44px;}
+  .section-sub{font-size:.88rem;line-height:1.75;}
+
+  /* Layout */
+  .content{padding:0 16px 56px;}
+
+  /* Blocks */
+  .block{padding:24px 18px;margin-bottom:20px;border-radius:16px;}
+  .block-title{font-size:1.3rem;}
+  .block p{font-size:.9rem;}
+  .highlight{padding:14px 16px;}
+
+  /* Stats: grille 2×2 au lieu de 4 en ligne */
+  .stats-bar{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:20px 16px;padding:32px 20px;
+  }
+  .stat-number{font-size:1.9rem;}
+
+  /* Avantages */
+  .avantages-grid{grid-template-columns:1fr;gap:14px;margin:24px 0;}
+  .avantage-card{padding:22px 16px;border-radius:14px;}
+
+  /* Steps: vertical avec ligne connectrice */
+  .steps{flex-direction:column;gap:0;}
+  .step{flex:none;text-align:left;padding:0 0 28px 56px;position:relative;}
+  .step:last-child{padding-bottom:0;}
+  .step-num{position:absolute;left:0;top:0;margin:0;}
+  .step-title{font-size:.9rem;text-align:left;}
+  .step-desc{text-align:left;}
+  .step:not(:last-child)::after{
+    content:'';position:absolute;left:19px;top:42px;bottom:4px;
+    width:2px;
+    background:linear-gradient(to bottom,rgba(200,169,110,.35),transparent);
+  }
+
+  /* Formulaire: font-size 1rem pour éviter le zoom iOS */
+  .form-input,.form-select,.form-textarea{font-size:1rem;padding:13px 12px;}
   .form-row{grid-template-columns:1fr;}
-  .cta-section{padding:40px 20px 80px;}
-  .footer{padding:30px 20px 16px;}
+  .file-upload{padding:16px 12px;}
+
+  /* CTA */
+  .cta-section{padding:36px 16px 72px;}
+  .cta-title{font-size:1.6rem;}
+
+  /* Footer */
+  .footer{padding:28px 16px 16px;}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center;gap:16px;}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:12px 18px;}
+
+  /* WhatsApp */
+  .wa{width:48px;height:48px;bottom:18px;right:14px;}
+  .wa svg{width:24px;height:24px;}
+}
+
+/* Tablette (480–768px): 2 colonnes pour les avantages */
+@media(min-width:481px) and (max-width:768px){
+  .avantages-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* Très petits écrans (<380px) */
+@media(max-width:380px){
+  .navbar{padding:0 12px;}
+  .nav-logo-name{font-size:1.2rem;letter-spacing:4px;}
+  .block{padding:18px 14px;}
+  .avantage-card{padding:18px 12px;}
+  .stats-bar{padding:28px 14px;gap:16px 12px;}
+  .stat-number{font-size:1.7rem;}
 }
 </style>
 </head>
