@@ -37,9 +37,12 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .nav-logo-line{flex:1;height:1px;background:var(--gold);}
 .nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
 
-.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;}
+.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;opacity:1;transition:opacity .5s ease;}
 .gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);}
 @keyframes goldShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.lang-btn{display:flex;align-items:center;gap:6px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;letter-spacing:.5px;font-family:'Inter',sans-serif;transition:border-color .3s,color .3s;}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold-light);}
+.lang-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;}
 
 .nav-links{display:flex !important;align-items:center;gap:32px;}
 .nav-link{font-size:.9rem;color:var(--text-dim);text-decoration:none;letter-spacing:.5px;font-weight:400;transition:color .3s;position:relative;}
@@ -244,17 +247,18 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     </div>
   </a>
   <div class="nav-links">
-    <a href="index.html" class="nav-link">Accueil</a>
-    <a href="vehicules.html" class="nav-link">Véhicules</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="tarifs-reservations.html" class="nav-link active">Tarifs</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-    <a href="devenir-chauffeur.html" class="nav-link">Devenir chauffeur</a>
+    <a href="index.html" class="nav-link" data-i18n="nav-home">Accueil</a>
+    <a href="vehicules.html" class="nav-link" data-i18n="nav-vehicles">Véhicules</a>
+    <a href="services.html" class="nav-link" data-i18n="nav-services">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link active" data-i18n="nav-rates">Tarifs</a>
+    <a href="contact.html" class="nav-link" data-i18n="nav-contact">Contact</a>
+    <a href="devenir-chauffeur.html" class="nav-link" data-i18n="nav-driver">Devenir chauffeur</a>
     <a href="tel:+33760554460" class="nav-phone">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       07 60 55 44 60
     </a>
-    <a href="index.html#booking" class="nav-cta">Réserver</a>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="langBtnText">EN</span></button>
+    <a href="index.html#booking" class="nav-cta" data-i18n="nav-book">Réserver</a>
   </div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
@@ -263,21 +267,22 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 <!-- SIDEBAR MOBILE -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <nav class="sidebar" id="sidebar">
-  <a href="index.html" class="sidebar-link">Accueil</a>
-  <a href="vehicules.html" class="sidebar-link">Véhicules</a>
-  <a href="services.html" class="sidebar-link">Services</a>
-  <a href="tarifs-reservations.html" class="sidebar-link" style="color:var(--gold);">Tarifs & Réservations</a>
-  <a href="contact.html" class="sidebar-link">Contact</a>
-  <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
-  <a href="index.html#booking" class="sidebar-link">Réserver</a>
+  <a href="index.html" class="sidebar-link" data-i18n="nav-home">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link" data-i18n="nav-vehicles">Véhicules</a>
+  <a href="services.html" class="sidebar-link" data-i18n="nav-services">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link" style="color:var(--gold);" data-i18n="nav-rates">Tarifs & Réservations</a>
+  <a href="contact.html" class="sidebar-link" data-i18n="nav-contact">Contact</a>
+  <a href="devenir-chauffeur.html" class="sidebar-link" data-i18n="nav-driver">Devenir chauffeur</a>
+  <a href="index.html#booking" class="sidebar-link" data-i18n="nav-book">Réserver</a>
   <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </nav>
 
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-header">
-  <div class="section-label">Tarifs & Réservations</div>
-  <h1 class="section-title">Réservez en toute <em>transparence</em></h1>
-  <p class="section-sub">Prix fixe garanti, paiement sécurisé en ligne, annulation flexible. Tout est clair dès le départ, sans surprise à l'arrivée.</p>
+  <div class="section-label" data-i18n="tp-label">Tarifs &amp; Réservations</div>
+  <h1 class="section-title" data-i18n="tp-title">Réservez en toute <em>transparence</em></h1>
+  <p class="section-sub" data-i18n="tp-sub">Prix fixe garanti, paiement sécurisé en ligne, annulation flexible. Tout est clair dès le départ, sans surprise à l'arrivée.</p>
 </header>
 
 <div class="sep"></div>
@@ -290,7 +295,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
     </div>
-    <div class="block-title">Comment <em>réserver</em> ?</div>
+    <div class="block-title" data-i18n="tb1-title">Comment <em>réserver</em> ?</div>
     <div class="info-row">
       <div class="info-dot"></div>
       <div class="info-text"><strong>Courses simples</strong> (aéroport, gare, trajet en ville) — Utilisez notre <a href="index.html#booking" style="color:var(--gold);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(200,169,110,.35);transition:border-color .2s;" onmouseover="this.style.borderBottomColor='var(--gold)'" onmouseout="this.style.borderBottomColor='rgba(200,169,110,.35)'">formulaire en ligne</a> pour réserver en quelques clics. Il vous suffit d'indiquer votre trajet, la date et l'heure souhaitées, ainsi que le nombre de passagers. Pour les transferts aéroport ou gare, pensez à préciser votre numéro de vol ou de train.</div>
@@ -313,7 +318,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
     </div>
-    <div class="block-title">Accueil & <em>ponctualité</em></div>
+    <div class="block-title" data-i18n="tb2-title">Accueil &amp; <em>ponctualité</em></div>
     <div class="info-row">
       <div class="info-dot"></div>
       <div class="info-text"><strong>Accueil avec pancarte nominative</strong> en aéroport et en gare pour les catégories Van et Berline de luxe.</div>
@@ -336,7 +341,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
     </div>
-    <div class="block-title">Nos <em>tarifs</em></div>
+    <div class="block-title" data-i18n="tb3-title">Nos <em>tarifs</em></div>
     <div class="info-row">
       <div class="info-dot"></div>
       <div class="info-text"><strong>Forfait fixe</strong> pour les transferts aéroport et gare — Le prix est calculé et affiché au moment de la réservation. Pas de compteur, pas de surprise.</div>
@@ -367,7 +372,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
     </div>
-    <div class="block-title">Paiement <em>sécurisé</em></div>
+    <div class="block-title" data-i18n="tb4-title">Paiement <em>sécurisé</em></div>
     <p>Le paiement s'effectue <strong>en ligne par carte bancaire</strong> (Visa, Mastercard) au moment de la réservation. Le règlement est intégral et sécurisé via notre plateforme de paiement Stripe.</p>
     <p>Une <strong>facture est envoyée automatiquement</strong> par email après chaque course. Idéal pour vos notes de frais professionnels.</p>
   </div>
@@ -377,7 +382,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
     </div>
-    <div class="block-title">Modifier une <em>réservation</em></div>
+    <div class="block-title" data-i18n="tb5-title">Modifier une <em>réservation</em></div>
     <p>Vous souhaitez changer l'heure, l'adresse ou la catégorie de véhicule ? Contactez notre support via <strong>WhatsApp</strong> et nous ajustons votre réservation en quelques minutes.</p>
     <p>Toute modification est <strong>gratuite</strong> si elle intervient au moins <strong class="gold">2 heures avant l'heure de prise en charge</strong>.</p>
   </div>
@@ -387,28 +392,28 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
     </div>
-    <div class="block-title">Politique d'<em>annulation</em></div>
+    <div class="block-title" data-i18n="tb6-title">Politique d'<em>annulation</em></div>
 
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-dot green">✓</div>
         <div class="timeline-content">
-          <div class="timeline-label">Plus de 24h avant la course</div>
-          <div class="timeline-desc">Annulation 100 % gratuite. Remboursement intégral.</div>
+          <div class="timeline-label" data-i18n="tt1-label">Plus de 24h avant la course</div>
+          <div class="timeline-desc" data-i18n="tt1-desc">Annulation 100 % gratuite. Remboursement intégral.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot orange">!</div>
         <div class="timeline-content">
-          <div class="timeline-label">Entre 24h et 2h avant la course</div>
-          <div class="timeline-desc">Frais d'annulation de 50 % du montant de la course.</div>
+          <div class="timeline-label" data-i18n="tt2-label">Entre 24h et 2h avant la course</div>
+          <div class="timeline-desc" data-i18n="tt2-desc">Frais d'annulation de 50 % du montant de la course.</div>
         </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot red">✕</div>
         <div class="timeline-content">
-          <div class="timeline-label">Moins de 2h avant ou no-show</div>
-          <div class="timeline-desc">Course facturée intégralement (100 %). Aucun remboursement.</div>
+          <div class="timeline-label" data-i18n="tt3-label">Moins de 2h avant ou no-show</div>
+          <div class="timeline-desc" data-i18n="tt3-desc">Course facturée intégralement (100 %). Aucun remboursement.</div>
         </div>
       </div>
     </div>
@@ -423,31 +428,31 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <div class="block-icon">
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </div>
-    <div class="block-title">Nos <em>engagements</em></div>
+    <div class="block-title" data-i18n="tb7-title">Nos <em>engagements</em></div>
     <div class="engage-grid">
       <div class="engage-item">
         <span class="engage-check">✓</span>
-        <span class="engage-text">Ponctualité garantie</span>
+        <span class="engage-text" data-i18n="te1">Ponctualité garantie</span>
       </div>
       <div class="engage-item">
         <span class="engage-check">✓</span>
-        <span class="engage-text">Véhicules propres et récents</span>
+        <span class="engage-text" data-i18n="te2">Véhicules propres et récents</span>
       </div>
       <div class="engage-item">
         <span class="engage-check">✓</span>
-        <span class="engage-text">Chauffeurs professionnels carte VTC</span>
+        <span class="engage-text" data-i18n="te3">Chauffeurs professionnels carte VTC</span>
       </div>
       <div class="engage-item">
         <span class="engage-check">✓</span>
-        <span class="engage-text">Assurance passagers complète</span>
+        <span class="engage-text" data-i18n="te4">Assurance passagers complète</span>
       </div>
       <div class="engage-item">
         <span class="engage-check">✓</span>
-        <span class="engage-text">Prix fixe garanti sans surprise</span>
+        <span class="engage-text" data-i18n="te5">Prix fixe garanti sans surprise</span>
       </div>
       <div class="engage-item">
         <span class="engage-check">✓</span>
-        <span class="engage-text">Service client 24h/24, 7j/7</span>
+        <span class="engage-text" data-i18n="te6">Service client 24h/24, 7j/7</span>
       </div>
     </div>
     <div style="margin-top:20px;">
@@ -460,12 +465,12 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 <!-- ═══ CTA SECTION ═══ -->
 <div class="sep"></div>
 <div class="cta-section">
-  <h2 class="cta-title">Prêt à réserver votre transfert ?</h2>
-  <p class="cta-sub">Prix fixe, confirmation immédiate, chauffeur professionnel.</p>
+  <h2 class="cta-title" data-i18n="tcta-title">Prêt à réserver votre transfert ?</h2>
+  <p class="cta-sub" data-i18n="tcta-sub">Prix fixe, confirmation immédiate, chauffeur professionnel.</p>
   <div class="cta-buttons">
-    <a href="index.html#booking" class="cta-btn primary">Réserver maintenant</a>
+    <a href="index.html#booking" class="cta-btn primary" data-i18n="tcta-btn1">Réserver maintenant</a>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20personnalis%C3%A9." class="cta-btn secondary" target="_blank" rel="noopener">
-      Devis sur WhatsApp
+      <span data-i18n="tcta-btn2">Devis sur WhatsApp</span>
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
     </a>
   </div>
@@ -486,9 +491,9 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
       <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
       <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
-    <div class="footer-links"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#cgv">CGV</a><a href="mentions-legales.html#cookies">Confidentialité</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a><a href="mentions-legales.html#cgv" data-i18n="ft-cgv">CGV</a><a href="mentions-legales.html#cookies" data-i18n="ft-privacy">Confidentialité</a><a href="contact.html" data-i18n="ft-contact">Contact</a></div>
   </div>
-  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </footer>
 
 <!-- WHATSAPP -->
@@ -521,5 +526,6 @@ const io=new IntersectionObserver((entries)=>{
 },{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.block').forEach(el=>io.observe(el));
 </script>
+<script src="js/lang.js"></script>
 </body>
 </html>

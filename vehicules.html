@@ -37,9 +37,12 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .nav-logo-line{flex:1;height:1px;background:var(--gold);}
 .nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
 
-.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;}
+.gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;opacity:1;transition:opacity .5s ease;}
 .gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);}
 @keyframes goldShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.lang-btn{display:flex;align-items:center;gap:6px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;letter-spacing:.5px;font-family:'Inter',sans-serif;transition:border-color .3s,color .3s;}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold-light);}
+.lang-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;}
 
 .nav-links{display:flex !important;align-items:center;gap:32px;}
 .nav-link{font-size:.9rem;color:var(--text-dim);text-decoration:none;letter-spacing:.5px;font-weight:400;transition:color .3s;position:relative;}
@@ -266,17 +269,18 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     </div>
   </a>
   <div class="nav-links">
-    <a href="index.html" class="nav-link">Accueil</a>
-    <a href="vehicules.html" class="nav-link active">Véhicules</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="tarifs-reservations.html" class="nav-link">Tarifs</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-    <a href="devenir-chauffeur.html" class="nav-link">Devenir chauffeur</a>
+    <a href="index.html" class="nav-link" data-i18n="nav-home">Accueil</a>
+    <a href="vehicules.html" class="nav-link active" data-i18n="nav-vehicles">Véhicules</a>
+    <a href="services.html" class="nav-link" data-i18n="nav-services">Services</a>
+    <a href="tarifs-reservations.html" class="nav-link" data-i18n="nav-rates">Tarifs</a>
+    <a href="contact.html" class="nav-link" data-i18n="nav-contact">Contact</a>
+    <a href="devenir-chauffeur.html" class="nav-link" data-i18n="nav-driver">Devenir chauffeur</a>
     <a href="tel:+33760554460" class="nav-phone">
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       07 60 55 44 60
     </a>
-    <a href="index.html#booking" class="nav-cta">Réserver</a>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="langBtnText">EN</span></button>
+    <a href="index.html#booking" class="nav-cta" data-i18n="nav-book">Réserver</a>
   </div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
@@ -285,21 +289,22 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar">
-  <a href="index.html" class="sidebar-link">Accueil</a>
-  <a href="vehicules.html" class="sidebar-link" style="color:var(--gold);">Véhicules</a>
-  <a href="services.html" class="sidebar-link">Services</a>
-  <a href="tarifs-reservations.html" class="sidebar-link">Tarifs & Réservations</a>
-  <a href="contact.html" class="sidebar-link">Contact</a>
-  <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
-  <a href="index.html#booking" class="sidebar-link">Réserver</a>
+  <a href="index.html" class="sidebar-link" data-i18n="nav-home">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link" style="color:var(--gold);" data-i18n="nav-vehicles">Véhicules</a>
+  <a href="services.html" class="sidebar-link" data-i18n="nav-services">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link" data-i18n="nav-rates">Tarifs & Réservations</a>
+  <a href="contact.html" class="sidebar-link" data-i18n="nav-contact">Contact</a>
+  <a href="devenir-chauffeur.html" class="sidebar-link" data-i18n="nav-driver">Devenir chauffeur</a>
+  <a href="index.html#booking" class="sidebar-link" data-i18n="nav-book">Réserver</a>
   <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
 
 <!-- ═══ PAGE HEADER ═══ -->
 <div class="page-header">
-  <div class="section-label">Notre flotte</div>
-  <h1 class="section-title">Des véhicules à la hauteur<br>de vos <em>exigences</em></h1>
-  <p class="section-sub">Chaque véhicule est vérifié, nettoyé et préparé avec soin. Confort, sécurité et discrétion pour tous vos déplacements.</p>
+  <div class="section-label" data-i18n="vhp-label">Notre flotte</div>
+  <h1 class="section-title" data-i18n="vhp-title">Des véhicules à la hauteur<br>de vos <em>exigences</em></h1>
+  <p class="section-sub" data-i18n="vhp-sub">Chaque véhicule est vérifié, nettoyé et préparé avec soin. Confort, sécurité et discrétion pour tous vos déplacements.</p>
 </div>
 
 <div class="sep"></div>
@@ -314,19 +319,19 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
       <div class="fleet-card-tag">Confort</div>
     </div>
     <div class="fleet-card-body">
-      <div class="fleet-card-name">Berline Confort</div>
+      <div class="fleet-card-name" data-i18n="vc1-name">Berline Confort</div>
       <div class="fleet-card-models">Tesla Model Y · Tesla Model 3</div>
       <div class="capacity">
         <span class="capacity-icon">👤</span>
-        <span class="capacity-text"><strong>1 à 3 passagers</strong> · 2 gros bagages + 1 petit</span>
+        <span class="capacity-text" data-i18n="vc1-cap"><strong>1 à 3 passagers</strong> · 2 gros bagages + 1 petit</span>
       </div>
-      <div class="fleet-card-desc">Véhicules récents, spacieux et parfaitement entretenus. Idéal pour les transferts aéroport, gare et courses en ville.</div>
+      <div class="fleet-card-desc" data-i18n="vc1-desc">Véhicules récents, spacieux et parfaitement entretenus. Idéal pour les transferts aéroport, gare et courses en ville.</div>
       <div class="equip-grid">
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Climatisation</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>Chargeurs USB</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Assurance complète</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg><span data-i18n="vc1-eq1">Climatisation</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><span data-i18n="vc1-eq2">Chargeurs USB</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="vc1-eq3">Assurance complète</span></div>
       </div>
-      <a href="index.html#booking" class="fleet-cta">Réserver une Berline Confort <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="index.html#booking" class="fleet-cta"><span data-i18n="vc1-cta">Réserver une Berline Confort</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -337,22 +342,22 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
       <div class="fleet-card-tag">Premium</div>
     </div>
     <div class="fleet-card-body">
-      <div class="fleet-card-name">Berline Premium</div>
+      <div class="fleet-card-name" data-i18n="vc2-name">Berline Premium</div>
       <div class="fleet-card-models">Mercedes Classe S · Mercedes Classe E · BMW Série 7</div>
       <div class="capacity">
         <span class="capacity-icon">👤</span>
-        <span class="capacity-text"><strong>1 à 3 passagers</strong> · 3 bagages max</span>
+        <span class="capacity-text" data-i18n="vc2-cap"><strong>1 à 3 passagers</strong> · 3 bagages max</span>
       </div>
-      <div class="fleet-card-desc">Pour vos déplacements d'affaires et vos occasions spéciales. Véhicules haut de gamme, intérieur cuir, finitions soignées. Le raffinement à chaque trajet.</div>
+      <div class="fleet-card-desc" data-i18n="vc2-desc">Pour vos déplacements d'affaires et vos occasions spéciales. Véhicules haut de gamme, intérieur cuir, finitions soignées. Le raffinement à chaque trajet.</div>
       <div class="equip-grid">
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Climatisation bi-zone</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>Wi-Fi 4G</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>Chargeurs USB-C</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Assurance complète</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Eau & presse</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Sièges cuir chauffants</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg><span data-i18n="vc2-eq1">Climatisation bi-zone</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg><span data-i18n="vc2-eq2">Wi-Fi 4G</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><span data-i18n="vc2-eq3">Chargeurs USB-C</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="vc2-eq4">Assurance complète</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="vc2-eq5">Eau &amp; presse</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span data-i18n="vc2-eq6">Sièges cuir chauffants</span></div>
       </div>
-      <a href="index.html#booking" class="fleet-cta">Réserver une Berline Premium <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="index.html#booking" class="fleet-cta"><span data-i18n="vc2-cta">Réserver une Berline Premium</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -363,22 +368,22 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
       <div class="fleet-card-tag">Groupe</div>
     </div>
     <div class="fleet-card-body">
-      <div class="fleet-card-name">Van & Minibus</div>
+      <div class="fleet-card-name" data-i18n="vc3-name">Van & Minibus</div>
       <div class="fleet-card-models">Mercedes Classe V · Mercedes Vito · VW Caravelle</div>
       <div class="capacity">
         <span class="capacity-icon">👥</span>
-        <span class="capacity-text"><strong>4 à 7 passagers</strong> · 7 bagages max</span>
+        <span class="capacity-text" data-i18n="vc3-cap"><strong>4 à 7 passagers</strong> · 7 bagages max</span>
       </div>
-      <div class="fleet-card-desc">Parfait pour les familles, groupes d'amis ou équipes professionnelles. Espace généreux pour les passagers et les bagages, sans compromis sur le confort.</div>
+      <div class="fleet-card-desc" data-i18n="vc3-desc">Parfait pour les familles, groupes d'amis ou équipes professionnelles. Espace généreux pour les passagers et les bagages, sans compromis sur le confort.</div>
       <div class="equip-grid">
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>Climatisation arrière</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>Wi-Fi</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>Chargeurs USB multiples</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Assurance complète</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>Grand coffre</div>
-        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Eau offerte</div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg><span data-i18n="vc3-eq1">Climatisation arrière</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg><span data-i18n="vc3-eq2">Wi-Fi</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><span data-i18n="vc3-eq3">Chargeurs USB multiples</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="vc3-eq4">Assurance complète</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg><span data-i18n="vc3-eq5">Grand coffre</span></div>
+        <div class="equip-item"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="vc3-eq6">Eau offerte</span></div>
       </div>
-      <a href="index.html#booking" class="fleet-cta">Réserver un Van <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="index.html#booking" class="fleet-cta"><span data-i18n="vc3-cta">Réserver un Van</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 
@@ -389,10 +394,10 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
       <div class="fleet-card-tag">VIP</div>
     </div>
     <div class="fleet-card-body">
-      <div class="fleet-card-name">Sprinter & Van VIP</div>
+      <div class="fleet-card-name" data-i18n="vc4-name">Sprinter & Van VIP</div>
       <div class="fleet-card-models">Mercedes Sprinter VIP · Mercedes Classe V Long</div>
-      <div class="fleet-card-desc">Pour vos événements, mariages, séminaires ou groupes importants. Véhicules haut de gamme sur mesure, service blanc gants. Devis personnalisé sous 2h.</div>
-      <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20VIP%20Sprinter." class="fleet-cta" target="_blank" rel="noopener">Demander un devis VIP <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor"/></svg></a>
+      <div class="fleet-card-desc" data-i18n="vc4-desc">Pour vos événements, mariages, séminaires ou groupes importants. Véhicules haut de gamme sur mesure, service blanc gants. Devis personnalisé sous 2h.</div>
+      <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20VIP%20Sprinter." class="fleet-cta" target="_blank" rel="noopener"><span data-i18n="vc4-cta">Demander un devis VIP</span> <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor"/></svg></a>
     </div>
   </div>
 
@@ -413,9 +418,9 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
       <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
       <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
-    <div class="footer-links"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#cgv">CGV</a><a href="mentions-legales.html#cookies">Confidentialité</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a><a href="mentions-legales.html#cgv" data-i18n="ft-cgv">CGV</a><a href="mentions-legales.html#cookies" data-i18n="ft-privacy">Confidentialité</a><a href="contact.html" data-i18n="ft-contact">Contact</a></div>
   </div>
-  <div class="footer-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </footer>
 
 <!-- WHATSAPP -->
@@ -449,5 +454,6 @@ const io=new IntersectionObserver((entries)=>{
 },{threshold:0.1,rootMargin:'0px 0px -80px 0px'});
 document.querySelectorAll('.fleet-card,.vip-banner').forEach(el=>io.observe(el));
 </script>
+<script src="js/lang.js"></script>
 </body>
 </html>

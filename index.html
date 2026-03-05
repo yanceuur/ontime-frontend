@@ -768,6 +768,7 @@ textarea.form-input{
   <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
   <a href="#booking" class="sidebar-link">Réserver</a>
   <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
 
 <!-- ——— HERO ——— -->
@@ -821,10 +822,10 @@ textarea.form-input{
 
       <label class="form-label" data-i18n="lbl-from">Départ</label>
       <div class="cat-tabs">
-        <button class="cat-tab active" data-cat="adresse" data-target="dep"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg>Adresse</button>
-        <button class="cat-tab" data-cat="aeroport" data-target="dep"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>Aéroport</button>
-        <button class="cat-tab" data-cat="gare" data-target="dep"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg>Gare</button>
-        <button class="cat-tab" data-cat="lieu" data-target="dep"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Lieu</button>
+        <button class="cat-tab active" data-cat="adresse" data-target="dep"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><span data-i18n="cat-adresse">Adresse</span></button>
+        <button class="cat-tab" data-cat="aeroport" data-target="dep"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><span data-i18n="cat-aeroport">Aéroport</span></button>
+        <button class="cat-tab" data-cat="gare" data-target="dep"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><span data-i18n="cat-gare">Gare</span></button>
+        <button class="cat-tab" data-cat="lieu" data-target="dep"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="cat-lieu">Lieu</span></button>
       </div>
       <div id="dep-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><input type="text" class="form-input" id="depAdresseInput" placeholder="Saisir une adresse de départ" autocomplete="off"></div></div>
       <div id="dep-aeroport" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><select class="form-select" id="depAeroportSelect"><option value="" disabled selected>Choisir un aéroport</option><option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option><option value="Aéroport d'Orly">Aéroport d'Orly</option><option value="Aéroport de Beauvais">Aéroport de Beauvais</option><option value="Aéroport du Bourget">Aéroport du Bourget</option></select></div></div>
@@ -833,10 +834,10 @@ textarea.form-input{
 
       <label class="form-label" data-i18n="lbl-to">Destination</label>
       <div class="cat-tabs">
-        <button class="cat-tab active" data-cat="adresse" data-target="arr"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg>Adresse</button>
-        <button class="cat-tab" data-cat="aeroport" data-target="arr"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>Aéroport</button>
-        <button class="cat-tab" data-cat="gare" data-target="arr"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg>Gare</button>
-        <button class="cat-tab" data-cat="lieu" data-target="arr"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Lieu</button>
+        <button class="cat-tab active" data-cat="adresse" data-target="arr"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><span data-i18n="cat-adresse">Adresse</span></button>
+        <button class="cat-tab" data-cat="aeroport" data-target="arr"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><span data-i18n="cat-aeroport">Aéroport</span></button>
+        <button class="cat-tab" data-cat="gare" data-target="arr"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><span data-i18n="cat-gare">Gare</span></button>
+        <button class="cat-tab" data-cat="lieu" data-target="arr"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="cat-lieu">Lieu</span></button>
       </div>
       <div id="arr-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><input type="text" class="form-input" id="arrAdresseInput" placeholder="Saisir une adresse de destination" autocomplete="off"></div></div>
       <div id="arr-aeroport" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><select class="form-select" id="arrAeroportSelect"><option value="" disabled selected>Choisir un aéroport</option><option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option><option value="Aéroport d'Orly">Aéroport d'Orly</option><option value="Aéroport de Beauvais">Aéroport de Beauvais</option><option value="Aéroport du Bourget">Aéroport du Bourget</option></select></div></div>
@@ -857,38 +858,38 @@ textarea.form-input{
       </div>
       <div class="child-seat-panel" id="childSeatPanel" style="display:none;">
         <div class="pax-grid">
-          <div class="pax-item"><label>Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
-          <div class="pax-item"><label>Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+          <div class="pax-item"><label data-i18n="lbl-seat-baby">Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+          <div class="pax-item"><label data-i18n="lbl-seat-child">Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
         </div>
       </div>
 
-      <label class="form-label">Date &amp; heure</label>
+      <label class="form-label" data-i18n="lbl-datetime">Date &amp; heure</label>
       <div class="form-row">
         <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><input type="date" class="form-input" id="inputDate"></div>
         <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><select class="form-select" id="inputTime"><option value="" disabled selected>Heure</option></select></div>
       </div>
 
-      <label class="form-label">Véhicule</label>
+      <label class="form-label" data-i18n="lbl-vehicle">Véhicule</label>
       <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg><select class="form-select" id="inputVehicle"><option value="" disabled selected>Choisir un véhicule</option><option value="confort">Berline Confort (1-3 passagers)</option><option value="premium">Berline Premium (1-3 passagers)</option><option value="van">Van / Minibus (4-7 passagers)</option></select></div>
 
       <!-- DISTANCE + PRICE DISPLAY -->
       <div id="priceDisplay" style="display:none;margin-top:14px;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:14px 18px;">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Distance estimée</span><br><span id="distKm" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
-          <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Prix fixe</span><br><span id="priceAmount" style="font-family:'DM Serif Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
+          <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-dist">Distance estimée</span><br><span id="distKm" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
+          <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-price-fix">Prix fixe</span><br><span id="priceAmount" style="font-family:'DM Serif Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
         </div>
-        <div id="nightSurcharge" style="display:none;margin-top:8px;font-size:.72rem;color:var(--gold);opacity:.8;">Supplément nuit (+10%) inclus</div>
+        <div id="nightSurcharge" style="display:none;margin-top:8px;font-size:.72rem;color:var(--gold);opacity:.8;" data-i18n="lbl-night-surcharge">Supplément nuit (+10%) inclus</div>
       </div>
 
-      <button class="btn-primary" id="btnVoirTarif">Voir le tarif</button>
+      <button class="btn-primary" id="btnVoirTarif" data-i18n="btn-voir-tarif">Voir le tarif</button>
 
       <!-- ERROR MSG -->
       <div id="bookingError" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
 
       <div class="booking-trust">
-        <div class="trust-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Paiement sécurisé</div>
-        <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Prix fixe garanti</div>
-        <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Annulation -24h</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="trust-pay">Paiement sécurisé</span></div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="trust-fixedprice">Prix fixe garanti</span></div>
+        <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="trust-cancel24">Annulation -24h</span></div>
       </div>
       </div>
 
@@ -896,7 +897,7 @@ textarea.form-input{
       <div id="bookingStep2" style="display:none;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;cursor:pointer;" id="btnBackStep1">
           <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--gold);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span style="font-size:.8rem;color:var(--gold);">Retour</span>
+          <span style="font-size:.8rem;color:var(--gold);" data-i18n="btn-back">Retour</span>
         </div>
         <div class="booking-title" data-i18n="book-title2">Vos coordonnées</div>
         <div class="booking-sub" data-i18n="book-sub2">Pour finaliser votre réservation</div>
@@ -930,14 +931,14 @@ textarea.form-input{
 
         <!-- RECAP -->
         <div style="margin-top:18px;background:rgba(200,169,110,.06);border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
-          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px;">Récapitulatif</div>
+          <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:8px;" data-i18n="recap-title">Récapitulatif</div>
           <div style="font-size:.82rem;color:var(--text-dim);line-height:1.8;">
             <span id="recapFrom">—</span> → <span id="recapTo">—</span><br>
-            <span id="recapDate">—</span> à <span id="recapTime">—</span><br>
-            <span id="recapVeh">—</span> · <span id="recapPax">—</span> pax · <span id="recapBags">—</span> bag.<span id="recapChildSeat"></span>
+            <span id="recapDate">—</span> <span data-i18n="recap-at">à</span> <span id="recapTime">—</span><br>
+            <span id="recapVeh">—</span> · <span id="recapPax">—</span> <span data-i18n="recap-pax">pax</span> · <span id="recapBags">—</span> <span data-i18n="recap-bags">bag.</span><span id="recapChildSeat"></span>
           </div>
           <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--border-light);">
-            <span style="font-size:.75rem;color:var(--text-muted);">Total</span>
+            <span style="font-size:.75rem;color:var(--text-muted);" data-i18n="recap-total">Total</span>
             <span id="recapPrice" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
           </div>
         </div>
@@ -950,15 +951,15 @@ textarea.form-input{
       <div id="bookingStep3" style="display:none;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;cursor:pointer;" id="btnBackStep2">
           <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--gold);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span style="font-size:.8rem;color:var(--gold);">Retour</span>
+          <span style="font-size:.8rem;color:var(--gold);" data-i18n="btn-back">Retour</span>
         </div>
         <div class="booking-title" data-i18n="book-title3">Paiement sécurisé</div>
         <div class="booking-sub" data-i18n="book-sub3">Vos données sont protégées par chiffrement SSL via Stripe.</div>
         <div style="margin-top:14px;background:rgba(200,169,110,.06);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
           <span id="p3From">—</span> → <span id="p3To">—</span><br>
-          <span id="p3Date">—</span> à <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
+          <span id="p3Date">—</span> <span data-i18n="recap-at">à</span> <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
           <div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-size:.7rem;color:var(--text-muted);">Total à payer</span>
+            <span style="font-size:.7rem;color:var(--text-muted);" data-i18n="lbl-total-pay">Total à payer</span>
             <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
           </div>
         </div>
@@ -974,14 +975,14 @@ textarea.form-input{
             <div id="card-expiry" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
           </div>
           <div>
-            <label class="form-label">CVC</label>
+            <label class="form-label" data-i18n="lbl-cvc">CVC</label>
             <div id="card-cvc" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
           </div>
         </div>
         <div id="card-errors" style="color:#f44336;font-size:.76rem;margin-top:6px;min-height:18px;"></div>
         <button class="btn-primary" id="btnPay" style="margin-top:12px;">
           <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(10,10,10,.2);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
-          Payer et confirmer
+          <span data-i18n="btn-pay">Payer et confirmer</span>
         </button>
         <div id="payError" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
       </div>
@@ -991,10 +992,10 @@ textarea.form-input{
         <div style="width:64px;height:64px;border-radius:50%;background:rgba(76,175,80,.12);border:2px solid rgba(76,175,80,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
           <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;">Réservation confirmée</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;" data-i18n="confirm-title">Réservation confirmée</div>
         <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--gold);font-weight:600;"></div>
-        <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
-        <div style="margin-top:20px;font-size:.82rem;color:var(--gold);">Merci de votre confiance</div>
+        <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;" data-i18n="confirm-note">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
+        <div style="margin-top:20px;font-size:.82rem;color:var(--gold);" data-i18n="confirm-thanks">Merci de votre confiance</div>
       </div>
 
     </div>
@@ -1558,7 +1559,7 @@ function updateTimeOptions(){
     minSlot=Math.ceil(totalMin/30)*30;
   }
   const prev=timeSelect.value;
-  timeSelect.innerHTML='<option value="" disabled selected>Heure</option>';
+  const cl=localStorage.getItem('lang')||'fr';timeSelect.innerHTML='<option value="" disabled selected>'+(cl==='en'?'Time':'Heure')+'</option>';
   for(let h=0;h<24;h++){for(let m=0;m<60;m+=30){
     const slot=h*60+m;
     if(isToday&&slot<minSlot)continue;
@@ -2032,7 +2033,7 @@ async function submitB2B(){
 }
 
 // ——— LANGUE FR / EN ———
-let currentLang='fr';
+let currentLang=localStorage.getItem('lang')||'fr';
 const i18n={
   en:{
     // Nav
@@ -2105,7 +2106,35 @@ const i18n={
     'btn-continue':'Continue to payment →',
     'book-title3':'Secure payment',
     'book-sub3':'Your data is protected by SSL encryption via Stripe.',
-    'lbl-cardholder':'Cardholder name','lbl-cardnumber':'Card number','lbl-expiry':'Expiry date'
+    'lbl-cardholder':'Cardholder name','lbl-cardnumber':'Card number','lbl-expiry':'Expiry date',
+    // Category tabs
+    'cat-adresse':'Address','cat-aeroport':'Airport','cat-gare':'Station','cat-lieu':'Place',
+    // Date/Vehicle labels
+    'lbl-datetime':'Date &amp; time','lbl-vehicle':'Vehicle',
+    // Booking form trust items
+    'trust-pay':'Secure payment','trust-fixedprice':'Guaranteed fixed price','trust-cancel24':'Cancellation −24h',
+    // Child seat labels
+    'lbl-seat-baby':'Baby seat (0-12m)','lbl-seat-child':'Child seat (1-10y)',
+    // Retour buttons
+    'btn-back':'Back',
+    // Recap header and labels
+    'recap-title':'Summary','recap-at':'at','recap-pax':'pax','recap-bags':'bag.',
+    'recap-total':'Total',
+    // Step 3 total label
+    'lbl-total-pay':'Total to pay',
+    // CVC
+    'lbl-cvc':'CVC',
+    // Pay button
+    'btn-pay':'Pay and confirm',
+    // Step 4 confirmation
+    'confirm-title':'Booking confirmed',
+    'confirm-note':'You will receive a confirmation email with your driver\'s details the day before the ride.',
+    'confirm-thanks':'Thank you for your trust',
+    // Price display
+    'lbl-dist':'Estimated distance','lbl-price-fix':'Fixed price',
+    'lbl-night-surcharge':'Night surcharge (+10%) included',
+    // Voir tarif button (initial)
+    'btn-voir-tarif':'Get a quote'
   },
   fr:{
     // Nav
@@ -2178,12 +2207,42 @@ const i18n={
     'btn-continue':'Continuer vers le paiement →',
     'book-title3':'Paiement sécurisé',
     'book-sub3':'Vos données sont protégées par chiffrement SSL via Stripe.',
-    'lbl-cardholder':'Nom du titulaire','lbl-cardnumber':'Numéro de carte','lbl-expiry':'Date d\'expiration'
+    'lbl-cardholder':'Nom du titulaire','lbl-cardnumber':'Numéro de carte','lbl-expiry':'Date d\'expiration',
+    // Category tabs
+    'cat-adresse':'Adresse','cat-aeroport':'Aéroport','cat-gare':'Gare','cat-lieu':'Lieu',
+    // Date/Vehicle labels
+    'lbl-datetime':'Date &amp; heure','lbl-vehicle':'Véhicule',
+    // Booking form trust items
+    'trust-pay':'Paiement sécurisé','trust-fixedprice':'Prix fixe garanti','trust-cancel24':'Annulation -24h',
+    // Child seat labels
+    'lbl-seat-baby':'Siège bébé (0-12m)','lbl-seat-child':'Siège enfant (1-10a)',
+    // Retour buttons
+    'btn-back':'Retour',
+    // Recap header and labels
+    'recap-title':'Récapitulatif','recap-at':'à','recap-pax':'pax','recap-bags':'bag.',
+    'recap-total':'Total',
+    // Step 3 total label
+    'lbl-total-pay':'Total à payer',
+    // CVC
+    'lbl-cvc':'CVC',
+    // Pay button
+    'btn-pay':'Payer et confirmer',
+    // Step 4 confirmation
+    'confirm-title':'Réservation confirmée',
+    'confirm-note':'Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.',
+    'confirm-thanks':'Merci de votre confiance',
+    // Price display
+    'lbl-dist':'Distance estimée','lbl-price-fix':'Prix fixe',
+    'lbl-night-surcharge':'Supplément nuit (+10%) inclus',
+    // Voir tarif button (initial)
+    'btn-voir-tarif':'Voir le tarif'
   }
 };
 function toggleLang(){setLang(currentLang==='fr'?'en':'fr');}
 function setLang(lang){
   currentLang=lang;
+  localStorage.setItem('lang',lang);
+  document.documentElement.lang=lang;
   const btn=document.getElementById('langBtn');
   const btnTxt=document.getElementById('langBtnText');
   if(btnTxt)btnTxt.textContent=lang==='fr'?'EN':'FR';
@@ -2201,11 +2260,33 @@ function setLang(lang){
   const ln=document.getElementById('inputLastName');if(ln)ln.placeholder=ph?'Last name':'Nom';
   const fl=document.getElementById('inputFlight');if(fl)fl.placeholder=ph?'e.g. AF1234, TGV 6789':'Ex: AF1234, TGV 6789';
   const cn=document.getElementById('inputCardName');if(cn)cn.placeholder=ph?'FULL NAME':'NOM PRÉNOM';
-  // Voir le tarif button if still in initial state
-  const vt=document.getElementById('btnVoirTarif');
-  if(vt&&(vt.textContent==='Voir le tarif'||vt.textContent==='Get a quote'))
-    vt.textContent=ph?'Get a quote':'Voir le tarif';
+  // Address inputs
+  const da=document.getElementById('depAdresseInput');if(da)da.placeholder=ph?'Enter a departure address':'Saisir une adresse de départ';
+  const aa=document.getElementById('arrAdresseInput');if(aa)aa.placeholder=ph?'Enter a destination address':'Saisir une adresse de destination';
+  // Select option 0 (placeholder text)
+  [{id:'depAeroportSelect',fr:'Choisir un aéroport',en:'Choose an airport'},
+   {id:'arrAeroportSelect',fr:'Choisir un aéroport',en:'Choose an airport'},
+   {id:'depGareSelect',fr:'Choisir une gare',en:'Choose a station'},
+   {id:'arrGareSelect',fr:'Choisir une gare',en:'Choose a station'},
+   {id:'depLieuSelect',fr:'Choisir un lieu',en:'Choose a place'},
+   {id:'arrLieuSelect',fr:'Choisir un lieu',en:'Choose a place'}
+  ].forEach(o=>{const s=document.getElementById(o.id);if(s&&s.options[0])s.options[0].text=ph?o.en:o.fr;});
+  // Vehicle select
+  const iv=document.getElementById('inputVehicle');
+  if(iv){
+    const vt=ph
+      ?['Choose a vehicle','Comfort Sedan (1-3 passengers)','Premium Sedan (1-3 passengers)','Van / Minibus (4-7 passengers)']
+      :['Choisir un véhicule','Berline Confort (1-3 passagers)','Berline Premium (1-3 passagers)','Van / Minibus (4-7 passagers)'];
+    Array.from(iv.options).forEach((o,i)=>{if(vt[i])o.text=vt[i];});
+  }
+  // Time select placeholder
+  const it=document.getElementById('inputTime');if(it&&it.options[0]&&it.options[0].value==='')it.options[0].text=ph?'Time':'Heure';
+  // Sidebar lang button
+  const sBtn=document.getElementById('sidebarLangBtnText');if(sBtn)sBtn.textContent=ph?'FR':'EN';
 }
+
+// Apply saved language on page load
+setLang(currentLang);
 </script>
 
 <!-- GOOGLE MAPS -->
