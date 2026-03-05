@@ -693,23 +693,57 @@ textarea.form-input{
   .trust-strip{padding:16px 40px;}
 }
 @media(max-width:640px){
-  .hero-left{padding:100px 24px 28px;}.hero-right{padding:0 24px 48px;}
-  .hero-stats{gap:24px;flex-wrap:wrap;}
-  .services-grid{grid-template-columns:1fr;}
-  .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section{padding:64px 24px;}
-  .footer{padding:40px 24px 20px;}.footer-inner{flex-direction:column;gap:16px;text-align:center;}
-  .navbar{padding:0 20px;}
+  /* Navbar / Sidebar */
+  .navbar{padding:0 16px;}
+  .sidebar{width:min(300px,85vw);}
+
+  /* Hero */
+  .hero-left{padding:100px 20px 24px;}
+  .hero-right{padding:0 16px 40px;}
+  .hero-stats{gap:20px;flex-wrap:wrap;}
+
+  /* Scroll-hint caché sur mobile (chevauche le formulaire) */
+  .scroll-hint{display:none;}
+
+  /* Booking form — iOS zoom fix (font-size ≥ 16px sinon Safari zoome) */
+  .form-select,.form-input{font-size:1rem;}
+  .pax-select{font-size:1rem;}
+  /* Date input : empêche le débordement sur iOS */
+  input[type="date"].form-input{width:100%;max-width:100%;box-sizing:border-box;}
   .form-row{grid-template-columns:1fr;}
+
+  /* Sections */
+  .services-grid{grid-template-columns:1fr;}
+  .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section{padding:56px 20px;}
+
+  /* Trust strip : grille 2 colonnes */
+  .trust-strip{padding:14px 20px;}
+  .trust-strip-inner{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;}
+  .tbadge{flex:none;min-width:0;}
+
+  /* Véhicules / Avis */
   .veh-grid{grid-template-columns:1fr;}
   .avis-grid{grid-template-columns:1fr;}
-  .zone-grid{grid-template-columns:1fr 1fr;}
-  .trust-strip{padding:14px 24px;}
-  .tbadge{min-width:120px;}
   .avis-header{flex-direction:column;}
+
+  /* Zone */
+  .zone-grid{grid-template-columns:1fr 1fr;}
+
+  /* Footer */
+  .footer{padding:36px 20px 20px;}
+  .footer-inner{flex-direction:column;gap:16px;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:12px 18px;}
+
+  /* WhatsApp */
+  .wa{width:48px;height:48px;bottom:18px;right:14px;}
+  .wa svg{width:24px;height:24px;}
 }
 @media(max-width:380px){
+  .hero-right{padding:0 12px 32px;}
+  .booking-card{padding:20px 16px;border-radius:14px;}
   #priceDisplay>div:first-child{flex-wrap:wrap;gap:10px;}
   .pax-item label{font-size:.62rem;}
+  .trust-strip-inner{gap:10px 8px;}
 }
 </style>
 </head>
