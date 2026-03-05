@@ -1512,6 +1512,77 @@ textarea.form-input{
   </div>
 </section>
 
+<!-- ——— B2B / ENTREPRISES ——— -->
+<section class="b2b-section" id="entreprises">
+  <div class="b2b-wrap">
+    <!-- GAUCHE : avantages -->
+    <div>
+      <div class="section-label" data-i18n="b2b-label">Entreprises</div>
+      <h2 class="section-title" data-i18n="b2b-title">Vous gérez des <em>déplacements pro</em>&nbsp;?</h2>
+      <p class="section-sub" data-i18n="b2b-sub">Un compte entreprise ONTIME vous simplifie la vie : réservations centralisées, factures automatiques, tarifs adaptés à votre volume.</p>
+
+      <div class="b2b-perks">
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="b2b-perk-title" data-i18n="b2b-p1-title">Facturation centralisée</div>
+            <div class="b2b-perk-desc" data-i18n="b2b-p1-desc">Une facture mensuelle unique pour toutes vos courses. Notes de frais simplifiées, reçu détaillé après chaque trajet.</div>
+          </div>
+        </div>
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <div>
+            <div class="b2b-perk-title" data-i18n="b2b-p2-title">Tarifs préférentiels</div>
+            <div class="b2b-perk-desc" data-i18n="b2b-p2-desc">Des prix négociés selon votre volume de courses mensuel. Plus vous réservez, plus vous économisez.</div>
+          </div>
+        </div>
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="b2b-perk-title" data-i18n="b2b-p3-title">Compte dédié & interlocuteur unique</div>
+            <div class="b2b-perk-desc" data-i18n="b2b-p3-desc">Un responsable de compte attitré. Vos équipes réservent en ligne ou par téléphone, confirmation immédiate.</div>
+          </div>
+        </div>
+        <div class="b2b-perk">
+          <div class="b2b-perk-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="b2b-perk-title" data-i18n="b2b-p4-title">Réservation en ligne 24h/24</div>
+            <div class="b2b-perk-desc" data-i18n="b2b-p4-desc">Vos collaborateurs réservent directement depuis le site, à toute heure. Suivi en temps réel, annulation flexible.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DROITE : formulaire -->
+    <div class="b2b-form-wrap">
+      <div class="b2b-form-title" data-i18n="b2b-form-title">Demande de compte entreprise</div>
+      <div class="b2b-form-sub" data-i18n="b2b-form-sub">Réponse sous 24h — Devis personnalisé gratuit</div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <input type="text" class="form-input" id="b2bCompany" placeholder="Nom de l'entreprise" style="font-size:.88rem;">
+        <input type="text" class="form-input" id="b2bContact" placeholder="Votre nom et prénom" style="font-size:.88rem;">
+        <input type="email" class="form-input" id="b2bEmail" placeholder="Email professionnel" style="font-size:.88rem;">
+        <input type="tel" class="form-input" id="b2bPhone" placeholder="Téléphone" style="font-size:.88rem;">
+        <select class="form-input" id="b2bVolume" style="font-size:.88rem;cursor:pointer;">
+          <option value="" disabled selected>Volume estimé de courses / mois</option>
+          <option value="Moins de 10">Moins de 10 courses / mois</option>
+          <option value="10 à 50">10 à 50 courses / mois</option>
+          <option value="Plus de 50">Plus de 50 courses / mois</option>
+        </select>
+        <button type="button" id="b2bSubmitBtn" style="width:100%;padding:14px;border:none;border-radius:10px;font-size:.88rem;font-weight:600;cursor:pointer;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);letter-spacing:.3px;transition:transform .2s,box-shadow .2s;margin-top:4px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(200,169,110,.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''" data-i18n="b2b-btn">Demander un devis entreprise</button>
+        <div id="b2bStatus" role="alert" aria-live="polite" style="display:none;padding:10px 14px;border-radius:8px;font-size:.8rem;"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -2062,42 +2133,41 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
 });
 
 // ——— B2B FORM SUBMIT ———
-async function submitB2B(){
-  const societe=document.getElementById('b2bSociete').value.trim();
-  const siret  =document.getElementById('b2bSiret').value.trim();
+document.getElementById('b2bSubmitBtn').addEventListener('click',async()=>{
+  const company=document.getElementById('b2bCompany').value.trim();
   const contact=document.getElementById('b2bContact').value.trim();
   const email  =document.getElementById('b2bEmail').value.trim();
-  const tel    =document.getElementById('b2bTel').value.trim();
+  const phone  =document.getElementById('b2bPhone').value.trim();
   const volume =document.getElementById('b2bVolume').value;
-  const message=document.getElementById('b2bMessage').value.trim();
-  const errEl  =document.getElementById('b2bError');
-  const succEl =document.getElementById('b2bSuccess');
-  errEl.style.display='none';
-  if(!societe||!contact||!email){
-    errEl.textContent='Veuillez remplir les champs obligatoires (Société, Contact, Email).';
-    errEl.style.display='block';return;
+  const statusEl=document.getElementById('b2bStatus');
+  statusEl.style.display='none';
+  if(!company||!contact||!email){
+    statusEl.style.cssText='display:block;padding:10px 14px;border-radius:8px;font-size:.8rem;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);color:#f44336;';
+    statusEl.textContent='Veuillez remplir au minimum l\'entreprise, votre nom et votre email.';
+    return;
   }
-  const btn=document.getElementById('btnB2B');
+  const btn=document.getElementById('b2bSubmitBtn');
   btn.disabled=true;btn.textContent='Envoi en cours...';
   try{
     const res=await fetch(BACKEND+'/api/contact',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        name:contact,email,phone:tel||'Non renseigné',
-        subject:'Demande compte entreprise – '+societe,
-        message:'Société: '+societe+'\nSIRET: '+(siret||'Non renseigné')+'\nVolume: '+(volume||'Non précisé')+'\n\n'+message
+        name:contact,email,phone:phone||'Non renseigné',
+        subject:'Demande compte entreprise – '+company,
+        message:'Société: '+company+'\nVolume: '+(volume||'Non précisé')
       })
     });
     if(res.ok){
-      succEl.style.display='block';
-      btn.textContent='Demande envoyée';
+      statusEl.style.cssText='display:block;padding:10px 14px;border-radius:8px;font-size:.8rem;background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.2);color:#4caf50;';
+      statusEl.textContent='✓ Demande envoyée ! Nous vous recontactons sous 24h.';
+      btn.textContent='Demande envoyée ✓';
     } else {throw new Error();}
   }catch{
-    errEl.textContent='Erreur lors de l\'envoi. Contactez-nous directement par WhatsApp.';
-    errEl.style.display='block';
-    btn.disabled=false;btn.textContent='Envoyer la demande';
+    statusEl.style.cssText='display:block;padding:10px 14px;border-radius:8px;font-size:.8rem;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);color:#f44336;';
+    statusEl.textContent='Erreur lors de l\'envoi. Contactez-nous par WhatsApp.';
+    btn.disabled=false;btn.textContent='Demander un devis entreprise';
   }
-}
+});
 
 // ——— LANGUE FR / EN ———
 let currentLang=localStorage.getItem('lang')||'fr';
