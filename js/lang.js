@@ -7,7 +7,7 @@ const i18n = {
   en: {
     /* ── NAV ── */
     'nav-home':'Home','nav-vehicles':'Vehicles','nav-services':'Services',
-    'nav-rates':'Rates','nav-contact':'Contact','nav-driver':'Become a driver','nav-book':'Book',
+    'nav-rates':'Rates','nav-b2b':'Business','nav-contact':'Contact','nav-driver':'Become a driver','nav-book':'Book',
     /* ── FOOTER ── */
     'ft-legal':'Legal notice','ft-cgv':'T&Cs','ft-privacy':'Privacy','ft-contact':'Contact',
     'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.',
@@ -208,7 +208,7 @@ const i18n = {
   fr: {
     /* ── NAV ── */
     'nav-home':'Accueil','nav-vehicles':'Véhicules','nav-services':'Services',
-    'nav-rates':'Tarifs','nav-contact':'Contact','nav-driver':'Devenir chauffeur','nav-book':'Réserver',
+    'nav-rates':'Tarifs','nav-b2b':'Entreprises','nav-contact':'Contact','nav-driver':'Devenir chauffeur','nav-book':'Réserver',
     /* ── FOOTER ── */
     'ft-legal':'Mentions légales','ft-cgv':'CGV','ft-privacy':'Confidentialité','ft-contact':'Contact',
     'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.',

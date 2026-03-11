@@ -16,6 +16,11 @@
 <meta name="twitter:title" content="ONTIME TRANSFERT — Chauffeur Privé VTC Paris">
 <meta name="twitter:description" content="Transferts VTC Paris. Tarif fixe, ponctualité garantie. CDG, Orly, gares, Disneyland.">
 <title>ONTIME TRANSFERT — Chauffeur Privé VTC Paris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://js.stripe.com">
+<link rel="dns-prefetch" href="https://maps.googleapis.com">
+<link rel="dns-prefetch" href="https://images.pexels.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -55,7 +60,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
 .nav-logo-line{flex:1;height:1px;background:var(--gold);}
 .nav-logo-sub{
-  font-family:'Montserrat',sans-serif;font-weight:400;font-size:.45rem;letter-spacing:5px;
+  font-family:'Montserrat',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:4px;
   color:var(--gold);text-transform:uppercase;
 }
 
@@ -187,13 +192,13 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 }
 
 .hero-text{
-  color:rgba(255,255,255,.55);font-size:.92rem;line-height:1.9;max-width:480px;font-weight:300;
+  color:rgba(255,255,255,.75);font-size:1.08rem;line-height:1.9;max-width:480px;font-weight:300;
   opacity:0;animation:heroFadeUp .8s cubic-bezier(.16,1,.3,1) .7s forwards;
 }
 .hero-text strong{color:rgba(255,255,255,.78);font-weight:500;}
 
 .hero-signature{
-  font-family:'DM Serif Display',serif;font-size:.95rem;font-style:italic;color:var(--gold);
+  font-family:'DM Serif Display',serif;font-size:1.08rem;font-style:italic;color:var(--gold);
   margin-top:28px;
   opacity:0;animation:heroFadeUp .8s cubic-bezier(.16,1,.3,1) .9s forwards;
 }
@@ -204,7 +209,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .stat-item{opacity:0;animation:heroFadeUp .7s cubic-bezier(.16,1,.3,1) forwards;}
 .stat-item:nth-child(1){animation-delay:1.1s}.stat-item:nth-child(2){animation-delay:1.3s}.stat-item:nth-child(3){animation-delay:1.5s}
 .stat-number{font-family:'DM Serif Display',serif;font-size:2.2rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.stat-label{font-size:.62rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.8px;margin-top:4px;}
+.stat-label{font-size:.82rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.8px;margin-top:4px;}
 
 @keyframes heroFadeUp{
   from{opacity:0;transform:translateY(40px);filter:blur(8px);}
@@ -229,9 +234,9 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
   to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}
 }
 .booking-title{font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
-.booking-sub{font-size:.80rem;color:var(--text-muted);font-weight:300;margin-bottom:18px;line-height:1.6;}
+.booking-sub{font-size:.95rem;color:var(--text-muted);font-weight:300;margin-bottom:18px;line-height:1.6;}
 
-.form-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;display:block;margin-top:14px;}
+.form-label{font-size:.84rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;display:block;margin-top:14px;}
 .form-label:first-of-type{margin-top:0;}
 
 /* Category Tabs */
@@ -240,7 +245,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
   flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
   padding:8px 2px;border-radius:8px;cursor:pointer;
   background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.08);
-  color:var(--text-muted);font-size:.68rem;font-family:'Inter',sans-serif;
+  color:var(--text-muted);font-size:.82rem;font-family:'Inter',sans-serif;
   letter-spacing:.3px;transition:all .3s;
 }
 .cat-tab svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;transition:all .3s;}
@@ -299,7 +304,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
 
 .booking-trust{display:flex;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light);flex-wrap:wrap;}
-.trust-item{display:flex;align-items:center;gap:4px;font-size:.70rem;color:var(--text-muted);}
+.trust-item{display:flex;align-items:center;gap:4px;font-size:.82rem;color:var(--text-muted);}
 .trust-item svg{width:11px;height:11px;stroke:var(--gold);stroke-width:1.5;fill:none;flex-shrink:0;}
 
 /* Scroll indicator */
@@ -308,7 +313,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   display:flex;flex-direction:column;align-items:center;gap:8px;
   opacity:0;animation:heroFadeUp .6s cubic-bezier(.16,1,.3,1) 1.6s forwards;
 }
-.scroll-hint span{font-size:.55rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--text-muted);}
+.scroll-hint span{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);}
 .scroll-line{width:1px;height:36px;position:relative;overflow:hidden;background:rgba(255,255,255,.08);}
 .scroll-line::after{
   content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;
@@ -359,14 +364,14 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
    SECTIONS
 ———————————————————————————————— */
 .section{position:relative;z-index:1;padding:120px 60px;}
-.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.70rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);margin-bottom:16px;}
+.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.85rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:16px;}
 .section-label::before{content:'';width:28px;height:1px;background:var(--gold);}
 .section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .section-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.section-sub{color:var(--text-muted);font-size:.88rem;font-weight:300;max-width:520px;line-height:1.7;margin-bottom:56px;}
+.section-sub{color:var(--text-muted);font-size:1rem;font-weight:300;max-width:520px;line-height:1.7;margin-bottom:56px;}
 
 /* Services banners */
-.svc-banners{display:flex;flex-direction:column;gap:20px;max-width:1100px;}
+.svc-banners{display:flex;flex-direction:column;gap:20px;width:min(900px,100%);margin-left:auto;margin-right:auto;}
 
 .svc-banner{
   position:relative;display:flex;align-items:center;min-height:240px;
@@ -410,7 +415,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 }
 .svc-banner:hover .svc-banner-text h3{color:var(--gold-light);}
 .svc-banner-text p{
-  font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.7;font-weight:300;max-width:600px;
+  font-size:1.08rem;color:rgba(255,255,255,.78);line-height:1.7;font-weight:300;max-width:600px;
 }
 .svc-banner-arrow{
   flex-shrink:0;width:56px;height:56px;border-radius:50%;
@@ -443,7 +448,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .gar-item-icon{width:42px;height:42px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;color:var(--gold);}
 .gar-item-icon svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.5;fill:none;}
 .gar-item-title{font-weight:600;font-size:.85rem;margin-bottom:3px;color:var(--text);}
-.gar-item-desc{font-size:.88rem;color:var(--text-muted);line-height:1.65;font-weight:300;}
+.gar-item-desc{font-size:.97rem;color:var(--text-muted);line-height:1.65;font-weight:300;}
 
 .gar-visual{display:flex;align-items:center;justify-content:center;}
 .gar-badge{width:280px;height:280px;border-radius:50%;background:linear-gradient(145deg,rgba(200,169,110,.08),rgba(200,169,110,.02));border:1px solid rgba(200,169,110,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;}
@@ -451,7 +456,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .gar-badge::after{content:'';position:absolute;inset:-28px;border-radius:50%;border:1px solid rgba(200,169,110,.03);}
 .gar-badge svg{width:44px;height:44px;stroke:var(--gold);stroke-width:1.2;fill:none;margin-bottom:12px;}
 .gar-badge-title{font-family:'DM Serif Display',serif;font-size:1.15rem;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
-.gar-badge-sub{font-size:.62rem;color:var(--text-muted);max-width:170px;line-height:1.5;}
+.gar-badge-sub{font-size:.82rem;color:var(--text-muted);max-width:170px;line-height:1.5;}
 
 /* ————————————————————————————————
    TRUST STRIP
@@ -479,7 +484,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   display:flex;align-items:center;justify-content:center;
 }
 .tbadge-icon svg{width:17px;height:17px;stroke:var(--gold);stroke-width:1.5;fill:none;}
-.tbadge-text{font-size:.72rem;color:var(--text-dim);font-weight:400;line-height:1.3;}
+.tbadge-text{font-size:.88rem;color:var(--text-dim);font-weight:400;line-height:1.3;}
 
 /* ————————————————————————————————
    VÉHICULES SECTION
@@ -512,7 +517,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .veh-card:hover .veh-card-img img{transform:scale(1.06);filter:brightness(.6);}
 .veh-card-body{padding:22px 24px 26px;}
 .veh-card-cat{
-  font-size:.55rem;text-transform:uppercase;letter-spacing:2.5px;
+  font-size:.78rem;text-transform:uppercase;letter-spacing:2px;
   color:var(--gold);margin-bottom:8px;
   display:flex;align-items:center;gap:8px;
 }
@@ -523,11 +528,11 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:4px;
 }
-.veh-card-sub{font-size:.72rem;color:var(--text-muted);font-weight:300;margin-bottom:16px;}
+.veh-card-sub{font-size:.84rem;color:var(--text-muted);font-weight:300;margin-bottom:16px;}
 .veh-card-features{display:flex;flex-direction:column;gap:7px;margin-bottom:18px;}
 .veh-feat{
   display:flex;align-items:center;gap:8px;
-  font-size:.73rem;color:var(--text-dim);font-weight:300;
+  font-size:.88rem;color:var(--text-dim);font-weight:300;
 }
 .veh-feat svg{width:13px;height:13px;stroke:var(--gold);stroke-width:1.5;fill:none;flex-shrink:0;}
 .veh-card-price{
@@ -540,9 +545,9 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   line-height:1;
 }
-.veh-card-km{font-size:.6rem;color:var(--text-muted);line-height:1.4;}
+.veh-card-km{font-size:.78rem;color:var(--text-muted);line-height:1.4;}
 .veh-card-badge{
-  font-size:.55rem;padding:4px 10px;border-radius:20px;font-weight:600;letter-spacing:.5px;
+  font-size:.78rem;padding:4px 10px;border-radius:20px;font-weight:600;letter-spacing:.5px;
   text-transform:uppercase;
 }
 .veh-badge-pop{
@@ -570,7 +575,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .avis-score{font-family:'DM Serif Display',serif;font-size:2.8rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
 .avis-stars{display:flex;gap:3px;margin:4px 0;}
 .avis-stars svg{width:14px;height:14px;fill:var(--gold);stroke:none;}
-.avis-count{font-size:.68rem;color:var(--text-muted);}
+.avis-count{font-size:.85rem;color:var(--text-muted);}
 .avis-grid{
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
@@ -583,7 +588,7 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .avis-card:hover{border-color:rgba(200,169,110,.22);transform:translateY(-3px);}
 .avis-card-stars{display:flex;gap:3px;margin-bottom:12px;}
 .avis-card-stars svg{width:12px;height:12px;fill:var(--gold);stroke:none;}
-.avis-text{font-size:.8rem;color:var(--text-dim);line-height:1.75;font-weight:300;margin-bottom:16px;font-style:italic;}
+.avis-text{font-size:.92rem;color:var(--text-dim);line-height:1.75;font-weight:300;margin-bottom:16px;font-style:italic;}
 .avis-author{display:flex;align-items:center;gap:12px;}
 .avis-avatar{
   width:34px;height:34px;border-radius:50%;flex-shrink:0;
@@ -600,8 +605,8 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   background:linear-gradient(135deg,rgba(200,169,110,.15),rgba(200,169,110,.05));
   border:1px solid rgba(200,169,110,.2);
 }
-.avis-name{font-size:.78rem;color:var(--text);font-weight:500;}
-.avis-source{font-size:.6rem;color:var(--text-muted);}
+.avis-name{font-size:.88rem;color:var(--text);font-weight:500;}
+.avis-source{font-size:.78rem;color:var(--text-muted);}
 
 /* ————————————————————————————————
    ZONE SECTION
@@ -632,12 +637,12 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 }
 .zone-icon svg{width:18px;height:18px;stroke:var(--gold);stroke-width:1.5;fill:none;}
 .zone-name{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:3px;}
-.zone-detail{font-size:.67rem;color:var(--text-muted);line-height:1.5;font-weight:300;}
+.zone-detail{font-size:.82rem;color:var(--text-muted);line-height:1.5;font-weight:300;}
 
 /* ————————————————————————————————
    B2B / ENTREPRISES
 ———————————————————————————————— */
-.b2b-section{padding:120px 60px;position:relative;z-index:1;}
+.b2b-section{padding:120px 60px;position:relative;z-index:1;background:var(--dark);border-top:1px solid rgba(200,169,110,.12);}
 .b2b-wrap{
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
@@ -652,28 +657,50 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 }
 .b2b-perk-icon svg{width:19px;height:19px;stroke:var(--gold);stroke-width:1.5;fill:none;}
 .b2b-perk-title{font-weight:600;font-size:.85rem;color:var(--text);margin-bottom:3px;}
-.b2b-perk-desc{font-size:.74rem;color:var(--text-muted);line-height:1.65;font-weight:300;}
+.b2b-perk-desc{font-size:.88rem;color:var(--text-muted);line-height:1.65;font-weight:300;}
 
 .b2b-form-wrap{
   background:linear-gradient(145deg,rgba(22,19,13,.9),rgba(10,10,8,.95));
   border:1px solid rgba(200,169,110,.14);border-radius:20px;padding:32px;
 }
 .b2b-form-title{font-family:'DM Serif Display',serif;font-size:1.2rem;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
-.b2b-form-sub{font-size:.68rem;color:var(--text-muted);margin-bottom:22px;line-height:1.6;}
+.b2b-form-sub{font-size:.82rem;color:var(--text-muted);margin-bottom:22px;line-height:1.6;}
 
 textarea.form-input{
   resize:vertical;min-height:90px;padding-top:11px;padding-bottom:11px;
   padding-left:14px;line-height:1.6;
 }
 
+/* ————————————————————————————————
+   FAQ
+———————————————————————————————— */
+.faq-section{padding:120px 60px;border-top:1px solid rgba(200,169,110,.12);}
+.faq-wrap{max-width:780px;margin:0 auto;}
+.faq-list{margin-top:48px;display:flex;flex-direction:column;gap:0;}
+.faq-item{border-bottom:1px solid rgba(200,169,110,.12);}
+.faq-q{
+  width:100%;background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 0;text-align:left;
+  font-family:'Inter',sans-serif;font-size:.95rem;font-weight:500;
+  color:var(--text);line-height:1.5;transition:color .2s;
+}
+.faq-q:hover{color:var(--gold);}
+.faq-arrow{width:18px;height:18px;flex-shrink:0;stroke:var(--gold);stroke-width:1.8;fill:none;transition:transform .35s cubic-bezier(.16,1,.3,1);}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.16,1,.3,1);}
+.faq-item.open .faq-a{max-height:400px;}
+.faq-a p{padding:0 0 22px;font-size:.97rem;color:var(--text-muted);line-height:1.8;font-weight:300;}
+.faq-a strong{color:var(--gold-light);font-weight:500;}
+
 /* FOOTER */
 .footer{position:relative;z-index:1;padding:60px 60px 30px;border-top:1px solid var(--border-light);}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
 .footer-logo{display:flex;align-items:center;gap:10px;}
 .footer-links{display:flex;gap:24px;}
-.footer-links a{font-size:.7rem;color:var(--text-muted);text-decoration:none;transition:color .3s;}
+.footer-links a{font-size:.82rem;color:var(--text-muted);text-decoration:none;transition:color .3s;}
 .footer-links a:hover{color:var(--gold);}
-.footer-copy{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border-light);font-size:.6rem;color:var(--text-muted);max-width:1100px;margin-left:auto;margin-right:auto;}
+.footer-copy{text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border-light);font-size:.82rem;color:var(--text-muted);max-width:1100px;margin-left:auto;margin-right:auto;}
 .card-logos-row{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);}
 .footer-cards{display:flex;align-items:center;justify-content:center;gap:8px;padding-top:18px;margin-top:18px;border-top:1px solid var(--border-light);}
 
@@ -681,6 +708,29 @@ textarea.form-input{
 .wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);cursor:pointer;transition:transform .3s,box-shadow .3s;text-decoration:none;}
 .wa:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,.4);}
 .wa svg{width:28px;height:28px;fill:#fff;}
+
+/* ——— PRIX INDICATIFS ——— */
+.price-section{padding:80px 24px;text-align:center;}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:1100px;margin:40px auto 0;}
+.price-card{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color .3s,transform .3s;}
+.price-card:hover{border-color:var(--gold);transform:translateY(-4px);}
+.price-route{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.price-from-to{font-size:.95rem;color:var(--text);font-weight:500;}
+.price-arrow{color:var(--gold);font-size:1.1rem;margin:0 8px;flex-shrink:0;}
+.price-amount{font-size:1.6rem;font-weight:700;color:var(--gold);font-family:'DM Serif Display',serif;}
+.price-mention{font-size:.78rem;color:var(--text-muted);margin-top:4px;}
+.price-disclaimer{color:var(--text-muted);font-size:.82rem;max-width:700px;margin:32px auto 0;line-height:1.6;}
+
+/* ——— STICKY MOBILE CTA ——— */
+.sticky-cta{display:none;}
+@media(max-width:768px){
+  .sticky-cta{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:95;padding:12px 16px;background:rgba(10,10,10,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border);gap:12px;align-items:center;}
+  .sticky-cta-price{font-size:.82rem;color:var(--text-muted);line-height:1.3;flex:1;}
+  .sticky-cta-price strong{display:block;color:var(--gold);font-size:1rem;}
+  .sticky-cta-btn{background:var(--gold);color:var(--black);font-weight:700;font-size:.95rem;padding:14px 28px;border-radius:8px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;transition:background .3s;}
+  .sticky-cta-btn:hover{background:var(--gold-light);}
+  .wa{bottom:80px;}
+}
 
 /* ————————————————————————————————
    RESPONSIVE
@@ -700,7 +750,7 @@ textarea.form-input{
   .booking-card{max-width:100%;}
   .services-grid{grid-template-columns:1fr 1fr;}
   .gar-wrap{grid-template-columns:1fr;}.gar-visual{order:-1;}.gar-badge{width:200px;height:200px;}
-  .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section{padding:80px 40px;}
+  .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section,.faq-section{padding:80px 40px;}
   .veh-grid{grid-template-columns:1fr 1fr;}
   .avis-grid{grid-template-columns:1fr 1fr;}
   .zone-grid{grid-template-columns:repeat(2,1fr);}
@@ -732,7 +782,7 @@ textarea.form-input{
 
   /* Sections */
   .services-grid{grid-template-columns:1fr;}
-  .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section{padding:56px 20px;}
+  .section,.gar,.veh-section,.avis-section,.zone-section,.b2b-section,.faq-section{padding:56px 20px;}
 
   /* Trust strip : grille 2 colonnes */
   .trust-strip{padding:14px 20px;}
@@ -760,10 +810,116 @@ textarea.form-input{
   .hero-right{padding:0 12px 32px;}
   .booking-card{padding:20px 16px;border-radius:14px;}
   #priceDisplay>div:first-child{flex-wrap:wrap;gap:10px;}
-  .pax-item label{font-size:.62rem;}
+  .pax-item label{font-size:.82rem;}
   .trust-strip-inner{gap:10px 8px;}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quelle est la différence entre un VTC et un taxi ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Le VTC (Véhicule de Tourisme avec Chauffeur) est un service de transport privé réservé à l'avance, avec un prix fixé avant la course. Contrairement au taxi, il n'y a pas de compteur : vous connaissez le tarif exact avant de confirmer votre réservation. Les chauffeurs VTC sont titulaires d'une carte professionnelle et utilisent des véhicules haut de gamme systématiquement nettoyés."}
+    },
+    {
+      "@type": "Question",
+      "name": "Le prix est-il vraiment fixé à l'avance, sans surprise ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Oui, 100% garanti. Le prix affiché lors de votre réservation est celui que vous payez — ni plus, ni moins. Pas de surcoût lié aux embouteillages, pas de frais cachés, pas de supplément bagage. Le seul cas de majoration est explicitement indiqué : trajets de nuit (22h–6h, +10%) et heures de pointe (7h–10h / 17h–20h, +20%)."}
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte un transfert Paris - aéroport CDG ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "À partir de 80 € en Confort, 120 € en Business et 130 € en Van pour un trajet Paris - Charles de Gaulle (tarif jour, prix fixe). Pour Orly, à partir de 60 € en Confort."}
+    },
+    {
+      "@type": "Question",
+      "name": "Que se passe-t-il si mon vol est retardé ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Nous suivons l'état de votre vol en temps réel. Si votre vol est retardé, votre chauffeur adapte automatiquement l'heure de prise en charge sans que vous ayez besoin de nous contacter. Aucun frais supplémentaire n'est appliqué pour les retards de vol."}
+    },
+    {
+      "@type": "Question",
+      "name": "Comment réserver un chauffeur privé VTC à Paris ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Pas besoin de créer un compte. Réservez en moins de 2 minutes sur notre site : renseignez votre trajet, choisissez votre véhicule, entrez vos coordonnées et confirmez. Vous pouvez aussi appeler ou contacter par WhatsApp le 07 60 55 44 60."}
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je annuler ou modifier ma réservation ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "L'annulation est gratuite jusqu'à 24h avant la course. Entre 24h et 2h avant le départ, 50% du montant est retenu. En deçà de 2h ou en cas de non-présentation, 100% est facturé."}
+    },
+    {
+      "@type": "Question",
+      "name": "Transportez-vous les groupes et les familles nombreuses ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Oui, notre Mercedes Classe V (catégorie Van) accueille jusqu'à 7 passagers avec leurs bagages dans un espace confortable. Idéal pour les familles, groupes d'amis ou transferts depuis CDG/Orly avec plusieurs valises."}
+    },
+    {
+      "@type": "Question",
+      "name": "Êtes-vous disponibles la nuit et le week-end ?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Oui, ONTIME TRANSFERT est disponible 24h/24, 7j/7, y compris les nuits, week-ends et jours fériés. Les transferts nocturnes (22h–6h) font l'objet d'une majoration de 10%, et les heures de pointe (7h–10h / 17h–20h) de 20%."}
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "TaxiService"],
+  "name": "ONTIME TRANSFERT",
+  "legalName": "YOYO TRANSPORT SAS",
+  "url": "https://www.ontime-chauffeur.fr/",
+  "telephone": "+33760554460",
+  "email": "contact@ontimetransfert.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "15 Allée de la Saussaie",
+    "addressLocality": "Draveil",
+    "postalCode": "91210",
+    "addressCountry": "FR"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "priceRange": "€€",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Cash, Credit Card",
+  "areaServed": [
+    {"@type": "City", "name": "Paris"},
+    {"@type": "AdministrativeArea", "name": "Île-de-France"}
+  ],
+  "description": "Service VTC haut de gamme Paris & Île-de-France. Transferts aéroport CDG, Orly, gares parisiennes, Disneyland. Tarif fixe garanti, réservation en ligne 24h/24.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services VTC Paris",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {"@type": "Service", "name": "Transfert Aéroport CDG", "description": "Transfert VTC vers/depuis Paris-Charles de Gaulle"},
+        "priceSpecification": {"@type": "PriceSpecification", "minPrice": "80", "priceCurrency": "EUR", "valueAddedTaxIncluded": true}
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {"@type": "Service", "name": "Transfert Aéroport Orly", "description": "Transfert VTC vers/depuis Paris-Orly"},
+        "priceSpecification": {"@type": "PriceSpecification", "minPrice": "60", "priceCurrency": "EUR", "valueAddedTaxIncluded": true}
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {"@type": "Service", "name": "Transfert Gare Paris", "description": "VTC gares Gare du Nord, Lyon, Montparnasse, Saint-Lazare"},
+        "priceSpecification": {"@type": "PriceSpecification", "minPrice": "35", "priceCurrency": "EUR", "valueAddedTaxIncluded": true}
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {"@type": "Service", "name": "Mise à disposition chauffeur", "description": "Chauffeur privé à disposition à l'heure"},
+        "priceSpecification": {"@type": "PriceSpecification", "minPrice": "80", "priceCurrency": "EUR", "unitText": "HOUR", "valueAddedTaxIncluded": true}
+      }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -792,6 +948,7 @@ textarea.form-input{
     <a href="vehicules.html" class="nav-link" data-i18n="nav-vehicles">Véhicules</a>
     <a href="services.html" class="nav-link" data-i18n="nav-services">Services</a>
     <a href="tarifs-reservations.html" class="nav-link" data-i18n="nav-rates">Tarifs</a>
+    <a href="#entreprises" class="nav-link" data-i18n="nav-b2b">Entreprises</a>
     <a href="contact.html" class="nav-link" data-i18n="nav-contact">Contact</a>
     <a href="devenir-chauffeur.html" class="nav-link" data-i18n="nav-driver">Devenir chauffeur</a>
     <a href="tel:+33760554460" class="nav-phone">
@@ -816,6 +973,8 @@ textarea.form-input{
   <a href="vehicules.html" class="sidebar-link">Véhicules</a>
   <a href="services.html" class="sidebar-link">Services</a>
   <a href="tarifs-reservations.html" class="sidebar-link">Tarifs &amp; Réservations</a>
+  <a href="#entreprises" class="sidebar-link">Entreprises</a>
+  <a href="#faq" class="sidebar-link">FAQ</a>
   <a href="contact.html" class="sidebar-link">Contact</a>
   <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
   <a href="#booking" class="sidebar-link">Réserver</a>
@@ -1042,7 +1201,7 @@ textarea.form-input{
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#2E77BC"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8.5" fill="white" letter-spacing="0.8">AMEX</text></svg>
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Carte Bancaire"><rect width="38" height="24" rx="3" fill="#005B99"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="13" fill="white">CB</text></svg>
-          <span style="font-size:.58rem;color:var(--text-muted);margin-left:2px;letter-spacing:.3px;">via Stripe</span>
+          <span style="font-size:.8rem;color:var(--text-muted);margin-left:2px;letter-spacing:.3px;">via Stripe</span>
         </div>
       </div>
 
@@ -1098,6 +1257,62 @@ textarea.form-input{
 
 <div class="sep"></div>
 
+<!-- ——— PRIX INDICATIFS ——— -->
+<section class="price-section" id="tarifs-apercu">
+  <div class="anim-fade" style="display:flex;flex-direction:column;align-items:center;">
+    <div class="section-label" data-i18n="price-label">Tarifs indicatifs</div>
+    <h2 class="section-title" data-i18n="price-title">Des prix clairs, <em>sans surprise</em></h2>
+    <p class="section-sub" data-i18n="price-sub">Tarifs fixes communiqués avant la réservation. Pas de compteur, pas de majoration.</p>
+  </div>
+  <div class="price-grid">
+    <div class="price-card anim-fade">
+      <div class="price-route">
+        <span class="price-from-to">Paris <span class="price-arrow">→</span> CDG</span>
+      </div>
+      <div class="price-amount">dès 65€</div>
+      <div class="price-mention">Berline Confort · 1-3 pax</div>
+    </div>
+    <div class="price-card anim-fade">
+      <div class="price-route">
+        <span class="price-from-to">Paris <span class="price-arrow">→</span> Orly</span>
+      </div>
+      <div class="price-amount">dès 55€</div>
+      <div class="price-mention">Berline Confort · 1-3 pax</div>
+    </div>
+    <div class="price-card anim-fade">
+      <div class="price-route">
+        <span class="price-from-to">Paris <span class="price-arrow">→</span> Disneyland</span>
+      </div>
+      <div class="price-amount">dès 80€</div>
+      <div class="price-mention">Berline Confort · 1-3 pax</div>
+    </div>
+    <div class="price-card anim-fade">
+      <div class="price-route">
+        <span class="price-from-to">CDG <span class="price-arrow">→</span> Disneyland</span>
+      </div>
+      <div class="price-amount">dès 75€</div>
+      <div class="price-mention">Berline Confort · 1-3 pax</div>
+    </div>
+    <div class="price-card anim-fade">
+      <div class="price-route">
+        <span class="price-from-to">Paris <span class="price-arrow">→</span> Gare du Nord</span>
+      </div>
+      <div class="price-amount">dès 35€</div>
+      <div class="price-mention">Berline Confort · 1-3 pax</div>
+    </div>
+    <div class="price-card anim-fade">
+      <div class="price-route">
+        <span class="price-from-to">Paris <span class="price-arrow">→</span> Beauvais</span>
+      </div>
+      <div class="price-amount">dès 130€</div>
+      <div class="price-mention">Berline Confort · 1-3 pax</div>
+    </div>
+  </div>
+  <p class="price-disclaimer" data-i18n="price-disclaimer">* Tarifs indicatifs pour une Berline Confort. Le prix exact est calculé lors de la réservation selon la distance et le véhicule choisi. Suppléments Van / VIP disponibles.</p>
+</section>
+
+<div class="sep"></div>
+
 <!-- ——— SERVICES ——— -->
 <section class="section" id="services">
   <div class="anim-fade" style="text-align:center;display:flex;flex-direction:column;align-items:center;">
@@ -1105,10 +1320,10 @@ textarea.form-input{
     <h2 class="section-title" data-i18n="svc-title">Un service pour chaque <em>occasion</em></h2>
     <p class="section-sub" data-i18n="svc-sub" style="text-align:center;">Aéroports, gares, Paris, longues distances, événements — le même niveau d'exigence.</p>
   </div>
-  <div class="svc-banners">
+  <div class="svc-banners" style="margin-left:auto;margin-right:auto;">
 
     <a href="services.html" class="svc-banner anim-fade d1">
-      <img class="svc-banner-bg" src="https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Transfert aéroport" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Transfert aéroport" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
@@ -1121,7 +1336,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d2">
-      <img class="svc-banner-bg" src="https://images.pexels.com/photos/7064576/pexels-photo-7064576.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Gare parisienne" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="https://images.pexels.com/photos/7064576/pexels-photo-7064576.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Gare parisienne" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg></div>
@@ -1134,7 +1349,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d3">
-      <img class="svc-banner-bg" src="https://images.pexels.com/photos/161901/paris-sunset-france-monument-161901.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Paris Tour Eiffel" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="https://images.pexels.com/photos/161901/paris-sunset-france-monument-161901.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Paris Tour Eiffel" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg></div>
@@ -1147,7 +1362,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d4">
-      <img class="svc-banner-bg" src="https://images.pexels.com/photos/13811147/pexels-photo-13811147.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Autoroute longue distance" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="https://images.pexels.com/photos/13811147/pexels-photo-13811147.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Autoroute longue distance" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
@@ -1160,7 +1375,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d5">
-      <img class="svc-banner-bg" src="https://images.pexels.com/photos/14995879/pexels-photo-14995879.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Chauffeur VIP affaires" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="https://images.pexels.com/photos/14995879/pexels-photo-14995879.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Chauffeur VIP affaires" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg></div>
@@ -1212,7 +1427,7 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d1">
       <div class="veh-card-img">
-        <img src="https://images.pexels.com/photos/1007410/pexels-photo-1007410.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Confort" onerror="this.style.display='none'">
+        <img src="https://images.pexels.com/photos/1007410/pexels-photo-1007410.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Confort" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Berline</div>
@@ -1225,7 +1440,7 @@ textarea.form-input{
         </div>
         <div class="veh-card-price">
           <div>
-            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
+            <div style="font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
             <div class="veh-card-amount">28€</div>
             <div class="veh-card-km">+ 1,37€/km</div>
           </div>
@@ -1236,7 +1451,7 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d2">
       <div class="veh-card-img">
-        <img src="https://images.pexels.com/photos/3786091/pexels-photo-3786091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Business" onerror="this.style.display='none'">
+        <img src="https://images.pexels.com/photos/3786091/pexels-photo-3786091.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Business" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Berline</div>
@@ -1249,7 +1464,7 @@ textarea.form-input{
         </div>
         <div class="veh-card-price">
           <div>
-            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
+            <div style="font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
             <div class="veh-card-amount">44€</div>
             <div class="veh-card-km">+ 1,90€/km</div>
           </div>
@@ -1260,7 +1475,7 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d3">
       <div class="veh-card-img">
-        <img src="https://images.pexels.com/photos/1118448/pexels-photo-1118448.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Van Minibus" onerror="this.style.display='none'">
+        <img src="https://images.pexels.com/photos/1118448/pexels-photo-1118448.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Van Minibus" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Van &amp; Minibus</div>
@@ -1273,7 +1488,7 @@ textarea.form-input{
         </div>
         <div class="veh-card-price">
           <div>
-            <div style="font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
+            <div style="font-size:.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;" data-i18n="veh-from">À partir de</div>
             <div class="veh-card-amount">48€</div>
             <div class="veh-card-km">+ 2,12€/km</div>
           </div>
@@ -1512,6 +1727,83 @@ textarea.form-input{
   </div>
 </section>
 
+<!-- ——— FAQ ——— -->
+<section class="faq-section" id="faq">
+  <div class="faq-wrap">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Questions <em>fréquentes</em></h2>
+    <p class="section-sub">Tout ce que vous devez savoir avant de réserver votre chauffeur privé.</p>
+
+    <div class="faq-list" role="list">
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Quelle est la différence entre un VTC et un taxi ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Le VTC (Véhicule de Tourisme avec Chauffeur) est un service de transport <strong>privé réservé à l'avance</strong>, avec un prix fixé avant la course. Contrairement au taxi, il n'y a <strong>pas de compteur</strong> : vous connaissez le tarif exact avant de confirmer votre réservation. Les chauffeurs VTC sont titulaires d'une carte professionnelle et utilisent des véhicules haut de gamme systématiquement nettoyés.</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Le prix est-il vraiment fixé à l'avance, sans surprise ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Oui, <strong>100% garanti</strong>. Le prix affiché lors de votre réservation est celui que vous payez — ni plus, ni moins. Pas de surcoût lié aux embouteillages, pas de frais cachés, pas de supplément bagage. Le seul cas de majoration est explicitement indiqué : trajets de nuit (22h–6h, +10%) et heures de pointe (7h–10h / 17h–20h, +20%).</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Combien coûte un transfert Paris ↔ aéroport CDG ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>À partir de <strong>80 € en Confort</strong>, <strong>120 € en Business</strong> et <strong>130 € en Van</strong> pour un trajet Paris ↔ Charles de Gaulle (tarif jour, prix fixe). Pour Orly, à partir de 60 € en Confort. Tous les tarifs exacts sont consultables dans notre <a href="tarifs-reservations.html" style="color:var(--gold);text-decoration:none;">tableau des prix</a> ou directement dans le simulateur de réservation.</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Que se passe-t-il si mon vol est retardé ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Nous suivons l'état de votre vol <strong>en temps réel</strong>. Si votre vol est retardé, votre chauffeur adapte automatiquement l'heure de prise en charge sans que vous ayez besoin de nous contacter. <strong>Aucun frais supplémentaire</strong> n'est appliqué pour les retards de vol. Votre chauffeur vous attend dans le hall d'arrivée avec un panneau nominatif.</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Comment réserver ? Faut-il un compte ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Pas besoin de créer un compte. Réservez en <strong>moins de 2 minutes</strong> directement sur notre site : renseignez votre trajet, choisissez votre véhicule, entrez vos coordonnées et confirmez. Vous pouvez aussi nous appeler ou nous contacter par <strong>WhatsApp au 07 60 55 44 60</strong>. Vous recevrez une confirmation immédiate par SMS et email.</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Puis-je annuler ou modifier ma réservation ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>L'annulation est <strong>gratuite jusqu'à 24h avant la course</strong>. Entre 24h et 2h avant le départ, 50% du montant est retenu. En deçà de 2h ou en cas de non-présentation, 100% est facturé. Pour modifier l'heure ou l'adresse, contactez-nous dès que possible par téléphone ou WhatsApp.</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Transportez-vous les groupes et les familles nombreuses ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Oui, notre <strong>Mercedes Classe V</strong> (catégorie Van) accueille jusqu'à <strong>7 passagers</strong> avec leurs bagages dans un espace confortable. Idéal pour les familles, les groupes d'amis, les séminaires d'entreprise ou les transferts depuis CDG/Orly avec plusieurs valises.</p></div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          <span>Êtes-vous disponibles la nuit et le week-end ?</span>
+          <svg class="faq-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-a"><p>Oui, ONTIME TRANSFERT est disponible <strong>24h/24, 7j/7</strong>, y compris les nuits, week-ends et jours fériés. Les transferts nocturnes (22h–6h) font l'objet d'une majoration de 10%, et les heures de pointe (7h–10h / 17h–20h) de 20%. Ces majorations sont automatiquement incluses dans le prix affiché lors de la réservation.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ——— B2B / ENTREPRISES ——— -->
 <section class="b2b-section" id="entreprises">
   <div class="b2b-wrap">
@@ -1597,12 +1889,12 @@ textarea.form-input{
         <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
       </svg>
       <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
-      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.5rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.75rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
-    <div class="footer-links"><a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a><a href="mentions-legales.html#cgv" data-i18n="ft-cgv">CGV</a><a href="mentions-legales.html#cookies" data-i18n="ft-privacy">Confidentialité</a><a href="contact.html" data-i18n="ft-contact">Contact</a></div>
+    <div class="footer-links"><a href="#faq">FAQ</a><a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a><a href="mentions-legales.html#cgv" data-i18n="ft-cgv">CGV</a><a href="mentions-legales.html#cookies" data-i18n="ft-privacy">Confidentialité</a><a href="contact.html" data-i18n="ft-contact">Contact</a></div>
   </div>
   <div class="footer-cards">
-    <span style="font-size:.62rem;color:var(--text-muted);letter-spacing:.5px;margin-right:4px;">Paiement accepté :</span>
+    <span style="font-size:.82rem;color:var(--text-muted);letter-spacing:.5px;margin-right:4px;">Paiement accepté :</span>
     <svg width="34" height="21" viewBox="0 0 38 24" style="border-radius:3px;flex-shrink:0;" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-style="italic" font-weight="900" font-size="12" fill="white">VISA</text></svg>
     <svg width="34" height="21" viewBox="0 0 38 24" style="border-radius:3px;flex-shrink:0;" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
     <svg width="34" height="21" viewBox="0 0 38 24" style="border-radius:3px;flex-shrink:0;" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#2E77BC"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8.5" fill="white" letter-spacing="0.8">AMEX</text></svg>
@@ -1612,8 +1904,7 @@ textarea.form-input{
   <div class="footer-copy" data-i18n="ft-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </footer>
 
-<!-- STRIPE (doit être chargé avant le script inline) -->
-<script src="https://js.stripe.com/v3/"></script>
+<!-- STRIPE chargé à la demande (étape paiement uniquement) -->
 
 <!-- WHATSAPP -->
 <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
@@ -1762,8 +2053,19 @@ const KNOWN_COORDS={
 };
 
 // ——— GOOGLE MAPS AUTOCOMPLETE ———
-let acDep,acArr;
+let acDep,acArr,mapsLoaded=false;
 const _geo_={};
+function loadMapsScript(){
+  if(mapsLoaded)return;
+  mapsLoaded=true;
+  const s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initMap';
+  document.head.appendChild(s);
+}
+['depAdresseInput','arrAdresseInput'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('focus',loadMapsScript,{once:true});
+});
 function initMap(){
   const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
   const depInput=document.getElementById('depAdresseInput');
@@ -2011,21 +2313,31 @@ document.getElementById('btnBackStep1').addEventListener('click',()=>{
   document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 });
 
-// ——— STRIPE INIT (sans mount) ———
-const stripe=Stripe(STRIPE_PK);
-const stripeStyle={
-  base:{color:'#e8e8e8',fontFamily:'Inter, sans-serif',fontSize:'14px',fontSmoothing:'antialiased','::placeholder':{color:'#555'},iconColor:'#c8a96e'},
-  invalid:{color:'#f44336',iconColor:'#f44336'}
-};
-const elements=stripe.elements();
-const cardNumberEl=elements.create('cardNumber',{style:stripeStyle,showIcon:true});
-const cardExpiryEl=elements.create('cardExpiry',{style:stripeStyle});
-const cardCvcEl=elements.create('cardCvc',{style:stripeStyle});
-let cardMounted=false;
-const onStripeErr=e=>{document.getElementById('card-errors').textContent=e.error?e.error.message:'';};
-cardNumberEl.on('change',onStripeErr);
-cardExpiryEl.on('change',onStripeErr);
-cardCvcEl.on('change',onStripeErr);
+// ——— STRIPE LAZY LOAD ———
+let stripe,elements,cardNumberEl,cardExpiryEl,cardCvcEl,cardMounted=false,stripeReady=false;
+function initStripeElements(){
+  const stripeStyle={
+    base:{color:'#e8e8e8',fontFamily:'Inter, sans-serif',fontSize:'14px',fontSmoothing:'antialiased','::placeholder':{color:'#555'},iconColor:'#c8a96e'},
+    invalid:{color:'#f44336',iconColor:'#f44336'}
+  };
+  stripe=Stripe(STRIPE_PK);
+  elements=stripe.elements();
+  cardNumberEl=elements.create('cardNumber',{style:stripeStyle,showIcon:true});
+  cardExpiryEl=elements.create('cardExpiry',{style:stripeStyle});
+  cardCvcEl=elements.create('cardCvc',{style:stripeStyle});
+  const onStripeErr=e=>{document.getElementById('card-errors').textContent=e.error?e.error.message:'';};
+  cardNumberEl.on('change',onStripeErr);
+  cardExpiryEl.on('change',onStripeErr);
+  cardCvcEl.on('change',onStripeErr);
+  stripeReady=true;
+}
+function loadStripeScript(cb){
+  if(stripeReady){cb();return;}
+  const s=document.createElement('script');
+  s.src='https://js.stripe.com/v3/';
+  s.onload=()=>{initStripeElements();cb();};
+  document.head.appendChild(s);
+}
 
 // ——— ÉTAPE 2 → ÉTAPE 3 ———
 document.getElementById('btnContinuePay').addEventListener('click',()=>{
@@ -2049,26 +2361,27 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
   booking.firstName=fn;booking.lastName=ln;booking.phone=ph;booking.email=em;
   booking.flight=document.getElementById('inputFlight').value;
 
-  document.getElementById('bookingStep2').style.display='none';
-  document.getElementById('bookingStep3').style.display='block';
+  loadStripeScript(()=>{
+    document.getElementById('bookingStep2').style.display='none';
+    document.getElementById('bookingStep3').style.display='block';
 
-  // Récap étape 3
-  document.getElementById('p3From').textContent=booking.from;
-  document.getElementById('p3To').textContent=booking.to;
-  document.getElementById('p3Date').textContent=booking.date;
-  document.getElementById('p3Time').textContent=booking.time;
-  document.getElementById('p3Veh').textContent=vehNames[booking.veh]||booking.veh;
-  document.getElementById('p3Price').textContent=booking.price+'€';
+    // Récap étape 3
+    document.getElementById('p3From').textContent=booking.from;
+    document.getElementById('p3To').textContent=booking.to;
+    document.getElementById('p3Date').textContent=booking.date;
+    document.getElementById('p3Time').textContent=booking.time;
+    document.getElementById('p3Veh').textContent=vehNames[booking.veh]||booking.veh;
+    document.getElementById('p3Price').textContent=booking.price+'€';
 
-  // Monter Stripe ici (éléments visibles) — fix principal
-  if(!cardMounted){
-    cardNumberEl.mount('#card-number');
-    cardExpiryEl.mount('#card-expiry');
-    cardCvcEl.mount('#card-cvc');
-    cardMounted=true;
-  }
-  setStep(3);
-  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+    if(!cardMounted){
+      cardNumberEl.mount('#card-number');
+      cardExpiryEl.mount('#card-expiry');
+      cardCvcEl.mount('#card-cvc');
+      cardMounted=true;
+    }
+    setStep(3);
+    document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+  });
 });
 
 document.getElementById('btnBackStep2').addEventListener('click',()=>{
@@ -2167,6 +2480,16 @@ document.getElementById('b2bSubmitBtn').addEventListener('click',async()=>{
     statusEl.textContent='Erreur lors de l\'envoi. Contactez-nous par WhatsApp.';
     btn.disabled=false;btn.textContent='Demander un devis entreprise';
   }
+});
+
+// ——— FAQ ACCORDION ———
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-q').setAttribute('aria-expanded','false');});
+    if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}
+  });
 });
 
 // ——— LANGUE FR / EN ———
@@ -2426,7 +2749,16 @@ function setLang(lang){
 setLang(currentLang);
 </script>
 
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <div class="sticky-cta-price">
+    <strong data-i18n="sticky-from">Dès 35€</strong>
+    <span data-i18n="sticky-label">Tarif fixe garanti</span>
+  </div>
+  <a href="#booking" class="sticky-cta-btn" data-i18n="sticky-btn">Réserver</a>
+</div>
+
 <!-- GOOGLE MAPS -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initMap" async defer></script>
+<!-- Maps chargé à la demande -->
 </body>
 </html>
