@@ -711,7 +711,9 @@ textarea.form-input{
 
 /* ——— PRIX INDICATIFS ——— */
 .price-section{padding:80px 24px;text-align:center;}
-.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:1100px;margin:40px auto 0;}
+.price-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:1100px;margin:40px auto 0;}
+.price-card{width:calc(33.333% - 11px);}
+@media(max-width:768px){.price-card{width:100%;}}
 .price-card{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color .3s,transform .3s;}
 .price-card:hover{border-color:var(--gold);transform:translateY(-4px);}
 .price-route{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
