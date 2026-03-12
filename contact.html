@@ -24,6 +24,7 @@
   --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px;}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
 body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
 
@@ -305,21 +306,21 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="fname" data-i18n="cf-fname">Prénom</label>
-          <input type="text" id="fname" class="form-input" placeholder="Votre prénom">
+          <input type="text" id="fname" class="form-input" placeholder="Votre prénom" autocomplete="given-name">
         </div>
         <div class="form-group">
           <label class="form-label" for="lname" data-i18n="cf-lname">Nom</label>
-          <input type="text" id="lname" class="form-input" placeholder="Votre nom">
+          <input type="text" id="lname" class="form-input" placeholder="Votre nom" autocomplete="family-name">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="email" data-i18n="cf-email">Email</label>
-          <input type="email" id="email" class="form-input" placeholder="votre@email.com">
+          <input type="email" id="email" class="form-input" placeholder="votre@email.com" autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label" for="phone" data-i18n="cf-phone">Téléphone</label>
-          <input type="tel" id="phone" class="form-input" placeholder="+33 6 00 00 00 00" pattern="[\+0-9][0-9 \.\-\(\)]{7,}" title="Numéro valide (ex : 06 12 34 56 78)">
+          <input type="tel" id="phone" class="form-input" placeholder="+33 6 00 00 00 00" pattern="[\+0-9][0-9 \.\-\(\)]{7,}" title="Numéro valide (ex : 06 12 34 56 78)" autocomplete="tel">
         </div>
       </div>
       <div class="form-row">
@@ -458,7 +459,7 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
       <a href="contact.html" data-i18n="ft-contact">Contact</a>
     </div>
   </div>
-  <div class="footer-copy" data-i18n="ft-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </footer>
 
 <!-- WHATSAPP -->

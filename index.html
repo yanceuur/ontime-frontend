@@ -43,7 +43,8 @@
 <link rel="dns-prefetch" href="https://js.stripe.com">
 <link rel="dns-prefetch" href="https://maps.googleapis.com">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
 <style>
 :root{
   --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
@@ -292,7 +293,9 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;cursor:pointer;
 }
 .form-select option{background:#1a1a1a;color:var(--text);}
-.form-select:focus,.form-input:focus{border-color:var(--gold);box-shadow:0 0 16px rgba(200,169,110,.08);}
+.form-select:hover,.form-input:hover{border-color:rgba(200,169,110,.25);}
+.form-select:focus,.form-input:focus{border-color:var(--gold);box-shadow:0 0 16px rgba(200,169,110,.08);outline:none;}
+a:focus-visible,button:focus-visible,.faq-q:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px;}
 
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .pax-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin-top:2px;}
@@ -947,6 +950,7 @@ textarea.form-input{
 </script>
 </head>
 <body>
+<a href="#booking" class="sr-only" style="position:absolute;top:-100px;left:0;background:var(--gold);color:var(--black);padding:12px 24px;z-index:200;font-weight:600;" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Aller au formulaire de réservation</a>
 
 <!-- ——— NAVBAR ——— -->
 <nav class="navbar top" id="navbar">
@@ -1012,14 +1016,14 @@ textarea.form-input{
   <div class="hero-bg" id="heroBg">
     <img src="img/hero.jpg"
          onerror="this.src='img/hero-fallback.jpg'"
-         alt="Chauffeur privé VTC Mercedes Paris" style="width:100%;height:100%;object-fit:cover;">
+         alt="Chauffeur privé VTC Mercedes Paris" width="1920" height="1080" style="width:100%;height:100%;object-fit:cover;">
   </div>
   <div class="hero-glow g1"></div>
   <div class="hero-glow g2"></div>
 
   <div class="hero-left">
     <div class="hero-badge">
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="none"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="none"/></svg>
       <span data-i18n="hero-badge">Chauffeur privé VTC</span>
     </div>
     <h1 class="hero-title">
@@ -1138,8 +1142,8 @@ textarea.form-input{
         <div class="booking-title" data-i18n="book-title2">Vos coordonnées</div>
         <div class="booking-sub" data-i18n="book-sub2">Pour finaliser votre réservation</div>
         <div class="form-row">
-          <div><label class="form-label" data-i18n="lbl-firstname">Prénom</label><input type="text" class="form-input" id="inputFirstName" placeholder="Prénom" style="padding-left:12px;"></div>
-          <div><label class="form-label" data-i18n="lbl-lastname">Nom</label><input type="text" class="form-input" id="inputLastName" placeholder="Nom" style="padding-left:12px;"></div>
+          <div><label class="form-label" data-i18n="lbl-firstname">Prénom</label><input type="text" class="form-input" id="inputFirstName" placeholder="Prénom" autocomplete="given-name" style="padding-left:12px;"></div>
+          <div><label class="form-label" data-i18n="lbl-lastname">Nom</label><input type="text" class="form-input" id="inputLastName" placeholder="Nom" autocomplete="family-name" style="padding-left:12px;"></div>
         </div>
         <label class="form-label" data-i18n="lbl-phone">Téléphone</label>
         <div class="phone-row">
@@ -1158,10 +1162,10 @@ textarea.form-input{
             <option value="+213">+213 DZ</option>
             <option value="+216">+216 TN</option>
           </select>
-          <input type="tel" class="form-input" id="inputPhone" placeholder="6 12 34 56 78" title="Numéro valide" style="flex:1;">
+          <input type="tel" class="form-input" id="inputPhone" placeholder="6 12 34 56 78" title="Numéro valide" autocomplete="tel-national" maxlength="15" style="flex:1;">
         </div>
         <label class="form-label" data-i18n="lbl-email" style="margin-top:8px;">Email</label>
-        <input type="email" class="form-input" id="inputEmail" placeholder="votre@email.com" style="padding-left:12px;">
+        <input type="email" class="form-input" id="inputEmail" placeholder="votre@email.com" autocomplete="email" style="padding-left:12px;">
         <label class="form-label" data-i18n="lbl-flight">N° de vol / train (optionnel)</label>
         <input type="text" class="form-input" id="inputFlight" placeholder="Ex: AF1234, TGV 6789" style="padding-left:12px;">
 
@@ -1348,7 +1352,7 @@ textarea.form-input{
   <div class="svc-banners" style="margin-left:auto;margin-right:auto;">
 
     <a href="services.html" class="svc-banner anim-fade d1">
-      <img class="svc-banner-bg" src="img/svc-airport.jpg" alt="Transfert aéroport" loading="lazy" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="img/svc-airport.jpg" alt="Transfert aéroport" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
@@ -1361,7 +1365,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d2">
-      <img class="svc-banner-bg" src="img/svc-gare.jpg" alt="Gare parisienne" loading="lazy" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="img/svc-gare.jpg" alt="Gare parisienne" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg></div>
@@ -1374,7 +1378,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d3">
-      <img class="svc-banner-bg" src="img/svc-paris.jpg" alt="Paris Tour Eiffel" loading="lazy" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="img/svc-paris.jpg" alt="Paris Tour Eiffel" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg></div>
@@ -1387,7 +1391,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d4">
-      <img class="svc-banner-bg" src="img/svc-longdistance.jpg" alt="Autoroute longue distance" loading="lazy" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="img/svc-longdistance.jpg" alt="Autoroute longue distance" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
@@ -1400,7 +1404,7 @@ textarea.form-input{
     </a>
 
     <a href="services.html" class="svc-banner anim-fade d5">
-      <img class="svc-banner-bg" src="img/svc-vip.jpg" alt="Chauffeur VIP affaires" loading="lazy" onerror="this.style.display='none'">
+      <img class="svc-banner-bg" src="img/svc-vip.jpg" alt="Chauffeur VIP affaires" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       <div class="svc-banner-overlay"></div>
       <div class="svc-banner-content">
         <div class="svc-banner-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg></div>
@@ -1452,7 +1456,7 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d1">
       <div class="veh-card-img">
-        <img src="img/car-confort.jpg" alt="Confort" loading="lazy" onerror="this.style.display='none'">
+        <img src="img/car-confort.jpg" alt="Confort" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Berline</div>
@@ -1476,7 +1480,7 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d2">
       <div class="veh-card-img">
-        <img src="img/car-business.jpg" alt="Business" loading="lazy" onerror="this.style.display='none'">
+        <img src="img/car-business.jpg" alt="Business" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Berline</div>
@@ -1500,7 +1504,7 @@ textarea.form-input{
 
     <div class="veh-card anim-fade d3">
       <div class="veh-card-img">
-        <img src="img/car-van.jpg" alt="Van Minibus" loading="lazy" onerror="this.style.display='none'">
+        <img src="img/car-van.jpg" alt="Van Minibus" width="1600" height="900" loading="lazy" onerror="this.style.display='none'">
       </div>
       <div class="veh-card-body">
         <div class="veh-card-cat">Van &amp; Minibus</div>
@@ -1927,7 +1931,7 @@ textarea.form-input{
     <svg width="34" height="21" viewBox="0 0 38 24" style="border-radius:3px;flex-shrink:0;" aria-label="Carte Bancaire"><rect width="38" height="24" rx="3" fill="#005B99"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="13" fill="white">CB</text></svg>
     <svg width="34" height="21" viewBox="0 0 38 24" style="border-radius:3px;flex-shrink:0;" aria-label="Stripe"><rect width="38" height="24" rx="3" fill="#635BFF"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="9" fill="white" letter-spacing="0.5">STRIPE</text></svg>
   </div>
-  <div class="footer-copy" data-i18n="ft-copy">© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </footer>
 
 <!-- STRIPE chargé à la demande (étape paiement uniquement) -->
@@ -2580,7 +2584,7 @@ const i18n={
     'zn-long':'Long distances','zd-long':'Lyon, Brussels, Normandy, Bordeaux…',
     // Footer
     'ft-legal':'Legal notice','ft-cgv':'T&amp;Cs','ft-privacy':'Privacy','ft-contact':'Contact',
-    'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.',
+    'ft-copy':'© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.',
     // Booking form
     'book-title1':'Book online',
     'book-sub1':'Fixed &amp; instant price. Booking at least 4h in advance, or call <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
@@ -2681,7 +2685,7 @@ const i18n={
     'zn-long':'Longues distances','zd-long':'Lyon, Bruxelles, Normandie, Bordeaux…',
     // Footer
     'ft-legal':'Mentions légales','ft-cgv':'CGV','ft-privacy':'Confidentialité','ft-contact':'Contact',
-    'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.',
+    'ft-copy':'© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.',
     // Booking form
     'book-title1':'Réservez en ligne',
     'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--gold)">07 60 55 44 60</strong>.',
