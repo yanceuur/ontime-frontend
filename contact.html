@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="ONTIME TRANSFERT">
 <meta property="og:image" content="https://ontime-frontend.vercel.app/img/hero.jpg">
 <title>Contact — ONTIME TRANSFERT</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
@@ -33,10 +33,10 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;white-space:nowrap;text-decoration:none;}
 .nav-logo-hex{width:44px;height:44px;flex-shrink:0;}
 .nav-logo-text{display:flex;flex-direction:column;}
-.nav-logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
+.nav-logo-name{font-family:'Inter',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
 .nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
 .nav-logo-line{flex:1;height:1px;background:var(--gold);}
-.nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
 .gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;opacity:1;transition:opacity .5s ease;}
 .gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);}
 .lang-btn{display:flex;align-items:center;gap:6px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);padding:7px 14px;border-radius:6px;cursor:pointer;font-size:.8rem;letter-spacing:.5px;font-family:'Inter',sans-serif;transition:border-color .3s,color .3s;}
@@ -301,6 +301,7 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
     <div class="contact-form-card" id="formCard">
       <div class="form-title" data-i18n="cform-title">Envoyez-nous un message</div>
       <div class="form-subtitle" data-i18n="cform-sub">Nous vous répondons dans les meilleurs délais.</div>
+      <input type="text" name="website" id="contactHoney" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="fname" data-i18n="cf-fname">Prénom</label>
@@ -382,6 +383,7 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
     <div class="b2b-form-wrap">
       <div class="b2b-form-title" data-i18n="cb2b-title">Ouvrir un compte entreprise</div>
       <div class="b2b-form-sub" data-i18n="cb2b-sub">Réponse sous 24h par notre équipe commerciale.</div>
+      <input type="text" name="company_url" id="b2bHoneyC" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
       <div class="b2b-msg err" id="b2bError" role="alert" aria-live="polite"></div>
       <div class="b2b-msg ok" id="b2bSuccess">Demande envoyée ! Nous vous contactons sous 24h.</div>
       <label class="b2b-field-label" data-i18n="cb2b-societe">Société *</label>
@@ -446,8 +448,8 @@ textarea.b2b-input{resize:vertical;min-height:90px;padding-top:11px;padding-left
         <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
         <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
       </svg>
-      <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
-      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+      <span style="font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-family:'Inter',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
     <div class="footer-links">
       <a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a>
@@ -501,6 +503,7 @@ if(location.hash==='#entreprises') switchTab('entreprises');
 // CONTACT FORM
 const API_URL='https://ontime-backend.vercel.app';
 async function sendEmail(){
+  if(document.getElementById('contactHoney').value){return;}
   const btn=document.getElementById('submitBtn');
   const status=document.getElementById('formStatus');
   const fname=document.getElementById('fname').value.trim();
@@ -538,6 +541,7 @@ async function sendEmail(){
 
 // B2B FORM
 async function submitB2B(){
+  if(document.getElementById('b2bHoneyC').value){return;}
   const societe=document.getElementById('b2bSociete').value.trim();
   const siret=document.getElementById('b2bSiret').value.trim();
   const contact=document.getElementById('b2bContact').value.trim();

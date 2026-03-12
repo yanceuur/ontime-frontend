@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="ONTIME TRANSFERT">
 <meta property="og:image" content="https://ontime-frontend.vercel.app/img/hero.jpg">
 <title>Devenir Chauffeur — ONTIME TRANSFERT</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
@@ -39,10 +39,10 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 .nav-logo{display:flex;align-items:center;gap:12px;flex-shrink:0;white-space:nowrap;text-decoration:none;}
 .nav-logo-hex{width:44px;height:44px;flex-shrink:0;}
 .nav-logo-text{display:flex;flex-direction:column;}
-.nav-logo-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
+.nav-logo-name{font-family:'Inter',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:6px;color:#fff;line-height:1;}
 .nav-logo-bar{display:flex;align-items:center;gap:6px;margin-top:2px;}
 .nav-logo-line{flex:1;height:1px;background:var(--gold);}
-.nav-logo-sub{font-family:'Montserrat',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
+.nav-logo-sub{font-family:'Inter',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:5px;color:var(--gold);text-transform:uppercase;}
 
 .gold-line{position:fixed;top:72px;left:0;right:0;z-index:99;height:2px;overflow:hidden;opacity:1;transition:opacity .5s ease;}
 .gold-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,var(--gold) 20%,var(--gold-light) 50%,var(--gold) 80%,transparent 100%);}
@@ -509,6 +509,7 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     <p>Remplissez le formulaire ci-dessous pour rejoindre notre équipe. Nous vous recontactons sous 48h.</p>
 
     <div class="driver-form" id="driverForm">
+      <input type="text" name="website" id="driverHoney" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Prénom</label>
@@ -571,8 +572,8 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
         <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
         <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
       </svg>
-      <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
-      <span style="font-family:'Montserrat',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+      <span style="font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-family:'Inter',sans-serif;font-weight:400;font-size:.80rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
     <div class="footer-links">
       <a href="mentions-legales.html" data-i18n="ft-legal">Mentions légales</a>
@@ -618,6 +619,7 @@ document.querySelectorAll('.block,.avantage-card').forEach(el=>io.observe(el));
 
 // FORM SUBMIT
 document.getElementById('btnSubmitDriver').addEventListener('click',async()=>{
+  if(document.getElementById('driverHoney').value){return;}
   const fn=document.getElementById('driverFirstName').value.trim();
   const ln=document.getElementById('driverLastName').value.trim();
   const ph=document.getElementById('driverPhone').value.trim();
