@@ -12,9 +12,11 @@
 <meta property="og:url" content="https://ontime-frontend.vercel.app/">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="ONTIME TRANSFERT">
+<meta property="og:image" content="https://ontime-frontend.vercel.app/img/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ONTIME TRANSFERT — Chauffeur Privé VTC Paris">
 <meta name="twitter:description" content="Transferts VTC Paris. Tarif fixe, ponctualité garantie. CDG, Orly, gares, Disneyland.">
+<meta name="twitter:image" content="https://ontime-frontend.vercel.app/img/hero.jpg">
 <title>ONTIME TRANSFERT — Chauffeur Privé VTC Paris</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +32,7 @@
   --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
 body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
 
@@ -1040,7 +1043,7 @@ textarea.form-input{
         <button class="cat-tab" data-cat="gare" data-target="dep"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><span data-i18n="cat-gare">Gare</span></button>
         <button class="cat-tab" data-cat="lieu" data-target="dep"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="cat-lieu">Lieu</span></button>
       </div>
-      <div id="dep-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><input type="text" class="form-input" id="depAdresseInput" placeholder="Saisir une adresse de départ" autocomplete="off"></div></div>
+      <div id="dep-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><label for="depAdresseInput" class="sr-only">Adresse de départ</label><input type="text" class="form-input" id="depAdresseInput" placeholder="Saisir une adresse de départ" autocomplete="off"></div></div>
       <div id="dep-aeroport" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><select class="form-select" id="depAeroportSelect"><option value="" disabled selected>Choisir un aéroport</option><option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option><option value="Aéroport d'Orly">Aéroport d'Orly</option><option value="Aéroport de Beauvais">Aéroport de Beauvais</option><option value="Aéroport du Bourget">Aéroport du Bourget</option></select></div></div>
       <div id="dep-gare" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><select class="form-select" id="depGareSelect"><option value="" disabled selected>Choisir une gare</option><option value="Gare du Nord">Gare du Nord</option><option value="Gare de Lyon">Gare de Lyon</option><option value="Gare Montparnasse">Gare Montparnasse</option><option value="Gare de l'Est">Gare de l'Est</option><option value="Gare Saint-Lazare">Gare Saint-Lazare</option><option value="Gare d'Austerlitz">Gare d'Austerlitz</option><option value="Gare de Bercy">Gare de Bercy</option><option value="Gare Massy TGV">Gare Massy TGV</option><option value="Gare Marne-la-Vallée Chessy">Gare Marne-la-Vallée Chessy</option></select></div></div>
       <div id="dep-lieu" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><select class="form-select" id="depLieuSelect"><option value="" disabled selected>Choisir un lieu</option><option value="Disneyland Paris">Disneyland Paris</option><option value="Château de Versailles">Château de Versailles</option><option value="Parc Astérix">Parc Astérix</option><option value="La Défense">La Défense</option></select></div></div>
@@ -1052,15 +1055,15 @@ textarea.form-input{
         <button class="cat-tab" data-cat="gare" data-target="arr"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><span data-i18n="cat-gare">Gare</span></button>
         <button class="cat-tab" data-cat="lieu" data-target="arr"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="cat-lieu">Lieu</span></button>
       </div>
-      <div id="arr-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><input type="text" class="form-input" id="arrAdresseInput" placeholder="Saisir une adresse de destination" autocomplete="off"></div></div>
+      <div id="arr-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><label for="arrAdresseInput" class="sr-only">Adresse de destination</label><input type="text" class="form-input" id="arrAdresseInput" placeholder="Saisir une adresse de destination" autocomplete="off"></div></div>
       <div id="arr-aeroport" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><select class="form-select" id="arrAeroportSelect"><option value="" disabled selected>Choisir un aéroport</option><option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option><option value="Aéroport d'Orly">Aéroport d'Orly</option><option value="Aéroport de Beauvais">Aéroport de Beauvais</option><option value="Aéroport du Bourget">Aéroport du Bourget</option></select></div></div>
       <div id="arr-gare" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><select class="form-select" id="arrGareSelect"><option value="" disabled selected>Choisir une gare</option><option value="Gare du Nord">Gare du Nord</option><option value="Gare de Lyon">Gare de Lyon</option><option value="Gare Montparnasse">Gare Montparnasse</option><option value="Gare de l'Est">Gare de l'Est</option><option value="Gare Saint-Lazare">Gare Saint-Lazare</option><option value="Gare d'Austerlitz">Gare d'Austerlitz</option><option value="Gare de Bercy">Gare de Bercy</option><option value="Gare Massy TGV">Gare Massy TGV</option><option value="Gare Marne-la-Vallée Chessy">Gare Marne-la-Vallée Chessy</option></select></div></div>
       <div id="arr-lieu" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><select class="form-select" id="arrLieuSelect"><option value="" disabled selected>Choisir un lieu</option><option value="Disneyland Paris">Disneyland Paris</option><option value="Château de Versailles">Château de Versailles</option><option value="Parc Astérix">Parc Astérix</option><option value="La Défense">La Défense</option></select></div></div>
 
       <label class="form-label" data-i18n="lbl-paxbags">Passagers &amp; bagages</label>
       <div class="pax-grid">
-        <div class="pax-item"><label data-i18n="lbl-pax">Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
-        <div class="pax-item"><label data-i18n="lbl-bags">Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+        <div class="pax-item"><label for="inputPax" data-i18n="lbl-pax">Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
+        <div class="pax-item"><label for="inputBags" data-i18n="lbl-bags">Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
       </div>
       <div class="toggle-row">
         <span class="toggle-row-label" data-i18n="lbl-childseat">Siège enfant requis ?</span>
@@ -1071,15 +1074,15 @@ textarea.form-input{
       </div>
       <div class="child-seat-panel" id="childSeatPanel" style="display:none;">
         <div class="pax-grid">
-          <div class="pax-item"><label data-i18n="lbl-seat-baby">Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
-          <div class="pax-item"><label data-i18n="lbl-seat-child">Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+          <div class="pax-item"><label for="inputSeatBaby" data-i18n="lbl-seat-baby">Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+          <div class="pax-item"><label for="inputSeatChild" data-i18n="lbl-seat-child">Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
         </div>
       </div>
 
       <label class="form-label" data-i18n="lbl-datetime">Date &amp; heure</label>
       <div class="form-row">
-        <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><input type="date" class="form-input" id="inputDate"></div>
-        <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><select class="form-select" id="inputTime"><option value="" disabled selected>Heure</option></select></div>
+        <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><label for="inputDate" class="sr-only">Date</label><input type="date" class="form-input" id="inputDate"></div>
+        <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><label for="inputTime" class="sr-only">Heure</label><select class="form-select" id="inputTime"><option value="" disabled selected>Heure</option></select></div>
       </div>
 
       <label class="form-label" data-i18n="lbl-vehicle">Véhicule</label>
@@ -1177,7 +1180,7 @@ textarea.form-input{
           </div>
         </div>
         <label class="form-label" data-i18n="lbl-cardholder" style="margin-top:16px;">Nom du titulaire</label>
-        <input type="text" class="form-input" id="inputCardName" placeholder="NOM PRÉNOM" style="padding-left:12px;letter-spacing:.5px;">
+        <label for="inputCardName" class="sr-only">Nom sur la carte</label><input type="text" class="form-input" id="inputCardName" placeholder="NOM PRÉNOM" style="padding-left:12px;letter-spacing:.5px;">
 
         <label class="form-label" data-i18n="lbl-cardnumber" style="margin-top:12px;">Numéro de carte</label>
         <div id="card-number" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
@@ -1861,11 +1864,11 @@ textarea.form-input{
       <div class="b2b-form-sub" data-i18n="b2b-form-sub">Réponse sous 24h — Devis personnalisé gratuit</div>
 
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <input type="text" class="form-input" id="b2bCompany" placeholder="Nom de l'entreprise" style="font-size:.88rem;">
-        <input type="text" class="form-input" id="b2bContact" placeholder="Votre nom et prénom" style="font-size:.88rem;">
-        <input type="email" class="form-input" id="b2bEmail" placeholder="Email professionnel" style="font-size:.88rem;">
-        <input type="tel" class="form-input" id="b2bPhone" placeholder="Téléphone" style="font-size:.88rem;">
-        <select class="form-input" id="b2bVolume" style="font-size:.88rem;cursor:pointer;">
+        <label for="b2bCompany" class="sr-only">Nom de l'entreprise</label><input type="text" class="form-input" id="b2bCompany" placeholder="Nom de l'entreprise" style="font-size:.88rem;">
+        <label for="b2bContact" class="sr-only">Nom et prénom</label><input type="text" class="form-input" id="b2bContact" placeholder="Votre nom et prénom" style="font-size:.88rem;">
+        <label for="b2bEmail" class="sr-only">Email professionnel</label><input type="email" class="form-input" id="b2bEmail" placeholder="Email professionnel" style="font-size:.88rem;">
+        <label for="b2bPhone" class="sr-only">Téléphone</label><input type="tel" class="form-input" id="b2bPhone" placeholder="Téléphone" style="font-size:.88rem;">
+        <label for="b2bVolume" class="sr-only">Volume estimé</label><select class="form-input" id="b2bVolume" style="font-size:.88rem;cursor:pointer;">
           <option value="" disabled selected>Volume estimé de courses / mois</option>
           <option value="Moins de 10">Moins de 10 courses / mois</option>
           <option value="10 à 50">10 à 50 courses / mois</option>
