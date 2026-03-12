@@ -158,6 +158,13 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
 }
 .svc-cta.outline:hover{border-color:var(--gold);box-shadow:0 8px 28px rgba(200,169,110,.1);}
 
+/* Destinations grid */
+.dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:960px;margin:0 auto;padding:0 40px 80px;}
+.dest-card{display:flex;flex-direction:column;align-items:center;gap:8px;background:linear-gradient(145deg,rgba(20,18,14,.9),rgba(12,11,8,.95));border:1px solid var(--border);border-radius:16px;padding:28px 16px;text-decoration:none;transition:transform .3s,border-color .3s,box-shadow .3s;}
+.dest-card:hover{transform:translateY(-4px);border-color:rgba(200,169,110,.3);box-shadow:0 12px 40px rgba(200,169,110,.08);}
+.dest-card-name{font-family:'DM Serif Display',serif;font-size:1.05rem;color:#fff;text-align:center;}
+.dest-card-price{font-size:.85rem;color:var(--gold);font-weight:500;}
+
 /* CTA bottom */
 .cta-bottom{text-align:center;padding:60px 40px 120px;}
 .cta-bottom-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;margin-bottom:12px;}
@@ -412,6 +419,21 @@ body{background:var(--black);color:var(--text);font-family:'Inter',sans-serif;fo
     </div>
   </div>
 
+</div>
+
+<!-- ═══ DESTINATIONS ═══ -->
+<div class="sep"></div>
+<div style="text-align:center;padding:80px 40px 32px;">
+  <div class="section-label">Nos destinations</div>
+  <h2 class="section-title">Découvrez nos <em>transferts</em></h2>
+  <p class="section-sub">Pages dédiées avec tarifs fixes, détails du trajet et FAQ pour chaque destination.</p>
+</div>
+<div class="dest-grid">
+  <a href="vtc-paris-cdg.html" class="dest-card"><div class="dest-card-name">Aéroport CDG</div><div class="dest-card-price">dès 80€</div></a>
+  <a href="vtc-paris-orly.html" class="dest-card"><div class="dest-card-name">Aéroport Orly</div><div class="dest-card-price">dès 60€</div></a>
+  <a href="vtc-paris-beauvais.html" class="dest-card"><div class="dest-card-name">Aéroport Beauvais</div><div class="dest-card-price">dès 150€</div></a>
+  <a href="vtc-gare-du-nord.html" class="dest-card"><div class="dest-card-name">Gare du Nord</div><div class="dest-card-price">dès 35€</div></a>
+  <a href="vtc-disneyland-paris.html" class="dest-card"><div class="dest-card-name">Disneyland Paris</div><div class="dest-card-price">dès 70€</div></a>
 </div>
 
 <!-- ═══ CTA BOTTOM ═══ -->
