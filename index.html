@@ -114,18 +114,18 @@
    Midnight Blue + iOS Glassmorphism
 ═══════════════════════════════════════════ */
 :root{
-  --bg:#080d18;
+  --bg:#0a0a0a;
   --surface:rgba(255,255,255,.04);
   --surface-hover:rgba(255,255,255,.07);
-  --glass:rgba(15,22,42,.65);
-  --glass-border:rgba(255,255,255,.08);
-  --accent:#4f8ff7;
-  --accent-light:#7eb3ff;
-  --accent-glow:rgba(79,143,247,.15);
-  --accent-dark:#2d6fd4;
-  --text:#f0f4ff;
-  --text-dim:#8b9cc7;
-  --text-muted:#556585;
+  --glass:rgba(18,16,12,.7);
+  --glass-border:rgba(200,169,110,.08);
+  --accent:#c8a96e;
+  --accent-light:#dfc9a0;
+  --accent-glow:rgba(200,169,110,.15);
+  --accent-dark:#a6894e;
+  --text:#e8e8e8;
+  --text-dim:#ccc;
+  --text-muted:#777;
   --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
   --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
   --black:#0a0a0a;--dark:#111;--dark2:#1a1a1a;
@@ -141,20 +141,20 @@ body{
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 10%,rgba(79,143,247,.08),transparent),
-    radial-gradient(ellipse 60% 50% at 80% 90%,rgba(79,143,247,.05),transparent),
-    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(30,50,100,.06),transparent);
+    radial-gradient(ellipse 80% 60% at 20% 10%,rgba(200,169,110,.06),transparent),
+    radial-gradient(ellipse 60% 50% at 80% 90%,rgba(200,169,110,.04),transparent),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(40,35,20,.06),transparent);
 }
 
 /* ═══ FLOATING PILL NAVBAR ═══ */
 .pill-nav{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:200;
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;
   display:flex;align-items:center;gap:4px;
-  background:rgba(15,22,42,.75);
+  background:rgba(10,10,10,.8);
   backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);
-  border:1px solid rgba(255,255,255,.1);
+  border:1px solid rgba(200,169,110,.12);
   border-radius:60px;padding:6px 8px;
-  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 0 1px rgba(79,143,247,.05);
+  box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 0 1px rgba(200,169,110,.05);
   transition:opacity .3s,transform .3s;
 }
 .pill-nav a,.pill-nav button{
@@ -167,13 +167,13 @@ body::before{
   white-space:nowrap;font-family:inherit;
 }
 .pill-nav a:hover,.pill-nav button:hover{color:#fff;background:rgba(255,255,255,.08);}
-.pill-nav a.active{color:#fff;background:rgba(79,143,247,.15);}
+.pill-nav a.active{color:#fff;background:rgba(200,169,110,.15);}
 .pill-nav a.pill-cta{
   background:var(--accent);color:#fff;font-weight:600;
   padding:10px 22px;margin-left:2px;
-  box-shadow:0 4px 16px rgba(79,143,247,.3);
+  box-shadow:0 4px 16px rgba(200,169,110,.3);
 }
-.pill-nav a.pill-cta:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(79,143,247,.4);}
+.pill-nav a.pill-cta:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,169,110,.4);}
 .pill-nav .pill-phone{
   display:flex;align-items:center;gap:5px;padding:10px 14px;
 }
@@ -186,7 +186,7 @@ body::before{
   border-radius:20px;padding:7px 12px;cursor:pointer;transition:all .25s;line-height:1;
 }
 .lang-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.5;fill:none;opacity:.7;}
-.lang-btn:hover,.lang-btn.active-en{color:var(--accent-light);border-color:var(--accent);background:rgba(79,143,247,.1);}
+.lang-btn:hover,.lang-btn.active-en{color:var(--accent-light);border-color:var(--accent);background:rgba(200,169,110,.1);}
 
 /* Mobile hamburger */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:20px;right:20px;z-index:201;}
@@ -199,7 +199,7 @@ body::before{
 .sidebar-overlay.open{opacity:1;pointer-events:all;}
 .sidebar{
   position:fixed;top:0;right:0;bottom:0;width:300px;z-index:199;
-  background:linear-gradient(180deg,#0f1628,#080d18);
+  background:linear-gradient(180deg,#111,#0a0a0a);
   border-left:1px solid rgba(255,255,255,.06);
   padding:80px 32px 32px;display:flex;flex-direction:column;
   transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);
@@ -220,7 +220,7 @@ body::before{
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:auto;
   gap:12px;
-  padding:24px 24px 100px;
+  padding:80px 24px 40px;
   max-width:1400px;margin:0 auto;
   min-height:100vh;
 }
@@ -238,8 +238,8 @@ body::before{
 }
 .cell:hover{
   transform:translateY(-3px);
-  border-color:rgba(79,143,247,.15);
-  box-shadow:0 12px 40px rgba(0,0,0,.3),0 0 0 1px rgba(79,143,247,.08);
+  border-color:rgba(200,169,110,.15);
+  box-shadow:0 12px 40px rgba(0,0,0,.3),0 0 0 1px rgba(200,169,110,.08);
 }
 /* Staggered entrance */
 .cell:nth-child(1){animation-delay:.1s}
@@ -261,16 +261,16 @@ body::before{
   grid-column:1/3;grid-row:1/2;
   display:flex;flex-direction:column;justify-content:center;
   padding:40px 36px;
-  background:linear-gradient(135deg,rgba(79,143,247,.06),rgba(15,22,42,.7));
+  background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(15,22,42,.7));
 }
 .cell-hero::before{
   content:'';position:absolute;top:-60px;left:-60px;width:250px;height:250px;
-  background:radial-gradient(circle,rgba(79,143,247,.1),transparent 70%);
+  background:radial-gradient(circle,rgba(200,169,110,.1),transparent 70%);
   pointer-events:none;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(79,143,247,.1);border:1px solid rgba(79,143,247,.2);
+  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
   border-radius:24px;padding:6px 16px;font-size:.65rem;color:var(--accent-light);
   text-transform:uppercase;letter-spacing:2.5px;margin-bottom:20px;width:fit-content;
 }
@@ -300,7 +300,7 @@ body::before{
 .cell-simulator{
   grid-column:3/5;grid-row:1/2;
   display:flex;flex-direction:column;
-  background:linear-gradient(145deg,rgba(79,143,247,.05),rgba(15,22,42,.8));
+  background:linear-gradient(145deg,rgba(200,169,110,.05),rgba(15,22,42,.8));
   padding:28px;
 }
 .sim-title{
@@ -320,13 +320,13 @@ body::before{
   -webkit-appearance:none;appearance:none;
 }
 .sim-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
-.sim-select:focus,.sim-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(79,143,247,.15);}
-.sim-select option{background:#0f1628;color:var(--text);}
+.sim-select:focus,.sim-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
+.sim-select option{background:#0a0a0a;color:var(--text);}
 .sim-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .sim-price-box{
   margin-top:14px;padding:14px 18px;border-radius:12px;
-  background:linear-gradient(135deg,rgba(79,143,247,.1),rgba(79,143,247,.03));
-  border:1px solid rgba(79,143,247,.2);
+  background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));
+  border:1px solid rgba(200,169,110,.2);
   display:none;
 }
 .sim-price-box .sim-price-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;}
@@ -344,7 +344,7 @@ body::before{
   letter-spacing:.3px;transition:all .25s;margin-top:14px;
   font-family:'Inter',sans-serif;
 }
-.btn-sim:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(79,143,247,.3);}
+.btn-sim:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,169,110,.3);}
 .btn-sim:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .btn-book-full{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -354,7 +354,7 @@ body::before{
   letter-spacing:.3px;transition:all .25s;margin-top:8px;
   text-decoration:none;font-family:'Inter',sans-serif;
 }
-.btn-book-full:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(79,143,247,.3);}
+.btn-book-full:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
 .sim-trust{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap;}
 .sim-trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
 .sim-trust-item svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
@@ -363,10 +363,10 @@ body::before{
 .cell-car{
   grid-column:1/2;grid-row:2/3;
   display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(79,143,247,.04),rgba(15,22,42,.6));
+  background:linear-gradient(135deg,rgba(200,169,110,.04),rgba(15,22,42,.6));
   overflow:hidden;padding:20px;
 }
-.car-svg{width:100%;max-width:320px;height:auto;filter:drop-shadow(0 8px 30px rgba(79,143,247,.15));}
+.car-svg{width:100%;max-width:320px;height:auto;filter:drop-shadow(0 8px 30px rgba(200,169,110,.15));}
 .car-label{
   position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
   font-size:.68rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;
@@ -406,7 +406,7 @@ body::before{
   background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
   text-align:center;transition:all .25s;
 }
-.price-pill:hover{border-color:rgba(79,143,247,.2);background:rgba(79,143,247,.05);}
+.price-pill:hover{border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.05);}
 .price-pill-route{font-size:.72rem;color:var(--text-dim);margin-bottom:4px;font-weight:500;}
 .price-pill-arrow{color:var(--accent);margin:0 2px;}
 .price-pill-amount{
@@ -437,7 +437,7 @@ body::before{
   text-decoration:none;color:var(--text-dim);
   transition:all .3s;text-align:center;
 }
-.svc-mini-card:hover{border-color:rgba(79,143,247,.2);background:rgba(79,143,247,.04);color:#fff;}
+.svc-mini-card:hover{border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04);color:#fff;}
 .svc-mini-card svg{width:22px;height:22px;stroke:var(--accent);stroke-width:1.5;fill:none;}
 .svc-mini-card span{font-size:.7rem;line-height:1.3;letter-spacing:.3px;}
 
@@ -453,7 +453,7 @@ body::before{
 .review-author{display:flex;align-items:center;gap:10px;}
 .review-avatar{
   width:36px;height:36px;border-radius:50%;
-  background:rgba(79,143,247,.1);border:1px solid rgba(79,143,247,.2);
+  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
   display:flex;align-items:center;justify-content:center;
   font-family:'DM Serif Display',serif;font-size:.85rem;color:var(--accent);
 }
@@ -462,7 +462,7 @@ body::before{
 .review-badge{
   display:flex;align-items:center;gap:6px;margin-top:14px;
   padding:8px 12px;border-radius:8px;
-  background:rgba(79,143,247,.06);border:1px solid rgba(79,143,247,.1);
+  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);
 }
 .review-badge-score{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--accent);}
 .review-badge-text{font-size:.65rem;color:var(--text-muted);}
@@ -475,7 +475,7 @@ body::before{
 }
 .contact-icon{
   width:48px;height:48px;border-radius:50%;
-  background:rgba(79,143,247,.1);border:1px solid rgba(79,143,247,.15);
+  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.15);
   display:flex;align-items:center;justify-content:center;
 }
 .contact-icon svg{width:22px;height:22px;stroke:var(--accent-light);stroke-width:1.5;fill:none;}
@@ -492,7 +492,7 @@ body::before{
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
   color:var(--text-dim);text-decoration:none;transition:all .25s;
 }
-.contact-link:hover{border-color:rgba(79,143,247,.2);color:#fff;}
+.contact-link:hover{border-color:rgba(200,169,110,.2);color:#fff;}
 .contact-link svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.8;fill:none;}
 
 /* ═══ FOOTER (minimal, bottom of bento) ═══ */
@@ -516,9 +516,9 @@ body::before{
 .booking-overlay.open{display:flex;}
 .booking-card{
   background:linear-gradient(145deg,rgba(20,28,52,.95),rgba(10,15,30,.98));
-  border:1px solid rgba(79,143,247,.12);border-radius:24px;padding:32px;
+  border:1px solid rgba(200,169,110,.12);border-radius:24px;padding:32px;
   width:100%;max-width:520px;
-  box-shadow:0 0 100px rgba(79,143,247,.08),0 40px 80px rgba(0,0,0,.5);
+  box-shadow:0 0 100px rgba(200,169,110,.08),0 40px 80px rgba(0,0,0,.5);
   position:relative;
   animation:modalIn .4s cubic-bezier(.16,1,.3,1);
 }
@@ -553,21 +553,21 @@ body::before{
   transition:border-color .25s,box-shadow .25s;
   -webkit-appearance:none;appearance:none;
 }
-.form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(79,143,247,.15);}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
-.form-select option{background:#0f1628;color:var(--text);}
+.form-select option{background:#0a0a0a;color:var(--text);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .cat-tabs{display:flex;gap:5px;margin-bottom:6px;}
 .cat-tab{
   flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
   padding:8px 2px;border-radius:8px;cursor:pointer;
-  background:rgba(79,143,247,.03);border:1px solid rgba(79,143,247,.08);
+  background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.08);
   color:var(--text-muted);font-size:.75rem;font-family:'Inter',sans-serif;
   letter-spacing:.3px;transition:all .3s;
 }
 .cat-tab svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;transition:all .3s;}
-.cat-tab:hover{border-color:rgba(79,143,247,.2);color:var(--text-dim);}
-.cat-tab.active{background:linear-gradient(135deg,rgba(79,143,247,.12),rgba(79,143,247,.05));border-color:rgba(79,143,247,.35);color:var(--accent);}
+.cat-tab:hover{border-color:rgba(200,169,110,.2);color:var(--text-dim);}
+.cat-tab.active{background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.05));border-color:rgba(200,169,110,.35);color:var(--accent);}
 .cat-tab.active svg{stroke:var(--accent);}
 .field-wrap{position:relative;}
 .f-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--text-muted);stroke-width:1.5;fill:none;pointer-events:none;}
@@ -581,7 +581,7 @@ body::before{
   -webkit-appearance:none;appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;
 }
-.pax-select option{background:#0f1628;color:var(--text);}
+.pax-select option{background:#0a0a0a;color:var(--text);}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 0;}
 .toggle-row-label{font-size:.78rem;color:var(--text-dim);}
 .toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0;}
@@ -595,7 +595,7 @@ body::before{
   content:'';position:absolute;height:18px;width:18px;left:3px;bottom:2px;border-radius:50%;
   background:var(--text-muted);transition:.3s;
 }
-input:checked+.toggle-slider{background:rgba(79,143,247,.2);border-color:rgba(79,143,247,.35);}
+input:checked+.toggle-slider{background:rgba(200,169,110,.2);border-color:rgba(200,169,110,.35);}
 input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--accent);}
 .child-seat-panel{margin-top:6px;}
 .btn-primary{
@@ -605,7 +605,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   letter-spacing:.3px;transition:all .25s;margin-top:16px;
   font-family:'Inter',sans-serif;
 }
-.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(79,143,247,.3);}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,169,110,.3);}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .booking-trust{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;}
 .trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
@@ -617,7 +617,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text-muted);
   transition:all .3s;
 }
-.step-dot.active{background:rgba(79,143,247,.15);border-color:var(--accent);color:var(--accent);}
+.step-dot.active{background:rgba(200,169,110,.15);border-color:var(--accent);color:var(--accent);}
 .step-dot.done{background:rgba(76,175,80,.15);border-color:rgba(76,175,80,.4);color:#4caf50;}
 .step-line{flex:1;max-width:40px;height:1px;background:rgba(255,255,255,.08);}
 .card-logos-row{display:flex;align-items:center;gap:6px;margin-top:14px;flex-wrap:wrap;}
@@ -626,7 +626,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 
 /* ═══ WHATSAPP BUTTON ═══ */
 .wa{
-  position:fixed;bottom:100px;right:20px;z-index:150;
+  position:fixed;bottom:24px;right:20px;z-index:150;
   width:52px;height:52px;border-radius:50%;
   background:linear-gradient(135deg,#25d366,#128c7e);
   display:flex;align-items:center;justify-content:center;
@@ -651,14 +651,14 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 }
 @media(max-width:768px){
   .pill-nav{
-    bottom:12px;left:12px;right:12px;transform:none;
+    top:12px;left:12px;right:12px;transform:none;
     justify-content:center;gap:2px;padding:4px 6px;
     border-radius:40px;
   }
   .pill-nav a,.pill-nav button{padding:8px 12px;font-size:.75rem;}
   .pill-nav .pill-phone,.pill-nav .pill-hide-mobile{display:none;}
   .hamburger{display:flex;}
-  .bento{grid-template-columns:1fr;padding:16px 12px 100px;gap:10px;}
+  .bento{grid-template-columns:1fr;padding:70px 12px 40px;gap:10px;}
   .cell-hero,.cell-simulator,.cell-car,.cell-stats,.cell-prices,.cell-services,.cell-reviews,.cell-contact{grid-column:1/-1;grid-row:auto;}
   .hero-title{font-size:clamp(1.6rem,6vw,2.2rem);}
   .prices-grid{grid-template-columns:repeat(2,1fr);}
@@ -710,7 +710,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
   <a href="#" class="sidebar-link" onclick="openBooking();closeSidebar();return false;">Réserver</a>
   <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
-  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(79,143,247,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
 
 <!-- ═══ BENTO GRID ═══ -->
@@ -806,20 +806,20 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       <!-- Ground reflection -->
       <ellipse cx="200" cy="170" rx="160" ry="6" fill="url(#carGlow)" opacity=".4"/>
       <!-- Body shell -->
-      <path d="M50 120 L60 80 Q65 65 80 58 L140 45 Q160 40 200 38 Q240 40 260 45 L320 58 Q335 65 340 80 L350 120" stroke="url(#carStroke)" stroke-width="2" fill="rgba(79,143,247,.03)"/>
+      <path d="M50 120 L60 80 Q65 65 80 58 L140 45 Q160 40 200 38 Q240 40 260 45 L320 58 Q335 65 340 80 L350 120" stroke="url(#carStroke)" stroke-width="2" fill="rgba(200,169,110,.03)"/>
       <!-- Roof line -->
       <path d="M100 58 Q110 30 160 25 L240 25 Q290 30 300 58" stroke="url(#carStroke)" stroke-width="1.5" fill="none"/>
       <!-- Windows -->
-      <path d="M115 56 Q120 35 160 30 L195 29 L195 56 Z" fill="rgba(79,143,247,.08)" stroke="rgba(79,143,247,.2)" stroke-width=".8"/>
-      <path d="M205 56 L205 29 L240 30 Q280 35 285 56 Z" fill="rgba(79,143,247,.08)" stroke="rgba(79,143,247,.2)" stroke-width=".8"/>
+      <path d="M115 56 Q120 35 160 30 L195 29 L195 56 Z" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.2)" stroke-width=".8"/>
+      <path d="M205 56 L205 29 L240 30 Q280 35 285 56 Z" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.2)" stroke-width=".8"/>
       <!-- Door line -->
       <line x1="200" y1="56" x2="200" y2="118" stroke="rgba(255,255,255,.06)" stroke-width=".5"/>
       <!-- Headlights -->
-      <path d="M50 105 L40 100 Q35 98 36 95 L45 85 Q48 82 52 84 L60 95 Z" fill="rgba(79,143,247,.12)" stroke="var(--accent)" stroke-width="1"/>
-      <path d="M350 105 L360 100 Q365 98 364 95 L355 85 Q352 82 348 84 L340 95 Z" fill="rgba(79,143,247,.12)" stroke="var(--accent)" stroke-width="1"/>
+      <path d="M50 105 L40 100 Q35 98 36 95 L45 85 Q48 82 52 84 L60 95 Z" fill="rgba(200,169,110,.12)" stroke="var(--accent)" stroke-width="1"/>
+      <path d="M350 105 L360 100 Q365 98 364 95 L355 85 Q352 82 348 84 L340 95 Z" fill="rgba(200,169,110,.12)" stroke="var(--accent)" stroke-width="1"/>
       <!-- Headlight glow -->
-      <circle cx="45" cy="95" r="8" fill="rgba(79,143,247,.15)"/>
-      <circle cx="355" cy="95" r="8" fill="rgba(79,143,247,.15)"/>
+      <circle cx="45" cy="95" r="8" fill="rgba(200,169,110,.15)"/>
+      <circle cx="355" cy="95" r="8" fill="rgba(200,169,110,.15)"/>
       <!-- Grille -->
       <rect x="160" y="100" width="80" height="16" rx="3" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.08)" stroke-width=".8"/>
       <line x1="180" y1="100" x2="180" y2="116" stroke="rgba(255,255,255,.05)" stroke-width=".5"/>
@@ -836,24 +836,24 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       <rect x="100" y="122" width="200" height="2" rx="1" fill="url(#underGlow)" opacity=".6"/>
       <!-- Wheels -->
       <circle cx="110" cy="125" r="22" fill="#0a0e1a" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
-      <circle cx="110" cy="125" r="15" fill="none" stroke="rgba(79,143,247,.15)" stroke-width="1"/>
-      <circle cx="110" cy="125" r="5" fill="rgba(79,143,247,.1)" stroke="rgba(79,143,247,.25)" stroke-width=".8"/>
+      <circle cx="110" cy="125" r="15" fill="none" stroke="rgba(200,169,110,.15)" stroke-width="1"/>
+      <circle cx="110" cy="125" r="5" fill="rgba(200,169,110,.1)" stroke="rgba(200,169,110,.25)" stroke-width=".8"/>
       <!-- Wheel spokes -->
       <line x1="110" y1="110" x2="110" y2="115" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <line x1="95" y1="125" x2="100" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <line x1="120" y1="125" x2="125" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <line x1="110" y1="135" x2="110" y2="140" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <circle cx="290" cy="125" r="22" fill="#0a0e1a" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
-      <circle cx="290" cy="125" r="15" fill="none" stroke="rgba(79,143,247,.15)" stroke-width="1"/>
-      <circle cx="290" cy="125" r="5" fill="rgba(79,143,247,.1)" stroke="rgba(79,143,247,.25)" stroke-width=".8"/>
+      <circle cx="290" cy="125" r="15" fill="none" stroke="rgba(200,169,110,.15)" stroke-width="1"/>
+      <circle cx="290" cy="125" r="5" fill="rgba(200,169,110,.1)" stroke="rgba(200,169,110,.25)" stroke-width=".8"/>
       <line x1="290" y1="110" x2="290" y2="115" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <line x1="275" y1="125" x2="280" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <line x1="300" y1="125" x2="305" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <line x1="290" y1="135" x2="290" y2="140" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
       <!-- Gradients -->
       <defs>
-        <linearGradient id="carStroke" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="rgba(79,143,247,.2)"/><stop offset="50%" stop-color="rgba(126,179,255,.4)"/><stop offset="100%" stop-color="rgba(79,143,247,.2)"/></linearGradient>
-        <radialGradient id="carGlow" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(79,143,247,.3)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <linearGradient id="carStroke" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="rgba(200,169,110,.2)"/><stop offset="50%" stop-color="rgba(223,201,160,.4)"/><stop offset="100%" stop-color="rgba(200,169,110,.2)"/></linearGradient>
+        <radialGradient id="carGlow" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(200,169,110,.3)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
         <linearGradient id="underGlow" x1="0" y1="0" x2="200" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="var(--accent)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
       </defs>
     </svg>
@@ -1077,7 +1077,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
     <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg><select class="form-select" id="inputVehicle"><option value="" disabled selected>Choisir un véhicule</option><option value="confort">Berline Confort (1-3 passagers)</option><option value="premium">Berline Premium (1-3 passagers)</option><option value="van">Van / Minibus (4-7 passagers)</option></select></div>
 
     <!-- DISTANCE + PRICE DISPLAY -->
-    <div id="priceDisplay" style="display:none;margin-top:14px;background:linear-gradient(135deg,rgba(79,143,247,.1),rgba(79,143,247,.03));border:1px solid rgba(79,143,247,.2);border-radius:10px;padding:14px 18px;">
+    <div id="priceDisplay" style="display:none;margin-top:14px;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:14px 18px;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-dist">Distance estimée</span><br><span id="distKm" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
         <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-price-fix">Prix fixe</span><br><span id="priceAmount" style="font-family:'DM Serif Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
@@ -1122,7 +1122,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       <input type="text" class="form-input" id="inputFlight" placeholder="Ex: AF1234, TGV 6789" style="padding-left:12px;">
 
       <!-- RECAP -->
-      <div style="margin-top:18px;background:rgba(79,143,247,.06);border:1px solid rgba(79,143,247,.1);border-radius:10px;padding:14px 18px;">
+      <div style="margin-top:18px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);border-radius:10px;padding:14px 18px;">
         <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;" data-i18n="recap-title">Récapitulatif</div>
         <div style="font-size:.82rem;color:var(--text-dim);line-height:1.8;">
           <span id="recapFrom">—</span> → <span id="recapTo">—</span><br>
@@ -1147,7 +1147,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       </div>
       <div class="booking-title" data-i18n="book-title3">Paiement sécurisé</div>
       <div class="booking-sub" data-i18n="book-sub3">Vos données sont protégées par chiffrement SSL via Stripe.</div>
-      <div style="margin-top:14px;background:rgba(79,143,247,.06);border:1px solid rgba(79,143,247,.1);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
+      <div style="margin-top:14px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
         <span id="p3From">—</span> → <span id="p3To">—</span><br>
         <span id="p3Date">—</span> <span data-i18n="recap-at">à</span> <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
         <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;">
@@ -1178,7 +1178,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
         <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;" data-i18n="confirm-title">Réservation confirmée</div>
-      <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(79,143,247,.1);border:1px solid rgba(79,143,247,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--accent);font-weight:600;"></div>
+      <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--accent);font-weight:600;"></div>
       <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;" data-i18n="confirm-note">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
       <div style="margin-top:20px;font-size:.82rem;color:var(--accent);" data-i18n="confirm-thanks">Merci de votre confiance</div>
     </div>
@@ -1573,11 +1573,11 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
           clientSecret:data.clientSecret,
           appearance:{
             theme:'night',
-            variables:{colorPrimary:'#4f8ff7',colorBackground:'#0f1628',colorText:'#f0f4ff',
+            variables:{colorPrimary:'#c8a96e',colorBackground:'#0a0a0a',colorText:'#e8e8e8',
               colorDanger:'#f44336',fontFamily:'Inter, sans-serif',borderRadius:'8px',fontSizeBase:'14px'},
-            rules:{'.Input':{border:'1px solid rgba(79,143,247,.15)',backgroundColor:'rgba(255,255,255,.04)',padding:'13px 12px'},
-              '.Input:focus':{borderColor:'#4f8ff7',boxShadow:'0 0 0 1px #4f8ff7'},
-              '.Label':{color:'#8b9cc7',fontSize:'12px',textTransform:'uppercase',letterSpacing:'0.5px'}}
+            rules:{'.Input':{border:'1px solid rgba(200,169,110,.15)',backgroundColor:'rgba(200,169,110,.04)',padding:'13px 12px'},
+              '.Input:focus':{borderColor:'#c8a96e',boxShadow:'0 0 0 1px #c8a96e'},
+              '.Label':{color:'#888',fontSize:'12px',textTransform:'uppercase',letterSpacing:'0.5px'}}
           },
           locale:document.documentElement.lang==='en'?'en':'fr'
         });
