@@ -8,7 +8,6 @@
 <meta name="theme-color" content="#0a0a0a">
 <link rel="canonical" href="https://www.ontime-chauffeur.fr/blog/comment-aller-aeroport-cdg.html">
 <link rel="alternate" hreflang="fr" href="https://www.ontime-chauffeur.fr/blog/comment-aller-aeroport-cdg.html">
-<link rel="alternate" hreflang="en" href="https://www.ontime-chauffeur.fr/blog/en/how-to-get-to-cdg-airport.html">
 <link rel="alternate" hreflang="x-default" href="https://www.ontime-chauffeur.fr/blog/comment-aller-aeroport-cdg.html">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta property="og:type" content="article">
@@ -39,11 +38,15 @@
 .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:98;opacity:0;pointer-events:none;transition:opacity .4s;}.sidebar-overlay.open{opacity:1;pointer-events:all;}
 .sidebar{position:fixed;top:0;right:0;bottom:0;width:300px;z-index:99;background:linear-gradient(180deg,#0f0d0a,#0a0a0a);border-left:1px solid var(--border);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s;box-shadow:-20px 0 60px rgba(0,0,0,.5);}.sidebar.open{transform:translateX(0);}
 .sidebar-link{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid var(--border-light);cursor:pointer;transition:color .3s,padding-left .3s;text-decoration:none;display:block;}.sidebar-link:hover{color:var(--gold);padding-left:8px;}
-.page-header{padding:160px 60px 60px;text-align:center;position:relative;overflow:hidden;}.page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 60%);pointer-events:none;}
+.page-header{padding:0;text-align:center;position:relative;overflow:hidden;min-height:480px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.page-header-bg{position:absolute;inset:0;}.page-header-bg img{width:100%;height:100%;object-fit:cover;}.page-header-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.4) 0%,rgba(10,10,10,.85) 70%,var(--black) 100%);}
+.page-header-content{position:relative;z-index:2;padding:160px 60px 60px;}
 .section-label{display:inline-flex;align-items:center;gap:10px;font-size:.85rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);margin-bottom:16px;}.section-label::before{content:'';width:28px;height:1px;background:var(--gold);}
 .section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,2.8rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}.section-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.section-sub{color:var(--text-muted);font-size:.88rem;font-weight:300;max-width:620px;line-height:1.8;margin:0 auto;}
+.section-sub{color:var(--text-dim);font-size:.88rem;font-weight:300;max-width:620px;line-height:1.8;margin:0 auto;}
 .sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.1;}
+
+/* Article */
 .article{max-width:740px;margin:0 auto;padding:40px 40px 80px;}
 .article h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--gold-light);margin:48px 0 16px;line-height:1.3;}
 .article h3{font-size:1.05rem;font-weight:600;color:#fff;margin:32px 0 12px;}
@@ -54,17 +57,47 @@
 .article li{margin-bottom:6px;}
 .article-meta{display:flex;align-items:center;gap:16px;font-size:.82rem;color:var(--text-muted);margin-bottom:32px;justify-content:center;}
 .article-back{display:inline-flex;align-items:center;gap:6px;color:var(--gold);font-size:.85rem;text-decoration:none;margin-bottom:24px;}.article-back:hover{text-decoration:underline;}.article-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;}
+
+/* Immersive Images */
+.article-img{position:relative;margin:36px 0;border-radius:16px;overflow:hidden;border:1px solid rgba(200,169,110,.12);}
+.article-img img{width:100%;height:300px;object-fit:cover;display:block;transition:transform .6s;}
+.article-img:hover img{transform:scale(1.03);}
+.article-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(10,10,10,.7) 100%);pointer-events:none;}
+.article-img-caption{position:absolute;bottom:0;left:0;right:0;padding:16px 24px;font-size:.78rem;color:var(--gold-light);letter-spacing:.3px;font-weight:400;z-index:1;font-style:italic;}
+.article-img-wide{position:relative;width:calc(100% + 80px);margin:48px -40px;overflow:hidden;}
+.article-img-wide img{width:100%;height:360px;object-fit:cover;display:block;}
+.article-img-wide::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.8) 0%,rgba(10,10,10,.2) 40%,rgba(10,10,10,.2) 60%,rgba(10,10,10,.8) 100%);pointer-events:none;}
+.article-img-wide .img-quote{position:absolute;top:50%;left:40px;transform:translateY(-50%);z-index:2;max-width:320px;font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--gold-light);line-height:1.5;font-style:italic;}
+.article-img-wide .img-quote-author{display:block;font-family:'Inter',sans-serif;font-size:.75rem;font-style:normal;color:var(--text-muted);margin-top:10px;letter-spacing:1px;text-transform:uppercase;}
+
+/* Comparison Table */
 .comp-table{width:100%;border-collapse:collapse;margin:24px 0 32px;font-size:.88rem;}
 .comp-table th{background:rgba(200,169,110,.08);color:var(--gold);font-weight:600;text-align:left;padding:14px 16px;border-bottom:1px solid var(--border);letter-spacing:.5px;font-size:.8rem;text-transform:uppercase;}
 .comp-table td{padding:12px 16px;border-bottom:1px solid var(--border-light);color:var(--text-dim);font-weight:300;}
 .comp-table tr:hover td{background:rgba(200,169,110,.03);}
 .comp-table .winner{color:var(--gold-light);font-weight:500;}
+
 .tip-box{background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.15);border-radius:12px;padding:20px 24px;margin:24px 0;}.tip-box strong{display:block;color:var(--gold);font-size:.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}.tip-box p{margin:0;font-size:.9rem;}
+
+/* Lang toggle */
+.lang-en{display:none;}
+body.lang-en .lang-en{display:block;}
+body.lang-en .lang-fr{display:none;}
+body.lang-en h2.lang-en,body.lang-en h3.lang-en,body.lang-en p.lang-en,body.lang-en span.lang-en{display:block;}
+body.lang-en li.lang-en{display:list-item;}
+body.lang-en tr.lang-en{display:table-row;}
+body.lang-en th.lang-en{display:table-cell;}
+body.lang-en td.lang-en{display:table-cell;}
+body.lang-en thead.lang-en{display:table-header-group;}
+body.lang-en tbody.lang-en{display:table-row-group;}
+body.lang-en div.lang-en{display:block;}
+body.lang-en a.lang-en{display:inline-flex;}
+
 .svc-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:10px;font-size:.88rem;font-weight:600;text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);}.svc-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,169,110,.25);}.svc-cta svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;}.svc-cta.outline{background:transparent;color:var(--gold);border:1px solid rgba(200,169,110,.3);}.svc-cta.outline:hover{border-color:var(--gold);}
 .cta-bottom{text-align:center;padding:60px 40px 120px;}.cta-bottom-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2.2rem);color:#fff;margin-bottom:12px;}.cta-bottom-sub{color:var(--text-muted);font-size:.9rem;margin-bottom:32px;font-weight:300;}.cta-bottom-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .footer{border-top:1px solid var(--border);padding:40px 60px 20px;}.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:20px;}.footer-logo{display:flex;align-items:center;gap:10px;}.footer-links{display:flex;gap:24px;}.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.82rem;transition:color .3s;}.footer-links a:hover{color:var(--gold);}.footer-copy{text-align:center;font-size:.82rem;color:var(--text-muted);opacity:.5;}
 .wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s,box-shadow .3s;}.wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.45);}.wa svg{width:28px;height:28px;fill:#fff;}
-@media(max-width:768px){.navbar{padding:0 20px;height:64px;}.gold-line{top:64px;}.nav-links{display:none !important;}.hamburger{display:flex;}.page-header{padding:130px 24px 40px;}.article{padding:24px 20px 60px;}.comp-table{font-size:.8rem;}.comp-table th,.comp-table td{padding:10px 10px;}.cta-bottom{padding:40px 20px 80px;}.footer{padding:30px 20px 16px;}}
+@media(max-width:768px){.navbar{padding:0 20px;height:64px;}.gold-line{top:64px;}.nav-links{display:none !important;}.hamburger{display:flex;}.page-header{min-height:380px;}.page-header-content{padding:120px 24px 40px;}.article{padding:24px 20px 60px;}.article-img img{height:220px;}.article-img-wide{width:calc(100% + 40px);margin:36px -20px;}.article-img-wide img{height:280px;}.article-img-wide .img-quote{left:20px;font-size:1rem;max-width:260px;}.comp-table{font-size:.8rem;}.comp-table th,.comp-table td{padding:10px 10px;}.cta-bottom{padding:40px 20px 80px;}.footer{padding:30px 20px 16px;}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"Comment aller à l'aéroport CDG depuis Paris ?","description":"Toutes les options de transport Paris-CDG : RER B, Roissybus, taxi, VTC. Comparatif prix et durée.","datePublished":"2026-03-12T08:00:00+01:00","dateModified":"2026-03-12T08:00:00+01:00","author":{"@type":"Organization","name":"ONTIME TRANSFERT","url":"https://www.ontime-chauffeur.fr"},"publisher":{"@type":"Organization","name":"ONTIME TRANSFERT","url":"https://www.ontime-chauffeur.fr","logo":{"@type":"ImageObject","url":"https://www.ontime-chauffeur.fr/favicon.svg"}},"mainEntityOfPage":"https://www.ontime-chauffeur.fr/blog/comment-aller-aeroport-cdg.html","image":"https://www.ontime-chauffeur.fr/img/hero.jpg"}
@@ -77,119 +110,269 @@
 ]}
 </script>
 </head>
-<body>
+<body class="lang-fr">
 <nav class="navbar" id="navbar"><a href="../index.html" class="nav-logo"><svg class="nav-logo-hex" viewBox="0 0 44 44" fill="none"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/><polygon points="22,7 36,15 36,29 22,37 8,29 8,15" fill="rgba(200,169,110,.06)" stroke="rgba(200,169,110,.15)" stroke-width=".5"/><circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/><line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="22" r="1.8" fill="#c8a96e"/></svg><div class="nav-logo-text"><span class="nav-logo-name">ONTIME</span><div class="nav-logo-bar"><span class="nav-logo-line"></span><span class="nav-logo-sub">Transfert</span><span class="nav-logo-line"></span></div></div></a><div class="nav-links"><a href="../index.html" class="nav-link">Accueil</a><a href="../vehicules.html" class="nav-link">Véhicules</a><a href="../services.html" class="nav-link">Services</a><a href="../tarifs-reservations.html" class="nav-link">Tarifs</a><a href="../blog.html" class="nav-link active">Blog</a><a href="../contact.html" class="nav-link">Contact</a><a href="tel:+33760554460" class="nav-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 60 55 44 60</a><button class="lang-btn" id="langBtn" onclick="toggleLang()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="langBtnText">EN</span></button><a href="../index.html#booking" class="nav-cta">Réserver</a></div><button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button></nav>
 <div class="gold-line" id="goldLine"></div>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <nav class="sidebar" id="sidebar"><a href="../index.html" class="sidebar-link">Accueil</a><a href="../vehicules.html" class="sidebar-link">Véhicules</a><a href="../services.html" class="sidebar-link">Services</a><a href="../tarifs-reservations.html" class="sidebar-link">Tarifs & Réservations</a><a href="../blog.html" class="sidebar-link">Blog</a><a href="../contact.html" class="sidebar-link">Contact</a><a href="../index.html#booking" class="sidebar-link">Réserver</a><a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a></nav>
 
+<!-- HERO IMAGE HEADER -->
 <header class="page-header">
-  <div class="section-label">Guide Aéroport</div>
-  <h1 class="section-title">Comment se rendre à <em>l'aéroport CDG</em> depuis Paris ?</h1>
-  <p class="section-sub">RER B, Roissybus, taxi, VTC — toutes les options de transport vers Roissy-Charles de Gaulle comparées. Prix, durée et conseils pratiques.</p>
+  <div class="page-header-bg">
+    <img src="../img/svc-airport.webp" alt="Transfert aéroport CDG chauffeur privé Mercedes" width="1400" height="600">
+  </div>
+  <div class="page-header-content">
+    <div class="section-label lang-fr">Guide Aéroport</div>
+    <div class="section-label lang-en">Airport Guide</div>
+    <h1 class="section-title lang-fr">Comment se rendre à <em>l'aéroport CDG</em> depuis Paris ?</h1>
+    <h1 class="section-title lang-en">How to get to <em>CDG Airport</em> from Paris?</h1>
+    <p class="section-sub lang-fr">RER B, Roissybus, taxi, VTC — toutes les options de transport vers Roissy-Charles de Gaulle comparées. Prix, durée et conseils pratiques.</p>
+    <p class="section-sub lang-en">RER B, Roissybus, taxi, private car — all transport options to Roissy-Charles de Gaulle compared. Prices, journey times and practical tips.</p>
+  </div>
 </header>
-<div class="sep"></div>
 
 <article class="article">
-  <a href="../blog.html" class="article-back"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Retour au blog</a>
+  <a href="../blog.html" class="article-back lang-fr"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Retour au blog</a>
+  <a href="../blog.html" class="article-back lang-en"><svg viewBox="0 0 24 24"><polyline points="19 12 5 12"/><polyline points="12 19 5 12 12 5"/></svg> Back to blog</a>
   <div class="article-meta">
-    <span>12 mars 2026</span>
+    <span class="lang-fr">12 mars 2026</span><span class="lang-en">March 12, 2026</span>
     <span>·</span>
-    <span>7 min de lecture</span>
+    <span class="lang-fr">7 min de lecture</span><span class="lang-en">7 min read</span>
   </div>
 
-  <p>Vous avez un vol à <strong>Roissy-Charles de Gaulle</strong> et vous cherchez le meilleur moyen de vous y rendre ? Entre les transports en commun bondés, les taxis introuvables et les navettes interminables, rejoindre CDG peut vite devenir un cauchemar. Il existe pourtant une solution simple, confortable et sans stress.</p>
+  <!-- FR CONTENT -->
+  <div class="lang-fr">
+    <p>Vous avez un vol à <strong>Roissy-Charles de Gaulle</strong> et vous cherchez le meilleur moyen de vous y rendre ? Entre les transports en commun bondés, les taxis introuvables et les navettes interminables, rejoindre CDG peut vite devenir un cauchemar. Il existe pourtant une solution simple, confortable et sans stress.</p>
 
-  <h2>Pourquoi les transports en commun vers CDG sont une épreuve</h2>
-  <p>On vous a peut-être conseillé le <strong>RER B</strong> ou le <strong>Roissybus</strong>. Sur le papier, c'est économique. En réalité, voici ce qui vous attend :</p>
+    <h2>Pourquoi les transports en commun vers CDG sont une épreuve</h2>
+    <p>On vous a peut-être conseillé le <strong>RER B</strong> ou le <strong>Roissybus</strong>. Sur le papier, c'est économique. En réalité, voici ce qui vous attend :</p>
 
-  <h3>Le RER B — le parcours du combattant</h3>
-  <ul>
-    <li><strong>Rames bondées</strong> aux heures de pointe — impossible de s'asseoir avec des valises</li>
-    <li><strong>Grèves et retards fréquents</strong> — vous stressez à chaque minute de retard en pensant à votre vol</li>
-    <li><strong>Escaliers, couloirs, correspondances</strong> — avec 2 valises et une poussette, c'est un calvaire</li>
-    <li><strong>Pickpockets</strong> — les voyageurs chargés sur le RER B sont des cibles connues</li>
-    <li><strong>Pas de service après 00h30</strong> — vol tôt le matin ou arrivée tardive ? Vous êtes bloqué</li>
-  </ul>
+    <h3>Le RER B — le parcours du combattant</h3>
+    <ul>
+      <li><strong>Rames bondées</strong> aux heures de pointe — impossible de s'asseoir avec des valises</li>
+      <li><strong>Grèves et retards fréquents</strong> — vous stressez à chaque minute de retard en pensant à votre vol</li>
+      <li><strong>Escaliers, couloirs, correspondances</strong> — avec 2 valises et une poussette, c'est un calvaire</li>
+      <li><strong>Pickpockets</strong> — les voyageurs chargés sur le RER B sont des cibles connues</li>
+      <li><strong>Pas de service après 00h30</strong> — vol tôt le matin ou arrivée tardive ? Vous êtes bloqué</li>
+    </ul>
 
-  <h3>Le Roissybus — lent et rigide</h3>
-  <ul>
-    <li><strong>60 à 90 minutes</strong> de trajet selon le trafic — vous devez partir très en avance</li>
-    <li><strong>Un seul point de départ</strong> (Opéra) — si vous n'y habitez pas, il faut d'abord vous y rendre</li>
-    <li><strong>Horaires fixes</strong> — vous vous adaptez au bus, pas l'inverse</li>
-    <li><strong>Pas de service de nuit</strong></li>
-  </ul>
+    <h3>Le Roissybus — lent et rigide</h3>
+    <ul>
+      <li><strong>60 à 90 minutes</strong> de trajet selon le trafic — vous devez partir très en avance</li>
+      <li><strong>Un seul point de départ</strong> (Opéra) — si vous n'y habitez pas, il faut d'abord vous y rendre</li>
+      <li><strong>Horaires fixes</strong> — vous vous adaptez au bus, pas l'inverse</li>
+      <li><strong>Pas de service de nuit</strong></li>
+    </ul>
 
-  <h3>Le taxi — la loterie</h3>
-  <ul>
-    <li><strong>Introuvable</strong> quand il pleut, en heure de pointe ou un jour de grève</li>
-    <li><strong>Suppléments cachés</strong> — 5e passager, bagages encombrants, la note grimpe</li>
-    <li><strong>Véhicule aléatoire</strong> — parfois correct, parfois une mauvaise surprise</li>
-    <li><strong>Aucun suivi de vol</strong> — votre avion a du retard ? Le taxi n'attend pas</li>
-  </ul>
-
-  <div class="tip-box">
-    <strong>La réalité</strong>
-    <p>Vous partez en vacances ou en déplacement pro. Votre vol est dans 3 heures. Vous voulez vraiment risquer un retard de RER, une rame bondée avec vos valises, ou un taxi introuvable ? Votre tranquillité d'esprit vaut bien un chauffeur privé qui vous attend devant votre porte.</p>
+    <h3>Le taxi — la loterie</h3>
+    <ul>
+      <li><strong>Introuvable</strong> quand il pleut, en heure de pointe ou un jour de grève</li>
+      <li><strong>Suppléments cachés</strong> — 5e passager, bagages encombrants, la note grimpe</li>
+      <li><strong>Véhicule aléatoire</strong> — parfois correct, parfois une mauvaise surprise</li>
+      <li><strong>Aucun suivi de vol</strong> — votre avion a du retard ? Le taxi n'attend pas</li>
+    </ul>
   </div>
 
-  <h2>La solution ONTIME : votre chauffeur privé pour CDG</h2>
-  <p>Avec <a href="../vtc-paris-cdg.html">ONTIME TRANSFERT</a>, rejoindre CDG devient un <strong>moment agréable</strong> plutôt qu'une source de stress. Voici comment ça se passe :</p>
+  <!-- EN CONTENT -->
+  <div class="lang-en">
+    <p>You have a flight from <strong>Roissy-Charles de Gaulle</strong> and you're looking for the best way to get there? Between crowded public transport, elusive taxis and endless shuttles, getting to CDG can quickly become a nightmare. Yet there is a simple, comfortable and stress-free solution.</p>
 
-  <h3>Pour un départ vers CDG</h3>
-  <ol>
-    <li>Vous réservez en ligne en <strong>2 minutes</strong> — tarif fixe affiché immédiatement</li>
-    <li>Votre chauffeur arrive <strong>10 minutes en avance</strong> devant votre porte, en Mercedes</li>
-    <li>Il charge vos bagages, vous ouvre la porte</li>
-    <li>Trajet en <strong>35-50 minutes</strong> dans un véhicule climatisé, avec eau fraîche et chargeurs</li>
-    <li>Il vous dépose <strong>directement devant votre terminal</strong> (T1, T2 ou T3)</li>
-  </ol>
+    <h2>Why public transport to CDG is an ordeal</h2>
+    <p>You may have been advised to take the <strong>RER B</strong> or the <strong>Roissybus</strong>. On paper, it's cheap. In reality, here's what awaits you:</p>
 
-  <h3>Pour une arrivée depuis CDG</h3>
-  <ol>
-    <li>Votre chauffeur <strong>suit votre vol en temps réel</strong> — retard ? Il s'adapte automatiquement</li>
-    <li>Il vous attend dans le <strong>hall d'arrivée avec une pancarte</strong> à votre nom</li>
-    <li><strong>15 minutes d'attente offertes</strong> pour récupérer vos bagages tranquillement</li>
-    <li>Il prend vos valises et vous accompagne jusqu'à la Mercedes</li>
-    <li>Vous arrivez chez vous <strong>reposé</strong>, pas épuisé</li>
-  </ol>
+    <h3>The RER B — an obstacle course</h3>
+    <ul>
+      <li><strong>Packed carriages</strong> at rush hour — impossible to sit with suitcases</li>
+      <li><strong>Frequent strikes and delays</strong> — you stress with every minute of delay thinking about your flight</li>
+      <li><strong>Stairs, corridors, connections</strong> — with 2 suitcases and a stroller, it's a nightmare</li>
+      <li><strong>Pickpockets</strong> — loaded travellers on the RER B are known targets</li>
+      <li><strong>No service after 00:30</strong> — early morning flight or late arrival? You're stuck</li>
+    </ul>
 
-  <h2>Ce qui est inclus dans chaque transfert</h2>
-  <ul>
-    <li><strong>Tarif fixe garanti</strong> — dès 80€, pas de compteur, pas de surprise</li>
-    <li><strong>Mercedes Classe E ou Classe V</strong> — véhicule premium garanti</li>
-    <li><strong>Chauffeur professionnel</strong> en costume, formé au service client</li>
-    <li><strong>Suivi de vol automatique</strong> — sans surcoût en cas de retard</li>
-    <li><strong>Sièges enfants gratuits</strong> — bébé ou rehausseur, installés à l'avance</li>
-    <li><strong>Eau fraîche, chargeurs, climatisation</strong></li>
-    <li><strong>Disponible 24h/24, 7j/7</strong> — vol à 5h du matin ? Votre chauffeur sera là</li>
-  </ul>
+    <h3>The Roissybus — slow and rigid</h3>
+    <ul>
+      <li><strong>60 to 90 minutes</strong> depending on traffic — you must leave very early</li>
+      <li><strong>Single departure point</strong> (Opéra) — if you don't live nearby, you need to get there first</li>
+      <li><strong>Fixed timetable</strong> — you adapt to the bus, not the other way around</li>
+      <li><strong>No night service</strong></li>
+    </ul>
 
-  <div class="tip-box">
-    <strong>Le calcul qui change tout</strong>
-    <p>À partir de <strong>2 personnes</strong>, le VTC revient à seulement <strong>40€/personne</strong>. À 3, c'est <strong>27€/personne</strong>. Pour ce prix, vous avez un chauffeur privé en Mercedes qui vous attend avec une pancarte — au lieu de traîner vos valises dans les escaliers du RER.</p>
+    <h3>The taxi — a gamble</h3>
+    <ul>
+      <li><strong>Impossible to find</strong> when it rains, at rush hour or on strike days</li>
+      <li><strong>Hidden surcharges</strong> — 5th passenger, bulky luggage, the bill adds up</li>
+      <li><strong>Random vehicle quality</strong> — sometimes decent, sometimes a bad surprise</li>
+      <li><strong>No flight tracking</strong> — your plane is delayed? The taxi won't wait</li>
+    </ul>
   </div>
 
-  <h2>Tous les terminaux de CDG desservis</h2>
-  <p>Votre chauffeur connaît CDG sur le bout des doigts et vous dépose (ou vous récupère) directement au bon terminal :</p>
-  <ul>
-    <li><strong>Terminal 1</strong> — Star Alliance (Lufthansa, ANA, Turkish Airlines…)</li>
-    <li><strong>Terminal 2</strong> (2A à 2G) — Air France, SkyTeam, easyJet, Transavia</li>
-    <li><strong>Terminal 3</strong> — Compagnies low-cost (Ryanair, Wizz Air, Vueling…)</li>
-  </ul>
-  <p>Pas besoin de chercher quel bus ou quelle navette prendre entre les terminaux — votre chauffeur s'en charge.</p>
+  <!-- IMAGE: Mercedes S-Class -->
+  <div class="article-img">
+    <img src="../img/car-classe-s.webp" alt="Mercedes Classe S chauffeur privé ONTIME transfert aéroport" loading="lazy" width="740" height="300">
+    <span class="article-img-caption lang-fr">Mercedes Classe S — le confort ultime pour votre transfert aéroport</span>
+    <span class="article-img-caption lang-en">Mercedes S-Class — ultimate comfort for your airport transfer</span>
+  </div>
 
-  <h2>Réservez votre transfert CDG maintenant</h2>
-  <p>Ne laissez pas le trajet vers l'aéroport gâcher le début de votre voyage. <a href="../vtc-paris-cdg.html">Découvrez nos tarifs Paris → CDG</a> ou <a href="../index.html#booking">réservez directement en ligne</a> en moins de 2 minutes. Tarif fixe dès 80€, chauffeur en Mercedes, zéro stress.</p>
+  <!-- FR: ONTIME Solution -->
+  <div class="lang-fr">
+    <div class="tip-box">
+      <strong>La réalité</strong>
+      <p>Vous partez en vacances ou en déplacement pro. Votre vol est dans 3 heures. Vous voulez vraiment risquer un retard de RER, une rame bondée avec vos valises, ou un taxi introuvable ? Votre tranquillité d'esprit vaut bien un chauffeur privé qui vous attend devant votre porte.</p>
+    </div>
+
+    <h2>La solution ONTIME : votre chauffeur privé pour CDG</h2>
+    <p>Avec <a href="../vtc-paris-cdg.html">ONTIME TRANSFERT</a>, rejoindre CDG devient un <strong>moment agréable</strong> plutôt qu'une source de stress. Voici comment ça se passe :</p>
+
+    <h3>Pour un départ vers CDG</h3>
+    <ol>
+      <li>Vous réservez en ligne en <strong>2 minutes</strong> — tarif fixe affiché immédiatement</li>
+      <li>Votre chauffeur arrive <strong>10 minutes en avance</strong> devant votre porte, en Mercedes</li>
+      <li>Il charge vos bagages, vous ouvre la porte</li>
+      <li>Trajet en <strong>35-50 minutes</strong> dans un véhicule climatisé, avec eau fraîche et chargeurs</li>
+      <li>Il vous dépose <strong>directement devant votre terminal</strong> (T1, T2 ou T3)</li>
+    </ol>
+
+    <h3>Pour une arrivée depuis CDG</h3>
+    <ol>
+      <li>Votre chauffeur <strong>suit votre vol en temps réel</strong> — retard ? Il s'adapte automatiquement</li>
+      <li>Il vous attend dans le <strong>hall d'arrivée avec une pancarte</strong> à votre nom</li>
+      <li><strong>15 minutes d'attente offertes</strong> pour récupérer vos bagages tranquillement</li>
+      <li>Il prend vos valises et vous accompagne jusqu'à la Mercedes</li>
+      <li>Vous arrivez chez vous <strong>reposé</strong>, pas épuisé</li>
+    </ol>
+
+    <h2>Comparatif : toutes les options Paris → CDG</h2>
+    <table class="comp-table">
+      <thead><tr><th>Transport</th><th>Prix</th><th>Durée</th><th>Confort</th></tr></thead>
+      <tbody>
+        <tr><td><strong>RER B</strong></td><td>11,45€</td><td>45-65 min</td><td>Bondé, pas de place bagages</td></tr>
+        <tr><td><strong>Roissybus</strong></td><td>16,60€</td><td>60-90 min</td><td>Correct, un seul départ</td></tr>
+        <tr><td><strong>Taxi</strong></td><td>53-58€</td><td>35-60 min</td><td>Aléatoire</td></tr>
+        <tr><td><strong>ONTIME VTC</strong></td><td class="winner">Dès 80€ fixe</td><td class="winner">35-50 min</td><td class="winner">Premium, porte-à-porte</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Ce qui est inclus dans chaque transfert</h2>
+    <ul>
+      <li><strong>Tarif fixe garanti</strong> — dès 80€, pas de compteur, pas de surprise</li>
+      <li><strong>Mercedes Classe E ou Classe V</strong> — véhicule premium garanti</li>
+      <li><strong>Chauffeur professionnel</strong> en costume, formé au service client</li>
+      <li><strong>Suivi de vol automatique</strong> — sans surcoût en cas de retard</li>
+      <li><strong>Sièges enfants gratuits</strong> — bébé ou rehausseur, installés à l'avance</li>
+      <li><strong>Eau fraîche, chargeurs, climatisation</strong></li>
+      <li><strong>Disponible 24h/24, 7j/7</strong> — vol à 5h du matin ? Votre chauffeur sera là</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>Le calcul qui change tout</strong>
+      <p>À partir de <strong>2 personnes</strong>, le VTC revient à seulement <strong>40€/personne</strong>. À 3, c'est <strong>27€/personne</strong>. Pour ce prix, vous avez un chauffeur privé en Mercedes qui vous attend avec une pancarte — au lieu de traîner vos valises dans les escaliers du RER.</p>
+    </div>
+  </div>
+
+  <!-- EN: ONTIME Solution -->
+  <div class="lang-en">
+    <div class="tip-box">
+      <strong>The reality</strong>
+      <p>You're heading on holiday or a business trip. Your flight is in 3 hours. Do you really want to risk an RER delay, a packed carriage with your suitcases, or an impossible-to-find taxi? Your peace of mind is worth a private driver waiting at your door.</p>
+    </div>
+
+    <h2>The ONTIME solution: your private driver to CDG</h2>
+    <p>With <a href="../vtc-paris-cdg.html">ONTIME TRANSFERT</a>, getting to CDG becomes a <strong>pleasant experience</strong> rather than a source of stress. Here's how it works:</p>
+
+    <h3>For a departure to CDG</h3>
+    <ol>
+      <li>Book online in <strong>2 minutes</strong> — fixed price displayed immediately</li>
+      <li>Your driver arrives <strong>10 minutes early</strong> at your door, in a Mercedes</li>
+      <li>He loads your luggage and opens the door for you</li>
+      <li><strong>35-50 minute</strong> journey in a climate-controlled vehicle, with chilled water and chargers</li>
+      <li>He drops you <strong>directly at your terminal</strong> (T1, T2 or T3)</li>
+    </ol>
+
+    <h3>For an arrival from CDG</h3>
+    <ol>
+      <li>Your driver <strong>tracks your flight in real time</strong> — delay? He adapts automatically</li>
+      <li>He meets you in the <strong>arrivals hall with a name board</strong></li>
+      <li><strong>15 minutes free waiting time</strong> to collect your luggage at your own pace</li>
+      <li>He takes your suitcases and walks you to the Mercedes</li>
+      <li>You arrive home <strong>rested</strong>, not exhausted</li>
+    </ol>
+
+    <h2>Comparison: all Paris → CDG options</h2>
+    <table class="comp-table">
+      <thead><tr><th>Transport</th><th>Price</th><th>Duration</th><th>Comfort</th></tr></thead>
+      <tbody>
+        <tr><td><strong>RER B</strong></td><td>€11.45</td><td>45-65 min</td><td>Crowded, no luggage space</td></tr>
+        <tr><td><strong>Roissybus</strong></td><td>€16.60</td><td>60-90 min</td><td>Decent, single departure</td></tr>
+        <tr><td><strong>Taxi</strong></td><td>€53-58</td><td>35-60 min</td><td>Hit or miss</td></tr>
+        <tr><td><strong>ONTIME Private Car</strong></td><td class="winner">From €80 fixed</td><td class="winner">35-50 min</td><td class="winner">Premium, door-to-door</td></tr>
+      </tbody>
+    </table>
+
+    <h2>What's included in every transfer</h2>
+    <ul>
+      <li><strong>Guaranteed fixed price</strong> — from €80, no meter, no surprises</li>
+      <li><strong>Mercedes E-Class or V-Class</strong> — premium vehicle guaranteed</li>
+      <li><strong>Professional driver</strong> in a suit, trained in customer service</li>
+      <li><strong>Automatic flight tracking</strong> — no extra charge for delays</li>
+      <li><strong>Free child seats</strong> — baby or booster, pre-installed</li>
+      <li><strong>Chilled water, chargers, climate control</strong></li>
+      <li><strong>Available 24/7</strong> — 5am flight? Your driver will be there</li>
+    </ul>
+
+    <div class="tip-box">
+      <strong>The maths that changes everything</strong>
+      <p>From <strong>2 people</strong>, the private car works out to just <strong>€40/person</strong>. For 3, it's <strong>€27/person</strong>. For that price, you get a private driver in a Mercedes waiting with a name board — instead of dragging your suitcases up RER stairs.</p>
+    </div>
+  </div>
+
+  <!-- WIDE IMAGE WITH QUOTE -->
+  <div class="article-img-wide">
+    <img src="../img/hero.webp" alt="Mercedes chauffeur privé Paris nuit transfert aéroport" loading="lazy" width="1000" height="360">
+    <div class="img-quote lang-fr">"Plus jamais le RER avec des valises — le chauffeur m'attendait avec une pancarte, un vrai luxe"<span class="img-quote-author">— Un voyageur ONTIME</span></div>
+    <div class="img-quote lang-en">"Never taking the RER with suitcases again — the driver was waiting with a name board, pure luxury"<span class="img-quote-author">— An ONTIME traveller</span></div>
+  </div>
+
+  <!-- FR: Terminals + CTA -->
+  <div class="lang-fr">
+    <h2>Tous les terminaux de CDG desservis</h2>
+    <p>Votre chauffeur connaît CDG sur le bout des doigts et vous dépose (ou vous récupère) directement au bon terminal :</p>
+    <ul>
+      <li><strong>Terminal 1</strong> — Star Alliance (Lufthansa, ANA, Turkish Airlines…)</li>
+      <li><strong>Terminal 2</strong> (2A à 2G) — Air France, SkyTeam, easyJet, Transavia</li>
+      <li><strong>Terminal 3</strong> — Compagnies low-cost (Ryanair, Wizz Air, Vueling…)</li>
+    </ul>
+    <p>Pas besoin de chercher quel bus ou quelle navette prendre entre les terminaux — votre chauffeur s'en charge.</p>
+
+    <h2>Réservez votre transfert CDG maintenant</h2>
+    <p>Ne laissez pas le trajet vers l'aéroport gâcher le début de votre voyage. <a href="../vtc-paris-cdg.html">Découvrez nos tarifs Paris → CDG</a> ou <a href="../index.html#booking">réservez directement en ligne</a> en moins de 2 minutes. Tarif fixe dès 80€, chauffeur en Mercedes, zéro stress.</p>
+  </div>
+
+  <!-- EN: Terminals + CTA -->
+  <div class="lang-en">
+    <h2>All CDG terminals covered</h2>
+    <p>Your driver knows CDG inside out and drops you (or picks you up) directly at the right terminal:</p>
+    <ul>
+      <li><strong>Terminal 1</strong> — Star Alliance (Lufthansa, ANA, Turkish Airlines…)</li>
+      <li><strong>Terminal 2</strong> (2A to 2G) — Air France, SkyTeam, easyJet, Transavia</li>
+      <li><strong>Terminal 3</strong> — Low-cost airlines (Ryanair, Wizz Air, Vueling…)</li>
+    </ul>
+    <p>No need to figure out which bus or shuttle to take between terminals — your driver handles it all.</p>
+
+    <h2>Book your CDG transfer now</h2>
+    <p>Don't let the journey to the airport ruin the start of your trip. <a href="../vtc-paris-cdg.html">Check our Paris → CDG rates</a> or <a href="../index.html#booking">book directly online</a> in under 2 minutes. Fixed price from €80, Mercedes chauffeur, zero stress.</p>
+  </div>
 </article>
 
 <div class="sep"></div>
 <div class="cta-bottom">
-  <h2 class="cta-bottom-title">Réservez votre transfert vers CDG</h2>
-  <p class="cta-bottom-sub">Chauffeur privé, tarif fixe, suivi de vol. En moins de 2 minutes.</p>
+  <h2 class="cta-bottom-title lang-fr">Réservez votre transfert vers CDG</h2>
+  <h2 class="cta-bottom-title lang-en">Book your transfer to CDG</h2>
+  <p class="cta-bottom-sub lang-fr">Chauffeur privé, tarif fixe, suivi de vol. En moins de 2 minutes.</p>
+  <p class="cta-bottom-sub lang-en">Private driver, fixed price, flight tracking. In under 2 minutes.</p>
   <div class="cta-bottom-btns">
-    <a href="../index.html#booking" class="svc-cta"><span>Réserver maintenant</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    <a href="../vtc-paris-cdg.html" class="svc-cta outline"><span>Tarifs Paris → CDG</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="../index.html#booking" class="svc-cta lang-fr"><span>Réserver maintenant</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="../index.html#booking" class="svc-cta lang-en"><span>Book now</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    <a href="../vtc-paris-cdg.html" class="svc-cta outline"><span>VTC Paris → CDG</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 </div>
 

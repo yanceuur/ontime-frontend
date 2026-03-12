@@ -202,7 +202,31 @@ const i18n = {
     'ml-toc':'Table of contents',
     'ml-toc1':'1. Legal notice',
     'ml-toc2':'2. Terms &amp; Conditions',
-    'ml-toc3':'3. Cookies &amp; personal data'
+    'ml-toc3':'3. Cookies &amp; personal data',
+
+    /* ════════════════════════════
+       BLOG PAGE
+    ════════════════════════════ */
+    'blog-label':'Blog & Tips',
+    'blog-title':'The Parisian <em>traveller\'s guide</em>',
+    'blog-sub':'Practical tips, comparisons and guides for getting around Paris and Île-de-France. Everything you need to know before booking your private car.',
+    'blog-feat-badge':'Featured article',
+    'blog-vtc-tag':'Comparison',
+    'blog-vtc-title':'Private car vs taxi in Paris: why VTC changed everything',
+    'blog-vtc-excerpt':'Running meter, random vehicle, taxi impossible to find in the rain… Discover why thousands of Parisians have permanently switched to a private chauffeur.',
+    'blog-vtc-meta':'March 12, 2026 · 5 min read',
+    'blog-cdg-tag':'Airport Guide',
+    'blog-cdg-title':'How to get to CDG Airport from Paris?',
+    'blog-cdg-excerpt':'Your chauffeur waits at your door. Why public transport to CDG is a nightmare — and how to avoid it.',
+    'blog-cdg-meta':'March 12, 2026 · 7 min',
+    'blog-disney-tag':'Family',
+    'blog-disney-title':'Disneyland family transfer: the magic starts in the car',
+    'blog-disney-excerpt':'Free child seats, Mercedes V-Class, drop-off at the park entrance. Why families no longer take the train to Disneyland.',
+    'blog-disney-meta':'March 12, 2026 · 6 min',
+    'blog-read':'Read <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+    'blog-read-full':'Read the article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+    'blog-cta-title':'Need a transfer?',
+    'blog-cta-sub':'Book your private chauffeur in under 2 minutes. Fixed price guaranteed.'
   },
 
   fr: {
@@ -376,7 +400,29 @@ const i18n = {
     'ml-toc':'Sommaire',
     'ml-toc1':'1. Mentions légales',
     'ml-toc2':'2. Conditions générales de vente',
-    'ml-toc3':'3. Cookies &amp; données personnelles'
+    'ml-toc3':'3. Cookies &amp; données personnelles',
+
+    /* ── BLOG ── */
+    'blog-label':'Blog & Conseils',
+    'blog-title':'Le guide du <em>voyageur parisien</em>',
+    'blog-sub':'Conseils pratiques, comparatifs et guides pour vos déplacements à Paris et en Île-de-France. Tout ce qu\'il faut savoir avant de réserver votre VTC.',
+    'blog-feat-badge':'Article vedette',
+    'blog-vtc-tag':'Comparatif',
+    'blog-vtc-title':'VTC ou taxi à Paris : pourquoi le VTC a tout changé',
+    'blog-vtc-excerpt':'Compteur qui tourne, véhicule aléatoire, taxi introuvable sous la pluie… Découvrez pourquoi des milliers de Parisiens ont définitivement adopté le chauffeur privé.',
+    'blog-vtc-meta':'12 mars 2026 · 5 min de lecture',
+    'blog-cdg-tag':'Guide Aéroport',
+    'blog-cdg-title':'Comment se rendre à l\'aéroport CDG depuis Paris ?',
+    'blog-cdg-excerpt':'Votre chauffeur vous attend devant votre porte. Pourquoi les transports en commun vers CDG sont un cauchemar — et comment l\'éviter.',
+    'blog-cdg-meta':'12 mars 2026 · 7 min',
+    'blog-disney-tag':'Famille',
+    'blog-disney-title':'Transfert Disneyland en famille : la magie commence dans la voiture',
+    'blog-disney-excerpt':'Sièges enfants gratuits, Mercedes Classe V, dépose à l\'entrée du parc. Pourquoi les familles ne prennent plus le RER pour Disneyland.',
+    'blog-disney-meta':'12 mars 2026 · 6 min',
+    'blog-read':'Lire <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+    'blog-read-full':'Lire l\'article <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+    'blog-cta-title':'Besoin d\'un transfert ?',
+    'blog-cta-sub':'Réservez votre chauffeur privé en moins de 2 minutes. Tarif fixe garanti.'
   }
 };
 
@@ -388,6 +434,8 @@ function setLang(lang) {
   currentLang = lang;
   localStorage.setItem('lang', lang);
   document.documentElement.lang = lang;
+  document.body.classList.remove('lang-fr', 'lang-en');
+  document.body.classList.add('lang-' + lang);
   const btn = document.getElementById('langBtn');
   const btnTxt = document.getElementById('langBtnText');
   if (btnTxt) btnTxt.textContent = lang === 'fr' ? 'EN' : 'FR';
