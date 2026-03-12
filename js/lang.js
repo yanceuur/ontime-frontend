@@ -10,26 +10,26 @@ const i18n = {
     'nav-rates':'Rates','nav-b2b':'Business','nav-contact':'Contact','nav-driver':'Become a driver','nav-book':'Book',
     /* ── FOOTER ── */
     'ft-legal':'Legal notice','ft-cgv':'T&Cs','ft-privacy':'Privacy','ft-contact':'Contact',
-    'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.',
+    'ft-copy':'© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.',
 
     /* ════════════════════════════
        VEHICULES PAGE
     ════════════════════════════ */
     'vhp-label':'Our fleet',
-    'vhp-title':'Vehicles up to<br>your <em>standards</em>',
+    'vhp-title':'Vehicles that meet<br>your <em>standards</em>',
     'vhp-sub':'Every vehicle is checked, cleaned and prepared with care. Comfort, safety and discretion for every journey.',
     /* Card 1 — Confort */
     'vc1-name':'Confort',
     'vc1-cap':'<strong>1 to 3 passengers</strong> · 2 large bags + 1 small',
-    'vc1-desc':'Recent, spacious and perfectly maintained vehicles. Ideal for airport, station and city transfers.',
+    'vc1-desc':'Late-model, spacious and perfectly maintained vehicles. Ideal for airport, station and city transfers.',
     'vc1-eq1':'Air conditioning','vc1-eq2':'USB chargers','vc1-eq3':'Full insurance',
     'vc1-cta':'Book Confort',
     /* Card 2 — Premium */
     'vc2-name':'Business',
     'vc2-cap':'<strong>1 to 3 passengers</strong> · 3 bags max',
-    'vc2-desc':'For your business travel and special occasions. High-end vehicles, leather interior, refined finishes. Elegance at every journey.',
+    'vc2-desc':'For business travel and special occasions. High-end vehicles, leather interior, refined finishes. Elegance on every journey.',
     'vc2-eq1':'Dual-zone climate control','vc2-eq2':'Wi-Fi 4G','vc2-eq3':'USB-C chargers',
-    'vc2-eq4':'Full insurance','vc2-eq5':'Water &amp; press','vc2-eq6':'Heated leather seats',
+    'vc2-eq4':'Full insurance','vc2-eq5':'Water &amp; newspapers','vc2-eq6':'Heated leather seats',
     'vc2-cta':'Book Business',
     /* Card 3 — Van */
     'vc3-name':'Van &amp; Minibus',
@@ -40,7 +40,7 @@ const i18n = {
     'vc3-cta':'Book a Van',
     /* Card 4 — VIP */
     'vc4-name':'Sprinter &amp; VIP Van',
-    'vc4-desc':'For events, weddings, seminars or large groups. Premium bespoke vehicles, white-glove service. Custom quote within 2h.',
+    'vc4-desc':'For events, weddings, seminars or large groups. Premium bespoke vehicles, white-glove service. Personalised quote within 2 hours.',
     'vc4-cta':'Request a VIP quote',
 
     /* ════════════════════════════
@@ -52,37 +52,37 @@ const i18n = {
     /* Svc 1 — Airport */
     's1-name':'Airport <em>Transfer</em>',
     's1-tag':'CDG — Orly — Beauvais',
-    's1-desc':'We handle hundreds of airport transfers every month. Our drivers know all accesses, terminals and drop-off zones at <strong>Roissy-Charles de Gaulle</strong>, <strong>Orly</strong> and <strong>Beauvais</strong>. Your flight is tracked in real time: if delayed or early, your driver adapts automatically, at no extra charge. On arrival, he awaits you with a name sign for Van and luxury sedan categories. You benefit from <strong>15 free minutes of waiting</strong> to collect your luggage in peace.',
+    's1-desc':'We handle hundreds of airport transfers every month. Our drivers know every access road, terminal and drop-off zone at <strong>Roissy-Charles de Gaulle</strong>, <strong>Orly</strong> and <strong>Beauvais</strong>. Your flight is tracked in real time: if delayed or early, your driver adjusts automatically at no extra charge. On arrival, your driver greets you with a name sign for Van and luxury sedan categories. You get <strong>15 free minutes of waiting</strong> to collect your luggage stress-free.',
     's1-f1':'Real-time flight tracking','s1-f2':'Name sign','s1-f3':'15 min free waiting','s1-f4':'Guaranteed fixed price',
     's1-cta':'Book an airport transfer',
     /* Svc 2 — Disneyland */
     's2-name':'Disneyland <em>Paris</em> Transfer',
     's2-tag':'Marne-la-Vallée — Chessy Station',
-    's2-desc':'Specialists in transfers to <strong>Disneyland Paris</strong> and <strong>Marne-la-Vallée Chessy station</strong>, we transport families, groups and business travellers directly from Paris airports, train stations or your home. Our vehicles are spacious, ideal for families with children — we provide <strong>baby seats and booster seats free of charge</strong>. Your children travel safely, and you arrive relaxed, ready to enjoy the magic.',
+    's2-desc':'Transfer specialists for <strong>Disneyland Paris</strong> and <strong>Marne-la-Vallée Chessy station</strong>, we carry families, groups and business travellers directly from Paris airports, train stations or your doorstep. Our vehicles are spacious and family-friendly — we provide <strong>baby seats and booster seats free of charge</strong>. Your children travel safely, and you arrive relaxed, ready to enjoy the magic.',
     's2-f1':'Free child seats','s2-f2':'From airports &amp; stations','s2-f3':'Spacious vehicles','s2-f4':'Disney hotel pick-up',
     's2-cta':'Book for Disneyland',
     /* Svc 3 — Station */
     's3-name':'Train <em>Station</em> Transfer',
     's3-tag':'All Paris stations',
-    's3-desc':'Gare du Nord, Gare de Lyon, Gare Montparnasse, Gare de l\'Est, Gare Saint-Lazare, Gare d\'Austerlitz — we cover <strong>all Paris train stations</strong>. Your driver awaits you at the exit, ready to take charge of your luggage. As with airports, we track your train in real time and adjust the pick-up time in the event of a delay. Our drivers are experts in the often complex station accesses, ensuring a smooth, stress-free journey.',
+    's3-desc':'Gare du Nord, Gare de Lyon, Gare Montparnasse, Gare de l\'Est, Gare Saint-Lazare, Gare d\'Austerlitz — we cover <strong>every Paris train station</strong>. Your driver waits at the exit, ready to handle your luggage. Just like airports, we track your train in real time and adjust pick-up if there\'s a delay. Our drivers know every station access inside out, ensuring a smooth, stress-free journey.',
     's3-f1':'Real-time train tracking','s3-f2':'Luggage assistance','s3-f3':'All stations covered','s3-f4':'15 min free waiting',
     's3-cta':'Book a station transfer',
     /* Svc 4 — Mise à dispo */
     's4-name':'Chauffeur <em>on Standby</em>',
     's4-tag':'By the hour or full day',
-    's4-desc':'Need a private driver for several hours or a full day? Our standby service offers <strong>total flexibility</strong>. Business meetings, shopping, sightseeing, multiple stops — your driver remains at your disposal and adapts to your schedule in real time. The vehicle and driver are dedicated exclusively to you for the entire duration.',
+    's4-desc':'Need a private driver for several hours or the whole day? Our chauffeur-on-standby service gives you <strong>total flexibility</strong>. Business meetings, shopping, sightseeing, multiple stops — your driver stays at your disposal and follows your schedule in real time. Both vehicle and driver are exclusively yours for the entire booking.',
     's4-f1':'Dedicated driver','s4-f2':'Multiple stops included','s4-f3':'Flexible schedule','s4-f4':'Custom quote',
     's4-cta':'WhatsApp quote',
     /* Svc 5 — Événements */
     's5-name':'Events &amp; <em>Weddings</em>',
     's5-tag':'Tailored',
-    's5-desc':'Weddings, seminars, galas, corporate evenings — we create <strong>bespoke</strong> transport services for your events. From the VIP Sprinter for the wedding party to shuttles for your guests, every detail is planned so that transport matches your event. White-glove service, decorated vehicles on request, coordination with your suppliers — we take care of everything.',
+    's5-desc':'Weddings, seminars, galas, corporate evenings — we create <strong>bespoke</strong> transport solutions for your events. From a VIP Sprinter for the wedding party to guest shuttles, every detail is planned so that transport lives up to your event. White-glove service, decorated vehicles on request, coordination with your vendors — we handle everything.',
     's5-f1':'Sprinter &amp; VIP Van','s5-f2':'Guest shuttles','s5-f3':'Logistics coordination','s5-f4':'Quote within 2h',
     's5-cta':'Event quote',
     /* Svc 6 — Long distance */
     's6-name':'Long <em>distance</em>',
     's6-tag':'France &amp; neighbouring countries',
-    's6-desc':'Need a transfer beyond Île-de-France? We handle <strong>long-distance</strong> journeys to all major French cities and neighbouring countries: Belgium, Luxembourg, Netherlands, Germany. Optimal comfort, recent vehicle, water and chargers available — even on long journeys, the service remains impeccable. Fixed fare communicated in advance, no nasty surprises.',
+    's6-desc':'Need a transfer beyond Île-de-France? We cover <strong>long-distance</strong> journeys to every major French city and neighbouring countries: Belgium, Luxembourg, the Netherlands, Germany. Premium comfort, late-model vehicle, complimentary water and chargers — even on long trips, the service stays impeccable. Fixed fare quoted upfront, no nasty surprises.',
     's6-f1':'All of France','s6-f2':'Belgium, Luxembourg','s6-f3':'Fixed long-distance fare','s6-f4':'Premium comfort',
     's6-cta':'Request a quote',
     /* CTA bottom */
@@ -95,7 +95,7 @@ const i18n = {
     ════════════════════════════ */
     'tp-label':'Rates &amp; Bookings',
     'tp-title':'Book with complete <em>transparency</em>',
-    'tp-sub':'Guaranteed fixed price, secure online payment, flexible cancellation. Everything is clear from the start, no surprises on arrival.',
+    'tp-sub':'Guaranteed fixed fare, secure online payment, flexible cancellation. Everything is clear from the start — no surprises on arrival.',
     /* Block titles */
     'tb1-title':'How to <em>book</em>?',
     'tb2-title':'Reception &amp; <em>punctuality</em>',
@@ -116,7 +116,7 @@ const i18n = {
     'te2':'Clean and recent vehicles',
     'te3':'Professional VTC-licensed drivers',
     'te4':'Comprehensive passenger insurance',
-    'te5':'Fixed price with no surprises',
+    'te5':'Guaranteed fixed fare, no surprises',
     'te6':'24/7 customer service',
     /* CTA */
     'tcta-title':'Ready to book your transfer?',
@@ -152,7 +152,7 @@ const i18n = {
     'b2b-form-title':'Business account request','b2b-form-sub':'Reply within 24h — Free personalised quote',
     'b2b-btn':'Request a business quote',
     'cb2bp1-title':'Monthly billing','cb2bp1-desc':'A single monthly summary invoice. Accepted by your accounting department.',
-    'cb2bp2-title':'Dedicated contract','cb2bp2-desc':'A single point of contact, drivers accustomed to your requirements, priority availability.',
+    'cb2bp2-title':'Dedicated contract','cb2bp2-desc':'One point of contact, drivers familiar with your needs, priority availability.',
     'cb2bp3-title':'Preferential rates','cb2bp3-desc':'Discounts from 10 rides/month. Tiered pricing based on your monthly volume.',
     'cb2bp4-title':'Monthly reporting','cb2bp4-desc':'Journey history, expenses and statistics per employee.',
     'cb2b-title':'Open a company account',
@@ -173,11 +173,11 @@ const i18n = {
     'drav-label':'Why join us',
     'drav-title':'The <em>ONTIME</em> advantages',
     'drav1-title':'Regular rides',
-    'drav1-desc':'Access a steady flow of bookings across Paris and Île-de-France. No more searching for clients.',
+    'drav1-desc':'Tap into a steady stream of bookings across Paris and Île-de-France. No more hunting for clients.',
     'drav2-title':'Attractive pay',
-    'drav2-desc':'Fair rates, payment within 7 days and full transparency on every ride. No bad surprises.',
+    'drav2-desc':'Fair rates, payment within 7 days and full transparency on every ride. No unpleasant surprises.',
     'drav3-title':'Respect for drivers',
-    'drav3-desc':'At ONTIME, the driver comes first. 24/7 support, attentiveness, and a relationship built on mutual trust.',
+    'drav3-desc':'At ONTIME, drivers come first. Round-the-clock support, genuine care, and a partnership built on mutual trust.',
     'drav4-title':'Dedicated app',
     'drav4-desc':'Receive your rides, manage your schedule and track your earnings directly from your phone.',
     'drav5-title':'Paris &amp; Île-de-France area',
@@ -211,7 +211,7 @@ const i18n = {
     'nav-rates':'Tarifs','nav-b2b':'Entreprises','nav-contact':'Contact','nav-driver':'Devenir chauffeur','nav-book':'Réserver',
     /* ── FOOTER ── */
     'ft-legal':'Mentions légales','ft-cgv':'CGV','ft-privacy':'Confidentialité','ft-contact':'Contact',
-    'ft-copy':'© 2025 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.',
+    'ft-copy':'© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.',
 
     /* ── VEHICULES ── */
     'vhp-label':'Notre flotte',
