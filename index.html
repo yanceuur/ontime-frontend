@@ -1211,22 +1211,7 @@ textarea.form-input{
             <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
           </div>
         </div>
-        <label class="form-label" data-i18n="lbl-cardholder" style="margin-top:16px;">Nom du titulaire</label>
-        <label for="inputCardName" class="sr-only">Nom sur la carte</label><input type="text" class="form-input" id="inputCardName" placeholder="NOM PRÉNOM" style="padding-left:12px;letter-spacing:.5px;">
-
-        <label class="form-label" data-i18n="lbl-cardnumber" style="margin-top:12px;">Numéro de carte</label>
-        <div id="card-number" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
-
-        <div class="form-row" style="margin-top:12px;">
-          <div>
-            <label class="form-label" data-i18n="lbl-expiry">Date d'expiration</label>
-            <div id="card-expiry" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
-          </div>
-          <div>
-            <label class="form-label" data-i18n="lbl-cvc">CVC</label>
-            <div id="card-cvc" style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.1);border-radius:8px;padding:13px 12px;"></div>
-          </div>
-        </div>
+        <div id="payment-element" style="margin-top:16px;"></div>
         <div id="card-errors" style="color:#f44336;font-size:.76rem;margin-top:6px;min-height:18px;"></div>
         <button class="btn-primary" id="btnPay" style="margin-top:12px;">
           <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(10,10,10,.2);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
@@ -1236,7 +1221,8 @@ textarea.form-input{
         <div class="card-logos-row">
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-style="italic" font-weight="900" font-size="12" fill="white">VISA</text></svg>
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
-          <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#2E77BC"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="8.5" fill="white" letter-spacing="0.8">AMEX</text></svg>
+          <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Apple Pay"><rect width="38" height="24" rx="3" fill="#000"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="10" fill="white"> Pay</text></svg>
+          <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Google Pay"><rect width="38" height="24" rx="3" fill="#fff" stroke="#ddd"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="8" fill="#5F6368">G Pay</text></svg>
           <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;flex-shrink:0;" aria-label="Carte Bancaire"><rect width="38" height="24" rx="3" fill="#005B99"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="13" fill="white">CB</text></svg>
           <span style="font-size:.8rem;color:var(--text-muted);margin-left:2px;letter-spacing:.3px;">via Stripe</span>
         </div>
@@ -2369,30 +2355,32 @@ document.getElementById('btnBackStep1').addEventListener('click',()=>{
 });
 
 // ——— STRIPE LAZY LOAD ———
-let stripe,elements,cardNumberEl,cardExpiryEl,cardCvcEl,cardMounted=false,stripeReady=false;
-function initStripeElements(){
-  const stripeStyle={
-    base:{color:'#e8e8e8',fontFamily:'Inter, sans-serif',fontSize:'14px',fontSmoothing:'antialiased','::placeholder':{color:'#555'},iconColor:'#c8a96e'},
-    invalid:{color:'#f44336',iconColor:'#f44336'}
-  };
-  stripe=Stripe(STRIPE_PK);
-  elements=stripe.elements();
-  cardNumberEl=elements.create('cardNumber',{style:stripeStyle,showIcon:true});
-  cardExpiryEl=elements.create('cardExpiry',{style:stripeStyle});
-  cardCvcEl=elements.create('cardCvc',{style:stripeStyle});
-  const onStripeErr=e=>{document.getElementById('card-errors').textContent=e.error?e.error.message:'';};
-  cardNumberEl.on('change',onStripeErr);
-  cardExpiryEl.on('change',onStripeErr);
-  cardCvcEl.on('change',onStripeErr);
-  stripeReady=true;
-}
+let stripe,elements,paymentElement,stripeLoaded=false,paymentElementMounted=false;
 function loadStripeScript(cb){
-  if(stripeReady){cb();return;}
+  if(stripeLoaded){cb();return;}
   const s=document.createElement('script');
   s.src='https://js.stripe.com/v3/';
-  s.onload=()=>{initStripeElements();cb();};
+  s.onload=()=>{stripe=Stripe(STRIPE_PK);stripeLoaded=true;cb();};
   document.head.appendChild(s);
 }
+
+// Handle redirect return (Apple Pay, Google Pay, etc.)
+(function checkPaymentReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('payment')==='success'||params.get('redirect_status')==='succeeded'){
+    // Clean URL
+    window.history.replaceState({},'',window.location.pathname);
+    // Show confirmation
+    setTimeout(()=>{
+      document.getElementById('bookingStep1').style.display='none';
+      document.getElementById('bookingStep4').style.display='block';
+      const ref='OT-'+Date.now().toString(36).toUpperCase();
+      document.getElementById('confirmRef').textContent='Réf. '+ref;
+      setStep(4);
+      document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+    },300);
+  }
+})();
 
 // ——— ÉTAPE 2 → ÉTAPE 3 ———
 document.getElementById('btnContinuePay').addEventListener('click',()=>{
@@ -2416,7 +2404,7 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
   booking.firstName=fn;booking.lastName=ln;booking.phone=ph;booking.email=em;
   booking.flight=document.getElementById('inputFlight').value;
 
-  loadStripeScript(()=>{
+  loadStripeScript(async()=>{
     document.getElementById('bookingStep2').style.display='none';
     document.getElementById('bookingStep3').style.display='block';
 
@@ -2428,11 +2416,46 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
     document.getElementById('p3Veh').textContent=vehNames[booking.veh]||booking.veh;
     document.getElementById('p3Price').textContent=booking.price+'€';
 
-    if(!cardMounted){
-      cardNumberEl.mount('#card-number');
-      cardExpiryEl.mount('#card-expiry');
-      cardCvcEl.mount('#card-cvc');
-      cardMounted=true;
+    // Create PaymentIntent and mount Payment Element
+    if(!paymentElementMounted){
+      try{
+        const ctrl=new AbortController();
+        const to=setTimeout(()=>ctrl.abort(),15000);
+        const res=await fetch(BACKEND+'/api/create-payment-intent',{
+          method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,
+          body:JSON.stringify({
+            amount:booking.price*100,currency:'eur',
+            metadata:{from:booking.from,to:booking.to,date:booking.date,time:booking.time,
+              name:booking.firstName+' '+booking.lastName,phone:booking.phone,email:booking.email,
+              vehicle:booking.veh,pax:booking.pax,bags:booking.bags,
+              seatBaby:booking.seatBaby,seatChild:booking.seatChild,
+              flight:booking.flight,distKm:booking.distKm}
+          })
+        });
+        clearTimeout(to);
+        const data=await res.json();
+        if(!data.clientSecret)throw new Error(data.error||'Erreur serveur');
+        booking.clientSecret=data.clientSecret;
+
+        elements=stripe.elements({
+          clientSecret:data.clientSecret,
+          appearance:{
+            theme:'night',
+            variables:{colorPrimary:'#c8a96e',colorBackground:'#0a0a0a',colorText:'#e8e8e8',
+              colorDanger:'#f44336',fontFamily:'Inter, sans-serif',borderRadius:'8px',
+              fontSizeBase:'14px'},
+            rules:{'.Input':{border:'1px solid rgba(200,169,110,.15)',backgroundColor:'rgba(200,169,110,.04)',padding:'13px 12px'},
+              '.Input:focus':{borderColor:'#c8a96e',boxShadow:'0 0 0 1px #c8a96e'},
+              '.Label':{color:'#888',fontSize:'12px',textTransform:'uppercase',letterSpacing:'0.5px'}}
+          },
+          locale:document.documentElement.lang==='en'?'en':'fr'
+        });
+        paymentElement=elements.create('payment',{layout:'tabs'});
+        paymentElement.mount('#payment-element');
+        paymentElementMounted=true;
+      }catch(err){
+        document.getElementById('card-errors').textContent=err.name==='AbortError'?'Délai dépassé. Réessayez.':'Erreur: '+err.message;
+      }
     }
     setStep(3);
     document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
@@ -2440,7 +2463,9 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
 });
 
 document.getElementById('btnBackStep2').addEventListener('click',()=>{
-  if(!confirm('Retourner aux coordonnées ? La saisie de votre carte sera perdue.'))return;
+  if(!confirm('Retourner aux coordonnées ?'))return;
+  paymentElementMounted=false;
+  document.getElementById('payment-element').innerHTML='';
   document.getElementById('bookingStep3').style.display='none';
   document.getElementById('bookingStep2').style.display='block';
   setStep(2);
@@ -2457,43 +2482,28 @@ document.getElementById('btnPay').addEventListener('click',async()=>{
   document.getElementById('payError').style.display='none';
 
   try{
-    const ctrl=new AbortController();
-    const to=setTimeout(()=>ctrl.abort(),15000);
-    const res=await fetch(BACKEND+'/api/create-payment-intent',{
-      method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,
-      body:JSON.stringify({
-        amount:booking.price*100,currency:'eur',
-        metadata:{from:booking.from,to:booking.to,date:booking.date,time:booking.time,
-          name:fn+' '+ln,phone:ph,email:em,vehicle:booking.veh,
-          pax:booking.pax,bags:booking.bags,seatBaby:booking.seatBaby,seatChild:booking.seatChild,flight:booking.flight,
-          distKm:booking.distKm}
-      })
+    const result=await stripe.confirmPayment({
+      elements,
+      confirmParams:{
+        return_url:window.location.origin+window.location.pathname+'?payment=success',
+        payment_method_data:{billing_details:{name:fn+' '+ln,email:em,phone:ph}}
+      },
+      redirect:'if_required'
     });
-    clearTimeout(to);
-    const data=await res.json();
-    if(data.clientSecret){
-      const cardHolder=(document.getElementById('inputCardName').value.trim())||fn+' '+ln;
-      const result=await stripe.confirmCardPayment(data.clientSecret,{
-        payment_method:{card:cardNumberEl,billing_details:{name:cardHolder,email:em,phone:ph}}
-      });
-      if(result.error){
-        document.getElementById('card-errors').textContent=result.error.message;
-        btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
-      } else if(result.paymentIntent.status==='succeeded'){
-        const ref='OT-'+Date.now().toString(36).toUpperCase();
-        document.getElementById('confirmRef').textContent='Réf. '+ref;
-        setStep(4);
-        document.getElementById('bookingStep3').style.display='none';
-        document.getElementById('bookingStep4').style.display='block';
-        document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
-        // Notifications email + WhatsApp
-        sendBookingNotifications(ref,fn,ln,ph,em);
-      }
-    } else {
-      throw new Error(data.error||'Erreur serveur');
+    if(result.error){
+      document.getElementById('card-errors').textContent=result.error.message;
+      btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
+    } else if(result.paymentIntent && result.paymentIntent.status==='succeeded'){
+      const ref='OT-'+Date.now().toString(36).toUpperCase();
+      document.getElementById('confirmRef').textContent='Réf. '+ref;
+      setStep(4);
+      document.getElementById('bookingStep3').style.display='none';
+      document.getElementById('bookingStep4').style.display='block';
+      document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+      sendBookingNotifications(ref,fn,ln,ph,em);
     }
   }catch(err){
-    const msg=err.name==='AbortError'?'Délai dépassé. Vérifiez votre connexion et réessayez.':'Erreur: '+err.message;
+    const msg='Erreur: '+err.message;
     document.getElementById('payError').textContent=msg;
     document.getElementById('payError').style.display='block';
     btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
@@ -2622,7 +2632,6 @@ const i18n={
     'btn-continue':'Continue to payment →',
     'book-title3':'Secure payment',
     'book-sub3':'Your data is protected by SSL encryption via Stripe.',
-    'lbl-cardholder':'Cardholder name','lbl-cardnumber':'Card number','lbl-expiry':'Expiry date',
     // Category tabs
     'cat-adresse':'Address','cat-aeroport':'Airport','cat-gare':'Station','cat-lieu':'Place',
     // Date/Vehicle labels
@@ -2638,8 +2647,6 @@ const i18n={
     'recap-total':'Total',
     // Step 3 total label
     'lbl-total-pay':'Total to pay',
-    // CVC
-    'lbl-cvc':'CVC',
     // Pay button
     'btn-pay':'Pay and confirm',
     // Step 4 confirmation
@@ -2752,7 +2759,6 @@ const i18n={
     'btn-continue':'Continuer vers le paiement →',
     'book-title3':'Paiement sécurisé',
     'book-sub3':'Vos données sont protégées par chiffrement SSL via Stripe.',
-    'lbl-cardholder':'Nom du titulaire','lbl-cardnumber':'Numéro de carte','lbl-expiry':'Date d\'expiration',
     // Category tabs
     'cat-adresse':'Adresse','cat-aeroport':'Aéroport','cat-gare':'Gare','cat-lieu':'Lieu',
     // Date/Vehicle labels
@@ -2768,8 +2774,6 @@ const i18n={
     'recap-total':'Total',
     // Step 3 total label
     'lbl-total-pay':'Total à payer',
-    // CVC
-    'lbl-cvc':'CVC',
     // Pay button
     'btn-pay':'Payer et confirmer',
     // Step 4 confirmation
@@ -2833,7 +2837,6 @@ function setLang(lang){
   const fn=document.getElementById('inputFirstName');if(fn)fn.placeholder=ph?'First name':'Prénom';
   const ln=document.getElementById('inputLastName');if(ln)ln.placeholder=ph?'Last name':'Nom';
   const fl=document.getElementById('inputFlight');if(fl)fl.placeholder=ph?'e.g. AF1234, TGV 6789':'Ex: AF1234, TGV 6789';
-  const cn=document.getElementById('inputCardName');if(cn)cn.placeholder=ph?'FULL NAME':'NOM PRÉNOM';
   // Address inputs
   const da=document.getElementById('depAdresseInput');if(da)da.placeholder=ph?'Enter a departure address':'Saisir une adresse de départ';
   const aa=document.getElementById('arrAdresseInput');if(aa)aa.placeholder=ph?'Enter a destination address':'Saisir une adresse de destination';
