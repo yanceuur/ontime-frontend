@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/blog/:path*", "destination": "/articles/:path*", "statusCode": 301 }
+    { "source": "/blog/:path+", "destination": "/articles/:path+", "statusCode": 301 }
   ],
   "headers": [
     {
