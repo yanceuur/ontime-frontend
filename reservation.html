@@ -115,12 +115,12 @@
 }
 .form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
-.form-select option{background:#0a0a0a;color:var(--text);}
+.form-select option{background:#1a0508;color:var(--text);}
 /* Google Places Autocomplete dropdown */
 .pac-container{
-  background:#111!important;border:1px solid rgba(255,255,255,.08)!important;
+  background:#1a0508!important;border:1px solid rgba(200,169,110,.1)!important;
   border-radius:12px!important;margin-top:6px!important;padding:6px 0!important;
-  box-shadow:0 12px 40px rgba(0,0,0,.6)!important;
+  box-shadow:0 12px 40px rgba(20,2,5,.7)!important;
   font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif!important;
   z-index:99999!important;
 }
@@ -164,7 +164,7 @@
   -webkit-appearance:none;appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;
 }
-.pax-select option{background:#0a0a0a;color:var(--text);}
+.pax-select option{background:#1a0508;color:var(--text);}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 0;}
 .toggle-row-label{font-size:.78rem;color:var(--text-dim);}
 .toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0;}
@@ -872,7 +872,7 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
           clientSecret:data.clientSecret,
           appearance:{
             theme:'night',
-            variables:{colorPrimary:'#c8a96e',colorBackground:'#0a0a0a',colorText:'#e8e8e8',
+            variables:{colorPrimary:'#c8a96e',colorBackground:'#1a0508',colorText:'#f0e8e8',
               colorDanger:'#f44336',fontFamily:'Inter, sans-serif',borderRadius:'8px',fontSizeBase:'14px'},
             rules:{'.Input':{border:'1px solid rgba(200,169,110,.15)',backgroundColor:'rgba(200,169,110,.04)',padding:'13px 12px'},
               '.Input:focus':{borderColor:'#c8a96e',boxShadow:'0 0 0 1px #c8a96e'},
