@@ -24,59 +24,6 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
 <style>
-:root{
-  --bg:#0a0a0a;--glass:rgba(18,16,12,.7);--glass-border:rgba(200,169,110,.08);
-  --accent:#c8a96e;--accent-light:#dfc9a0;--accent-dark:#a6894e;
-  --text:#e8e8e8;--text-dim:#ccc;--text-muted:#777;
-  --gold:#c8a96e;--gold-light:#dfc9a0;--gold-dark:#a6894e;
-  --border:rgba(200,169,110,.12);--border-light:rgba(255,255,255,.06);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(200,169,110,.06),transparent),radial-gradient(ellipse 60% 50% at 80% 90%,rgba(200,169,110,.04),transparent);}
-
-/* PILL NAV */
-.pill-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:4px;background:rgba(10,10,10,.8);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border:1px solid rgba(200,169,110,.12);border-radius:60px;padding:6px 8px;box-shadow:0 8px 40px rgba(0,0,0,.4),0 0 0 1px rgba(200,169,110,.05);transition:opacity .3s,transform .3s;}
-.pill-nav a,.pill-nav button{display:flex;align-items:center;gap:6px;padding:10px 18px;border-radius:50px;font-size:.82rem;font-weight:500;letter-spacing:.3px;color:var(--text-dim);text-decoration:none;background:transparent;border:none;cursor:pointer;transition:all .25s cubic-bezier(.16,1,.3,1);white-space:nowrap;font-family:inherit;}
-.pill-nav a:hover,.pill-nav button:hover{color:#fff;background:rgba(255,255,255,.08);}
-.pill-nav a.active{color:#fff;background:rgba(200,169,110,.15);}
-.pill-nav a.pill-cta{background:var(--accent);color:#fff;font-weight:600;padding:10px 22px;margin-left:2px;box-shadow:0 4px 16px rgba(200,169,110,.3);}
-.pill-nav a.pill-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
-.pill-nav .pill-phone{display:flex;align-items:center;gap:5px;padding:10px 14px;}
-.pill-nav .pill-phone svg{width:14px;height:14px;stroke:var(--accent-light);stroke-width:2;fill:none;}
-.lang-btn{display:flex;align-items:center;gap:4px;font-size:.72rem;font-weight:700;letter-spacing:.8px;color:var(--text-dim);background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:7px 12px;cursor:pointer;transition:all .25s;line-height:1;}
-.lang-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.5;fill:none;opacity:.7;}
-.lang-btn:hover{color:var(--accent-light);border-color:var(--accent);background:rgba(200,169,110,.1);}
-
-/* HAMBURGER + SIDEBAR */
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:20px;right:20px;z-index:201;}
-.hamburger span{display:block;height:1.5px;background:var(--accent-light);border-radius:1px;transition:all .4s cubic-bezier(.16,1,.3,1);}
-.hamburger span:nth-child(1){width:24px}.hamburger span:nth-child(2){width:18px;margin-left:auto}.hamburger span:nth-child(3){width:24px}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:198;opacity:0;pointer-events:none;transition:opacity .4s;}
-.sidebar-overlay.open{opacity:1;pointer-events:all;}
-.sidebar{position:fixed;top:0;right:0;bottom:0;width:300px;z-index:199;background:linear-gradient(180deg,#111,#0a0a0a);border-left:1px solid rgba(255,255,255,.06);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
-.sidebar.open{transform:translateX(0);}
-.sidebar-link{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:color .25s,padding-left .25s;text-decoration:none;display:block;}
-.sidebar-link:hover{color:var(--accent-light);padding-left:8px;}
-
-/* BENTO GRID */
-.bento{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:100px 24px 40px;max-width:1000px;margin:0 auto;}
-
-/* CELL */
-.cell{background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--glass-border);border-radius:20px;padding:28px;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .3s;opacity:0;animation:cellIn .6s cubic-bezier(.16,1,.3,1) forwards;}
-.cell:hover{transform:translateY(-3px);border-color:rgba(200,169,110,.15);box-shadow:0 12px 40px rgba(0,0,0,.3);}
-.cell:nth-child(1){animation-delay:.1s}.cell:nth-child(2){animation-delay:.15s}.cell:nth-child(3){animation-delay:.2s}.cell:nth-child(4){animation-delay:.25s}.cell:nth-child(5){animation-delay:.3s}.cell:nth-child(6){animation-delay:.35s}.cell:nth-child(7){animation-delay:.4s}.cell:nth-child(8){animation-delay:.45s}.cell:nth-child(9){animation-delay:.5s}.cell:nth-child(10){animation-delay:.55s}.cell:nth-child(11){animation-delay:.6s}.cell:nth-child(12){animation-delay:.65s}
-@keyframes cellIn{from{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
-
-.cell-hero{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:48px 36px;background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(15,12,8,.7));}
-.cell-hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:300px;height:200px;background:radial-gradient(circle,rgba(200,169,110,.1),transparent 70%);pointer-events:none;}
-.hero-label{display:inline-flex;align-items:center;gap:8px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);border-radius:24px;padding:6px 16px;font-size:.65rem;color:var(--accent-light);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:20px;}
-.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--gold-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-title em{font-style:italic;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-sub{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:620px;line-height:1.8;}
-
 /* FAQ CATEGORY HEADER */
 .cell-cat{grid-column:1/-1;padding:18px 28px;display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(200,169,110,.06),var(--glass));}
 .cell-cat h2{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--gold-light);}
@@ -92,57 +39,8 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 .faq-a-inner strong{color:#fff;font-weight:500;}
 .faq-a-inner a{color:var(--gold);text-decoration:none;}
 .faq-a-inner a:hover{text-decoration:underline;}
-
-/* CTA CELL */
-.cell-cta{grid-column:1/-1;text-align:center;padding:40px 28px;background:linear-gradient(135deg,rgba(200,169,110,.06),var(--glass));}
-.cell-cta h2{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#fff;margin-bottom:8px;}
-.cell-cta p{color:var(--text-muted);font-size:.88rem;margin-bottom:24px;font-weight:300;}
-.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:50px;font-size:.85rem;font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s;}
-.cta-btn.primary{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(200,169,110,.3);}
-.cta-btn.primary:hover{background:var(--accent-dark);transform:translateY(-2px);}
-.cta-btn.outline{background:transparent;color:var(--gold);border:1px solid rgba(200,169,110,.3);}
-.cta-btn.outline:hover{border-color:var(--gold);transform:translateY(-2px);}
-.cta-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;}
-
-/* FOOTER */
-.site-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 24px 20px;margin-top:20px;}
-.footer-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
-.footer-logo{display:flex;align-items:center;gap:10px;}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
-.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.8rem;transition:color .3s;}
-.footer-links a:hover{color:var(--gold);}
-.footer-copy{text-align:center;margin-top:24px;font-size:.78rem;color:var(--text-muted);opacity:.5;max-width:1000px;margin-left:auto;margin-right:auto;}
-
-/* RESERVER DROPDOWN */
-.nav-reserver{position:relative;}
-.nav-reserver-btn{background:var(--accent) !important;color:#fff !important;font-weight:600 !important;padding:10px 22px !important;box-shadow:0 4px 16px rgba(200,169,110,.3);}
-.nav-reserver-btn:hover{background:var(--accent-dark) !important;transform:translateY(-1px);}
-.reserver-panel{position:absolute;top:calc(100% + 12px);right:0;width:520px;background:rgba(12,11,8,.96);backdrop-filter:blur(30px) saturate(1.8);border:1px solid rgba(200,169,110,.15);border-radius:20px;padding:28px;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transition:all .3s cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:210;}
-.reserver-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:all;}
-.reserver-panel h3{font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;margin-bottom:16px;text-align:center;}
-.tarif-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;font-size:.78rem;border:1px solid rgba(200,169,110,.12);border-radius:12px;overflow:hidden;}
-.tarif-grid .tg-head{background:rgba(200,169,110,.1);color:var(--accent-light);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:.68rem;padding:10px 8px;text-align:center;}
-.tarif-grid .tg-dest{padding:10px 12px;color:#fff;font-weight:500;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px;}
-.tarif-grid .tg-price{padding:10px 8px;text-align:center;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,.04);}
-.tarif-grid .tg-price strong{color:var(--accent-light);font-weight:600;}
-.reserver-panel .res-cta{display:block;text-align:center;margin-top:18px;padding:12px;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;font-size:.88rem;text-decoration:none;transition:background .2s,transform .2s;}
-.reserver-panel .res-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
-@media(max-width:768px){.reserver-panel{width:calc(100vw - 32px);right:-60px;}}
-
-/* WHATSAPP */
-.wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s;text-decoration:none;}
-.wa:hover{transform:scale(1.08);}
-.wa svg{width:28px;height:28px;fill:#fff;}
-
-@media(max-width:768px){
-  .pill-nav{display:none;}
-  .hamburger{display:flex;}
-  .bento{grid-template-columns:1fr;padding:80px 16px 32px;}
-  .site-footer{padding:30px 16px 16px;}
-  .footer-inner{flex-direction:column;text-align:center;}
-}
 </style>
+<link rel="stylesheet" href="css/common.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
   {"@type":"Question","name":"Combien coûte un VTC à Paris ?","acceptedAnswer":{"@type":"Answer","text":"Les tarifs dépendent de la destination : transfert aéroport CDG dès 80€, Orly dès 60€, gares parisiennes dès 35€, Disneyland dès 70€, Beauvais dès 150€. Tous les prix sont fixes et garantis à la réservation."}},
@@ -174,11 +72,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
   <a href="contact.html" data-i18n="nav-contact">Contact</a>
   <a href="tel:+33760554460" class="pill-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 60 55 44 60</a>
   <button class="lang-btn" id="langBtn" onclick="toggleLang()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="langBtnText">EN</span></button>
-  <div class="nav-reserver"><a href="#" class="pill-cta nav-reserver-btn" onclick="toggleReserver(event)" data-i18n="nav-book">Réserver</a><div class="reserver-panel" id="reserverPanel"><h3>Simulateur de prix</h3><p style="color:rgba(255,255,255,.5);font-size:.85rem;margin:0 0 12px;">Tarifs indicatifs depuis Paris intra-muros, de jour. Nuit +10%.</p><div class="tarif-grid"><div class="tg-head">Destination</div><div class="tg-head">Confort</div><div class="tg-head">Business</div><div class="tg-head">Van</div><div class="tg-dest">Aéroport CDG</div><div class="tg-price"><strong>80€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-price"><strong>130€</strong></div><div class="tg-dest">Aéroport Orly</div><div class="tg-price"><strong>60€</strong></div><div class="tg-price"><strong>90€</strong></div><div class="tg-price"><strong>100€</strong></div><div class="tg-dest">Beauvais</div><div class="tg-price"><strong>145€</strong></div><div class="tg-price"><strong>205€</strong></div><div class="tg-price"><strong>230€</strong></div><div class="tg-dest">Gares</div><div class="tg-price">dès <strong>35€</strong></div><div class="tg-price">dès <strong>55€</strong></div><div class="tg-price">dès <strong>60€</strong></div><div class="tg-dest">Disneyland</div><div class="tg-price"><strong>75€</strong></div><div class="tg-price"><strong>110€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-dest">Mise à dispo.</div><div class="tg-price" style="grid-column:span 3;text-align:center;"><strong>80€</strong>/h</div></div><p style="color:rgba(255,255,255,.45);font-size:.75rem;margin:10px 0 0;text-align:center;">Tarifs indicatifs — devis personnalisé sur demande</p><a href="index.html#booking" class="res-cta">Demander un devis</a></div></div>
+  <div class="nav-reserver"><a href="#" class="pill-cta nav-reserver-btn" onclick="toggleReserver(event)" data-i18n="nav-book" aria-expanded="false">Réserver</a><div class="reserver-panel" id="reserverPanel"><h3>Simulateur de prix</h3><p style="color:rgba(255,255,255,.5);font-size:.85rem;margin:0 0 12px;">Tarifs indicatifs depuis Paris intra-muros, de jour. Nuit +10%.</p><div class="tarif-grid"><div class="tg-head">Destination</div><div class="tg-head">Confort</div><div class="tg-head">Business</div><div class="tg-head">Van</div><div class="tg-dest">Aéroport CDG</div><div class="tg-price"><strong>80€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-price"><strong>130€</strong></div><div class="tg-dest">Aéroport Orly</div><div class="tg-price"><strong>60€</strong></div><div class="tg-price"><strong>90€</strong></div><div class="tg-price"><strong>100€</strong></div><div class="tg-dest">Beauvais</div><div class="tg-price"><strong>145€</strong></div><div class="tg-price"><strong>205€</strong></div><div class="tg-price"><strong>230€</strong></div><div class="tg-dest">Gares</div><div class="tg-price">dès <strong>35€</strong></div><div class="tg-price">dès <strong>55€</strong></div><div class="tg-price">dès <strong>60€</strong></div><div class="tg-dest">Disneyland</div><div class="tg-price"><strong>75€</strong></div><div class="tg-price"><strong>110€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-dest">Mise à dispo.</div><div class="tg-price" style="grid-column:span 3;text-align:center;"><strong>80€</strong>/h</div></div><p style="color:rgba(255,255,255,.45);font-size:.75rem;margin:10px 0 0;text-align:center;">Tarifs indicatifs — devis personnalisé sur demande</p><a href="index.html#booking" class="res-cta">Demander un devis</a></div></div>
 </nav>
 
 <!-- HAMBURGER -->
-<button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+<button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar">
   <a href="index.html" class="sidebar-link" data-i18n="nav-home">Accueil</a>
@@ -319,18 +217,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;bac
 <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
 <script>
-function toggleReserver(e){e.preventDefault();document.getElementById('reserverPanel').classList.toggle('open');}
-document.addEventListener('click',e=>{const p=document.getElementById('reserverPanel');if(p&&!e.target.closest('.nav-reserver'))p.classList.remove('open');});
-// SIDEBAR
-const hamburger=document.getElementById('hamburgerBtn'),sidebar=document.getElementById('sidebar'),overlay=document.getElementById('sidebarOverlay');
-function closeSidebar(){hamburger.classList.remove('open');sidebar.classList.remove('open');overlay.classList.remove('open');document.body.style.overflow='';}
-hamburger.addEventListener('click',()=>{const open=sidebar.classList.contains('open');open?closeSidebar():(hamburger.classList.add('open'),sidebar.classList.add('open'),overlay.classList.add('open'),document.body.style.overflow='hidden');});
-overlay.addEventListener('click',closeSidebar);
-document.querySelectorAll('.sidebar-link').forEach(l=>l.addEventListener('click',closeSidebar));
-
 // FAQ ACCORDION
 document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const cell=q.closest('.cell');const a=cell.querySelector('.faq-a');if(cell.classList.contains('open')){cell.classList.remove('open');a.style.maxHeight=null;}else{document.querySelectorAll('.cell.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null;});cell.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}});});
 </script>
+<script src="js/common.js"></script>
 <script src="js/lang.js"></script>
 </body>
 </html>

@@ -49,14 +49,8 @@
 </script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--accent:#c8a96e;--accent-light:#dfc9a0;--accent-dark:#a6894e;--glass:rgba(18,16,12,.7);--glass-border:rgba(200,169,110,.08);--text:#e8e8e8;--text-dim:#ccc;--text-muted:#777;}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;min-height:100vh;}
-
-/* PILL NAV */
-.pill-nav{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:200;display:flex;align-items:center;gap:22px;background:rgba(10,10,10,.8);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border:1px solid rgba(200,169,110,.12);border-radius:60px;padding:6px 8px;}
+/* CONTACT PAGE — pn-* nav overrides (contact uses pn-* classes, not pill-nav defaults) */
+.pill-nav{gap:22px;}
 .pn-logo{display:flex;align-items:center;gap:8px;text-decoration:none;padding:4px 12px;}
 .pn-logo svg{width:32px;height:32px;flex-shrink:0;}
 .pn-logo span{font-weight:800;font-size:.85rem;letter-spacing:4px;color:#fff;}
@@ -71,42 +65,13 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .pn-lang{background:none;border:1px solid rgba(200,169,110,.2);color:var(--accent);padding:6px 12px;border-radius:40px;cursor:pointer;font-size:.72rem;font-family:'Inter',sans-serif;letter-spacing:.5px;transition:border-color .3s;}
 .pn-lang:hover{border-color:var(--accent);}
 
-/* RESERVER DROPDOWN */
-.nav-reserver{position:relative;}
+/* CONTACT — reserver button override (gradient + 40px radius) */
 .nav-reserver-btn{background:linear-gradient(135deg,var(--accent),var(--accent-dark)) !important;color:var(--bg) !important;font-weight:600 !important;padding:9px 20px !important;border-radius:40px !important;box-shadow:0 4px 16px rgba(200,169,110,.3);white-space:nowrap;font-size:.78rem !important;text-decoration:none;display:inline-flex;transition:transform .2s,box-shadow .2s;}
 .nav-reserver-btn:hover{transform:translateY(-1px) !important;box-shadow:0 6px 20px rgba(200,169,110,.4) !important;}
-.reserver-panel{position:absolute;top:calc(100% + 12px);right:0;width:520px;background:rgba(12,11,8,.96);backdrop-filter:blur(30px) saturate(1.8);border:1px solid rgba(200,169,110,.15);border-radius:20px;padding:28px;opacity:0;visibility:hidden;transform:translateY(-8px) scale(.98);transition:all .3s cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:210;}
-.reserver-panel.open{opacity:1;visibility:visible;transform:translateY(0) scale(1);pointer-events:all;}
-.reserver-panel h3{font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;margin-bottom:16px;text-align:center;}
-.tarif-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;font-size:.78rem;border:1px solid rgba(200,169,110,.12);border-radius:12px;overflow:hidden;}
-.tarif-grid .tg-head{background:rgba(200,169,110,.1);color:var(--accent-light);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:.68rem;padding:10px 8px;text-align:center;}
-.tarif-grid .tg-dest{padding:10px 12px;color:#fff;font-weight:500;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px;}
-.tarif-grid .tg-price{padding:10px 8px;text-align:center;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,.04);}
-.tarif-grid .tg-price strong{color:var(--accent-light);font-weight:600;}
-.reserver-panel .res-cta{display:block;text-align:center;margin-top:18px;padding:12px;border-radius:12px;background:var(--accent);color:#fff;font-weight:600;font-size:.88rem;text-decoration:none;transition:background .2s,transform .2s;}
-.reserver-panel .res-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
-@media(max-width:768px){.reserver-panel{width:calc(100vw - 32px);right:-60px;}}
 
-/* HAMBURGER + SIDEBAR */
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:201;position:fixed;top:24px;right:20px;background:rgba(10,10,10,.7);backdrop-filter:blur(16px);border:1px solid rgba(200,169,110,.1);border-radius:12px;}
-.hamburger span{display:block;height:1.5px;background:var(--accent);border-radius:1px;transition:all .4s cubic-bezier(.16,1,.3,1);}
-.hamburger span:nth-child(1){width:22px}.hamburger span:nth-child(2){width:16px;margin-left:auto}.hamburger span:nth-child(3){width:22px}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.hamburger.open span:nth-child(2){opacity:0;width:0}.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:198;opacity:0;pointer-events:none;transition:opacity .4s;}
-.sidebar-overlay.open{opacity:1;pointer-events:all;}
-.sidebar{position:fixed;top:0;right:0;bottom:0;width:min(300px,85vw);z-index:199;background:linear-gradient(180deg,#0f0d0a,#0a0a0a);border-left:1px solid rgba(200,169,110,.1);padding:80px 32px 32px;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(0,0,0,.5);}
-.sidebar.open{transform:translateX(0);}
-.sidebar-link{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--text-dim);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;transition:color .3s,padding-left .3s;text-decoration:none;display:block;}
-.sidebar-link:hover{color:var(--accent);padding-left:8px;}
-
-/* BENTO GRID */
-.bento{max-width:1100px;margin:0 auto;padding:120px 24px 40px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-.cell{background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--glass-border);border-radius:20px;padding:36px;animation:cellIn .7s cubic-bezier(.16,1,.3,1) both;}
-@keyframes cellIn{from{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
-.cell:nth-child(1){animation-delay:.05s}.cell:nth-child(2){animation-delay:.1s}.cell:nth-child(3){animation-delay:.15s}
-.cell:nth-child(4){animation-delay:.2s}.cell:nth-child(5){animation-delay:.25s}.cell:nth-child(6){animation-delay:.3s}
-.cell:nth-child(7){animation-delay:.35s}.cell:nth-child(8){animation-delay:.4s}.cell:nth-child(9){animation-delay:.45s}
-.cell:nth-child(10){animation-delay:.5s}.cell:nth-child(11){animation-delay:.55s}
+/* CONTACT — bento overrides */
+.bento{max-width:1100px;padding:120px 24px 40px;gap:14px;}
+.cell{padding:36px;}
 .span-2{grid-column:span 2;}
 
 /* HERO CELL */
@@ -186,44 +151,16 @@ textarea.b2b-input{resize:vertical;min-height:80px;padding-top:11px;padding-left
 .cta-cell{text-align:center;padding:48px 36px;background:linear-gradient(145deg,rgba(22,19,13,.85),var(--glass));}
 .cta-title{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.5vw,1.8rem);color:#fff;margin-bottom:10px;}
 .cta-sub{color:var(--text-muted);font-size:.85rem;margin-bottom:24px;font-weight:300;}
-.cta-btn{display:inline-block;padding:14px 36px;border-radius:50px;font-size:.88rem;font-weight:600;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:var(--bg);text-decoration:none;transition:transform .2s,box-shadow .2s;}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
 
-/* FOOTER */
-.footer{border-top:1px solid rgba(200,169,110,.08);padding:40px 24px 20px;max-width:1100px;margin:0 auto;}
-.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:16px;}
-.footer-logo{display:flex;align-items:center;gap:10px;}
-.footer-links{display:flex;gap:20px;}
-.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.8rem;transition:color .3s;}
-.footer-links a:hover{color:var(--accent);}
-.footer-copy{text-align:center;font-size:.78rem;color:var(--text-muted);opacity:.5;}
-
-/* WHATSAPP */
-.wa{position:fixed;bottom:28px;right:28px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s,box-shadow .3s;text-decoration:none;}
-.wa:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.45);}
-.wa svg{width:28px;height:28px;fill:#fff;}
-
-/* RESPONSIVE */
+/* CONTACT — responsive overrides */
 @media(max-width:768px){
-  .pill-nav{display:none;}
-  .hamburger{display:flex;}
-  .bento{grid-template-columns:1fr;padding:80px 14px 32px;}
   .span-2{grid-column:span 1;}
-  .cell{padding:26px 20px;border-radius:16px;}
   .hero-cell{padding:40px 24px;}
   .form-row{grid-template-columns:1fr;}
   .b2b-row{grid-template-columns:1fr;}
-  .footer{padding:28px 16px 16px;}
-  .footer-inner{flex-direction:column;align-items:center;text-align:center;}
-  .footer-links{flex-wrap:wrap;justify-content:center;gap:10px 16px;}
-  .wa{width:48px;height:48px;bottom:18px;right:14px;}
-  .wa svg{width:24px;height:24px;}
-}
-@media(max-width:380px){
-  .bento{padding:76px 10px 24px;}
-  .cell{padding:20px 16px;}
 }
 </style>
+<link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 
@@ -250,11 +187,11 @@ textarea.b2b-input{resize:vertical;min-height:80px;padding-top:11px;padding-left
   </div>
   <a href="tel:+33760554460" class="pn-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 60 55 44 60</a>
   <button class="pn-lang" id="langBtn" onclick="toggleLang()"><span id="langBtnText">EN</span></button>
-  <div class="nav-reserver"><a href="#" class="pn-cta nav-reserver-btn" onclick="toggleReserver(event)" data-i18n="nav-book">Réserver</a><div class="reserver-panel" id="reserverPanel"><h3>Simulateur de prix</h3><p style="color:rgba(255,255,255,.5);font-size:.85rem;margin:0 0 12px;">Tarifs indicatifs depuis Paris intra-muros, de jour. Nuit +10%.</p><div class="tarif-grid"><div class="tg-head">Destination</div><div class="tg-head">Confort</div><div class="tg-head">Business</div><div class="tg-head">Van</div><div class="tg-dest">Aéroport CDG</div><div class="tg-price"><strong>80€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-price"><strong>130€</strong></div><div class="tg-dest">Aéroport Orly</div><div class="tg-price"><strong>60€</strong></div><div class="tg-price"><strong>90€</strong></div><div class="tg-price"><strong>100€</strong></div><div class="tg-dest">Beauvais</div><div class="tg-price"><strong>145€</strong></div><div class="tg-price"><strong>205€</strong></div><div class="tg-price"><strong>230€</strong></div><div class="tg-dest">Gares</div><div class="tg-price">dès <strong>35€</strong></div><div class="tg-price">dès <strong>55€</strong></div><div class="tg-price">dès <strong>60€</strong></div><div class="tg-dest">Disneyland</div><div class="tg-price"><strong>75€</strong></div><div class="tg-price"><strong>110€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-dest">Mise à dispo.</div><div class="tg-price" style="grid-column:span 3;text-align:center;"><strong>80€</strong>/h</div></div><p style="color:rgba(255,255,255,.45);font-size:.75rem;margin:10px 0 0;text-align:center;">Tarifs indicatifs — devis personnalisé sur demande</p><a href="index.html#booking" class="res-cta">Demander un devis</a></div></div>
+  <div class="nav-reserver"><a href="#" class="pn-cta nav-reserver-btn" onclick="toggleReserver(event)" data-i18n="nav-book" aria-expanded="false">Réserver</a><div class="reserver-panel" id="reserverPanel"><h3>Simulateur de prix</h3><p style="color:rgba(255,255,255,.5);font-size:.85rem;margin:0 0 12px;">Tarifs indicatifs depuis Paris intra-muros, de jour. Nuit +10%.</p><div class="tarif-grid"><div class="tg-head">Destination</div><div class="tg-head">Confort</div><div class="tg-head">Business</div><div class="tg-head">Van</div><div class="tg-dest">Aéroport CDG</div><div class="tg-price"><strong>80€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-price"><strong>130€</strong></div><div class="tg-dest">Aéroport Orly</div><div class="tg-price"><strong>60€</strong></div><div class="tg-price"><strong>90€</strong></div><div class="tg-price"><strong>100€</strong></div><div class="tg-dest">Beauvais</div><div class="tg-price"><strong>145€</strong></div><div class="tg-price"><strong>205€</strong></div><div class="tg-price"><strong>230€</strong></div><div class="tg-dest">Gares</div><div class="tg-price">dès <strong>35€</strong></div><div class="tg-price">dès <strong>55€</strong></div><div class="tg-price">dès <strong>60€</strong></div><div class="tg-dest">Disneyland</div><div class="tg-price"><strong>75€</strong></div><div class="tg-price"><strong>110€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-dest">Mise à dispo.</div><div class="tg-price" style="grid-column:span 3;text-align:center;"><strong>80€</strong>/h</div></div><p style="color:rgba(255,255,255,.45);font-size:.75rem;margin:10px 0 0;text-align:center;">Tarifs indicatifs — devis personnalisé sur demande</p><a href="index.html#booking" class="res-cta">Demander un devis</a></div></div>
 </nav>
 
 <!-- HAMBURGER + SIDEBAR -->
-<button class="hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+<button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <nav class="sidebar" id="sidebar">
   <a href="index.html" class="sidebar-link" data-i18n="nav-home">Accueil</a>
@@ -342,21 +279,21 @@ textarea.b2b-input{resize:vertical;min-height:80px;padding-top:11px;padding-left
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="fname" data-i18n="cf-fname">Prénom</label>
-          <input type="text" id="fname" class="form-input" placeholder="Votre prénom" autocomplete="given-name">
+          <input type="text" id="fname" class="form-input" placeholder="Votre prénom" autocomplete="given-name" aria-required="true">
         </div>
         <div class="form-group">
           <label class="form-label" for="lname" data-i18n="cf-lname">Nom</label>
-          <input type="text" id="lname" class="form-input" placeholder="Votre nom" autocomplete="family-name">
+          <input type="text" id="lname" class="form-input" placeholder="Votre nom" autocomplete="family-name" aria-required="true">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label" for="email" data-i18n="cf-email">Email</label>
-          <input type="email" id="email" class="form-input" placeholder="votre@email.com" autocomplete="email">
+          <input type="email" id="email" class="form-input" placeholder="votre@email.com" autocomplete="email" aria-required="true">
         </div>
         <div class="form-group">
           <label class="form-label" for="phone" data-i18n="cf-phone">Téléphone</label>
-          <input type="tel" id="phone" class="form-input" placeholder="+33 6 00 00 00 00" pattern="[\+0-9][0-9 \.\-\(\)]{7,}" title="Numéro valide (ex : 06 12 34 56 78)" autocomplete="tel">
+          <input type="tel" id="phone" class="form-input" placeholder="+33 6 00 00 00 00" pattern="[\+0-9][0-9 \.\-\(\)]{7,}" title="Numéro valide (ex : 06 12 34 56 78)" autocomplete="tel" aria-required="true">
         </div>
       </div>
       <div class="form-row">
@@ -376,7 +313,7 @@ textarea.b2b-input{resize:vertical;min-height:80px;padding-top:11px;padding-left
       <div class="form-row">
         <div class="form-group full">
           <label class="form-label" for="message" data-i18n="cf-message">Message</label>
-          <textarea id="message" class="form-textarea" placeholder="Décrivez votre demande..."></textarea>
+          <textarea id="message" class="form-textarea" placeholder="Décrivez votre demande..." aria-required="true"></textarea>
         </div>
       </div>
       <button type="button" class="form-submit" id="submitBtn" onclick="sendEmail()" data-i18n="cf-submit">Envoyer le message</button>
@@ -504,18 +441,6 @@ textarea.b2b-input{resize:vertical;min-height:80px;padding-top:11px;padding-left
 <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
 <script>
-function toggleReserver(e){e.preventDefault();document.getElementById('reserverPanel').classList.toggle('open');}
-document.addEventListener('click',e=>{const p=document.getElementById('reserverPanel');if(p&&!e.target.closest('.nav-reserver'))p.classList.remove('open');});
-// SIDEBAR
-const hamburger=document.getElementById('hamburgerBtn'),sidebar=document.getElementById('sidebar'),overlayEl=document.getElementById('sidebarOverlay');
-function closeSidebar(){hamburger.classList.remove('open');sidebar.classList.remove('open');overlayEl.classList.remove('open');document.body.style.overflow='';}
-hamburger.addEventListener('click',()=>{
-  const open=sidebar.classList.contains('open');
-  open?closeSidebar():(hamburger.classList.add('open'),sidebar.classList.add('open'),overlayEl.classList.add('open'),document.body.style.overflow='hidden');
-});
-overlayEl.addEventListener('click',closeSidebar);
-document.querySelectorAll('.sidebar-link').forEach(l=>l.addEventListener('click',closeSidebar));
-
 // TABS
 function switchTab(tab){
   const isEnt=(tab==='entreprises');
@@ -608,5 +533,6 @@ async function submitB2B(){
 }
 </script>
 <script src="js/lang.js"></script>
+<script src="js/common.js"></script>
 </body>
 </html>
