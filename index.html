@@ -167,11 +167,18 @@
   display:flex;flex-direction:column;justify-content:center;
   padding:40px 36px;
   background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(15,12,8,.7));
+  position:relative;overflow:hidden;
 }
+.cell-hero::after{
+  content:'';position:absolute;inset:0;
+  background:url('img/hero.webp') center/cover no-repeat;
+  opacity:.12;z-index:0;pointer-events:none;
+}
+.cell-hero>*{position:relative;z-index:1;}
 .cell-hero::before{
   content:'';position:absolute;top:-60px;left:-60px;width:250px;height:250px;
   background:radial-gradient(circle,rgba(200,169,110,.1),transparent 70%);
-  pointer-events:none;
+  pointer-events:none;z-index:1;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
@@ -269,7 +276,12 @@
   grid-column:1/2;grid-row:2/3;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,rgba(200,169,110,.04),rgba(15,12,8,.6));
-  overflow:hidden;padding:20px;
+  overflow:hidden;padding:20px;position:relative;
+}
+.cell-car::after{
+  content:'';position:absolute;inset:0;
+  background:url('img/car-classe-v.webp') center/cover no-repeat;
+  opacity:.08;pointer-events:none;
 }
 .car-svg{width:100%;max-width:320px;height:auto;filter:drop-shadow(0 8px 30px rgba(200,169,110,.15));}
 .car-label{
@@ -346,12 +358,15 @@
 .svc-mini-card svg{width:22px;height:22px;stroke:var(--accent);stroke-width:1.5;fill:none;}
 .svc-mini-card span{font-size:.7rem;line-height:1.3;letter-spacing:.3px;}
 
-/* ═══ CELL: REVIEWS ═══ */
+/* ═══ CELL: REVIEWS (CAROUSEL) ═══ */
 .cell-reviews{
   grid-column:3/4;grid-row:3/4;
   display:flex;flex-direction:column;justify-content:center;
-  padding:24px;
+  padding:24px;position:relative;overflow:hidden;
 }
+.review-slide{display:none;animation:reviewFade .5s ease;}
+.review-slide.active{display:block;}
+@keyframes reviewFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .review-stars{display:flex;gap:2px;margin-bottom:10px;}
 .review-stars svg{width:14px;height:14px;fill:var(--accent);stroke:none;}
 .review-text{font-size:.82rem;color:var(--text-dim);line-height:1.6;font-style:italic;margin-bottom:14px;}
@@ -364,13 +379,27 @@
 }
 .review-name{font-size:.78rem;color:#fff;font-weight:500;}
 .review-source{font-size:.65rem;color:var(--text-muted);}
+.review-dots{display:flex;gap:6px;margin-top:12px;justify-content:center;}
+.review-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;}
+.review-dot.active{background:var(--accent);transform:scale(1.3);}
 .review-badge{
-  display:flex;align-items:center;gap:6px;margin-top:14px;
+  display:flex;align-items:center;gap:6px;margin-top:10px;
   padding:8px 12px;border-radius:8px;
   background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);
 }
 .review-badge-score{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--accent);}
 .review-badge-text{font-size:.65rem;color:var(--text-muted);}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.2);}50%{box-shadow:0 0 20px 4px rgba(200,169,110,.1);}}
+.cell-stats .stat-number{transition:transform .3s;}
+.cell-stats:hover .stat-number{transform:scale(1.05);}
+.cell-prices .price-pill{transition:all .3s cubic-bezier(.16,1,.3,1);}
+.cell-prices .price-pill:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
+.svc-mini-card{transition:all .35s cubic-bezier(.16,1,.3,1);}
+.svc-mini-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.3);}
+.svc-mini-card:hover svg{animation:pulseGlow 2s ease infinite;}
+.contact-icon{animation:pulseGlow 3s ease infinite;}
 
 /* ═══ CELL: CONTACT ═══ */
 .cell-contact{
@@ -708,28 +737,37 @@
     </div>
   </div>
 
-  <!-- CELL 7: REVIEWS -->
-  <div class="cell cell-reviews">
-    <div class="review-stars">
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  <!-- CELL 7: REVIEWS CAROUSEL -->
+  <div class="cell cell-reviews" id="reviewCarousel">
+    <div class="review-slide active">
+      <div class="review-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="review-text">"Transfert CDG impeccable. Le chauffeur était là 10 min avant l'heure. Mon vol avait 40 min de retard, il a attendu sans problème."</div>
+      <div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sophie B.</div><div class="review-source">Google · CDG → Paris</div></div></div>
     </div>
-    <div class="review-text">"Transfert CDG impeccable. Le chauffeur était là 10 minutes avant l'heure. Mon vol avait 40 min de retard, il a attendu sans problème. Je recommande à 100%."</div>
-    <div class="review-author">
-      <div class="review-avatar">S</div>
-      <div>
-        <div class="review-name">Sophie B.</div>
-        <div class="review-source">Google · Transfert CDG → Paris</div>
-      </div>
+    <div class="review-slide">
+      <div class="review-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="review-text">"Service au top pour notre mariage ! 3 véhicules coordonnés, chauffeurs en costume, timing parfait. Nos invités étaient ravis."</div>
+      <div class="review-author"><div class="review-avatar">M</div><div><div class="review-name">Marc & Julie D.</div><div class="review-source">Google · Mariage Château de Vaux</div></div></div>
+    </div>
+    <div class="review-slide">
+      <div class="review-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="review-text">"J'utilise ONTIME chaque semaine pour mes déplacements pro. Ponctualité irréprochable, véhicules toujours impeccables. Facturation simplifiée."</div>
+      <div class="review-author"><div class="review-avatar">P</div><div><div class="review-name">Philippe R.</div><div class="review-source">Google · Compte entreprise</div></div></div>
+    </div>
+    <div class="review-slide">
+      <div class="review-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="review-text">"Transfert Disneyland avec 2 enfants, sièges auto installés, bonbons pour les petits. Chauffeur adorable. On re-réserve les yeux fermés !"</div>
+      <div class="review-author"><div class="review-avatar">L</div><div><div class="review-name">Laura M.</div><div class="review-source">Google · Orly → Disneyland</div></div></div>
+    </div>
+    <div class="review-dots">
+      <span class="review-dot active" onclick="goReview(0)"></span>
+      <span class="review-dot" onclick="goReview(1)"></span>
+      <span class="review-dot" onclick="goReview(2)"></span>
+      <span class="review-dot" onclick="goReview(3)"></span>
     </div>
     <div class="review-badge">
       <div class="review-badge-score">4.9</div>
-      <div>
-        <div class="review-badge-text" data-i18n="avis-count">200+ avis Google</div>
-      </div>
+      <div><div class="review-badge-text" data-i18n="avis-count">200+ avis Google</div></div>
     </div>
   </div>
 
@@ -912,6 +950,41 @@ function setLang(lang){
   const sBtn=document.getElementById('sidebarLangBtnText');if(sBtn)sBtn.textContent=lang==='en'?'FR':'EN';
 }
 setLang(currentLang);
+
+// ═══ REVIEW CAROUSEL ═══
+let currentReview=0;
+const slides=document.querySelectorAll('.review-slide');
+const dots=document.querySelectorAll('.review-dot');
+function goReview(i){
+  slides[currentReview].classList.remove('active');
+  dots[currentReview].classList.remove('active');
+  currentReview=i%slides.length;
+  slides[currentReview].classList.add('active');
+  dots[currentReview].classList.add('active');
+}
+setInterval(()=>goReview(currentReview+1),4000);
+
+// ═══ ANIMATED COUNTERS ═══
+const statsObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.stat-number').forEach(el=>{
+        const text=el.textContent.trim();
+        if(text.includes('/')){return;}
+        const num=parseInt(text);if(isNaN(num))return;
+        const suffix=text.replace(/[\d]/g,'');
+        let current=0;const step=Math.max(1,Math.floor(num/30));
+        const timer=setInterval(()=>{
+          current+=step;if(current>=num){current=num;clearInterval(timer);}
+          el.textContent=current+suffix;
+        },40);
+      });
+      statsObserver.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+const statsCell=document.querySelector('.cell-stats');
+if(statsCell)statsObserver.observe(statsCell);
 </script>
 <script src="js/common.js"></script>
 </body>
