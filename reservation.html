@@ -1040,6 +1040,17 @@ function setLang(lang){
   const sBtn=document.getElementById('sidebarLangBtnText');if(sBtn)sBtn.textContent=ph?'FR':'EN';
 }
 setLang(currentLang);
+
+// ═══ PRE-FILL FROM SIMULATOR ═══
+(function prefillFromSimulator(){
+  const p=new URLSearchParams(window.location.search);
+  const from=p.get('from'), to=p.get('to'), veh=p.get('vehicle');
+  if(!from&&!to) return;
+  if(from) document.getElementById('depAdresseInput').value=from;
+  if(to) document.getElementById('arrAdresseInput').value=to;
+  if(veh){const sel=document.getElementById('inputVehicle');if(sel){sel.value=veh;}}
+  window.history.replaceState({},'',window.location.pathname);
+})();
 </script>
 <script src="js/common.js"></script>
 </body>

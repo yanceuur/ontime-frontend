@@ -996,7 +996,10 @@ document.getElementById('btnSimEstimate').addEventListener('click',async()=>{
   const nightEl=document.getElementById('simNightInfo');
   nightEl.style.display='none';
   document.getElementById('simPriceBox').style.display='block';
-  document.getElementById('btnBookFull').style.display='flex';
+  const bookBtn=document.getElementById('btnBookFull');
+  bookBtn.style.display='flex';
+  const bookParams=new URLSearchParams({from:fromFinal,to:toFinal,vehicle:veh});
+  bookBtn.href='reservation.html?'+bookParams.toString();
   btn.textContent=currentLang==='en'?'Recalculate':'Recalculer';
   btn.disabled=false;
 });
