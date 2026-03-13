@@ -35,6 +35,7 @@
 /* VEHICLE CARD */
 .cell-vehicle{display:flex;flex-direction:column;}
 .v-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-bottom:16px;background:#1a1a1a;}
+#van .v-img{object-fit:contain;background:#fff;}
 .v-tag{display:inline-block;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);border-radius:20px;padding:4px 14px;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:12px;width:fit-content;}
 .v-name{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:4px;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .v-models{font-size:.82rem;color:var(--gold);font-weight:500;margin-bottom:12px;}
@@ -149,7 +150,7 @@
 
   <!-- VAN -->
   <div class="cell cell-vehicle" id="van">
-    <picture><source srcset="img/car-classe-v.webp" type="image/webp"><img class="v-img" src="img/car-classe-v.jpg" alt="Mercedes Classe V" loading="lazy" decoding="async" onerror="this.style.background='#1a1a1a';this.src=''"></picture>
+    <img class="v-img" src="img/classe-v-white.jpg" alt="Mercedes Classe V" loading="lazy" decoding="async">
     <span class="v-tag">Groupe</span>
     <div class="v-name" data-i18n="vc3-name">Van</div>
     <div class="v-models">Classe V</div>
