@@ -26,8 +26,8 @@
 <link rel="dns-prefetch" href="https://js.stripe.com">
 <link rel="dns-prefetch" href="https://maps.googleapis.com">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"></noscript>
 <link rel="stylesheet" href="css/common.css">
 <style>
 /* ═══════════════════════════════════════════
@@ -50,7 +50,7 @@
 }
 .res-hero-label svg{width:14px;height:14px;fill:var(--accent);stroke:none;}
 .res-hero-title{
-  font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;
+  font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;
   background:linear-gradient(135deg,#fff 20%,var(--accent-light) 80%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:12px;
@@ -78,7 +78,7 @@
 }
 .booking-close{display:none;}
 .booking-title{
-  font-family:'DM Serif Display',serif;font-size:1.4rem;
+  font-family:'Playfair Display',serif;font-size:1.4rem;
   background:linear-gradient(135deg,#fff,var(--accent-light));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:4px;
@@ -100,7 +100,7 @@
   border-radius:16px;padding:22px;
 }
 .step1-right-title{
-  font-family:'DM Serif Display',serif;font-size:1rem;color:#fff;margin-bottom:14px;
+  font-family:'Playfair Display',serif;font-size:1rem;color:#fff;margin-bottom:14px;
 }
 
 /* ═══ FORM ELEMENTS ═══ */
@@ -109,7 +109,7 @@
 .form-input,.form-select{
   width:100%;padding:12px 14px;border-radius:10px;font-size:.88rem;
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  color:var(--text);font-family:'Inter',sans-serif;
+  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;
   transition:border-color .25s,box-shadow .25s;
   -webkit-appearance:none;appearance:none;
 }
@@ -122,7 +122,7 @@
   flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
   padding:8px 2px;border-radius:8px;cursor:pointer;
   background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.08);
-  color:var(--text-muted);font-size:.75rem;font-family:'Inter',sans-serif;
+  color:var(--text-muted);font-size:.75rem;font-family:'Plus Jakarta Sans',sans-serif;
   letter-spacing:.3px;transition:all .3s;
 }
 .cat-tab svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;transition:all .3s;}
@@ -137,7 +137,7 @@
 .pax-select{
   width:100%;padding:10px 12px;border-radius:8px;font-size:.88rem;
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-  color:var(--text);font-family:'Inter',sans-serif;cursor:pointer;
+  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;
   -webkit-appearance:none;appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;
 }
@@ -163,7 +163,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   font-size:.88rem;font-weight:600;cursor:pointer;
   background:var(--accent);color:#fff;
   letter-spacing:.3px;transition:all .25s;margin-top:16px;
-  font-family:'Inter',sans-serif;
+  font-family:'Plus Jakarta Sans',sans-serif;
 }
 .btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,169,110,.3);}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;}
@@ -246,7 +246,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <a href="contact.html" class="sidebar-link">Contact</a>
   <a href="reservation.html" class="sidebar-link" style="color:var(--accent-light);">Réserver</a>
   <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
-  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
 
 <!-- ═══ HERO ═══ -->
@@ -340,8 +340,8 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
         <!-- DISTANCE + PRICE DISPLAY -->
         <div id="priceDisplay" style="display:none;margin-top:0;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:14px 18px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-dist">Distance estimée</span><br><span id="distKm" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
-            <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-price-fix">Prix fixe</span><br><span id="priceAmount" style="font-family:'DM Serif Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
+            <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-dist">Distance estimée</span><br><span id="distKm" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
+            <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-price-fix">Prix fixe</span><br><span id="priceAmount" style="font-family:'Playfair Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
           </div>
           <div id="nightSurcharge" style="display:none;margin-top:8px;font-size:.72rem;color:var(--accent);opacity:.8;" data-i18n="lbl-night-surcharge">Supplément nuit (+10%) inclus</div>
         </div>
@@ -417,7 +417,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
         </div>
         <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,.04);">
           <span style="font-size:.75rem;color:var(--text-muted);" data-i18n="recap-total">Total</span>
-          <span id="recapPrice" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
+          <span id="recapPrice" style="font-family:'Playfair Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
         </div>
       </div>
 
@@ -440,7 +440,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
         <span id="p3Date">—</span> <span data-i18n="recap-at">à</span> <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
         <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;">
           <span style="font-size:.7rem;color:var(--text-muted);" data-i18n="lbl-total-pay">Total à payer</span>
-          <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
+          <span id="p3Price" style="font-family:'Playfair Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
         </div>
       </div>
       <div id="payment-element" style="margin-top:16px;"></div>
@@ -466,7 +466,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       <div style="width:64px;height:64px;border-radius:50%;background:rgba(76,175,80,.12);border:2px solid rgba(76,175,80,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
         <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;" data-i18n="confirm-title">Réservation confirmée</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;" data-i18n="confirm-title">Réservation confirmée</div>
       <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--accent);font-weight:600;"></div>
       <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;" data-i18n="confirm-note">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
       <div style="margin-top:20px;font-size:.82rem;color:var(--accent);" data-i18n="confirm-thanks">Merci de votre confiance</div>
