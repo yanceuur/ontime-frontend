@@ -301,6 +301,11 @@
 .sim-trust{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap;}
 .sim-trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
 .sim-trust-item svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
+/* Trust badges */
+.trust-badges{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;gap:10px;}
+.trust-badge-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;}
+.trust-badge{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;color:var(--text-muted);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:4px 10px;}
+.trust-badge svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
 
 /* ═══ CELL: CAR (Van photo carousel) ═══ */
 .cell-car{
@@ -629,6 +634,21 @@
       <div class="sim-trust-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="trust-pay">Paiement sécurisé</span></div>
       <div class="sim-trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="trust-fixedprice">Prix fixe garanti</span></div>
       <div class="sim-trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="trust-cancel24">Annulation -24h</span></div>
+    </div>
+    <!-- Trust badges -->
+    <div class="trust-badges">
+      <div class="trust-badge-group">
+        <svg width="32" height="20" viewBox="0 0 38 24" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-style="italic" font-weight="900" font-size="12" fill="white">VISA</text></svg>
+        <svg width="32" height="20" viewBox="0 0 38 24" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
+        <svg width="32" height="20" viewBox="0 0 38 24" aria-label="CB"><rect width="38" height="24" rx="3" fill="#005B99"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="13" fill="white">CB</text></svg>
+        <svg width="32" height="20" viewBox="0 0 38 24" aria-label="Apple Pay"><rect width="38" height="24" rx="3" fill="#000"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="10" fill="white"> Pay</text></svg>
+        <svg width="32" height="20" viewBox="0 0 38 24" aria-label="Google Pay"><rect width="38" height="24" rx="3" fill="#fff" stroke="#555"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="8" fill="#5F6368">G Pay</text></svg>
+      </div>
+      <div class="trust-badge-group">
+        <div class="trust-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="badge-vtc">VTC enregistré</span></div>
+        <div class="trust-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg><span data-i18n="badge-insurance">Assurance RC Pro</span></div>
+        <div class="trust-badge"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="badge-ssl">SSL Stripe</span></div>
+      </div>
     </div>
   </div>
 
@@ -1021,6 +1041,7 @@ const i18n={
     'contact-sub':'24/7<br>Instant response',
     'trust-vtc':'Licensed VTC drivers','trust-tracking':'Flight &amp; train tracking',
     'trust-payment':'Secure SSL payment','trust-cancel':'Free cancellation up to 24h','trust-driver':'Dedicated driver',
+    'badge-vtc':'Registered VTC','badge-insurance':'Professional liability insurance','badge-ssl':'SSL Stripe',
     'svc-title':'A service for every <em>occasion</em>',
     'svc1-h':'Airport Transfers','svc2-h':'Station Transfers','svc3-h':'Paris & IDF',
     'svc4-h':'Long Distance','svc5-h':'Chauffeur on Standby',

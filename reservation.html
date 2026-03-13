@@ -400,6 +400,25 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
               <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none;flex-shrink:0;"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
               <span data-i18n="res-trust4">Chauffeurs carte VTC</span>
             </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-dim);">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none;flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <span data-i18n="res-trust5">Assurance RC Professionnelle</span>
+            </div>
+          </div>
+          <!-- Payment logos -->
+          <div style="display:flex;align-items:center;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;justify-content:center;">
+            <svg width="34" height="22" viewBox="0 0 38 24" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-style="italic" font-weight="900" font-size="12" fill="white">VISA</text></svg>
+            <svg width="34" height="22" viewBox="0 0 38 24" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
+            <svg width="34" height="22" viewBox="0 0 38 24" aria-label="CB"><rect width="38" height="24" rx="3" fill="#005B99"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="13" fill="white">CB</text></svg>
+            <svg width="34" height="22" viewBox="0 0 38 24" aria-label="Apple Pay"><rect width="38" height="24" rx="3" fill="#000"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="10" fill="white"> Pay</text></svg>
+            <svg width="34" height="22" viewBox="0 0 38 24" aria-label="Google Pay"><rect width="38" height="24" rx="3" fill="#fff" stroke="#555"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="8" fill="#5F6368">G Pay</text></svg>
+            <span style="font-size:.68rem;color:var(--text-muted);margin-left:2px;">via Stripe</span>
+          </div>
+          <!-- Certification badges -->
+          <div style="display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap;justify-content:center;">
+            <span style="display:inline-flex;align-items:center;gap:4px;font-size:.62rem;color:var(--text-muted);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:3px 9px;"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--accent);stroke-width:2;fill:none;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-i18n="badge-vtc">VTC enregistré</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px;font-size:.62rem;color:var(--text-muted);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:3px 9px;"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--accent);stroke-width:2;fill:none;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> <span data-i18n="badge-insurance">Assurance RC Pro</span></span>
+            <span style="display:inline-flex;align-items:center;gap:4px;font-size:.62rem;color:var(--text-muted);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:3px 9px;"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:var(--accent);stroke-width:2;fill:none;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> <span data-i18n="badge-ssl">SSL Stripe</span></span>
           </div>
         </div>
       </div><!-- /step1-right -->
@@ -941,6 +960,8 @@ const i18n={
     'res-trust2':'Free cancellation -24h',
     'res-trust3':'Real-time flight tracking',
     'res-trust4':'Licensed VTC drivers',
+    'res-trust5':'Professional liability insurance',
+    'badge-vtc':'Registered VTC','badge-insurance':'Professional liability insurance','badge-ssl':'SSL Stripe',
     'book-title1':'Book online',
     'book-sub1':'Fixed price, instant quote. Book at least 4 hours ahead, or call <strong style="color:var(--accent)">07 60 55 44 60</strong>.',
     'lbl-from':'Departure','lbl-to':'Destination',
@@ -978,6 +999,8 @@ const i18n={
     'res-trust2':'Annulation gratuite -24h',
     'res-trust3':'Suivi vol en temps réel',
     'res-trust4':'Chauffeurs carte VTC',
+    'res-trust5':'Assurance RC Professionnelle',
+    'badge-vtc':'VTC enregistré','badge-insurance':'Assurance RC Pro','badge-ssl':'SSL Stripe',
     'book-title1':'Réservez en ligne',
     'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 60 55 44 60</strong>.',
     'lbl-from':'Départ','lbl-to':'Destination',
