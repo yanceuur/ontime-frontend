@@ -25,63 +25,51 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
 <link rel="stylesheet" href="css/common.css">
 <style>
-/* PAGE OVERRIDES */
-.footer-inner{max-width:960px;margin-bottom:20px;}
-.footer-copy{max-width:960px;}
+/* BENTO GRID OVERRIDE */
+.bento{grid-template-columns:repeat(4,1fr);max-width:1400px;gap:16px;padding:110px 24px 40px;}
 
-/* PAGE LAYOUT */
-.page-wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:100px 24px 40px;}
-.page-header{text-align:center;margin-bottom:40px;}
-.section-label{display:inline-flex;align-items:center;gap:10px;font-size:.75rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--accent);margin-bottom:12px;}
-.section-label::before{content:'';width:28px;height:1px;background:var(--accent);}
-.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;margin-bottom:14px;background:linear-gradient(135deg,#fff 30%,var(--accent-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.section-title em{font-style:italic;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.section-sub{color:var(--text-muted);font-size:.92rem;font-weight:300;max-width:620px;line-height:1.8;margin:0 auto;}
+/* HERO CELL */
+.cell-hero{grid-column:1/-1;text-align:center;padding:44px 36px 36px;}
 
 /* SERVICE CELLS */
-.cell{background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--glass-border);border-radius:20px;padding:36px;position:relative;overflow:hidden;margin-bottom:16px;opacity:0;animation:cellIn .6s cubic-bezier(.16,1,.3,1) forwards;}
-.cell:hover{transform:translateY(-3px);border-color:rgba(200,169,110,.15);box-shadow:0 12px 40px rgba(0,0,0,.3);transition:transform .4s,box-shadow .4s,border-color .3s;}
-.cell:nth-child(1){animation-delay:.1s}.cell:nth-child(2){animation-delay:.15s}.cell:nth-child(3){animation-delay:.2s}.cell:nth-child(4){animation-delay:.25s}.cell:nth-child(5){animation-delay:.3s}.cell:nth-child(6){animation-delay:.35s}.cell:nth-child(7){animation-delay:.4s}
-@keyframes cellIn{from{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
-
-.svc-head{display:flex;align-items:flex-start;gap:20px;margin-bottom:16px;}
-.svc-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.svc-icon svg{width:26px;height:26px;stroke:var(--accent);stroke-width:1.4;fill:none;}
+.svc-cell{grid-column:span 2;padding:28px;}
+.svc-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;}
+.svc-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.svc-icon svg{width:24px;height:24px;stroke:var(--accent);stroke-width:1.4;fill:none;}
 .svc-info{flex:1;min-width:0;}
-.svc-name{font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;line-height:1.3;margin-bottom:4px;}
+.svc-name{font-family:'DM Serif Display',serif;font-size:1.15rem;color:#fff;line-height:1.3;margin-bottom:3px;}
 .svc-name em{font-style:italic;color:var(--accent-light);}
-.svc-tag{display:inline-block;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.15);padding:3px 10px;border-radius:20px;}
-.svc-desc{color:var(--text-dim);font-size:.9rem;line-height:1.85;font-weight:300;margin-bottom:16px;}
+.svc-tag{display:inline-block;font-size:.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.15);padding:2px 9px;border-radius:20px;}
+.svc-desc{color:var(--text-dim);font-size:.85rem;line-height:1.7;font-weight:300;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .svc-desc strong{color:#fff;font-weight:500;}
-.svc-features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
-.svc-feat{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid var(--border-light);border-radius:8px;padding:6px 12px;}
-.svc-feat-check{color:var(--accent);font-size:.85rem;flex-shrink:0;}
-.svc-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:10px;font-size:.82rem;font-weight:600;text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;}
+.svc-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.svc-feat{display:flex;align-items:center;gap:5px;font-size:.76rem;color:var(--text-dim);background:rgba(255,255,255,.03);border:1px solid var(--border-light);border-radius:6px;padding:4px 10px;}
+.svc-feat-check{color:var(--accent);font-size:.8rem;flex-shrink:0;}
+.svc-cta{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;border-radius:10px;font-size:.78rem;font-weight:600;text-decoration:none;letter-spacing:.3px;transition:transform .2s,box-shadow .2s;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;}
 .svc-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,169,110,.25);}
-.svc-cta svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;}
+.svc-cta svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;}
 .svc-cta.outline{background:transparent;color:var(--accent);border:1px solid rgba(200,169,110,.3);}
 .svc-cta.outline:hover{border-color:var(--accent);box-shadow:0 8px 28px rgba(200,169,110,.1);}
 
-/* DESTINATIONS GRID */
-.dest-title{text-align:center;margin:40px 0 20px;}
-.dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:40px;}
-.dest-card{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:16px;padding:24px 14px;text-decoration:none;transition:transform .3s,border-color .3s,box-shadow .3s;}
-.dest-card:hover{transform:translateY(-4px);border-color:rgba(200,169,110,.3);box-shadow:0 12px 40px rgba(200,169,110,.08);}
-.dest-card-name{font-family:'DM Serif Display',serif;font-size:1rem;color:#fff;text-align:center;}
-.dest-card-price{font-size:.82rem;color:var(--accent);font-weight:500;}
+/* CTA BOTTOM CELL */
+.cell-cta{grid-column:1/-1;}
 
-/* CTA BOTTOM */
-.cta-bottom{text-align:center;padding:40px 0 60px;}
-.cta-bottom-title{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,3vw,2rem);color:#fff;margin-bottom:10px;}
-.cta-bottom-sub{color:var(--text-muted);font-size:.88rem;margin-bottom:28px;font-weight:300;}
-.cta-bottom-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+/* FOOTER OVERRIDES */
+.footer-inner{max-width:1400px;margin-bottom:20px;}
+.footer-copy{max-width:1400px;}
 
+/* RESPONSIVE */
+@media(max-width:1200px){
+  .bento{grid-template-columns:repeat(2,1fr);max-width:800px;padding:100px 24px 40px;}
+  .svc-cell{grid-column:span 1;}
+}
 @media(max-width:768px){
-  .page-wrap{padding:70px 16px 30px;}
-  .cell{padding:24px 20px;}
-  .svc-head{flex-direction:column;gap:12px;}
-  .svc-icon{width:48px;height:48px;border-radius:14px;}
-  .svc-icon svg{width:22px;height:22px;}
+  .bento{grid-template-columns:1fr;padding:70px 16px 30px;}
+  .svc-cell{grid-column:1/-1;padding:24px 20px;}
+  .cell-hero{padding:32px 20px 28px;}
+  .svc-head{flex-direction:column;gap:10px;}
+  .svc-icon{width:44px;height:44px;border-radius:12px;}
+  .svc-icon svg{width:20px;height:20px;}
 }
 </style>
 <script type="application/ld+json">
@@ -152,15 +140,17 @@
   <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </nav>
 
-<div class="page-wrap">
-  <header class="page-header">
-    <div class="section-label" data-i18n="sp-label">Nos Services</div>
-    <h1 class="section-title" data-i18n="sp-title">Experts du transfert <em>prive</em></h1>
-    <p class="section-sub" data-i18n="sp-sub">Aeroports, gares, Disneyland Paris, evenements — nous couvrons tous vos besoins de transport haut de gamme en Ile-de-France et au-dela.</p>
-  </header>
+<main class="bento">
+
+  <!-- HERO -->
+  <div class="cell cell-hero">
+    <div class="hero-label" data-i18n="sp-label">Nos Services</div>
+    <h1 class="hero-title" data-i18n="sp-title">Experts du transfert <em>prive</em></h1>
+    <p class="hero-sub" data-i18n="sp-sub">Aeroports, gares, Disneyland Paris, evenements — tous vos besoins de transport haut de gamme en Ile-de-France et au-dela.</p>
+  </div>
 
   <!-- SERVICE 1 : TRANSFERT AEROPORT -->
-  <div class="cell">
+  <div class="cell svc-cell">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.4-.1.9.3 1.1L11 12l-2 3H6l-1 1 3 2 2 3 1-1v-3l3-2 3.7 7.3c.2.4.7.6 1.1.3l.5-.3c.4-.2.5-.6.5-1.1z"/></svg></div>
       <div class="svc-info">
@@ -168,7 +158,7 @@
         <div class="svc-tag" data-i18n="s1-tag">CDG — Orly — Beauvais</div>
       </div>
     </div>
-    <div class="svc-desc" data-i18n="s1-desc">Nous assurons des centaines de transferts aeroport chaque mois. Nos chauffeurs connaissent parfaitement les acces, terminaux et zones de depose de <strong>Roissy-Charles de Gaulle</strong>, <strong>Orly</strong> et <strong>Beauvais</strong>. Votre vol est suivi en temps reel : en cas de retard ou d'avance, votre chauffeur s'adapte automatiquement, sans supplement. A votre arrivee, il vous attend avec une pancarte nominative pour les categories Van et Berline de luxe. Vous profitez de <strong>15 minutes d'attente offertes</strong> pour recuperer vos bagages en toute serenite.</div>
+    <div class="svc-desc" data-i18n="s1-desc">Transferts <strong>CDG</strong>, <strong>Orly</strong>, <strong>Beauvais</strong>. Suivi vol en temps reel, pancarte nominative, <strong>15 min d'attente offertes</strong>.</div>
     <div class="svc-features">
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s1-f1">Suivi vol temps reel</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s1-f2">Pancarte nominative</span></div>
@@ -179,7 +169,7 @@
   </div>
 
   <!-- SERVICE 2 : DISNEYLAND -->
-  <div class="cell">
+  <div class="cell svc-cell">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="svc-info">
@@ -187,18 +177,17 @@
         <div class="svc-tag" data-i18n="s2-tag">Marne-la-Vallee — Gare de Chessy</div>
       </div>
     </div>
-    <div class="svc-desc" data-i18n="s2-desc">Specialistes du transfert vers <strong>Disneyland Paris</strong> et la <strong>Gare de Marne-la-Vallee Chessy</strong>, nous transportons familles, groupes et voyageurs d'affaires directement depuis les aeroports parisiens, les gares ou votre domicile. Nos vehicules sont spacieux, ideaux pour les familles avec enfants — nous mettons a disposition des <strong>sieges bebe et rehausseurs gratuitement</strong>. Vos enfants voyagent en securite, et vous arrivez detendus, prets a profiter de la magie.</div>
+    <div class="svc-desc" data-i18n="s2-desc">Depuis aeroports, gares ou domicile. Vehicules spacieux, <strong>sieges bebe et rehausseurs gratuits</strong>, prise en charge hotels Disney.</div>
     <div class="svc-features">
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s2-f1">Sieges enfants offerts</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s2-f2">Depuis aeroports &amp; gares</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s2-f3">Vehicules spacieux</span></div>
-      <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s2-f4">Prise en charge hotels Disney</span></div>
     </div>
     <a href="reservation.html" class="svc-cta"><span data-i18n="s2-cta">Reserver pour Disneyland</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- SERVICE 3 : GARE -->
-  <div class="cell">
+  <div class="cell svc-cell">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="21" r="1"/><circle cx="16" cy="21" r="1"/><path d="M6 19h12"/></svg></div>
       <div class="svc-info">
@@ -206,18 +195,17 @@
         <div class="svc-tag" data-i18n="s3-tag">Toutes gares parisiennes</div>
       </div>
     </div>
-    <div class="svc-desc" data-i18n="s3-desc">Gare du Nord, Gare de Lyon, Gare Montparnasse, Gare de l'Est, Gare Saint-Lazare, Gare d'Austerlitz — nous couvrons <strong>toutes les gares parisiennes</strong>. Votre chauffeur vous attend a la sortie, pret a prendre en charge vos bagages. Comme pour les aeroports, nous suivons votre train en temps reel et ajustons l'heure de prise en charge en cas de retard. Nos chauffeurs maitrisent les acces souvent complexes des gares parisiennes pour vous garantir un trajet fluide et sans stress.</div>
+    <div class="svc-desc" data-i18n="s3-desc">Toutes gares parisiennes. Suivi train en temps reel, prise en charge bagages, <strong>ponctualite garantie</strong>.</div>
     <div class="svc-features">
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s3-f1">Suivi train temps reel</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s3-f2">Prise en charge bagages</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s3-f3">Toutes gares couvertes</span></div>
-      <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s3-f4">15 min d'attente offertes</span></div>
     </div>
     <a href="reservation.html" class="svc-cta"><span data-i18n="s3-cta">Reserver un transfert gare</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- SERVICE 4 : MISE A DISPOSITION -->
-  <div class="cell">
+  <div class="cell svc-cell">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="svc-info">
@@ -225,18 +213,17 @@
         <div class="svc-tag" data-i18n="s4-tag">A l'heure ou a la journee</div>
       </div>
     </div>
-    <div class="svc-desc" data-i18n="s4-desc">Besoin d'un chauffeur prive pour plusieurs heures ou une journee entiere ? Notre service de mise a disposition vous offre une <strong>flexibilite totale</strong>. Rendez-vous d'affaires, shopping, visites touristiques, deplacements multiples — votre chauffeur reste a votre disposition et s'adapte a votre programme en temps reel. Le vehicule et le chauffeur sont dedies exclusivement a vous pendant toute la duree de la prestation.</div>
+    <div class="svc-desc" data-i18n="s4-desc">Chauffeur dedie a l'heure ou a la journee. <strong>Flexibilite totale</strong> : arrets multiples, programme modifiable en temps reel.</div>
     <div class="svc-features">
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s4-f1">Chauffeur dedie</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s4-f2">Arrets multiples inclus</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s4-f3">Programme flexible</span></div>
-      <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s4-f4">Devis personnalise</span></div>
     </div>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20une%20mise%20%C3%A0%20disposition." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="s4-cta">Demander un devis WhatsApp</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- SERVICE 5 : EVENEMENTS -->
-  <div class="cell">
+  <div class="cell svc-cell">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       <div class="svc-info">
@@ -244,18 +231,17 @@
         <div class="svc-tag" data-i18n="s5-tag">Sur mesure</div>
       </div>
     </div>
-    <div class="svc-desc" data-i18n="s5-desc">Mariages, seminaires, galas, soirees d'entreprise — nous creons des prestations de transport <strong>sur mesure</strong> pour vos evenements. Du Sprinter VIP pour le cortege de mariage a la navette pour vos invites, chaque detail est pense pour que le transport soit a la hauteur de votre evenement. Service blanc gants, vehicules decores sur demande, coordination avec vos prestataires — nous nous occupons de tout.</div>
+    <div class="svc-desc" data-i18n="s5-desc">Mariages, galas, seminaires — transport <strong>sur mesure</strong>. Sprinter VIP, navettes invites, coordination logistique complete.</div>
     <div class="svc-features">
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s5-f1">Sprinter &amp; Van VIP</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s5-f2">Navettes invites</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s5-f3">Coordination logistique</span></div>
-      <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s5-f4">Devis sous 2h</span></div>
     </div>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20un%20%C3%A9v%C3%A9nement." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="s5-cta">Demander un devis evenement</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
   <!-- SERVICE 6 : LONGUE DISTANCE -->
-  <div class="cell">
+  <div class="cell svc-cell">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
       <div class="svc-info">
@@ -263,39 +249,26 @@
         <div class="svc-tag" data-i18n="s6-tag">France &amp; pays limitrophes</div>
       </div>
     </div>
-    <div class="svc-desc" data-i18n="s6-desc">Vous avez besoin d'un transfert au-dela de l'Ile-de-France ? Nous assurons des trajets <strong>longue distance</strong> vers toutes les grandes villes de France et les pays limitrophes : Belgique, Luxembourg, Pays-Bas, Allemagne. Confort optimal, vehicule recent, eau et chargeurs a disposition — meme sur les longs trajets, le service reste irreprochable. Tarif fixe communique a l'avance, sans mauvaise surprise au compteur.</div>
+    <div class="svc-desc" data-i18n="s6-desc">Toute la France, Belgique, Luxembourg. <strong>Tarif fixe</strong> communique a l'avance, confort premium sur longs trajets.</div>
     <div class="svc-features">
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s6-f1">Toute la France</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s6-f2">Belgique, Luxembourg</span></div>
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s6-f3">Tarif fixe longue distance</span></div>
-      <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s6-f4">Confort premium</span></div>
     </div>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20longue%20distance." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="s6-cta">Demander un devis</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
 
-  <!-- DESTINATIONS -->
-  <div class="dest-title">
-    <div class="section-label">Nos destinations</div>
-    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem);">Decouvrez nos <em>transferts</em></h2>
-  </div>
-  <div class="dest-grid">
-    <a href="vtc-paris-cdg.html" class="dest-card"><div class="dest-card-name">Aeroport CDG</div><div class="dest-card-price">des 80&#8364;</div></a>
-    <a href="vtc-paris-orly.html" class="dest-card"><div class="dest-card-name">Aeroport Orly</div><div class="dest-card-price">des 60&#8364;</div></a>
-    <a href="vtc-paris-beauvais.html" class="dest-card"><div class="dest-card-name">Aeroport Beauvais</div><div class="dest-card-price">des 150&#8364;</div></a>
-    <a href="vtc-gare-du-nord.html" class="dest-card"><div class="dest-card-name">Gare du Nord</div><div class="dest-card-price">des 35&#8364;</div></a>
-    <a href="vtc-disneyland-paris.html" class="dest-card"><div class="dest-card-name">Disneyland Paris</div><div class="dest-card-price">des 70&#8364;</div></a>
-  </div>
-
   <!-- CTA BOTTOM -->
-  <div class="cta-bottom">
-    <h2 class="cta-bottom-title" data-i18n="scta-title">Un besoin specifique ?</h2>
-    <p class="cta-bottom-sub" data-i18n="scta-sub">Notre equipe est disponible 24h/24 pour etudier votre demande et vous proposer la meilleure solution.</p>
-    <div class="cta-bottom-btns">
-      <a href="reservation.html" class="svc-cta"><span data-i18n="scta-btn1">Reserver en ligne</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="https://wa.me/33760554460?text=Bonjour%2C%20j%27ai%20une%20demande%20sp%C3%A9cifique." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="scta-btn2">Nous contacter</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <div class="cell cell-cta">
+    <h2 data-i18n="scta-title">Un besoin specifique ?</h2>
+    <p data-i18n="scta-sub">Notre equipe est disponible 24h/24 pour etudier votre demande.</p>
+    <div class="cta-btns">
+      <a href="reservation.html" class="cta-btn primary"><span data-i18n="scta-btn1">Reserver en ligne</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="https://wa.me/33760554460?text=Bonjour%2C%20j%27ai%20une%20demande%20sp%C3%A9cifique." class="cta-btn outline" target="_blank" rel="noopener"><span data-i18n="scta-btn2">Nous contacter</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
-</div>
+
+</main>
 
 <!-- FOOTER -->
 <footer class="footer">
