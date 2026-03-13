@@ -641,8 +641,8 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 
   <!-- CELL 2: PRICE SIMULATOR -->
   <div class="cell cell-simulator" id="simCell">
-    <div class="sim-title" data-i18n="book-title1">Estimez votre trajet</div>
-    <div class="sim-sub" data-i18n="sim-sub">Tarif fixe et immédiat — Prix calculé en temps réel</div>
+    <div class="sim-title" data-i18n="sim-title">Estimez votre trajet</div>
+    <div class="sim-sub" data-i18n="sim-sub">Simulateur de prix — Obtenez une estimation immédiate</div>
 
     <label class="sim-label" data-i18n="lbl-from">Départ</label>
     <select class="sim-select" id="simFrom">
@@ -692,9 +692,9 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
     </div>
 
     <button class="btn-sim" id="btnSimEstimate" data-i18n="btn-voir-tarif">Estimer le prix</button>
-    <a href="#" class="btn-book-full" id="btnBookFull" style="display:none;" onclick="openBooking();return false;" data-i18n="nav-book">
-      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
-      Réserver maintenant
+    <a href="#" class="btn-book-full" id="btnBookFull" style="display:none;" onclick="openBooking();return false;" data-i18n="sim-book-btn">
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Réserver ce trajet
     </a>
 
     <div class="sim-trust">
@@ -1559,7 +1559,7 @@ document.getElementById('btnSimEstimate').addEventListener('click',()=>{
   nightEl.style.display='none';
   document.getElementById('simPriceBox').style.display='block';
   document.getElementById('btnBookFull').style.display='flex';
-  document.getElementById('btnSimEstimate').textContent='Recalculer';
+  document.getElementById('btnSimEstimate').textContent=currentLang==='en'?'Recalculate':'Recalculer';
 });
 
 // ═══ LANGUE FR / EN ═══
@@ -1573,7 +1573,9 @@ const i18n={
     'hero-text':'No meter. <strong>A fixed price</strong>.<br>No waiting. <strong>Your driver already on site</strong>.<br>No doubt. <strong>Real-time flight & train tracking</strong>.<br><br>ONTIME Transfert, your <strong>alternative to Parisian taxis</strong> — for every airport, every station, every journey, around the clock.',
     'hero-sig':'See you soon aboard one of our vehicles.',
     'stat-avail':'Available','stat-reviews':'Client reviews',
-    'sim-sub':'Fixed price, instant quote — Price calculated in real time',
+    'sim-title':'Estimate your trip',
+    'sim-sub':'Price simulator — Get an instant estimate',
+    'sim-book-btn':'Book this trip',
     'contact-sub':'24/7<br>Instant response',
     'trust-vtc':'Licensed VTC drivers','trust-tracking':'Flight &amp; train tracking',
     'trust-payment':'Secure SSL payment','trust-cancel':'Free cancellation up to 24h','trust-driver':'Dedicated driver',
@@ -1618,7 +1620,9 @@ const i18n={
     'hero-text':'Pas de compteur. <strong>Un tarif fixe</strong>.<br>Pas d\'attente. <strong>Un chauffeur déjà sur place</strong>.<br>Pas de doute. <strong>Un suivi de vol et de train en temps réel</strong>.<br><br>ONTIME Transfert, votre <strong>alternative au taxi parisien</strong> — pour chaque aéroport, chaque gare, chaque trajet, à toute heure.',
     'hero-sig':'À très vite, à bord de l\'un de nos véhicules.',
     'stat-avail':'Disponible','stat-reviews':'Avis clients',
-    'sim-sub':'Tarif fixe et immédiat — Prix calculé en temps réel',
+    'sim-title':'Estimez votre trajet',
+    'sim-sub':'Simulateur de prix — Obtenez une estimation immédiate',
+    'sim-book-btn':'Réserver ce trajet',
     'contact-sub':'24h/24 · 7j/7<br>Réponse immédiate',
     'trust-vtc':'Carte VTC officielle','trust-tracking':'Suivi vol &amp; train',
     'trust-payment':'Paiement SSL sécurisé','trust-cancel':'Annulation −24h gratuite','trust-driver':'Chauffeur dédié',
