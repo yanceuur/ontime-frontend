@@ -410,36 +410,19 @@
 .mini-footer a:hover{color:var(--accent-light);}
 .mini-footer-copy{margin-top:8px;opacity:.5;}
 
-/* ═══ BOOKING OVERLAY (fullscreen modal) ═══ */
-.booking-overlay{
-  position:fixed;inset:0;z-index:300;
-  background:rgba(10,10,10,.92);
-  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
-  display:none;align-items:center;justify-content:center;
-  padding:20px;overflow-y:auto;
+/* ═══ BOOKING SECTION (inline on page) ═══ */
+.booking-section{
+  position:relative;z-index:1;
+  max-width:580px;margin:40px auto 0;padding:0 24px 40px;
+  scroll-margin-top:100px;
 }
-.booking-overlay.open{display:flex;}
 .booking-card{
-  background:linear-gradient(145deg,rgba(18,16,12,.97),rgba(10,10,10,.98));
-  border:1px solid rgba(200,169,110,.15);border-radius:24px;padding:32px;
-  width:100%;max-width:520px;
-  box-shadow:0 0 100px rgba(200,169,110,.08),0 40px 80px rgba(0,0,0,.5);
-  position:relative;
-  animation:modalIn .4s cubic-bezier(.16,1,.3,1);
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid rgba(200,169,110,.15);border-radius:24px;padding:36px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 0 1px rgba(200,169,110,.08);
 }
-@keyframes modalIn{
-  from{opacity:0;transform:translateY(30px) scale(.96);}
-  to{opacity:1;transform:translateY(0) scale(1);}
-}
-.booking-close{
-  position:absolute;top:16px;right:16px;
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;
-}
-.booking-close:hover{background:rgba(244,67,54,.15);border-color:rgba(244,67,54,.3);}
-.booking-close svg{width:16px;height:16px;stroke:var(--text-dim);stroke-width:2;fill:none;}
+.booking-close{display:none;}
 .booking-title{
   font-family:'DM Serif Display',serif;font-size:1.4rem;
   background:linear-gradient(135deg,#fff,var(--accent-light));
@@ -549,6 +532,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   .prices-grid{grid-template-columns:repeat(2,1fr);}
   .svc-mini-grid{grid-template-columns:repeat(2,1fr);}
   .sim-row{grid-template-columns:1fr;}
+  .booking-section{padding:0 12px 32px;margin-top:24px;}
   .booking-card{padding:24px 18px;}
 }
 
@@ -570,26 +554,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <a href="tarifs-reservations.html" data-i18n="nav-rates">Tarifs</a>
   <a href="services.html" data-i18n="nav-services">Services</a>
   <a href="contact.html" data-i18n="nav-contact">Contact</a>
-  <div class="nav-reserver">
-    <a href="#" class="pill-cta nav-reserver-btn" aria-expanded="false" onclick="toggleReserver(event)" data-i18n="nav-book">Réserver</a>
-    <div class="reserver-panel" id="reserverPanel">
-      <div class="rp-title">Simulateur de <em>prix</em></div>
-      <div class="rp-sub">Tarifs indicatifs depuis Paris intra-muros, de jour. Nuit +10%.</div>
-      <table class="rp-table">
-        <thead><tr><th>Trajet</th><th>Confort</th><th>Business</th><th>Van</th></tr></thead>
-        <tbody>
-          <tr><td>Paris → CDG</td><td class="pc">80 €</td><td class="pc">120 €</td><td class="pc">130 €</td></tr>
-          <tr><td>Paris → Orly</td><td class="pc">60 €</td><td class="pc">90 €</td><td class="pc">100 €</td></tr>
-          <tr><td>Paris → Beauvais</td><td class="pc">145 €</td><td class="pc">205 €</td><td class="pc">230 €</td></tr>
-          <tr><td>Paris → Gares</td><td class="pc">dès 35 €</td><td class="pc">dès 55 €</td><td class="pc">dès 60 €</td></tr>
-          <tr><td>Paris → Disneyland</td><td class="pc">75 €</td><td class="pc">110 €</td><td class="pc">120 €</td></tr>
-          <tr class="dispo"><td>Mise à disposition</td><td class="pc" colspan="3">à partir de 80 €/h</td></tr>
-        </tbody>
-      </table>
-      <a href="#" class="rp-cta" onclick="document.getElementById('reserverPanel').classList.remove('open');openBooking();return false;">Demander un devis</a>
-      <div class="rp-note">Tarifs indicatifs — devis personnalisé sur demande</div>
-    </div>
-  </div>
+  <a href="#booking" class="pill-cta" data-i18n="nav-book">Réserver</a>
 </nav>
 
 <!-- ═══ TOP-RIGHT UTILS (phone + lang) ═══ -->
@@ -616,7 +581,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <a href="faq.html" class="sidebar-link">FAQ</a>
   <a href="contact.html" class="sidebar-link">Contact</a>
   <a href="devenir-chauffeur.html" class="sidebar-link">Devenir chauffeur</a>
-  <a href="#" class="sidebar-link" onclick="openBooking();closeSidebar();return false;">Réserver</a>
+  <a href="#booking" class="sidebar-link" onclick="closeSidebar();">Réserver</a>
   <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
   <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
@@ -696,7 +661,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
     </div>
 
     <button class="btn-sim" id="btnSimEstimate" data-i18n="btn-voir-tarif">Estimer le prix</button>
-    <a href="#" class="btn-book-full" id="btnBookFull" style="display:none;" onclick="openBooking();return false;" data-i18n="sim-book-btn">
+    <a href="#booking" class="btn-book-full" id="btnBookFull" style="display:none;" data-i18n="sim-book-btn">
       <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       Réserver ce trajet
     </a>
@@ -911,12 +876,9 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <div class="mini-footer-copy" data-i18n="ft-copy">© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
 </div>
 
-<!-- ═══ BOOKING OVERLAY (Full booking form) ═══ -->
-<div class="booking-overlay" id="bookingOverlay">
-  <div class="booking-card" id="booking">
-    <div class="booking-close" onclick="closeBooking()">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </div>
+<!-- ═══ BOOKING SECTION (inline on page) ═══ -->
+<section class="booking-section" id="booking">
+  <div class="booking-card">
 
     <!-- STEP INDICATOR -->
     <div class="step-indicator" id="stepIndicator">
@@ -1092,30 +1054,20 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
     </div>
 
   </div>
-</div>
+</section>
 
 <!-- WHATSAPP -->
 <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
 <script>
-// ═══ BOOKING OVERLAY ═══
+// ═══ BOOKING SECTION (scroll to) ═══
 function openBooking(){
-  document.getElementById('bookingOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function closeBooking(){
-  document.getElementById('bookingOverlay').classList.remove('open');
-  document.body.style.overflow='';
-  if(window.location.hash==='#booking')history.replaceState(null,'',window.location.pathname);
+// Auto-scroll if arriving with #booking hash
+if(window.location.hash==='#booking'){
+  setTimeout(()=>document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'}),300);
 }
-// Close on Escape
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
-// Close on overlay click
-document.getElementById('bookingOverlay').addEventListener('click',e=>{
-  if(e.target===e.currentTarget)closeBooking();
-});
-// Auto-open booking if arriving with #booking hash (from other pages)
-if(window.location.hash==='#booking'){openBooking();}
 
 // ═══ CATEGORY TABS ═══
 let depCat='adresse',arrCat='adresse';
