@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Réservez votre VTC à Paris en ligne — Transfert aéroport CDG, Orly, gares, Disneyland. Tarif fixe garanti, paiement sécurisé Stripe, confirmation immédiate. ONTIME TRANSFERT.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="theme-color" content="#080d18">
+<link rel="canonical" href="https://www.ontime-chauffeur.fr/reservation.html">
+<link rel="alternate" hreflang="fr" href="https://www.ontime-chauffeur.fr/reservation.html">
+<link rel="alternate" hreflang="en" href="https://www.ontime-chauffeur.fr/reservation.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://www.ontime-chauffeur.fr/reservation.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Réserver un VTC Paris — ONTIME TRANSFERT">
+<meta property="og:description" content="Réservez votre chauffeur privé VTC à Paris. Transferts aéroport, gare, longue distance. Tarif fixe, paiement sécurisé.">
+<meta property="og:url" content="https://www.ontime-chauffeur.fr/reservation.html">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="ONTIME TRANSFERT">
+<meta property="og:image" content="https://www.ontime-chauffeur.fr/img/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Réserver un VTC Paris — ONTIME TRANSFERT">
+<meta name="twitter:description" content="Réservez votre VTC Paris — CDG, Orly, gares. Tarif fixe garanti, confirmation immédiate.">
+<title>Réserver un VTC Paris — ONTIME TRANSFERT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://js.stripe.com">
+<link rel="dns-prefetch" href="https://maps.googleapis.com">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
+<link rel="stylesheet" href="css/common.css">
+<style>
+/* ═══════════════════════════════════════════
+   ONTIME TRANSFERT — RESERVATION PAGE
+   Dedicated booking page with 2-column layout
+═══════════════════════════════════════════ */
+
+/* ═══ HERO ═══ */
+.res-hero{
+  position:relative;z-index:1;
+  text-align:center;
+  padding:130px 24px 40px;
+  max-width:900px;margin:0 auto;
+}
+.res-hero-label{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
+  border-radius:24px;padding:6px 16px;font-size:.65rem;color:var(--accent-light);
+  text-transform:uppercase;letter-spacing:2.5px;margin-bottom:16px;
+}
+.res-hero-label svg{width:14px;height:14px;fill:var(--accent);stroke:none;}
+.res-hero-title{
+  font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;
+  background:linear-gradient(135deg,#fff 20%,var(--accent-light) 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:12px;
+}
+.res-hero-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--accent-light),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.res-hero-sub{
+  font-size:.92rem;color:var(--text-dim);font-weight:300;line-height:1.7;max-width:560px;margin:0 auto;
+}
+
+/* ═══ BOOKING SECTION ═══ */
+.booking-section{
+  position:relative;z-index:1;
+  max-width:900px;margin:0 auto;padding:0 24px 40px;
+  scroll-margin-top:100px;
+}
+.booking-card{
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
+  border:1px solid rgba(200,169,110,.15);border-radius:24px;padding:36px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 0 1px rgba(200,169,110,.08);
+}
+.booking-close{display:none;}
+.booking-title{
+  font-family:'DM Serif Display',serif;font-size:1.4rem;
+  background:linear-gradient(135deg,#fff,var(--accent-light));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.booking-sub{font-size:.88rem;color:var(--text-muted);font-weight:300;margin-bottom:18px;line-height:1.6;}
+
+/* ═══ 2-COLUMN LAYOUT FOR STEP 1 ═══ */
+.step1-grid{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:28px;
+  align-items:start;
+}
+.step1-left{}
+.step1-right{
+  position:sticky;top:120px;
+  background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(200,169,110,.02));
+  border:1px solid rgba(200,169,110,.12);
+  border-radius:16px;padding:22px;
+}
+.step1-right-title{
+  font-family:'DM Serif Display',serif;font-size:1rem;color:#fff;margin-bottom:14px;
+}
+
+/* ═══ FORM ELEMENTS ═══ */
+.form-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:6px;display:block;margin-top:14px;}
+.form-label:first-of-type{margin-top:0;}
+.form-input,.form-select{
+  width:100%;padding:12px 14px;border-radius:10px;font-size:.88rem;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--text);font-family:'Inter',sans-serif;
+  transition:border-color .25s,box-shadow .25s;
+  -webkit-appearance:none;appearance:none;
+}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
+.form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+.form-select option{background:#0a0a0a;color:var(--text);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.cat-tabs{display:flex;gap:5px;margin-bottom:6px;}
+.cat-tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 2px;border-radius:8px;cursor:pointer;
+  background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.08);
+  color:var(--text-muted);font-size:.75rem;font-family:'Inter',sans-serif;
+  letter-spacing:.3px;transition:all .3s;
+}
+.cat-tab svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;transition:all .3s;}
+.cat-tab:hover{border-color:rgba(200,169,110,.2);color:var(--text-dim);}
+.cat-tab.active{background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.05));border-color:rgba(200,169,110,.35);color:var(--accent);}
+.cat-tab.active svg{stroke:var(--accent);}
+.field-wrap{position:relative;}
+.f-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--text-muted);stroke-width:1.5;fill:none;pointer-events:none;}
+.field-wrap .form-input,.field-wrap .form-select{padding-left:36px;}
+.pax-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.pax-item label{font-size:.72rem;color:var(--text-muted);margin-bottom:4px;display:block;letter-spacing:.5px;}
+.pax-select{
+  width:100%;padding:10px 12px;border-radius:8px;font-size:.88rem;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  color:var(--text);font-family:'Inter',sans-serif;cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;
+}
+.pax-select option{background:#0a0a0a;color:var(--text);}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 0;}
+.toggle-row-label{font-size:.78rem;color:var(--text-dim);}
+.toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle-switch input{opacity:0;width:0;height:0;}
+.toggle-slider{
+  position:absolute;cursor:pointer;inset:0;border-radius:24px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);
+  transition:.3s;
+}
+.toggle-slider:before{
+  content:'';position:absolute;height:18px;width:18px;left:3px;bottom:2px;border-radius:50%;
+  background:var(--text-muted);transition:.3s;
+}
+input:checked+.toggle-slider{background:rgba(200,169,110,.2);border-color:rgba(200,169,110,.35);}
+input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--accent);}
+.child-seat-panel{margin-top:6px;}
+.btn-primary{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  font-size:.88rem;font-weight:600;cursor:pointer;
+  background:var(--accent);color:#fff;
+  letter-spacing:.3px;transition:all .25s;margin-top:16px;
+  font-family:'Inter',sans-serif;
+}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,169,110,.3);}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.booking-trust{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
+.trust-item svg{width:13px;height:13px;stroke:var(--accent);stroke-width:1.8;fill:none;}
+.step-indicator{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:18px;}
+.step-dot{
+  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:600;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text-muted);
+  transition:all .3s;
+}
+.step-dot.active{background:rgba(200,169,110,.15);border-color:var(--accent);color:var(--accent);}
+.step-dot.done{background:rgba(76,175,80,.15);border-color:rgba(76,175,80,.4);color:#4caf50;}
+.step-line{flex:1;max-width:40px;height:1px;background:rgba(255,255,255,.08);}
+.card-logos-row{display:flex;align-items:center;gap:6px;margin-top:14px;flex-wrap:wrap;}
+.phone-row{display:flex;gap:6px;align-items:center;}
+.phone-row .phone-prefix{width:84px;flex-shrink:0;padding-left:10px;padding-right:24px;}
+
+/* ═══ PRICE DISPLAY (right column) ═══ */
+.price-result-box{
+  margin-top:14px;padding:14px 18px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));
+  border:1px solid rgba(200,169,110,.2);
+  display:none;
+}
+
+/* ═══ STEPS 2 & 3 CENTERED ═══ */
+.step-narrow{max-width:580px;margin:0 auto;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .step1-grid{grid-template-columns:1fr;gap:16px;}
+  .step1-right{position:static;}
+  .booking-section{padding:0 12px 32px;}
+  .booking-card{padding:24px 18px;}
+  .form-row{grid-template-columns:1fr;}
+  .res-hero{padding:100px 16px 24px;}
+}
+
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Accueil","item":"https://www.ontime-chauffeur.fr/"},
+  {"@type":"ListItem","position":2,"name":"Réserver","item":"https://www.ontime-chauffeur.fr/reservation.html"}
+]}
+</script>
+</head>
+<body>
+
+<nav class="pill-nav">
+  <a href="index.html" data-i18n="nav-home">Accueil</a>
+  <a href="tarifs-reservations.html" data-i18n="nav-rates">Tarifs</a>
+  <a href="services.html" data-i18n="nav-services">Services</a>
+  <a href="contact.html" data-i18n="nav-contact">Contact</a>
+  <a href="reservation.html" class="pill-cta active" data-i18n="nav-book">Réserver</a>
+</nav>
+
+<!-- TOP-RIGHT UTILS -->
+<div class="top-utils" id="topUtils">
+  <a href="tel:+33760554460" class="top-phone">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    07 60 55 44 60
+  </a>
+  <button class="top-lang" id="langBtn" onclick="toggleLang()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <span id="langBtnText">EN</span>
+  </button>
+</div>
+
+<button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a href="index.html" class="sidebar-link">Accueil</a>
+  <a href="vehicules.html" class="sidebar-link">Véhicules</a>
+  <a href="services.html" class="sidebar-link">Services</a>
+  <a href="tarifs-reservations.html" class="sidebar-link">Tarifs</a>
+  <a href="contact.html" class="sidebar-link">Contact</a>
+  <a href="reservation.html" class="sidebar-link" style="color:var(--accent-light);">Réserver</a>
+  <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Inter',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
+</aside>
+
+<!-- ═══ HERO ═══ -->
+<div class="res-hero">
+  <div class="res-hero-label">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="none"/></svg>
+    <span data-i18n="res-badge">Réservation en ligne</span>
+  </div>
+  <h1 class="res-hero-title" data-i18n="res-title">Réservez votre <em>transfert</em></h1>
+  <p class="res-hero-sub" data-i18n="res-sub">Tarif fixe garanti, paiement sécurisé, confirmation immédiate. Réservez votre chauffeur privé en quelques clics.</p>
+</div>
+
+<!-- ═══ BOOKING SECTION ═══ -->
+<section class="booking-section" id="booking">
+  <div class="booking-card">
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator" id="stepIndicator">
+      <div class="step-dot active" id="stepDot1">1</div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="stepDot2">2</div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="stepDot3">3</div>
+    </div>
+
+    <!-- STEP 1: FORMULAIRE (2-column) -->
+    <div id="bookingStep1">
+    <div class="booking-title" data-i18n="book-title1">Réservez en ligne</div>
+    <div class="booking-sub" data-i18n="book-sub1">Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 60 55 44 60</strong>.</div>
+
+    <div class="step1-grid">
+      <div class="step1-left">
+
+    <label class="form-label" data-i18n="lbl-from">Départ</label>
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="adresse" data-target="dep"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><span data-i18n="cat-adresse">Adresse</span></button>
+      <button class="cat-tab" data-cat="aeroport" data-target="dep"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><span data-i18n="cat-aeroport">Aéroport</span></button>
+      <button class="cat-tab" data-cat="gare" data-target="dep"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><span data-i18n="cat-gare">Gare</span></button>
+      <button class="cat-tab" data-cat="lieu" data-target="dep"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="cat-lieu">Lieu</span></button>
+    </div>
+    <div id="dep-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><label for="depAdresseInput" class="sr-only">Adresse de départ</label><input type="text" class="form-input" id="depAdresseInput" placeholder="Saisir une adresse de départ" autocomplete="off"></div></div>
+    <div id="dep-aeroport" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><select class="form-select" id="depAeroportSelect"><option value="" disabled selected>Choisir un aéroport</option><option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option><option value="Aéroport d'Orly">Aéroport d'Orly</option><option value="Aéroport de Beauvais">Aéroport de Beauvais</option><option value="Aéroport du Bourget">Aéroport du Bourget</option></select></div></div>
+    <div id="dep-gare" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><select class="form-select" id="depGareSelect"><option value="" disabled selected>Choisir une gare</option><option value="Gare du Nord">Gare du Nord</option><option value="Gare de Lyon">Gare de Lyon</option><option value="Gare Montparnasse">Gare Montparnasse</option><option value="Gare de l'Est">Gare de l'Est</option><option value="Gare Saint-Lazare">Gare Saint-Lazare</option><option value="Gare d'Austerlitz">Gare d'Austerlitz</option><option value="Gare de Bercy">Gare de Bercy</option><option value="Gare Massy TGV">Gare Massy TGV</option><option value="Gare Marne-la-Vallée Chessy">Gare Marne-la-Vallée Chessy</option></select></div></div>
+    <div id="dep-lieu" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><select class="form-select" id="depLieuSelect"><option value="" disabled selected>Choisir un lieu</option><option value="Disneyland Paris">Disneyland Paris</option><option value="Château de Versailles">Château de Versailles</option><option value="Parc Astérix">Parc Astérix</option><option value="La Défense">La Défense</option></select></div></div>
+
+    <label class="form-label" data-i18n="lbl-to">Destination</label>
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="adresse" data-target="arr"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z"/></svg><span data-i18n="cat-adresse">Adresse</span></button>
+      <button class="cat-tab" data-cat="aeroport" data-target="arr"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><span data-i18n="cat-aeroport">Aéroport</span></button>
+      <button class="cat-tab" data-cat="gare" data-target="arr"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><span data-i18n="cat-gare">Gare</span></button>
+      <button class="cat-tab" data-cat="lieu" data-target="arr"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span data-i18n="cat-lieu">Lieu</span></button>
+    </div>
+    <div id="arr-adresse"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><label for="arrAdresseInput" class="sr-only">Adresse de destination</label><input type="text" class="form-input" id="arrAdresseInput" placeholder="Saisir une adresse de destination" autocomplete="off"></div></div>
+    <div id="arr-aeroport" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg><select class="form-select" id="arrAeroportSelect"><option value="" disabled selected>Choisir un aéroport</option><option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option><option value="Aéroport d'Orly">Aéroport d'Orly</option><option value="Aéroport de Beauvais">Aéroport de Beauvais</option><option value="Aéroport du Bourget">Aéroport du Bourget</option></select></div></div>
+    <div id="arr-gare" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><path d="M8 19l-2 3"/><path d="M16 19l2 3"/></svg><select class="form-select" id="arrGareSelect"><option value="" disabled selected>Choisir une gare</option><option value="Gare du Nord">Gare du Nord</option><option value="Gare de Lyon">Gare de Lyon</option><option value="Gare Montparnasse">Gare Montparnasse</option><option value="Gare de l'Est">Gare de l'Est</option><option value="Gare Saint-Lazare">Gare Saint-Lazare</option><option value="Gare d'Austerlitz">Gare d'Austerlitz</option><option value="Gare de Bercy">Gare de Bercy</option><option value="Gare Massy TGV">Gare Massy TGV</option><option value="Gare Marne-la-Vallée Chessy">Gare Marne-la-Vallée Chessy</option></select></div></div>
+    <div id="arr-lieu" style="display:none"><div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><select class="form-select" id="arrLieuSelect"><option value="" disabled selected>Choisir un lieu</option><option value="Disneyland Paris">Disneyland Paris</option><option value="Château de Versailles">Château de Versailles</option><option value="Parc Astérix">Parc Astérix</option><option value="La Défense">La Défense</option></select></div></div>
+
+    <label class="form-label" data-i18n="lbl-paxbags">Passagers &amp; bagages</label>
+    <div class="pax-grid">
+      <div class="pax-item"><label for="inputPax" data-i18n="lbl-pax">Passagers</label><select class="pax-select" id="inputPax"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select></div>
+      <div class="pax-item"><label for="inputBags" data-i18n="lbl-bags">Bagages</label><select class="pax-select" id="inputBags"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-row-label" data-i18n="lbl-childseat">Siège enfant requis ?</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggleChildSeat" onchange="document.getElementById('childSeatPanel').style.display=this.checked?'block':'none'">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="child-seat-panel" id="childSeatPanel" style="display:none;">
+      <div class="pax-grid">
+        <div class="pax-item"><label for="inputSeatBaby" data-i18n="lbl-seat-baby">Siège bébé (0-12m)</label><select class="pax-select" id="inputSeatBaby"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+        <div class="pax-item"><label for="inputSeatChild" data-i18n="lbl-seat-child">Siège enfant (1-10a)</label><select class="pax-select" id="inputSeatChild"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
+      </div>
+    </div>
+
+    <label class="form-label" data-i18n="lbl-datetime">Date &amp; heure</label>
+    <div class="form-row">
+      <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><label for="inputDate" class="sr-only">Date</label><input type="date" class="form-input" id="inputDate"></div>
+      <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><label for="inputTime" class="sr-only">Heure</label><select class="form-select" id="inputTime"><option value="" disabled selected>Heure</option></select></div>
+    </div>
+
+    <label class="form-label" data-i18n="lbl-vehicle">Véhicule</label>
+    <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg><select class="form-select" id="inputVehicle"><option value="" disabled selected>Choisir un véhicule</option><option value="confort">Berline Confort (1-3 passagers)</option><option value="premium">Berline Premium (1-3 passagers)</option><option value="van">Van / Minibus (4-7 passagers)</option></select></div>
+
+      </div><!-- /step1-left -->
+
+      <div class="step1-right">
+        <div class="step1-right-title" data-i18n="res-price-title">Votre tarif</div>
+
+        <!-- DISTANCE + PRICE DISPLAY -->
+        <div id="priceDisplay" style="display:none;margin-top:0;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:14px 18px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-dist">Distance estimée</span><br><span id="distKm" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
+            <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-price-fix">Prix fixe</span><br><span id="priceAmount" style="font-family:'DM Serif Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
+          </div>
+          <div id="nightSurcharge" style="display:none;margin-top:8px;font-size:.72rem;color:var(--accent);opacity:.8;" data-i18n="lbl-night-surcharge">Supplément nuit (+10%) inclus</div>
+        </div>
+
+        <button class="btn-primary" id="btnVoirTarif" data-i18n="btn-voir-tarif" style="margin-top:14px;">Voir le tarif</button>
+
+        <!-- ERROR MSG -->
+        <div id="bookingError" role="alert" aria-live="polite" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+
+        <div class="booking-trust" style="margin-top:16px;">
+          <div class="trust-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span data-i18n="trust-pay">Paiement sécurisé</span></div>
+          <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="trust-fixedprice">Prix fixe garanti</span></div>
+          <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="trust-cancel24">Annulation -24h</span></div>
+        </div>
+
+        <!-- TRUST BADGES -->
+        <div style="margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.04);">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-dim);">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none;flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span data-i18n="res-trust1">Paiement SSL via Stripe</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-dim);">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none;flex-shrink:0;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span data-i18n="res-trust2">Annulation gratuite -24h</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-dim);">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none;flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span data-i18n="res-trust3">Suivi vol en temps réel</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text-dim);">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--accent);stroke-width:1.5;fill:none;flex-shrink:0;"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+              <span data-i18n="res-trust4">Chauffeurs carte VTC</span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /step1-right -->
+    </div><!-- /step1-grid -->
+    </div>
+
+    <!-- STEP 2: COORDONNÉES -->
+    <div id="bookingStep2" style="display:none;">
+      <div class="step-narrow">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;cursor:pointer;" id="btnBackStep1">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--accent);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span style="font-size:.8rem;color:var(--accent);" data-i18n="btn-back">Retour</span>
+      </div>
+      <div class="booking-title" data-i18n="book-title2">Vos coordonnées</div>
+      <div class="booking-sub" data-i18n="book-sub2">Pour finaliser votre réservation</div>
+      <div class="form-row">
+        <div><label class="form-label" data-i18n="lbl-firstname">Prénom</label><input type="text" class="form-input" id="inputFirstName" placeholder="Prénom" autocomplete="given-name" style="padding-left:12px;"></div>
+        <div><label class="form-label" data-i18n="lbl-lastname">Nom</label><input type="text" class="form-input" id="inputLastName" placeholder="Nom" autocomplete="family-name" style="padding-left:12px;"></div>
+      </div>
+      <label class="form-label" data-i18n="lbl-phone">Téléphone</label>
+      <div class="phone-row">
+        <select class="form-select phone-prefix" id="inputPhonePrefix">
+          <option value="+33">+33 FR</option><option value="+32">+32 BE</option><option value="+41">+41 CH</option><option value="+352">+352 LU</option><option value="+44">+44 GB</option><option value="+1">+1 US</option><option value="+49">+49 DE</option><option value="+39">+39 IT</option><option value="+34">+34 ES</option><option value="+351">+351 PT</option><option value="+212">+212 MA</option><option value="+213">+213 DZ</option><option value="+216">+216 TN</option>
+        </select>
+        <input type="tel" class="form-input" id="inputPhone" placeholder="6 12 34 56 78" title="Numéro valide" autocomplete="tel-national" maxlength="15" style="flex:1;">
+      </div>
+      <label class="form-label" data-i18n="lbl-email" style="margin-top:8px;">Email</label>
+      <input type="email" class="form-input" id="inputEmail" placeholder="votre@email.com" autocomplete="email" style="padding-left:12px;">
+      <label class="form-label" data-i18n="lbl-flight">N° de vol / train (optionnel)</label>
+      <input type="text" class="form-input" id="inputFlight" placeholder="Ex: AF1234, TGV 6789" style="padding-left:12px;">
+
+      <!-- RECAP -->
+      <div style="margin-top:18px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);border-radius:10px;padding:14px 18px;">
+        <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;" data-i18n="recap-title">Récapitulatif</div>
+        <div style="font-size:.82rem;color:var(--text-dim);line-height:1.8;">
+          <span id="recapFrom">—</span> → <span id="recapTo">—</span><br>
+          <span id="recapDate">—</span> <span data-i18n="recap-at">à</span> <span id="recapTime">—</span><br>
+          <span id="recapVeh">—</span> · <span id="recapPax">—</span> <span data-i18n="recap-pax">pax</span> · <span id="recapBags">—</span> <span data-i18n="recap-bags">bag.</span><span id="recapChildSeat"></span>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid rgba(255,255,255,.04);">
+          <span style="font-size:.75rem;color:var(--text-muted);" data-i18n="recap-total">Total</span>
+          <span id="recapPrice" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btnContinuePay" style="margin-top:16px;" data-i18n="btn-continue">Continuer vers le paiement →</button>
+      <div id="step2Error" role="alert" aria-live="polite" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+      </div>
+    </div>
+
+    <!-- STEP 3: PAIEMENT -->
+    <div id="bookingStep3" style="display:none;">
+      <div class="step-narrow">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;cursor:pointer;" id="btnBackStep2">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--accent);stroke-width:2;fill:none;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span style="font-size:.8rem;color:var(--accent);" data-i18n="btn-back">Retour</span>
+      </div>
+      <div class="booking-title" data-i18n="book-title3">Paiement sécurisé</div>
+      <div class="booking-sub" data-i18n="book-sub3">Vos données sont protégées par chiffrement SSL via Stripe.</div>
+      <div style="margin-top:14px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
+        <span id="p3From">—</span> → <span id="p3To">—</span><br>
+        <span id="p3Date">—</span> <span data-i18n="recap-at">à</span> <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
+        <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:.7rem;color:var(--text-muted);" data-i18n="lbl-total-pay">Total à payer</span>
+          <span id="p3Price" style="font-family:'DM Serif Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span>
+        </div>
+      </div>
+      <div id="payment-element" style="margin-top:16px;"></div>
+      <div id="card-errors" style="color:#f44336;font-size:.76rem;margin-top:6px;min-height:18px;"></div>
+      <button class="btn-primary" id="btnPay" style="margin-top:12px;">
+        <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
+        <span data-i18n="btn-pay">Payer et confirmer</span>
+      </button>
+      <div id="payError" role="alert" aria-live="polite" style="display:none;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(244,67,54,.1);border:1px solid rgba(244,67,54,.2);font-size:.78rem;color:#f44336;"></div>
+      <div class="card-logos-row">
+        <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#1A1F71"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-style="italic" font-weight="900" font-size="12" fill="white">VISA</text></svg>
+        <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#1e1e1e"/><circle cx="15" cy="12" r="7" fill="#EB001B"/><circle cx="23" cy="12" r="7" fill="#F79E1B"/></svg>
+        <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;" aria-label="Apple Pay"><rect width="38" height="24" rx="3" fill="#000"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="10" fill="white"> Pay</text></svg>
+        <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;" aria-label="Google Pay"><rect width="38" height="24" rx="3" fill="#fff" stroke="#ddd"/><text x="19" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-weight="600" font-size="8" fill="#5F6368">G Pay</text></svg>
+        <svg width="38" height="24" viewBox="0 0 38 24" style="border-radius:4px;" aria-label="CB"><rect width="38" height="24" rx="3" fill="#005B99"/><text x="19" y="16.5" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="13" fill="white">CB</text></svg>
+        <span style="font-size:.8rem;color:var(--text-muted);margin-left:2px;">via Stripe</span>
+      </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: CONFIRMATION -->
+    <div id="bookingStep4" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="width:64px;height:64px;border-radius:50%;background:rgba(76,175,80,.12);border:2px solid rgba(76,175,80,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+        <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:2;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;" data-i18n="confirm-title">Réservation confirmée</div>
+      <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--accent);font-weight:600;"></div>
+      <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;" data-i18n="confirm-note">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
+      <div style="margin-top:20px;font-size:.82rem;color:var(--accent);" data-i18n="confirm-thanks">Merci de votre confiance</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg viewBox="0 0 44 44" fill="none" width="28" height="28"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/><circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/><line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="22" r="1.8" fill="#c8a96e"/></svg>
+      <span style="font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
+      <span style="font-size:.8rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
+    </div>
+    <div class="footer-links"><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#cgv">CGV</a><a href="mentions-legales.html#cookies">Confidentialité</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+</footer>
+
+<a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<script>
+// ═══ CATEGORY TABS ═══
+let depCat='adresse',arrCat='adresse';
+document.querySelectorAll('.cat-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const t=tab.dataset.target,c=tab.dataset.cat;
+    if(t==='dep')depCat=c; else arrCat=c;
+    tab.parentElement.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+    tab.classList.add('active');
+    ['adresse','aeroport','gare','lieu'].forEach(x=>{
+      const el=document.getElementById(t+'-'+x);
+      if(el)el.style.display=x===c?'block':'none';
+    });
+  });
+});
+
+// ═══ SET MIN DATE & POPULATE TIME ═══
+const dateInput=document.getElementById('inputDate');
+const timeSelect=document.getElementById('inputTime');
+const today=new Date().toISOString().split('T')[0];
+const maxDate=new Date();maxDate.setFullYear(maxDate.getFullYear()+1);
+dateInput.min=today;dateInput.max=maxDate.toISOString().split('T')[0];dateInput.value=today;
+function updateTimeOptions(){
+  const selDate=dateInput.value;
+  const isToday=selDate===new Date().toISOString().split('T')[0];
+  let minSlot=0;
+  if(isToday){const now=new Date();const totalMin=now.getHours()*60+now.getMinutes()+4*60;minSlot=Math.ceil(totalMin/30)*30;}
+  const prev=timeSelect.value;
+  const cl=localStorage.getItem('lang')||'fr';
+  timeSelect.innerHTML='<option value="" disabled selected>'+(cl==='en'?'Time':'Heure')+'</option>';
+  for(let h=0;h<24;h++){for(let m=0;m<60;m+=30){
+    const slot=h*60+m;if(isToday&&slot<minSlot)continue;
+    const v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+    timeSelect.innerHTML+='<option value="'+v+'">'+v+'</option>';
+  }}
+  if(prev)timeSelect.value=prev;
+}
+updateTimeOptions();
+dateInput.addEventListener('change',updateTimeOptions);
+
+// ═══ BOOKING STATE ═══
+const BACKEND='https://ontime-backend.vercel.app';
+const STRIPE_PK='pk_test_51T4mwLDBDY6q70mKum1sIQyVvfUGEVnGn2TiqdpSizarS9tipNLYhHEY1omlS97251QoBBB6GwUdRE9k4pODLmsf00CiPDhOoU';
+let booking={from:'',to:'',distKm:0,date:'',time:'',pax:1,bags:0,veh:'confort',price:0,firstName:'',lastName:'',phone:'',email:'',flight:''};
+
+// ═══ NOTIFICATIONS ═══
+async function sendBookingNotifications(ref,fn,ln,ph,em){
+  const seats=[];
+  if(booking.seatBaby>0)seats.push(booking.seatBaby+' siège bébé');
+  if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
+  const vehNames={confort:'Confort',premium:'Business',van:'Van / Minibus'};
+  const details=[
+    '📋 Réf. '+ref,'📍 '+booking.from+' → '+booking.to,'📅 '+booking.date+' à '+booking.time,
+    '🚗 '+vehNames[booking.veh]+' · '+booking.pax+' pax · '+booking.bags+' bag.',
+    seats.length?'🪑 '+seats.join(', '):'',booking.flight?'✈️ Vol/Train : '+booking.flight:'',
+    '💶 Prix : '+booking.price+'€','👤 Client : '+fn+' '+ln,'📱 Tél : '+ph,'📧 Email : '+em
+  ].filter(Boolean).join('\n');
+  try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:fn+' '+ln,email:em,phone:ph,subject:'🆕 Nouvelle réservation '+ref,message:details})});}catch{}
+  try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({to:em,name:'ONTIME TRANSFERT',email:em,phone:ph,subject:'Confirmation de votre réservation '+ref,message:'Bonjour '+fn+',\n\nVotre réservation est confirmée.\n\n'+details+'\n\nVotre chauffeur vous sera communiqué la veille.\nPour toute question : 07 60 55 44 60 (WhatsApp)\n\nMerci de votre confiance,\nONTIME TRANSFERT'})});}catch{}
+}
+
+// ═══ KNOWN COORDINATES ═══
+const KNOWN_COORDS={
+  'Paris centre':{lat:48.8566,lng:2.3522},
+  'Aéroport Roissy CDG':{lat:49.0097,lng:2.5479},
+  "Aéroport d'Orly":{lat:48.7262,lng:2.3652},
+  'Aéroport de Beauvais':{lat:49.4544,lng:2.1106},
+  'Aéroport du Bourget':{lat:48.9694,lng:2.4414},
+  'Gare du Nord':{lat:48.8809,lng:2.3553},
+  'Gare de Lyon':{lat:48.8448,lng:2.3735},
+  'Gare Montparnasse':{lat:48.8414,lng:2.3195},
+  "Gare de l'Est":{lat:48.8763,lng:2.3590},
+  'Gare Saint-Lazare':{lat:48.8760,lng:2.3251},
+  "Gare d'Austerlitz":{lat:48.8424,lng:2.3656},
+  'Gare de Bercy':{lat:48.8391,lng:2.3826},
+  'Gare Massy TGV':{lat:48.7253,lng:2.2606},
+  'Gare Marne-la-Vallée Chessy':{lat:48.8614,lng:2.7810},
+  'Disneyland Paris':{lat:48.8722,lng:2.7758},
+  'Château de Versailles':{lat:48.8049,lng:2.1204},
+  'Parc Astérix':{lat:49.1364,lng:2.5727},
+  'La Défense':{lat:48.8920,lng:2.2363}
+};
+
+// ═══ GOOGLE MAPS AUTOCOMPLETE ═══
+let acDep,acArr,mapsLoaded=false;
+const _geo_={};
+function loadMapsScript(){
+  if(mapsLoaded)return;mapsLoaded=true;
+  const s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initMap';
+  document.head.appendChild(s);
+}
+['depAdresseInput','arrAdresseInput'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('focus',loadMapsScript,{once:true});
+});
+function initMap(){
+  const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
+  const depInput=document.getElementById('depAdresseInput');
+  const arrInput=document.getElementById('arrAdresseInput');
+  acDep=new google.maps.places.Autocomplete(depInput,opts);
+  acArr=new google.maps.places.Autocomplete(arrInput,opts);
+  acDep.addListener('place_changed',()=>{window._placeDep=acDep.getPlace();});
+  acArr.addListener('place_changed',()=>{window._placeArr=acArr.getPlace();});
+  depInput.addEventListener('input',()=>{window._placeDep=null;});
+  arrInput.addEventListener('input',()=>{window._placeArr=null;});
+  bindEnterSelect(depInput);bindEnterSelect(arrInput);
+  depInput.addEventListener('blur',()=>geocodeFallback(depInput,'_placeDep'));
+  arrInput.addEventListener('blur',()=>geocodeFallback(arrInput,'_placeArr'));
+}
+function bindEnterSelect(input){
+  let _busy=false;
+  input.addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.keyCode===13)&&!_busy){
+      if(document.querySelector('.pac-item')){
+        e.preventDefault();e.stopPropagation();_busy=true;
+        input.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',keyCode:40,which:40,bubbles:true,cancelable:true}));
+        setTimeout(()=>{input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',keyCode:13,which:13,bubbles:true,cancelable:true}));_busy=false;},30);
+      }
+    }
+  },true);
+}
+function geocodeFallback(input,placeKey){
+  const val=input.value.trim();if(!val)return;
+  setTimeout(()=>{
+    if(window[placeKey]&&window[placeKey].geometry)return;
+    if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
+    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
+      if(status==='OK'&&results[0]){window[placeKey]=results[0];input.value=results[0].formatted_address;}
+    });
+  },200);
+}
+function resolveAddress(input,placeKey){
+  return new Promise(resolve=>{
+    if(window[placeKey]&&window[placeKey].geometry){resolve(true);return;}
+    const val=input.value.trim();if(!val){resolve(false);return;}
+    if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
+    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
+      if(status==='OK'&&results[0]){window[placeKey]=results[0];input.value=results[0].formatted_address;resolve(true);}else{resolve(false);}
+    });
+  });
+}
+
+// ═══ GET DEPARTURE / ARRIVAL VALUE ═══
+function getDepValue(){
+  if(depCat==='adresse')return document.getElementById('depAdresseInput').value;
+  if(depCat==='aeroport')return document.getElementById('depAeroportSelect').value;
+  if(depCat==='gare')return document.getElementById('depGareSelect').value;
+  if(depCat==='lieu')return document.getElementById('depLieuSelect').value;
+  return '';
+}
+function getArrValue(){
+  if(arrCat==='adresse')return document.getElementById('arrAdresseInput').value;
+  if(arrCat==='aeroport')return document.getElementById('arrAeroportSelect').value;
+  if(arrCat==='gare')return document.getElementById('arrGareSelect').value;
+  if(arrCat==='lieu')return document.getElementById('arrLieuSelect').value;
+  return '';
+}
+function getLatLng(cat,value,placeObj){
+  if(cat!=='adresse'&&KNOWN_COORDS[value])return KNOWN_COORDS[value];
+  if(cat==='adresse'&&placeObj&&placeObj.geometry)return{lat:placeObj.geometry.location.lat(),lng:placeObj.geometry.location.lng()};
+  return null;
+}
+function calcDistance(){
+  return new Promise((resolve,reject)=>{
+    const depLL=getLatLng(depCat,getDepValue(),window._placeDep);
+    const arrLL=getLatLng(arrCat,getArrValue(),window._placeArr);
+    if(!depLL||!arrLL){reject('coords');return;}
+    const service=new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+      origins:[new google.maps.LatLng(depLL.lat,depLL.lng)],
+      destinations:[new google.maps.LatLng(arrLL.lat,arrLL.lng)],
+      travelMode:'DRIVING'
+    },(res,status)=>{
+      if(status==='OK'&&res.rows[0].elements[0].status==='OK'){resolve(Math.round(res.rows[0].elements[0].distance.value/1000));}else{reject('api');}
+    });
+  });
+}
+
+// ═══ CALCULATE PRICE ═══
+const TARIF={
+  base:{confort:28,premium:44,van:48},
+  km:{confort:1.37,premium:1.90,van:2.12},
+  aero:{confort:6,premium:10,van:10},
+  coef:{jour:1.0,nuit:1.10,pointe:1.20,dimanche:1.12}
+};
+function calcPrice(km,veh,time,from,to){
+  const base=TARIF.base[veh]||28;const tkm=TARIF.km[veh]||1.37;
+  const hm=time?(parseInt(time.split(':')[0])+(parseInt(time.split(':')[1])||0)/60):12;
+  const isNight=hm>=22||hm<6;const isPointe=(hm>=7.5&&hm<9.5)||(hm>=17&&hm<19.5);
+  const horaire=isNight?'nuit':isPointe?'pointe':'jour';
+  const coef=TARIF.coef[horaire];
+  const t=((from||'')+' '+(to||'')).toLowerCase();
+  const isAero=['aéroport','cdg','orly','roissy','beauvais','bourget'].some(k=>t.includes(k));
+  const aeroSuppl=isAero?TARIF.aero[veh]:0;
+  const raw=base+km*tkm*coef+aeroSuppl;
+  return{price:Math.round(raw/5)*5,isNight,horaire,isAero};
+}
+
+// ═══ SHOW ERROR ═══
+function showError(msg){
+  const el=document.getElementById('bookingError');
+  el.textContent=msg;el.style.display='block';
+  setTimeout(()=>el.style.display='none',5000);
+}
+
+// ═══ VOIR LE TARIF BUTTON ═══
+document.getElementById('btnVoirTarif').addEventListener('click',async()=>{
+  const from=getDepValue(),to=getArrValue();
+  if(!from){showError('Veuillez renseigner une adresse de départ.');return;}
+  if(!to){showError('Veuillez renseigner une destination.');return;}
+  const date=document.getElementById('inputDate').value;
+  const time=document.getElementById('inputTime').value;
+  if(!date||!time){showError('Veuillez choisir une date et une heure.');return;}
+  const veh=document.getElementById('inputVehicle').value;
+  if(!veh){showError('Veuillez choisir un véhicule.');return;}
+  const btn=document.getElementById('btnVoirTarif');
+  if(depCat==='adresse'){const ok=await resolveAddress(document.getElementById('depAdresseInput'),'_placeDep');if(!ok){showError('Adresse de départ introuvable.');return;}}
+  if(arrCat==='adresse'){const ok=await resolveAddress(document.getElementById('arrAdresseInput'),'_placeArr');if(!ok){showError('Adresse de destination introuvable.');return;}}
+  btn.textContent='Calcul en cours...';btn.disabled=true;
+  try{
+    const km=await calcDistance();
+    const{price,isNight,horaire}=calcPrice(km,veh,time,from,to);
+    booking.distKm=km;booking.price=price;booking.from=from;booking.to=to;booking.date=date;booking.time=time;
+    booking.veh=veh;booking.pax=parseInt(document.getElementById('inputPax').value);
+    booking.bags=document.getElementById('inputBags').value;
+    const childOn=document.getElementById('toggleChildSeat').checked;
+    booking.seatBaby=childOn?parseInt(document.getElementById('inputSeatBaby').value)||0:0;
+    booking.seatChild=childOn?parseInt(document.getElementById('inputSeatChild').value)||0:0;
+    const totalSeats=booking.seatBaby+booking.seatChild;
+    if(totalSeats>booking.pax){showError('Le nombre de sièges enfant ('+totalSeats+') dépasse le nombre de passagers ('+booking.pax+').');btn.textContent='Voir le tarif';btn.disabled=false;return;}
+    document.getElementById('distKm').textContent=km;
+    document.getElementById('priceAmount').textContent=price+'€';
+    const nightEl=document.getElementById('nightSurcharge');
+    if(horaire==='nuit'){nightEl.textContent='Supplément nuit (+10%) inclus';nightEl.style.display='block';}
+    else if(horaire==='pointe'){nightEl.textContent='Supplément heure de pointe (+20%) inclus';nightEl.style.display='block';}
+    else{nightEl.style.display='none';}
+    document.getElementById('priceDisplay').style.display='block';
+    btn.textContent='Réserver maintenant';btn.disabled=false;
+    btn.onclick=()=>goToStep2();
+  }catch(e){showError('Impossible de calculer la distance. Vérifiez les adresses.');btn.textContent='Voir le tarif';btn.disabled=false;}
+});
+
+// ═══ STEP INDICATOR ═══
+function setStep(n){
+  [1,2,3].forEach(i=>{
+    const d=document.getElementById('stepDot'+i);
+    if(i<n)d.className='step-dot done';else if(i===n)d.className='step-dot active';else d.className='step-dot';
+  });
+  document.getElementById('stepIndicator').style.display=n>3?'none':'flex';
+}
+
+// ═══ RESET TARIF BUTTON ═══
+function resetTarifBtn(){
+  const btn=document.getElementById('btnVoirTarif');
+  if(btn.textContent==='Réserver maintenant'){btn.textContent='Voir le tarif';btn.onclick=null;document.getElementById('priceDisplay').style.display='none';}
+}
+['inputDate','inputTime','inputVehicle','inputPax','inputBags'].forEach(id=>document.getElementById(id).addEventListener('change',resetTarifBtn));
+document.getElementById('depAdresseInput')?.addEventListener('input',resetTarifBtn);
+document.getElementById('arrAdresseInput')?.addEventListener('input',resetTarifBtn);
+document.querySelectorAll('.cat-tab').forEach(t=>t.addEventListener('click',resetTarifBtn));
+
+// ═══ STEP NAVIGATION ═══
+const vehNames={confort:'Confort',premium:'Business',van:'Van / Minibus'};
+function goToStep2(){
+  document.getElementById('bookingStep1').style.display='none';
+  document.getElementById('bookingStep2').style.display='block';
+  document.getElementById('recapFrom').textContent=booking.from;
+  document.getElementById('recapTo').textContent=booking.to;
+  document.getElementById('recapDate').textContent=booking.date;
+  document.getElementById('recapTime').textContent=booking.time;
+  document.getElementById('recapVeh').textContent=vehNames[booking.veh]||booking.veh;
+  document.getElementById('recapPax').textContent=booking.pax;
+  document.getElementById('recapBags').textContent=booking.bags;
+  const seats=[];
+  if(booking.seatBaby>0)seats.push(booking.seatBaby+' siège bébé');
+  if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
+  document.getElementById('recapChildSeat').textContent=seats.length?' · '+seats.join(', '):'';
+  document.getElementById('recapPrice').textContent=booking.price+'€';
+  setStep(2);
+  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('btnBackStep1').addEventListener('click',()=>{
+  document.getElementById('bookingStep2').style.display='none';
+  document.getElementById('bookingStep1').style.display='block';
+  setStep(1);
+});
+
+// ═══ STRIPE LAZY LOAD ═══
+let stripe,elements,paymentElement,stripeLoaded=false,paymentElementMounted=false;
+function loadStripeScript(cb){
+  if(stripeLoaded){cb();return;}
+  const s=document.createElement('script');s.src='https://js.stripe.com/v3/';
+  s.onload=()=>{stripe=Stripe(STRIPE_PK);stripeLoaded=true;cb();};
+  document.head.appendChild(s);
+}
+
+// Handle redirect return
+(function checkPaymentReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('payment')==='success'||params.get('redirect_status')==='succeeded'){
+    window.history.replaceState({},'',window.location.pathname);
+    setTimeout(()=>{
+      document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+      document.getElementById('bookingStep1').style.display='none';
+      document.getElementById('bookingStep4').style.display='block';
+      const ref='OT-'+Date.now().toString(36).toUpperCase();
+      document.getElementById('confirmRef').textContent='Réf. '+ref;
+      setStep(4);
+    },300);
+  }
+})();
+
+// ═══ STEP 2 → STEP 3 ═══
+document.getElementById('btnContinuePay').addEventListener('click',()=>{
+  const fn=document.getElementById('inputFirstName').value.trim();
+  const ln=document.getElementById('inputLastName').value.trim();
+  const rawPh=document.getElementById('inputPhone').value.trim();
+  const prefix=document.getElementById('inputPhonePrefix').value;
+  const phDigits=rawPh.replace(/^0/,'').replace(/[\s\.\-]/g,'');
+  const ph=prefix+phDigits;
+  const em=document.getElementById('inputEmail').value.trim();
+  const errEl=document.getElementById('step2Error');
+  if(!fn||!ln||!rawPh||!em){errEl.textContent='Veuillez remplir tous les champs obligatoires.';errEl.style.display='block';return;}
+  if(phDigits.replace(/\D/g,'').length<6){errEl.textContent='Numéro de téléphone invalide.';errEl.style.display='block';return;}
+  errEl.style.display='none';
+  booking.firstName=fn;booking.lastName=ln;booking.phone=ph;booking.email=em;
+  booking.flight=document.getElementById('inputFlight').value;
+  loadStripeScript(async()=>{
+    document.getElementById('bookingStep2').style.display='none';
+    document.getElementById('bookingStep3').style.display='block';
+    document.getElementById('p3From').textContent=booking.from;
+    document.getElementById('p3To').textContent=booking.to;
+    document.getElementById('p3Date').textContent=booking.date;
+    document.getElementById('p3Time').textContent=booking.time;
+    document.getElementById('p3Veh').textContent=vehNames[booking.veh]||booking.veh;
+    document.getElementById('p3Price').textContent=booking.price+'€';
+    if(!paymentElementMounted){
+      try{
+        const ctrl=new AbortController();const to=setTimeout(()=>ctrl.abort(),15000);
+        const res=await fetch(BACKEND+'/api/create-payment-intent',{
+          method:'POST',headers:{'Content-Type':'application/json'},signal:ctrl.signal,
+          body:JSON.stringify({amount:booking.price*100,currency:'eur',
+            metadata:{from:booking.from,to:booking.to,date:booking.date,time:booking.time,
+              name:booking.firstName+' '+booking.lastName,phone:booking.phone,email:booking.email,
+              vehicle:booking.veh,pax:booking.pax,bags:booking.bags,
+              seatBaby:booking.seatBaby,seatChild:booking.seatChild,
+              flight:booking.flight,distKm:booking.distKm}
+          })
+        });
+        clearTimeout(to);const data=await res.json();
+        if(!data.clientSecret)throw new Error(data.error||'Erreur serveur');
+        booking.clientSecret=data.clientSecret;
+        elements=stripe.elements({
+          clientSecret:data.clientSecret,
+          appearance:{
+            theme:'night',
+            variables:{colorPrimary:'#c8a96e',colorBackground:'#0a0a0a',colorText:'#e8e8e8',
+              colorDanger:'#f44336',fontFamily:'Inter, sans-serif',borderRadius:'8px',fontSizeBase:'14px'},
+            rules:{'.Input':{border:'1px solid rgba(200,169,110,.15)',backgroundColor:'rgba(200,169,110,.04)',padding:'13px 12px'},
+              '.Input:focus':{borderColor:'#c8a96e',boxShadow:'0 0 0 1px #c8a96e'},
+              '.Label':{color:'#888',fontSize:'12px',textTransform:'uppercase',letterSpacing:'0.5px'}}
+          },
+          locale:document.documentElement.lang==='en'?'en':'fr'
+        });
+        paymentElement=elements.create('payment',{layout:'tabs'});
+        paymentElement.mount('#payment-element');
+        paymentElementMounted=true;
+      }catch(err){document.getElementById('card-errors').textContent=err.name==='AbortError'?'Délai dépassé. Réessayez.':'Erreur: '+err.message;}
+    }
+    setStep(3);
+    document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+document.getElementById('btnBackStep2').addEventListener('click',()=>{
+  if(!confirm('Retourner aux coordonnées ?'))return;
+  paymentElementMounted=false;document.getElementById('payment-element').innerHTML='';
+  document.getElementById('bookingStep3').style.display='none';
+  document.getElementById('bookingStep2').style.display='block';
+  setStep(2);
+});
+
+// ═══ PAIEMENT STRIPE ═══
+document.getElementById('btnPay').addEventListener('click',async()=>{
+  const fn=booking.firstName,ln=booking.lastName,ph=booking.phone,em=booking.email;
+  const btn=document.getElementById('btnPay');const spinner=document.getElementById('paySpinner');
+  btn.disabled=true;spinner.style.display='inline-block';
+  btn.innerHTML='';btn.appendChild(spinner);btn.append(' Traitement en cours...');
+  document.getElementById('payError').style.display='none';
+  try{
+    const result=await stripe.confirmPayment({
+      elements,
+      confirmParams:{return_url:window.location.origin+window.location.pathname+'?payment=success',
+        payment_method_data:{billing_details:{name:fn+' '+ln,email:em,phone:ph}}},
+      redirect:'if_required'
+    });
+    if(result.error){document.getElementById('card-errors').textContent=result.error.message;btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';}
+    else if(result.paymentIntent&&result.paymentIntent.status==='succeeded'){
+      const ref='OT-'+Date.now().toString(36).toUpperCase();
+      document.getElementById('confirmRef').textContent='Réf. '+ref;
+      setStep(4);
+      document.getElementById('bookingStep3').style.display='none';
+      document.getElementById('bookingStep4').style.display='block';
+      sendBookingNotifications(ref,fn,ln,ph,em);
+    }
+  }catch(err){
+    document.getElementById('payError').textContent='Erreur: '+err.message;
+    document.getElementById('payError').style.display='block';
+    btn.disabled=false;spinner.style.display='none';btn.textContent='Payer et confirmer';
+  }
+});
+
+// ═══ LANGUE FR / EN ═══
+let currentLang=localStorage.getItem('lang')||'fr';
+const i18n={
+  en:{
+    'nav-home':'Home','nav-vehicles':'Vehicles','nav-services':'Services',
+    'nav-rates':'Rates','nav-contact':'Contact','nav-driver':'Become a driver','nav-book':'Book now',
+    'res-badge':'Online booking',
+    'res-title':'Book your <em>transfer</em>',
+    'res-sub':'Guaranteed fixed price, secure payment, instant confirmation. Book your private driver in a few clicks.',
+    'res-price-title':'Your rate',
+    'res-trust1':'SSL payment via Stripe',
+    'res-trust2':'Free cancellation -24h',
+    'res-trust3':'Real-time flight tracking',
+    'res-trust4':'Licensed VTC drivers',
+    'book-title1':'Book online',
+    'book-sub1':'Fixed price, instant quote. Book at least 4 hours ahead, or call <strong style="color:var(--accent)">07 60 55 44 60</strong>.',
+    'lbl-from':'Departure','lbl-to':'Destination',
+    'lbl-paxbags':'Passengers &amp; luggage','lbl-pax':'Passengers','lbl-bags':'Luggage',
+    'lbl-childseat':'Child seat needed?',
+    'book-title2':'Your details','book-sub2':'To finalize your booking',
+    'lbl-firstname':'First name','lbl-lastname':'Last name',
+    'lbl-phone':'Phone','lbl-email':'Email','lbl-flight':'Flight / train number (optional)',
+    'btn-continue':'Continue to payment →',
+    'book-title3':'Secure payment',
+    'book-sub3':'Your data is protected by SSL encryption via Stripe.',
+    'cat-adresse':'Address','cat-aeroport':'Airport','cat-gare':'Station','cat-lieu':'Place',
+    'lbl-datetime':'Date &amp; time','lbl-vehicle':'Vehicle',
+    'trust-pay':'Secure payment','trust-fixedprice':'Guaranteed fixed price','trust-cancel24':'Cancellation −24h',
+    'lbl-seat-baby':'Baby seat (0-12m)','lbl-seat-child':'Child seat (1-10y)',
+    'btn-back':'Back',
+    'recap-title':'Summary','recap-at':'at','recap-pax':'pax','recap-bags':'bag.',
+    'recap-total':'Total','lbl-total-pay':'Total to pay','btn-pay':'Pay and confirm',
+    'confirm-title':'Booking confirmed',
+    'confirm-note':'You will receive a confirmation email with your driver\'s details the day before the ride.',
+    'confirm-thanks':'Thank you for your trust',
+    'lbl-dist':'Estimated distance','lbl-price-fix':'Fixed price',
+    'lbl-night-surcharge':'Night surcharge (+10%) included',
+    'btn-voir-tarif':'Get a quote',
+    'ft-copy':'© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. All rights reserved.'
+  },
+  fr:{
+    'nav-home':'Accueil','nav-vehicles':'Véhicules','nav-services':'Services',
+    'nav-rates':'Tarifs','nav-contact':'Contact','nav-driver':'Devenir chauffeur','nav-book':'Réserver',
+    'res-badge':'Réservation en ligne',
+    'res-title':'Réservez votre <em>transfert</em>',
+    'res-sub':'Tarif fixe garanti, paiement sécurisé, confirmation immédiate. Réservez votre chauffeur privé en quelques clics.',
+    'res-price-title':'Votre tarif',
+    'res-trust1':'Paiement SSL via Stripe',
+    'res-trust2':'Annulation gratuite -24h',
+    'res-trust3':'Suivi vol en temps réel',
+    'res-trust4':'Chauffeurs carte VTC',
+    'book-title1':'Réservez en ligne',
+    'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 60 55 44 60</strong>.',
+    'lbl-from':'Départ','lbl-to':'Destination',
+    'lbl-paxbags':'Passagers &amp; bagages','lbl-pax':'Passagers','lbl-bags':'Bagages',
+    'lbl-childseat':'Siège enfant requis ?',
+    'book-title2':'Vos coordonnées','book-sub2':'Pour finaliser votre réservation',
+    'lbl-firstname':'Prénom','lbl-lastname':'Nom',
+    'lbl-phone':'Téléphone','lbl-email':'Email','lbl-flight':'N° de vol / train (optionnel)',
+    'btn-continue':'Continuer vers le paiement →',
+    'book-title3':'Paiement sécurisé',
+    'book-sub3':'Vos données sont protégées par chiffrement SSL via Stripe.',
+    'cat-adresse':'Adresse','cat-aeroport':'Aéroport','cat-gare':'Gare','cat-lieu':'Lieu',
+    'lbl-datetime':'Date &amp; heure','lbl-vehicle':'Véhicule',
+    'trust-pay':'Paiement sécurisé','trust-fixedprice':'Prix fixe garanti','trust-cancel24':'Annulation -24h',
+    'lbl-seat-baby':'Siège bébé (0-12m)','lbl-seat-child':'Siège enfant (1-10a)',
+    'btn-back':'Retour',
+    'recap-title':'Récapitulatif','recap-at':'à','recap-pax':'pax','recap-bags':'bag.',
+    'recap-total':'Total','lbl-total-pay':'Total à payer','btn-pay':'Payer et confirmer',
+    'confirm-title':'Réservation confirmée',
+    'confirm-note':'Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.',
+    'confirm-thanks':'Merci de votre confiance',
+    'lbl-dist':'Distance estimée','lbl-price-fix':'Prix fixe',
+    'lbl-night-surcharge':'Supplément nuit (+10%) inclus',
+    'btn-voir-tarif':'Voir le tarif',
+    'ft-copy':'© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.'
+  }
+};
+function toggleLang(){setLang(currentLang==='fr'?'en':'fr');}
+function setLang(lang){
+  currentLang=lang;localStorage.setItem('lang',lang);
+  document.documentElement.lang=lang;
+  const btnTxt=document.getElementById('langBtnText');
+  if(btnTxt)btnTxt.textContent=lang==='fr'?'EN':'FR';
+  const btn=document.getElementById('langBtn');
+  if(btn)btn.classList.toggle('active-en',lang==='en');
+  const dict=i18n[lang]||{};
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(dict[k]!==undefined)el.innerHTML=dict[k];});
+  const ph=lang==='en';
+  const ip=document.getElementById('inputPhone');if(ip)ip.placeholder='6 12 34 56 78';
+  const fn=document.getElementById('inputFirstName');if(fn)fn.placeholder=ph?'First name':'Prénom';
+  const ln=document.getElementById('inputLastName');if(ln)ln.placeholder=ph?'Last name':'Nom';
+  const fl=document.getElementById('inputFlight');if(fl)fl.placeholder=ph?'e.g. AF1234, TGV 6789':'Ex: AF1234, TGV 6789';
+  const da=document.getElementById('depAdresseInput');if(da)da.placeholder=ph?'Enter a departure address':'Saisir une adresse de départ';
+  const aa=document.getElementById('arrAdresseInput');if(aa)aa.placeholder=ph?'Enter a destination address':'Saisir une adresse de destination';
+  [{id:'depAeroportSelect',fr:'Choisir un aéroport',en:'Choose an airport'},
+   {id:'arrAeroportSelect',fr:'Choisir un aéroport',en:'Choose an airport'},
+   {id:'depGareSelect',fr:'Choisir une gare',en:'Choose a station'},
+   {id:'arrGareSelect',fr:'Choisir une gare',en:'Choose a station'},
+   {id:'depLieuSelect',fr:'Choisir un lieu',en:'Choose a place'},
+   {id:'arrLieuSelect',fr:'Choisir un lieu',en:'Choose a place'}
+  ].forEach(o=>{const s=document.getElementById(o.id);if(s&&s.options[0])s.options[0].text=ph?o.en:o.fr;});
+  const iv=document.getElementById('inputVehicle');
+  if(iv){
+    const vt=ph
+      ?['Choose a vehicle','Confort (1-3 passengers)','Business (1-3 passengers)','Van / Minibus (4-7 passengers)']
+      :['Choisir un véhicule','Confort (1-3 passagers)','Business (1-3 passagers)','Van / Minibus (4-7 passagers)'];
+    Array.from(iv.options).forEach((o,i)=>{if(vt[i])o.text=vt[i];});
+  }
+  const it=document.getElementById('inputTime');if(it&&it.options[0]&&it.options[0].value==='')it.options[0].text=ph?'Time':'Heure';
+  const sBtn=document.getElementById('sidebarLangBtnText');if(sBtn)sBtn.textContent=ph?'FR':'EN';
+}
+setLang(currentLang);
+</script>
+<script src="js/common.js"></script>
+</body>
+</html>
