@@ -271,15 +271,17 @@
 .sim-trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
 .sim-trust-item svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
 
-/* ═══ CELL: CAR (Van photo) ═══ */
+/* ═══ CELL: CAR (Van photo carousel) ═══ */
 .cell-car{
   grid-column:1/2;grid-row:2/3;
   display:flex;align-items:center;justify-content:center;
   background:#0a0a0a;
   overflow:hidden;padding:0;position:relative;
 }
-.cell-car-wrap{position:relative;width:100%;height:100%;}
-.cell-car-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85);}
+.car-slider{position:relative;width:100%;height:100%;}
+.car-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;}
+.car-slide.active{opacity:1;}
+.car-slide img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85);}
 .plate-overlay{
   position:absolute;
   bottom:22%;left:50%;transform:translateX(-50%);
@@ -602,11 +604,17 @@
     </div>
   </div>
 
-  <!-- CELL 3: MERCEDES VAN PHOTO -->
+  <!-- CELL 3: MERCEDES VAN PHOTO CAROUSEL -->
   <div class="cell cell-car">
-    <div class="cell-car-wrap">
-      <img src="img/van-pinterest.jpg" alt="Mercedes Classe V — ONTIME TRANSFERT" loading="lazy">
-      <div class="plate-overlay">ONTIME TRANSFERT</div>
+    <div class="car-slider">
+      <div class="car-slide active">
+        <img src="img/van-pinterest.jpg" alt="Mercedes Classe V — ONTIME TRANSFERT" loading="lazy">
+        <div class="plate-overlay">ONTIME TRANSFERT</div>
+      </div>
+      <div class="car-slide">
+        <img src="img/van-pinterest2.jpg" alt="Mercedes Classe V — ONTIME TRANSFERT" loading="lazy">
+        <div class="plate-overlay">ONTIME TRANSFERT</div>
+      </div>
     </div>
     <div class="car-label">Mercedes Classe V</div>
   </div>
@@ -921,6 +929,17 @@ function goReview(i){
   dots[currentReview].classList.add('active');
 }
 setInterval(()=>goReview(currentReview+1),4000);
+
+// ═══ CAR PHOTO SLIDER ═══
+let currentCar=0;
+const carSlides=document.querySelectorAll('.car-slide');
+if(carSlides.length>1){
+  setInterval(()=>{
+    carSlides[currentCar].classList.remove('active');
+    currentCar=(currentCar+1)%carSlides.length;
+    carSlides[currentCar].classList.add('active');
+  },5000);
+}
 
 // ═══ ANIMATED COUNTERS ═══
 const statsObserver=new IntersectionObserver((entries)=>{
