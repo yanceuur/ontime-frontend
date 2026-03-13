@@ -188,7 +188,7 @@
 .hero-badge svg{width:12px;height:12px;fill:var(--accent);stroke:none;opacity:.7;}
 .hero-title{
   font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;
-  margin-bottom:18px;
+  margin-bottom:18px;letter-spacing:.5px;
 }
 .hero-title .line{
   display:block;
@@ -300,12 +300,12 @@
 .btn-book-full:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(200,169,110,.3);}
 .sim-trust{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap;}
 .sim-trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
-.sim-trust-item svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
+.sim-trust-item svg{width:12px;height:12px;stroke:var(--accent);stroke-width:1.5;fill:none;}
 /* Trust badges */
 .trust-badges{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.04);display:flex;flex-direction:column;gap:10px;}
 .trust-badge-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;}
 .trust-badge{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;color:var(--text-muted);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:4px 10px;}
-.trust-badge svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
+.trust-badge svg{width:12px;height:12px;stroke:var(--accent);stroke-width:1.5;fill:none;}
 
 /* ═══ CELL: CAR (Van photo carousel) ═══ */
 .cell-car{
@@ -372,7 +372,7 @@
   letter-spacing:.5px;text-transform:uppercase;font-weight:500;
 }
 .prices-cta:hover{color:#fff;}
-.prices-cta svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none;}
+.prices-cta svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none;}
 .prices-list{display:flex;flex-direction:column;gap:6px;flex:1;}
 .price-row{
   display:flex;align-items:center;justify-content:space-between;
@@ -514,6 +514,42 @@
 
 @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ═══ AESTHETIC ENHANCEMENTS ═══ */
+/* Staggered entrance for price rows */
+.price-row{opacity:0;animation:cellIn .5s cubic-bezier(.16,1,.3,1) forwards;}
+.price-row:nth-child(1){animation-delay:.15s}
+.price-row:nth-child(2){animation-delay:.22s}
+.price-row:nth-child(3){animation-delay:.29s}
+.price-row:nth-child(4){animation-delay:.36s}
+.price-row:nth-child(5){animation-delay:.43s}
+.price-row:nth-child(6){animation-delay:.50s}
+
+/* Subtle scale on cell hover */
+.cell-stats:hover,.cell-reviews:hover,.cell-contact:hover{transform:translateY(-3px) scale(1.01);}
+
+/* Vehicle image uniform aspect ratio */
+.cell-car{aspect-ratio:4/3;}
+.car-slide img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;}
+
+/* Service cards: alternate horizontal layout for odd cards on desktop */
+@media(min-width:769px){
+  .svc-mini-card:nth-child(odd){flex-direction:row;text-align:left;padding:14px 16px;}
+}
+
+/* Playfair titles refined spacing */
+.prices-title,.svc-mini-title,.sim-title{letter-spacing:.4px;}
+
+/* Footer mini links hover transition */
+.mini-footer a{transition:color .3s,transform .3s;display:inline-block;}
+.mini-footer a:hover{transform:translateY(-1px);}
+
+/* Mobile: more breathing room */
+@media(max-width:768px){
+  .bento{gap:18px;padding:90px 16px 40px;}
+  .cell{padding:24px;}
+  .svc-mini-card{padding:14px 10px;}
+}
 </style>
 </head>
 <body>
@@ -626,7 +662,7 @@
 
     <button class="btn-sim" id="btnSimEstimate" data-i18n="btn-voir-tarif">Estimer le prix</button>
     <a href="reservation.html" class="btn-book-full" id="btnBookFull" style="display:none;" data-i18n="sim-book-btn">
-      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       Réserver ce trajet
     </a>
 
