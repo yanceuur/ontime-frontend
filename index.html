@@ -232,6 +232,16 @@
 .sim-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
 .sim-select:focus,.sim-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
 .sim-select option{background:#0a0a0a;color:var(--text);}
+.sim-input{cursor:text;}
+.sim-input::placeholder{color:rgba(255,255,255,.3);}
+.sim-quick-picks{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;margin-bottom:2px;}
+.sim-quick-pick{
+  padding:4px 10px;border-radius:16px;font-size:.68rem;
+  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);
+  color:var(--text-muted);cursor:pointer;transition:all .25s;
+  white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif;
+}
+.sim-quick-pick:hover{background:rgba(200,169,110,.12);color:var(--accent);border-color:rgba(200,169,110,.25);}
 .sim-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .sim-price-box{
   margin-top:14px;padding:14px 18px;border-radius:12px;
@@ -548,32 +558,24 @@
     <div class="sim-sub" data-i18n="sim-sub">Simulateur de prix — Obtenez une estimation immédiate</div>
 
     <label class="sim-label" data-i18n="lbl-from">Départ</label>
-    <select class="sim-select" id="simFrom">
-      <option value="" disabled selected>Choisir un point de départ</option>
-      <option value="Paris centre">Paris centre</option>
-      <option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option>
-      <option value="Aéroport d'Orly">Aéroport d'Orly</option>
-      <option value="Aéroport de Beauvais">Aéroport de Beauvais</option>
-      <option value="Gare du Nord">Gare du Nord</option>
-      <option value="Gare de Lyon">Gare de Lyon</option>
-      <option value="Gare Montparnasse">Gare Montparnasse</option>
-      <option value="Disneyland Paris">Disneyland Paris</option>
-      <option value="La Défense">La Défense</option>
-    </select>
+    <input type="text" class="sim-input" id="simFrom" placeholder="Saisir une adresse de départ" autocomplete="off">
+    <div class="sim-quick-picks" data-target="simFrom">
+      <span class="sim-quick-pick">Paris centre</span>
+      <span class="sim-quick-pick">Aéroport CDG</span>
+      <span class="sim-quick-pick">Orly</span>
+      <span class="sim-quick-pick">Gare du Nord</span>
+      <span class="sim-quick-pick">Gare de Lyon</span>
+    </div>
 
     <label class="sim-label" data-i18n="lbl-to">Destination</label>
-    <select class="sim-select" id="simTo">
-      <option value="" disabled selected>Choisir une destination</option>
-      <option value="Paris centre">Paris centre</option>
-      <option value="Aéroport Roissy CDG">Aéroport Roissy CDG</option>
-      <option value="Aéroport d'Orly">Aéroport d'Orly</option>
-      <option value="Aéroport de Beauvais">Aéroport de Beauvais</option>
-      <option value="Gare du Nord">Gare du Nord</option>
-      <option value="Gare de Lyon">Gare de Lyon</option>
-      <option value="Gare Montparnasse">Gare Montparnasse</option>
-      <option value="Disneyland Paris">Disneyland Paris</option>
-      <option value="La Défense">La Défense</option>
-    </select>
+    <input type="text" class="sim-input" id="simTo" placeholder="Saisir une adresse de destination" autocomplete="off">
+    <div class="sim-quick-picks" data-target="simTo">
+      <span class="sim-quick-pick">Paris centre</span>
+      <span class="sim-quick-pick">Aéroport CDG</span>
+      <span class="sim-quick-pick">Orly</span>
+      <span class="sim-quick-pick">Gare du Nord</span>
+      <span class="sim-quick-pick">Disneyland</span>
+    </div>
 
     <label class="sim-label" data-i18n="lbl-vehicle">Véhicule</label>
     <select class="sim-select" id="simVehicle">
@@ -808,6 +810,12 @@ function calcPrice(km,veh,time,from,to){
 }
 
 // ═══ SIMULATOR (homepage quick estimate) ═══
+// Quick-pick label → KNOWN_COORDS key mapping
+const QUICK_PICK_MAP={
+  'Paris centre':'Paris centre','Aéroport CDG':'Aéroport Roissy CDG','Orly':"Aéroport d'Orly",
+  'Gare du Nord':'Gare du Nord','Gare de Lyon':'Gare de Lyon','Disneyland':'Disneyland Paris',
+  'Beauvais':'Aéroport de Beauvais','La Défense':'La Défense','Gare Montparnasse':'Gare Montparnasse'
+};
 const SIM_DISTANCES={
   'Paris centre|Aéroport Roissy CDG':32,'Paris centre|Aéroport d\'Orly':18,'Paris centre|Aéroport de Beauvais':85,
   'Paris centre|Gare du Nord':5,'Paris centre|Gare de Lyon':4,'Paris centre|Gare Montparnasse':5,
@@ -827,25 +835,147 @@ const SIM_DISTANCES={
   'Aéroport de Beauvais|Paris centre':85,'Aéroport de Beauvais|Aéroport Roissy CDG':80
 };
 
-document.getElementById('btnSimEstimate').addEventListener('click',()=>{
-  const from=document.getElementById('simFrom').value;
-  const to=document.getElementById('simTo').value;
+// Google Maps + Autocomplete for simulator
+let simMapsLoaded=false, simAcFrom, simAcTo;
+window._simPlaceFrom=null; window._simPlaceTo=null;
+
+function loadSimMaps(){
+  if(simMapsLoaded) return;
+  simMapsLoaded=true;
+  const s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initSimMap';
+  document.head.appendChild(s);
+}
+window.initSimMap=function(){
+  const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
+  const fromEl=document.getElementById('simFrom');
+  const toEl=document.getElementById('simTo');
+  simAcFrom=new google.maps.places.Autocomplete(fromEl,opts);
+  simAcTo=new google.maps.places.Autocomplete(toEl,opts);
+  simAcFrom.addListener('place_changed',()=>{window._simPlaceFrom=simAcFrom.getPlace();});
+  simAcTo.addListener('place_changed',()=>{window._simPlaceTo=simAcTo.getPlace();});
+  fromEl.addEventListener('input',()=>{window._simPlaceFrom=null;});
+  toEl.addEventListener('input',()=>{window._simPlaceTo=null;});
+};
+['simFrom','simTo'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener('focus',loadSimMaps,{once:true});
+});
+
+// Quick picks click handler
+document.querySelectorAll('.sim-quick-picks').forEach(container=>{
+  const targetId=container.dataset.target;
+  container.querySelectorAll('.sim-quick-pick').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const input=document.getElementById(targetId);
+      const label=btn.textContent.trim();
+      const fullName=QUICK_PICK_MAP[label]||label;
+      input.value=fullName;
+      // Set known coords as place
+      if(KNOWN_COORDS[fullName]){
+        const placeKey=targetId==='simFrom'?'_simPlaceFrom':'_simPlaceTo';
+        window[placeKey]={geometry:{location:{lat:()=>KNOWN_COORDS[fullName].lat,lng:()=>KNOWN_COORDS[fullName].lng}},formatted_address:fullName};
+      }
+    });
+  });
+});
+
+// Geocode helper for free-text addresses
+function simGeocode(val){
+  return new Promise((resolve)=>{
+    if(!window.google||!window.google.maps){resolve(null);return;}
+    const gc=new google.maps.Geocoder();
+    gc.geocode({address:val,componentRestrictions:{country:'fr'}},(results,status)=>{
+      if(status==='OK'&&results[0]) resolve(results[0]);
+      else resolve(null);
+    });
+  });
+}
+
+// Get coords for a sim input
+async function simGetCoords(inputId,placeKey){
+  const val=document.getElementById(inputId).value.trim();
+  if(!val) return null;
+  // Check known coords first
+  if(KNOWN_COORDS[val]) return KNOWN_COORDS[val];
+  // Check Google Place
+  if(window[placeKey]&&window[placeKey].geometry){
+    return{lat:window[placeKey].geometry.location.lat(),lng:window[placeKey].geometry.location.lng()};
+  }
+  // Geocode fallback
+  const result=await simGeocode(val);
+  if(result&&result.geometry){
+    window[placeKey]=result;
+    document.getElementById(inputId).value=result.formatted_address;
+    return{lat:result.geometry.location.lat(),lng:result.geometry.location.lng()};
+  }
+  return null;
+}
+
+document.getElementById('btnSimEstimate').addEventListener('click',async()=>{
+  const fromVal=document.getElementById('simFrom').value.trim();
+  const toVal=document.getElementById('simTo').value.trim();
   const veh=document.getElementById('simVehicle').value;
-  if(!from||!to){return;}
-  if(from===to){return;}
-  const key=from+'|'+to;
-  const km=SIM_DISTANCES[key]||Math.round(Math.abs(
-    (KNOWN_COORDS[from]?.lat||48.85)-(KNOWN_COORDS[to]?.lat||48.85))*111+
-    Math.abs((KNOWN_COORDS[from]?.lng||2.35)-(KNOWN_COORDS[to]?.lng||2.35))*80
-  );
-  const{price,horaire}=calcPrice(km,veh,'12:00',from,to);
+  if(!fromVal||!toVal) return;
+  if(fromVal===toVal) return;
+
+  const btn=document.getElementById('btnSimEstimate');
+  btn.textContent='Calcul...';btn.disabled=true;
+
+  // Try known distance first
+  const key=fromVal+'|'+toVal;
+  let km=SIM_DISTANCES[key];
+
+  if(!km){
+    // Need coordinates — load maps if not loaded
+    loadSimMaps();
+    // Wait for maps to load
+    await new Promise(r=>{
+      const check=()=>{if(window.google&&window.google.maps) r(); else setTimeout(check,200);};
+      check();
+    });
+    const fromCoords=await simGetCoords('simFrom','_simPlaceFrom');
+    const toCoords=await simGetCoords('simTo','_simPlaceTo');
+    if(!fromCoords||!toCoords){
+      btn.textContent=currentLang==='en'?'Address not found':'Adresse introuvable';
+      setTimeout(()=>{btn.textContent=currentLang==='en'?'Estimate price':'Estimer le prix';btn.disabled=false;},2000);
+      return;
+    }
+    // Use Distance Matrix for accurate distance
+    try{
+      km=await new Promise((resolve,reject)=>{
+        const svc=new google.maps.DistanceMatrixService();
+        svc.getDistanceMatrix({
+          origins:[new google.maps.LatLng(fromCoords.lat,fromCoords.lng)],
+          destinations:[new google.maps.LatLng(toCoords.lat,toCoords.lng)],
+          travelMode:'DRIVING'
+        },(res,status)=>{
+          if(status==='OK'&&res.rows[0].elements[0].status==='OK'){
+            resolve(Math.round(res.rows[0].elements[0].distance.value/1000));
+          }else reject('api');
+        });
+      });
+    }catch(e){
+      // Fallback: haversine approx
+      const R=6371;
+      const dLat=(toCoords.lat-fromCoords.lat)*Math.PI/180;
+      const dLng=(toCoords.lng-fromCoords.lng)*Math.PI/180;
+      const a=Math.sin(dLat/2)**2+Math.cos(fromCoords.lat*Math.PI/180)*Math.cos(toCoords.lat*Math.PI/180)*Math.sin(dLng/2)**2;
+      km=Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))*1.3);
+    }
+  }
+
+  const fromFinal=document.getElementById('simFrom').value;
+  const toFinal=document.getElementById('simTo').value;
+  const{price,horaire}=calcPrice(km,veh,'12:00',fromFinal,toFinal);
   document.getElementById('simPriceAmount').textContent=price+'€';
   document.getElementById('simPriceDist').textContent='~'+km+' km';
   const nightEl=document.getElementById('simNightInfo');
   nightEl.style.display='none';
   document.getElementById('simPriceBox').style.display='block';
   document.getElementById('btnBookFull').style.display='flex';
-  document.getElementById('btnSimEstimate').textContent=currentLang==='en'?'Recalculate':'Recalculer';
+  btn.textContent=currentLang==='en'?'Recalculate':'Recalculer';
+  btn.disabled=false;
 });
 
 // ═══ LANGUE FR / EN ═══
