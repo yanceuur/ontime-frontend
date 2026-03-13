@@ -271,23 +271,32 @@
 .sim-trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
 .sim-trust-item svg{width:12px;height:12px;stroke:var(--accent);stroke-width:2;fill:none;}
 
-/* ═══ CELL: CAR (Mercedes V illustration) ═══ */
+/* ═══ CELL: CAR (Van photo) ═══ */
 .cell-car{
   grid-column:1/2;grid-row:2/3;
   display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(200,169,110,.04),rgba(15,12,8,.6));
-  overflow:hidden;padding:20px;position:relative;
+  background:#0a0a0a;
+  overflow:hidden;padding:0;position:relative;
 }
-.cell-car::after{
-  content:'';position:absolute;inset:0;
-  background:url('img/car-classe-v.webp') center/cover no-repeat;
-  opacity:.08;pointer-events:none;
-}
-.car-svg{width:100%;max-width:320px;height:auto;filter:drop-shadow(0 8px 30px rgba(200,169,110,.15));}
-.car-label{
-  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
-  font-size:.68rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;
+.cell-car-wrap{position:relative;width:100%;height:100%;}
+.cell-car-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85);}
+.plate-overlay{
+  position:absolute;
+  bottom:22%;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,#111 0%,#1a1a1a 100%);
+  border:2px solid var(--accent);
+  border-radius:6px;
+  padding:4px 18px;
+  font-family:'Poppins',sans-serif;
+  font-size:.75rem;font-weight:700;letter-spacing:3px;
+  color:var(--accent);text-transform:uppercase;
   white-space:nowrap;
+  box-shadow:0 2px 12px rgba(0,0,0,.6),0 0 8px rgba(200,169,110,.2);
+}
+.car-label{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  font-size:.68rem;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;
+  white-space:nowrap;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,.8);
 }
 
 /* ═══ CELL: STATS ═══ */
@@ -593,63 +602,12 @@
     </div>
   </div>
 
-  <!-- CELL 3: MERCEDES CLASSE V (CSS/SVG) -->
+  <!-- CELL 3: MERCEDES VAN PHOTO -->
   <div class="cell cell-car">
-    <svg class="car-svg" viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation:float 6s ease-in-out infinite;">
-      <!-- Ground reflection -->
-      <ellipse cx="200" cy="170" rx="160" ry="6" fill="url(#carGlow)" opacity=".4"/>
-      <!-- Body shell -->
-      <path d="M50 120 L60 80 Q65 65 80 58 L140 45 Q160 40 200 38 Q240 40 260 45 L320 58 Q335 65 340 80 L350 120" stroke="url(#carStroke)" stroke-width="2" fill="rgba(200,169,110,.03)"/>
-      <!-- Roof line -->
-      <path d="M100 58 Q110 30 160 25 L240 25 Q290 30 300 58" stroke="url(#carStroke)" stroke-width="1.5" fill="none"/>
-      <!-- Windows -->
-      <path d="M115 56 Q120 35 160 30 L195 29 L195 56 Z" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.2)" stroke-width=".8"/>
-      <path d="M205 56 L205 29 L240 30 Q280 35 285 56 Z" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.2)" stroke-width=".8"/>
-      <!-- Door line -->
-      <line x1="200" y1="56" x2="200" y2="118" stroke="rgba(255,255,255,.06)" stroke-width=".5"/>
-      <!-- Headlights -->
-      <path d="M50 105 L40 100 Q35 98 36 95 L45 85 Q48 82 52 84 L60 95 Z" fill="rgba(200,169,110,.12)" stroke="var(--accent)" stroke-width="1"/>
-      <path d="M350 105 L360 100 Q365 98 364 95 L355 85 Q352 82 348 84 L340 95 Z" fill="rgba(200,169,110,.12)" stroke="var(--accent)" stroke-width="1"/>
-      <!-- Headlight glow -->
-      <circle cx="45" cy="95" r="8" fill="rgba(200,169,110,.15)"/>
-      <circle cx="355" cy="95" r="8" fill="rgba(200,169,110,.15)"/>
-      <!-- Grille -->
-      <rect x="160" y="100" width="80" height="16" rx="3" fill="rgba(255,255,255,.02)" stroke="rgba(255,255,255,.08)" stroke-width=".8"/>
-      <line x1="180" y1="100" x2="180" y2="116" stroke="rgba(255,255,255,.05)" stroke-width=".5"/>
-      <line x1="200" y1="100" x2="200" y2="116" stroke="rgba(255,255,255,.05)" stroke-width=".5"/>
-      <line x1="220" y1="100" x2="220" y2="116" stroke="rgba(255,255,255,.05)" stroke-width=".5"/>
-      <!-- Mercedes star -->
-      <circle cx="200" cy="108" r="6" fill="none" stroke="var(--accent)" stroke-width=".8"/>
-      <line x1="200" y1="103" x2="200" y2="113" stroke="var(--accent)" stroke-width=".6"/>
-      <line x1="195" y1="111" x2="200" y2="103" stroke="var(--accent)" stroke-width=".6"/>
-      <line x1="205" y1="111" x2="200" y2="103" stroke="var(--accent)" stroke-width=".6"/>
-      <!-- Bottom line -->
-      <path d="M55 120 L345 120" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-      <!-- Underbody accent light -->
-      <rect x="100" y="122" width="200" height="2" rx="1" fill="url(#underGlow)" opacity=".6"/>
-      <!-- Wheels -->
-      <circle cx="110" cy="125" r="22" fill="#0a0e1a" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
-      <circle cx="110" cy="125" r="15" fill="none" stroke="rgba(200,169,110,.15)" stroke-width="1"/>
-      <circle cx="110" cy="125" r="5" fill="rgba(200,169,110,.1)" stroke="rgba(200,169,110,.25)" stroke-width=".8"/>
-      <!-- Wheel spokes -->
-      <line x1="110" y1="110" x2="110" y2="115" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <line x1="95" y1="125" x2="100" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <line x1="120" y1="125" x2="125" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <line x1="110" y1="135" x2="110" y2="140" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <circle cx="290" cy="125" r="22" fill="#0a0e1a" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
-      <circle cx="290" cy="125" r="15" fill="none" stroke="rgba(200,169,110,.15)" stroke-width="1"/>
-      <circle cx="290" cy="125" r="5" fill="rgba(200,169,110,.1)" stroke="rgba(200,169,110,.25)" stroke-width=".8"/>
-      <line x1="290" y1="110" x2="290" y2="115" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <line x1="275" y1="125" x2="280" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <line x1="300" y1="125" x2="305" y2="125" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <line x1="290" y1="135" x2="290" y2="140" stroke="rgba(255,255,255,.1)" stroke-width=".6"/>
-      <!-- Gradients -->
-      <defs>
-        <linearGradient id="carStroke" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="rgba(200,169,110,.2)"/><stop offset="50%" stop-color="rgba(223,201,160,.4)"/><stop offset="100%" stop-color="rgba(200,169,110,.2)"/></linearGradient>
-        <radialGradient id="carGlow" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(200,169,110,.3)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-        <linearGradient id="underGlow" x1="0" y1="0" x2="200" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="50%" stop-color="var(--accent)"/><stop offset="100%" stop-color="transparent"/></linearGradient>
-      </defs>
-    </svg>
+    <div class="cell-car-wrap">
+      <img src="img/van-pinterest.jpg" alt="Mercedes Classe V — ONTIME TRANSFERT" loading="lazy">
+      <div class="plate-overlay">ONTIME TRANSFERT</div>
+    </div>
     <div class="car-label">Mercedes Classe V</div>
   </div>
 
