@@ -347,6 +347,21 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       </div>
     </div>
 
+    <div class="toggle-row">
+      <span class="toggle-row-label" data-i18n="lbl-roundtrip">Aller-retour ?</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggleRoundTrip" onchange="document.getElementById('roundTripPanel').style.display=this.checked?'block':'none'">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div id="roundTripPanel" style="display:none;margin-bottom:12px;">
+      <div class="form-row">
+        <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><label for="inputReturnDate" class="sr-only">Date retour</label><input type="date" class="form-input" id="inputReturnDate"></div>
+        <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><label for="inputReturnTime" class="sr-only">Heure retour</label><select class="form-select" id="inputReturnTime"><option value="" disabled selected data-i18n="lbl-return-time">Heure retour</option></select></div>
+      </div>
+      <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;" data-i18n="lbl-roundtrip-note">Le retour sera facturé au même tarif que l'aller.</div>
+    </div>
+
     <label class="form-label" data-i18n="lbl-datetime">Date &amp; heure</label>
     <div class="form-row">
       <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><label for="inputDate" class="sr-only">Date</label><input type="date" class="form-input" id="inputDate"></div>
@@ -488,6 +503,10 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       </div>
       <div id="payment-element" style="margin-top:16px;"></div>
       <div id="card-errors" style="color:#f44336;font-size:.76rem;margin-top:6px;min-height:18px;"></div>
+      <label style="display:flex;align-items:flex-start;gap:8px;margin-top:14px;cursor:pointer;font-size:.75rem;color:var(--text-dim);line-height:1.5;">
+        <input type="checkbox" id="acceptCGV" style="margin-top:3px;accent-color:var(--accent);flex-shrink:0;">
+        <span data-i18n="lbl-accept-cgv">J'accepte les <a href="mentions-legales.html#cgv" target="_blank" style="color:var(--accent);text-decoration:underline;">conditions générales de vente</a> et la <a href="mentions-legales.html#privacy" target="_blank" style="color:var(--accent);text-decoration:underline;">politique de confidentialité</a>.</span>
+      </label>
       <button class="btn-primary" id="btnPay" style="margin-top:12px;">
         <span id="paySpinner" style="display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;"></span>
         <span data-i18n="btn-pay">Payer et confirmer</span>
@@ -571,6 +590,16 @@ function updateTimeOptions(){
 }
 updateTimeOptions();
 dateInput.addEventListener('change',updateTimeOptions);
+
+// Populate return time select
+(function(){
+  const rt=document.getElementById('inputReturnTime');if(!rt)return;
+  const cl=localStorage.getItem('lang')||'fr';
+  for(let h=0;h<24;h++){for(let m=0;m<60;m+=30){
+    const v=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+    rt.innerHTML+='<option value="'+v+'">'+v+'</option>';
+  }}
+})();
 
 // ═══ BOOKING STATE ═══
 const BACKEND='https://ontime-backend.vercel.app';
@@ -918,6 +947,11 @@ document.getElementById('btnBackStep2').addEventListener('click',()=>{
 
 // ═══ PAIEMENT STRIPE ═══
 document.getElementById('btnPay').addEventListener('click',async()=>{
+  if(!document.getElementById('acceptCGV').checked){
+    const pe=document.getElementById('payError');
+    pe.textContent=(localStorage.getItem('lang')==='en')?'Please accept the terms and conditions.':'Veuillez accepter les conditions générales de vente.';
+    pe.style.display='block';return;
+  }
   const fn=booking.firstName,ln=booking.lastName,ph=booking.phone,em=booking.email;
   const btn=document.getElementById('btnPay');const spinner=document.getElementById('paySpinner');
   btn.disabled=true;spinner.style.display='inline-block';
@@ -967,6 +1001,10 @@ const i18n={
     'lbl-from':'Departure','lbl-to':'Destination',
     'lbl-paxbags':'Passengers &amp; luggage','lbl-pax':'Passengers','lbl-bags':'Luggage',
     'lbl-childseat':'Child seat needed?',
+    'lbl-roundtrip':'Round trip?',
+    'lbl-return-time':'Return time',
+    'lbl-roundtrip-note':'The return trip is billed at the same rate as the outbound.',
+    'lbl-accept-cgv':'I accept the <a href="mentions-legales.html#cgv" target="_blank" style="color:var(--accent);text-decoration:underline;">terms and conditions</a> and the <a href="mentions-legales.html#privacy" target="_blank" style="color:var(--accent);text-decoration:underline;">privacy policy</a>.',
     'book-title2':'Your details','book-sub2':'To finalize your booking',
     'lbl-firstname':'First name','lbl-lastname':'Last name',
     'lbl-phone':'Phone','lbl-email':'Email','lbl-flight':'Flight / train number (optional)',
@@ -1006,6 +1044,10 @@ const i18n={
     'lbl-from':'Départ','lbl-to':'Destination',
     'lbl-paxbags':'Passagers &amp; bagages','lbl-pax':'Passagers','lbl-bags':'Bagages',
     'lbl-childseat':'Siège enfant requis ?',
+    'lbl-roundtrip':'Aller-retour ?',
+    'lbl-return-time':'Heure retour',
+    'lbl-roundtrip-note':'Le retour sera facturé au même tarif que l\'aller.',
+    'lbl-accept-cgv':'J\'accepte les <a href="mentions-legales.html#cgv" target="_blank" style="color:var(--accent);text-decoration:underline;">conditions générales de vente</a> et la <a href="mentions-legales.html#privacy" target="_blank" style="color:var(--accent);text-decoration:underline;">politique de confidentialité</a>.',
     'book-title2':'Vos coordonnées','book-sub2':'Pour finaliser votre réservation',
     'lbl-firstname':'Prénom','lbl-lastname':'Nom',
     'lbl-phone':'Téléphone','lbl-email':'Email','lbl-flight':'N° de vol / train (optionnel)',
