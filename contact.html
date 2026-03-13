@@ -158,10 +158,20 @@ textarea.b2b-input{resize:vertical;min-height:80px;padding-top:11px;padding-left
   <a href="tarifs-reservations.html" data-i18n="nav-rates">Tarifs</a>
   <a href="services.html" data-i18n="nav-services">Services</a>
   <a href="contact.html" class="active" data-i18n="nav-contact">Contact</a>
-  <a href="tel:+33760554460" class="pill-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 60 55 44 60</a>
-  <button class="lang-btn" id="langBtn" onclick="toggleLang()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="langBtnText">EN</span></button>
   <div class="nav-reserver"><a href="#" class="pill-cta nav-reserver-btn" aria-expanded="false" onclick="toggleReserver(event)" data-i18n="nav-book">Réserver</a><div class="reserver-panel" id="reserverPanel"><h3>Simulateur de prix</h3><p style="color:rgba(255,255,255,.5);font-size:.85rem;margin:0 0 12px;">Tarifs indicatifs depuis Paris intra-muros, de jour. Nuit +10%.</p><div class="tarif-grid"><div class="tg-head">Destination</div><div class="tg-head">Confort</div><div class="tg-head">Business</div><div class="tg-head">Van</div><div class="tg-dest">Aéroport CDG</div><div class="tg-price"><strong>80€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-price"><strong>130€</strong></div><div class="tg-dest">Aéroport Orly</div><div class="tg-price"><strong>60€</strong></div><div class="tg-price"><strong>90€</strong></div><div class="tg-price"><strong>100€</strong></div><div class="tg-dest">Beauvais</div><div class="tg-price"><strong>145€</strong></div><div class="tg-price"><strong>205€</strong></div><div class="tg-price"><strong>230€</strong></div><div class="tg-dest">Gares</div><div class="tg-price">dès <strong>35€</strong></div><div class="tg-price">dès <strong>55€</strong></div><div class="tg-price">dès <strong>60€</strong></div><div class="tg-dest">Disneyland</div><div class="tg-price"><strong>75€</strong></div><div class="tg-price"><strong>110€</strong></div><div class="tg-price"><strong>120€</strong></div><div class="tg-dest">Mise à dispo.</div><div class="tg-price" style="grid-column:span 3;text-align:center;"><strong>80€</strong>/h</div></div><p style="color:rgba(255,255,255,.45);font-size:.75rem;margin:10px 0 0;text-align:center;">Tarifs indicatifs — devis personnalisé sur demande</p><a href="index.html#booking" class="res-cta">Demander un devis</a></div></div>
 </nav>
+
+<!-- TOP-RIGHT UTILS -->
+<div class="top-utils" id="topUtils">
+  <a href="tel:+33760554460" class="top-phone">
+    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    07 60 55 44 60
+  </a>
+  <button class="top-lang" id="langBtn" onclick="toggleLang()">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <span id="langBtnText">EN</span>
+  </button>
+</div>
 
 <!-- HAMBURGER + SIDEBAR -->
 <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
