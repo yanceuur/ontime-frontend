@@ -32,7 +32,9 @@
 .cell-hero{grid-column:1/-1;text-align:center;padding:44px 36px 36px;}
 
 /* SERVICE CELLS */
-.svc-cell{grid-column:span 2;padding:28px;}
+.svc-cell{grid-column:span 2;padding:0;overflow:hidden;}
+.svc-img{width:100%;height:160px;object-fit:cover;display:block;filter:brightness(.7);}
+.svc-body{padding:24px 28px 28px;}
 .svc-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;}
 .svc-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .svc-icon svg{width:24px;height:24px;stroke:var(--accent);stroke-width:1.4;fill:none;}
@@ -65,7 +67,9 @@
 }
 @media(max-width:768px){
   .bento{grid-template-columns:1fr;padding:70px 16px 30px;}
-  .svc-cell{grid-column:1/-1;padding:24px 20px;}
+  .svc-cell{grid-column:1/-1;padding:0;}
+  .svc-img{height:140px;}
+  .svc-body{padding:20px;}
   .cell-hero{padding:32px 20px 28px;}
   .svc-head{flex-direction:column;gap:10px;}
   .svc-icon{width:44px;height:44px;border-radius:12px;}
@@ -151,6 +155,8 @@
 
   <!-- SERVICE 1 : TRANSFERT AEROPORT -->
   <div class="cell svc-cell">
+    <img class="svc-img" src="img/svc-airport.webp" alt="Transfert aéroport VTC Paris CDG Orly" loading="lazy" width="600" height="160">
+    <div class="svc-body">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.4-.1.9.3 1.1L11 12l-2 3H6l-1 1 3 2 2 3 1-1v-3l3-2 3.7 7.3c.2.4.7.6 1.1.3l.5-.3c.4-.2.5-.6.5-1.1z"/></svg></div>
       <div class="svc-info">
@@ -166,10 +172,13 @@
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s1-f4">Prix fixe garanti</span></div>
     </div>
     <a href="reservation.html" class="svc-cta"><span data-i18n="s1-cta">Reserver un transfert aeroport</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 
   <!-- SERVICE 2 : DISNEYLAND -->
   <div class="cell svc-cell">
+    <img class="svc-img" src="img/svc-paris.webp" alt="Transfert Disneyland Paris VTC famille" loading="lazy" width="600" height="160">
+    <div class="svc-body">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
       <div class="svc-info">
@@ -184,10 +193,13 @@
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s2-f3">Vehicules spacieux</span></div>
     </div>
     <a href="reservation.html" class="svc-cta"><span data-i18n="s2-cta">Reserver pour Disneyland</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 
   <!-- SERVICE 3 : GARE -->
   <div class="cell svc-cell">
+    <img class="svc-img" src="img/svc-gare.webp" alt="Transfert gare VTC Paris" loading="lazy" width="600" height="160">
+    <div class="svc-body">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="21" r="1"/><circle cx="16" cy="21" r="1"/><path d="M6 19h12"/></svg></div>
       <div class="svc-info">
@@ -202,10 +214,13 @@
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s3-f3">Toutes gares couvertes</span></div>
     </div>
     <a href="reservation.html" class="svc-cta"><span data-i18n="s3-cta">Reserver un transfert gare</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 
   <!-- SERVICE 4 : MISE A DISPOSITION -->
   <div class="cell svc-cell">
+    <img class="svc-img" src="img/svc-vip.webp" alt="Mise à disposition chauffeur privé VTC" loading="lazy" width="600" height="160">
+    <div class="svc-body">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="svc-info">
@@ -220,10 +235,13 @@
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s4-f3">Programme flexible</span></div>
     </div>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20une%20mise%20%C3%A0%20disposition." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="s4-cta">Demander un devis WhatsApp</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 
   <!-- SERVICE 5 : EVENEMENTS -->
   <div class="cell svc-cell">
+    <img class="svc-img" src="img/car-classe-s.webp" alt="VTC événement mariage Paris" loading="lazy" width="600" height="160">
+    <div class="svc-body">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       <div class="svc-info">
@@ -238,10 +256,13 @@
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s5-f3">Coordination logistique</span></div>
     </div>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20un%20%C3%A9v%C3%A9nement." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="s5-cta">Demander un devis evenement</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 
   <!-- SERVICE 6 : LONGUE DISTANCE -->
   <div class="cell svc-cell">
+    <img class="svc-img" src="img/svc-longdistance.webp" alt="VTC longue distance France" loading="lazy" width="600" height="160">
+    <div class="svc-body">
     <div class="svc-head">
       <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
       <div class="svc-info">
@@ -256,6 +277,7 @@
       <div class="svc-feat"><span class="svc-feat-check">&#10003;</span> <span data-i18n="s6-f3">Tarif fixe longue distance</span></div>
     </div>
     <a href="https://wa.me/33760554460?text=Bonjour%2C%20je%20souhaite%20un%20devis%20longue%20distance." class="svc-cta outline" target="_blank" rel="noopener"><span data-i18n="s6-cta">Demander un devis</span> <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
   </div>
 
   <!-- CTA BOTTOM -->
