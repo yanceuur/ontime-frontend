@@ -120,31 +120,29 @@
   display:grid;
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:auto;
-  gap:20px;
-  padding:110px 28px 50px;
+  gap:14px;
+  padding:110px 24px 50px;
   max-width:1400px;margin:0 auto;
   min-height:100vh;
 }
 
-/* Cell base with interactive glow border */
+/* Cell base — refined glassmorphism */
 .cell{
   background:var(--glass);
-  backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid rgba(200,169,110,.12);
-  border-radius:20px;
+  backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
   padding:28px;
   position:relative;overflow:hidden;
-  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .5s,border-color .4s;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s,border-color .5s;
   opacity:0;animation:cellIn .6s cubic-bezier(.16,1,.3,1) forwards;
 }
 .cell:hover{
-  transform:translateY(-4px);
-  border-color:rgba(200,169,110,.35);
+  transform:translateY(-3px);
+  border-color:rgba(200,169,110,.18);
   box-shadow:
-    0 14px 44px rgba(0,0,0,.35),
-    0 0 0 1px rgba(200,169,110,.15),
-    0 0 40px -10px rgba(200,169,110,.12),
-    inset 0 1px 0 rgba(200,169,110,.08);
+    0 20px 50px rgba(0,0,0,.25),
+    0 0 0 1px rgba(200,169,110,.08);
 }
 /* Staggered entrance */
 .cell:nth-child(1){animation-delay:.1s}
@@ -182,14 +180,15 @@
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
-  border-radius:24px;padding:6px 16px;font-size:.65rem;color:var(--accent-light);
-  text-transform:uppercase;letter-spacing:2.5px;margin-bottom:20px;width:fit-content;
+  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.12);
+  border-radius:24px;padding:6px 16px;font-size:.62rem;color:var(--accent);
+  text-transform:uppercase;letter-spacing:3px;margin-bottom:24px;width:fit-content;
+  font-weight:500;
 }
-.hero-badge svg{width:14px;height:14px;fill:var(--accent);stroke:none;}
+.hero-badge svg{width:12px;height:12px;fill:var(--accent);stroke:none;opacity:.7;}
 .hero-title{
-  font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.5vw,3.2rem);line-height:1.1;
-  margin-bottom:16px;
+  font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;
+  margin-bottom:18px;
 }
 .hero-title .line{
   display:block;
@@ -201,11 +200,11 @@
   background:linear-gradient(135deg,var(--accent-light),var(--accent));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.hero-text{color:var(--text-dim);font-size:.92rem;line-height:1.7;max-width:520px;font-weight:300;}
-.hero-text strong{color:rgba(255,255,255,.8);font-weight:500;}
+.hero-text{color:var(--text-dim);font-size:.88rem;line-height:1.8;max-width:500px;font-weight:300;letter-spacing:.2px;}
+.hero-text strong{color:rgba(255,255,255,.75);font-weight:500;}
 .hero-signature{
-  font-family:'DM Serif Display',serif;font-size:.95rem;font-style:italic;
-  color:var(--accent);margin-top:16px;
+  font-family:'DM Serif Display',serif;font-size:.88rem;font-style:italic;
+  color:var(--accent);margin-top:20px;opacity:.8;
 }
 
 /* ═══ CELL: SIMULATOR ═══ */
@@ -216,19 +215,18 @@
   padding:28px;
 }
 .sim-title{
-  font-family:'DM Serif Display',serif;font-size:1.3rem;
-  background:linear-gradient(135deg,#fff,var(--accent-light));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-family:'DM Serif Display',serif;font-size:1.2rem;
+  color:#fff;
   margin-bottom:4px;
 }
-.sim-sub{font-size:.82rem;color:var(--text-muted);margin-bottom:18px;}
-.sim-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:6px;display:block;margin-top:12px;}
+.sim-sub{font-size:.75rem;color:var(--text-muted);margin-bottom:20px;letter-spacing:.3px;}
+.sim-label{font-size:.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:6px;display:block;margin-top:14px;font-weight:500;opacity:.8;}
 .sim-label:first-of-type{margin-top:0;}
 .sim-select,.sim-input{
-  width:100%;padding:12px 14px;border-radius:10px;font-size:.88rem;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  width:100%;padding:11px 14px;border-radius:10px;font-size:.85rem;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
   color:var(--text);font-family:'Inter',sans-serif;
-  transition:border-color .25s,box-shadow .25s;
+  transition:border-color .3s,box-shadow .3s;
   -webkit-appearance:none;appearance:none;
 }
 .sim-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
@@ -305,70 +303,78 @@
 /* ═══ CELL: STATS ═══ */
 .cell-stats{
   grid-column:2/3;grid-row:2/3;
-  display:flex;flex-direction:column;justify-content:center;gap:20px;
+  display:flex;flex-direction:column;justify-content:center;gap:24px;
   padding:28px;
 }
 .stat-block{text-align:center;}
 .stat-number{
-  font-family:'DM Serif Display',serif;font-size:2rem;
-  background:linear-gradient(135deg,var(--accent-light),var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-family:'DM Serif Display',serif;font-size:1.8rem;
+  color:var(--accent-light);
   line-height:1.2;
 }
-.stat-label{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:2px;}
+.stat-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2.5px;margin-top:4px;font-weight:400;}
 
-/* ═══ CELL: PRICES ═══ */
+/* ═══ CELL: PRICES (refined) ═══ */
 .cell-prices{
   grid-column:3/5;grid-row:2/3;
-  padding:24px;
+  padding:28px 24px;
+  display:flex;flex-direction:column;
 }
+.prices-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;}
 .prices-title{
-  font-family:'DM Serif Display',serif;font-size:1.15rem;color:#fff;margin-bottom:14px;
+  font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;
 }
 .prices-title em{
   font-style:italic;color:var(--accent-light);
   -webkit-text-fill-color:var(--accent-light);
 }
-.prices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-.price-pill{
-  padding:12px;border-radius:12px;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
-  text-align:center;transition:all .25s;
-}
-.price-pill:hover{border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.05);}
-.price-pill-route{font-size:.72rem;color:var(--text-dim);margin-bottom:4px;font-weight:500;}
-.price-pill-arrow{color:var(--accent);margin:0 2px;}
-.price-pill-amount{
-  font-family:'DM Serif Display',serif;font-size:1.2rem;
-  background:linear-gradient(135deg,#fff,var(--accent-light));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.price-pill-note{font-size:.6rem;color:var(--text-muted);margin-top:2px;}
 .prices-cta{
-  display:inline-flex;align-items:center;gap:6px;margin-top:14px;
-  font-size:.78rem;color:var(--accent-light);text-decoration:none;transition:color .2s;
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.72rem;color:var(--accent);text-decoration:none;transition:color .2s;
+  letter-spacing:.5px;text-transform:uppercase;font-weight:500;
 }
 .prices-cta:hover{color:#fff;}
-.prices-cta svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;}
+.prices-cta svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none;}
+.prices-list{display:flex;flex-direction:column;gap:6px;flex:1;}
+.price-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-radius:10px;
+  background:rgba(255,255,255,.02);
+  border:1px solid rgba(255,255,255,.04);
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.price-row:hover{
+  background:rgba(200,169,110,.04);border-color:rgba(200,169,110,.15);
+  transform:translateX(4px);
+}
+.price-route{display:flex;align-items:center;gap:8px;}
+.price-from,.price-to{font-size:.78rem;color:var(--text-dim);font-weight:400;}
+.price-arrow{color:rgba(200,169,110,.4);font-size:.65rem;}
+.price-amount{
+  font-family:'DM Serif Display',serif;font-size:1.05rem;
+  color:var(--accent-light);white-space:nowrap;
+}
+.price-amount small{font-size:.65rem;color:var(--text-muted);font-family:'Inter',sans-serif;font-weight:400;margin-left:2px;}
 
 /* ═══ CELL: SERVICES ═══ */
 .cell-services{
   grid-column:1/3;grid-row:3/4;
-  padding:24px;
+  padding:24px 24px 20px;
 }
-.svc-mini-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;margin-bottom:14px;}
+.svc-mini-title{font-family:'DM Serif Display',serif;font-size:1.05rem;color:#fff;margin-bottom:16px;}
 .svc-mini-title em{color:var(--accent-light);-webkit-text-fill-color:var(--accent-light);font-style:italic;}
-.svc-mini-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.svc-mini-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
 .svc-mini-card{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:16px 8px;border-radius:14px;
-  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);
-  text-decoration:none;color:var(--text-dim);
-  transition:all .3s;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:18px 8px;border-radius:12px;
+  background:transparent;border:1px solid rgba(255,255,255,.04);
+  text-decoration:none;color:var(--text-muted);
+  transition:all .35s cubic-bezier(.16,1,.3,1);text-align:center;
 }
-.svc-mini-card:hover{border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04);color:#fff;}
-.svc-mini-card svg{width:22px;height:22px;stroke:var(--accent);stroke-width:1.5;fill:none;}
-.svc-mini-card span{font-size:.7rem;line-height:1.3;letter-spacing:.3px;}
+.svc-mini-card:hover{border-color:rgba(200,169,110,.15);background:rgba(200,169,110,.03);color:var(--text-dim);}
+.svc-mini-card svg{width:20px;height:20px;stroke:var(--accent);stroke-width:1.5;fill:none;opacity:.7;transition:opacity .3s;}
+.svc-mini-card:hover svg{opacity:1;}
+.svc-mini-card span{font-size:.68rem;line-height:1.3;letter-spacing:.3px;}
 
 /* ═══ CELL: REVIEWS (CAROUSEL) ═══ */
 .cell-reviews{
@@ -379,39 +385,35 @@
 .review-slide{display:none;animation:reviewFade .5s ease;}
 .review-slide.active{display:block;}
 @keyframes reviewFade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-.review-stars{display:flex;gap:2px;margin-bottom:10px;}
-.review-stars svg{width:14px;height:14px;fill:var(--accent);stroke:none;}
-.review-text{font-size:.82rem;color:var(--text-dim);line-height:1.6;font-style:italic;margin-bottom:14px;}
+.review-stars{display:flex;gap:2px;margin-bottom:12px;}
+.review-stars svg{width:12px;height:12px;fill:var(--accent);stroke:none;opacity:.8;}
+.review-text{font-size:.8rem;color:var(--text-dim);line-height:1.7;font-style:italic;margin-bottom:16px;font-weight:300;}
 .review-author{display:flex;align-items:center;gap:10px;}
 .review-avatar{
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.12);
   display:flex;align-items:center;justify-content:center;
-  font-family:'DM Serif Display',serif;font-size:.85rem;color:var(--accent);
+  font-family:'DM Serif Display',serif;font-size:.8rem;color:var(--accent);
 }
-.review-name{font-size:.78rem;color:#fff;font-weight:500;}
-.review-source{font-size:.65rem;color:var(--text-muted);}
+.review-name{font-size:.75rem;color:rgba(255,255,255,.85);font-weight:500;}
+.review-source{font-size:.62rem;color:var(--text-muted);letter-spacing:.3px;}
 .review-dots{display:flex;gap:6px;margin-top:12px;justify-content:center;}
 .review-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;}
 .review-dot.active{background:var(--accent);transform:scale(1.3);}
 .review-badge{
-  display:flex;align-items:center;gap:6px;margin-top:10px;
+  display:flex;align-items:center;gap:8px;margin-top:12px;
   padding:8px 12px;border-radius:8px;
-  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);
+  background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.08);
 }
-.review-badge-score{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--accent);}
-.review-badge-text{font-size:.65rem;color:var(--text-muted);}
+.review-badge-score{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--accent);}
+.review-badge-text{font-size:.62rem;color:var(--text-muted);letter-spacing:.3px;}
 
 /* ═══ ANIMATIONS ═══ */
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.2);}50%{box-shadow:0 0 20px 4px rgba(200,169,110,.1);}}
-.cell-stats .stat-number{transition:transform .3s;}
-.cell-stats:hover .stat-number{transform:scale(1.05);}
-.cell-prices .price-pill{transition:all .3s cubic-bezier(.16,1,.3,1);}
-.cell-prices .price-pill:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3);}
-.svc-mini-card{transition:all .35s cubic-bezier(.16,1,.3,1);}
-.svc-mini-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.3);}
-.svc-mini-card:hover svg{animation:pulseGlow 2s ease infinite;}
-.contact-icon{animation:pulseGlow 3s ease infinite;}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.15);}50%{box-shadow:0 0 16px 2px rgba(200,169,110,.08);}}
+.cell-stats .stat-number{transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.cell-stats:hover .stat-number{transform:scale(1.03);}
+.svc-mini-card:hover{transform:translateY(-2px);}
+.contact-icon{animation:pulseGlow 4s ease infinite;}
 
 /* ═══ CELL: CONTACT ═══ */
 .cell-contact{
@@ -420,26 +422,26 @@
   text-align:center;gap:14px;padding:24px;
 }
 .contact-icon{
-  width:48px;height:48px;border-radius:50%;
-  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.15);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);
   display:flex;align-items:center;justify-content:center;
 }
-.contact-icon svg{width:22px;height:22px;stroke:var(--accent-light);stroke-width:1.5;fill:none;}
+.contact-icon svg{width:20px;height:20px;stroke:var(--accent);stroke-width:1.5;fill:none;opacity:.8;}
 .contact-phone{
-  font-family:'DM Serif Display',serif;font-size:1.1rem;color:#fff;
-  text-decoration:none;transition:color .2s;
+  font-family:'DM Serif Display',serif;font-size:1.05rem;color:#fff;
+  text-decoration:none;transition:color .3s;
 }
-.contact-phone:hover{color:var(--accent-light);}
-.contact-sub{font-size:.72rem;color:var(--text-muted);line-height:1.5;}
-.contact-links{display:flex;gap:8px;margin-top:4px;}
+.contact-phone:hover{color:var(--accent);}
+.contact-sub{font-size:.7rem;color:var(--text-muted);line-height:1.5;letter-spacing:.3px;}
+.contact-links{display:flex;gap:6px;margin-top:4px;}
 .contact-link{
   display:flex;align-items:center;gap:5px;
-  padding:8px 14px;border-radius:10px;font-size:.72rem;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
-  color:var(--text-dim);text-decoration:none;transition:all .25s;
+  padding:8px 14px;border-radius:8px;font-size:.7rem;
+  background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);
+  color:var(--text-muted);text-decoration:none;transition:all .3s;
 }
-.contact-link:hover{border-color:rgba(200,169,110,.2);color:#fff;}
-.contact-link svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.8;fill:none;}
+.contact-link:hover{border-color:rgba(200,169,110,.15);color:var(--text-dim);}
+.contact-link svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;}
 
 /* ═══ FOOTER (minimal, bottom of bento) ═══ */
 .mini-footer{
@@ -465,10 +467,9 @@
   .svc-mini-grid{grid-template-columns:repeat(3,1fr);}
 }
 @media(max-width:768px){
-  .bento{grid-template-columns:1fr;padding:90px 14px 40px;gap:16px;}
+  .bento{grid-template-columns:1fr;padding:90px 14px 40px;gap:12px;}
   .cell-hero,.cell-simulator,.cell-car,.cell-stats,.cell-prices,.cell-services,.cell-reviews,.cell-contact{grid-column:1/-1;grid-row:auto;}
   .hero-title{font-size:clamp(1.6rem,6vw,2.2rem);}
-  .prices-grid{grid-template-columns:repeat(2,1fr);}
   .svc-mini-grid{grid-template-columns:repeat(2,1fr);}
   .sim-row{grid-template-columns:1fr;}
 }
@@ -638,43 +639,39 @@
 
   <!-- CELL 5: QUICK PRICES -->
   <div class="cell cell-prices">
-    <div class="prices-title" data-i18n="price-title">Des prix clairs, <em>sans surprise</em></div>
-    <div class="prices-grid">
-      <div class="price-pill">
-        <div class="price-pill-route">Paris <span class="price-pill-arrow">→</span> CDG</div>
-        <div class="price-pill-amount">dès 65€</div>
-        <div class="price-pill-note">Berline Confort</div>
+    <div class="prices-header">
+      <div class="prices-title" data-i18n="price-title">Tarifs <em>fixes</em></div>
+      <a href="tarifs-reservations.html" class="prices-cta" data-i18n="price-see-all">
+        Tous les tarifs
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="prices-list">
+      <div class="price-row">
+        <div class="price-route"><span class="price-from">Paris</span><span class="price-arrow">→</span><span class="price-to">CDG</span></div>
+        <div class="price-amount">65€ <small>Confort</small></div>
       </div>
-      <div class="price-pill">
-        <div class="price-pill-route">Paris <span class="price-pill-arrow">→</span> Orly</div>
-        <div class="price-pill-amount">dès 55€</div>
-        <div class="price-pill-note">Berline Confort</div>
+      <div class="price-row">
+        <div class="price-route"><span class="price-from">Paris</span><span class="price-arrow">→</span><span class="price-to">Orly</span></div>
+        <div class="price-amount">55€ <small>Confort</small></div>
       </div>
-      <div class="price-pill">
-        <div class="price-pill-route">Paris <span class="price-pill-arrow">→</span> Disney</div>
-        <div class="price-pill-amount">dès 80€</div>
-        <div class="price-pill-note">Berline Confort</div>
+      <div class="price-row">
+        <div class="price-route"><span class="price-from">Paris</span><span class="price-arrow">→</span><span class="price-to">Disney</span></div>
+        <div class="price-amount">80€ <small>Confort</small></div>
       </div>
-      <div class="price-pill">
-        <div class="price-pill-route">CDG <span class="price-pill-arrow">→</span> Disney</div>
-        <div class="price-pill-amount">dès 75€</div>
-        <div class="price-pill-note">Berline Confort</div>
+      <div class="price-row">
+        <div class="price-route"><span class="price-from">CDG</span><span class="price-arrow">→</span><span class="price-to">Disney</span></div>
+        <div class="price-amount">75€ <small>Confort</small></div>
       </div>
-      <div class="price-pill">
-        <div class="price-pill-route">Paris <span class="price-pill-arrow">→</span> Gare Nord</div>
-        <div class="price-pill-amount">dès 35€</div>
-        <div class="price-pill-note">Berline Confort</div>
+      <div class="price-row">
+        <div class="price-route"><span class="price-from">Paris</span><span class="price-arrow">→</span><span class="price-to">Gare Nord</span></div>
+        <div class="price-amount">35€ <small>Confort</small></div>
       </div>
-      <div class="price-pill">
-        <div class="price-pill-route">Paris <span class="price-pill-arrow">→</span> Beauvais</div>
-        <div class="price-pill-amount">dès 130€</div>
-        <div class="price-pill-note">Berline Confort</div>
+      <div class="price-row">
+        <div class="price-route"><span class="price-from">Paris</span><span class="price-arrow">→</span><span class="price-to">Beauvais</span></div>
+        <div class="price-amount">130€ <small>Confort</small></div>
       </div>
     </div>
-    <a href="tarifs-reservations.html" class="prices-cta" data-i18n="price-see-all">
-      Voir tous les tarifs
-      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
   </div>
 
   <!-- CELL 6: SERVICES -->
