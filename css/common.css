@@ -177,7 +177,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px soli
 @media(max-width:768px){.reserver-panel{width:calc(100vw - 32px);right:-60px;}}
 
 /* ─── FOOTER ─── */
-.site-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 24px 20px;margin-top:20px;}
+.site-footer,.footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:40px 24px 20px;margin-top:20px;}
 .footer-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
 .footer-logo{display:flex;align-items:center;gap:10px;}
 .footer-links{display:flex;gap:20px;flex-wrap:wrap;}

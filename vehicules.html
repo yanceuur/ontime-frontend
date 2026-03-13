@@ -25,6 +25,13 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
 <link rel="stylesheet" href="css/common.css">
 <style>
+/* PAGE OVERRIDES */
+.bento{grid-template-columns:repeat(3,1fr);max-width:1200px;}
+.footer-inner{max-width:1200px;}
+.footer-copy{max-width:1200px;}
+@media(max-width:1024px){.bento{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.bento{grid-template-columns:1fr;}}
+
 /* VEHICLE CARD */
 .cell-vehicle{display:flex;flex-direction:column;}
 .v-img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:16px;background:#1a1a1a;}

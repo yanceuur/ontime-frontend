@@ -52,6 +52,7 @@
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/common.css">
 <style>
 /* LAYOUT */
 .page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:100px 24px 40px;}
@@ -143,9 +144,15 @@
 .cta-bar h2{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:6px;}
 .cta-bar p{color:var(--text-muted);font-size:.82rem;margin-bottom:18px;font-weight:300;}
 
+/* FOOTER OVERRIDE */
+.footer{max-width:900px;margin:0 auto;}
+
 /* PAGE-SPECIFIC RESPONSIVE */
 @media(max-width:768px){
   .page{padding:80px 16px 32px;}
+  .footer{padding:28px 16px 16px;}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center;}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:10px 16px;}
   .stats{grid-template-columns:repeat(2,1fr);}
   .stat-n{font-size:1.5rem;}
   .cards{grid-template-columns:1fr;}
@@ -161,7 +168,6 @@
   .acc-content{padding:0 16px 20px;}
 }
 </style>
-<link rel="stylesheet" href="css/common.css">
 </head>
 <body>
 
