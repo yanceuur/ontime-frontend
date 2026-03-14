@@ -32,7 +32,7 @@ const i18n = {
     'vc2-eq4':'Full insurance','vc2-eq5':'Water &amp; newspapers','vc2-eq6':'Heated leather seats',
     'vc2-cta':'Book Berline Luxe',
     /* Card 3 — Van */
-    'vc3-name':'Van &amp; Minibus',
+    'vc3-name':'Van',
     'vc3-cap':'<strong>4 to 7 passengers</strong> · 7 bags max',
     'vc3-desc':'Perfect for families, friend groups or professional teams. Generous space for passengers and luggage, without compromising on comfort.',
     'vc3-eq1':'Rear air conditioning','vc3-eq2':'Wi-Fi','vc3-eq3':'Multiple USB chargers',
@@ -252,7 +252,7 @@ const i18n = {
     'vc2-eq1':'Climatisation bi-zone','vc2-eq2':'Wi-Fi 4G','vc2-eq3':'Chargeurs USB-C',
     'vc2-eq4':'Assurance complète','vc2-eq5':'Eau &amp; presse','vc2-eq6':'Sièges cuir chauffants',
     'vc2-cta':'Réserver en Berline Luxe',
-    'vc3-name':'Van &amp; Minibus',
+    'vc3-name':'Van',
     'vc3-cap':'<strong>4 à 7 passagers</strong> · 7 bagages max',
     'vc3-desc':'Parfait pour les familles, groupes d\'amis ou équipes professionnelles. Espace généreux pour les passagers et les bagages, sans compromis sur le confort.',
     'vc3-eq1':'Climatisation arrière','vc3-eq2':'Wi-Fi','vc3-eq3':'Chargeurs USB multiples',
