@@ -369,7 +369,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
     </div>
 
     <label class="form-label" data-i18n="lbl-vehicle">Véhicule</label>
-    <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg><select class="form-select" id="inputVehicle"><option value="" disabled selected>Choisir un véhicule</option><option value="confort">Berline Economy (1-3 passagers)</option><option value="premium">Berline Premium (1-3 passagers)</option><option value="van">Van / Minibus (4-7 passagers)</option></select></div>
+    <div class="field-wrap"><svg class="f-icon" viewBox="0 0 24 24"><path d="M7 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M17 17m-2 0a2 2 0 104 0 2 2 0 10-4 0"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 012 2v4h-2"/><path d="M9 17h6"/></svg><select class="form-select" id="inputVehicle"><option value="" disabled selected>Choisir un véhicule</option><option value="confort">Berline Economy (1-3 passagers)</option><option value="premium">Berline Luxe (1-3 passagers)</option><option value="van">Van / Minibus (4-7 passagers)</option></select></div>
 
       </div><!-- /step1-left -->
 
@@ -611,7 +611,7 @@ async function sendBookingNotifications(ref,fn,ln,ph,em){
   const seats=[];
   if(booking.seatBaby>0)seats.push(booking.seatBaby+' siège bébé');
   if(booking.seatChild>0)seats.push(booking.seatChild+' siège enfant');
-  const vehNames={confort:'Berline Economy',premium:'Business',van:'Van / Minibus'};
+  const vehNames={confort:'Berline Economy',premium:'Berline Luxe',van:'Van / Minibus'};
   const details=[
     '📋 Réf. '+ref,'📍 '+booking.from+' → '+booking.to,'📅 '+booking.date+' à '+booking.time,
     '🚗 '+vehNames[booking.veh]+' · '+booking.pax+' pax · '+booking.bags+' bag.',
@@ -826,7 +826,7 @@ document.getElementById('arrAdresseInput')?.addEventListener('input',resetTarifB
 document.querySelectorAll('.cat-tab').forEach(t=>t.addEventListener('click',resetTarifBtn));
 
 // ═══ STEP NAVIGATION ═══
-const vehNames={confort:'Berline Economy',premium:'Business',van:'Van / Minibus'};
+const vehNames={confort:'Berline Economy',premium:'Berline Luxe',van:'Van / Minibus'};
 function goToStep2(){
   document.getElementById('bookingStep1').style.display='none';
   document.getElementById('bookingStep2').style.display='block';
@@ -1097,8 +1097,8 @@ function setLang(lang){
   const iv=document.getElementById('inputVehicle');
   if(iv){
     const vt=ph
-      ?['Choose a vehicle','Berline Economy (1-3 passengers)','Business (1-3 passengers)','Van / Minibus (4-7 passengers)']
-      :['Choisir un véhicule','Berline Economy (1-3 passagers)','Business (1-3 passagers)','Van / Minibus (4-7 passagers)'];
+      ?['Choose a vehicle','Berline Economy (1-3 passengers)','Berline Luxe (1-3 passengers)','Van / Minibus (4-7 passengers)']
+      :['Choisir un véhicule','Berline Economy (1-3 passagers)','Berline Luxe (1-3 passagers)','Van / Minibus (4-7 passagers)'];
     Array.from(iv.options).forEach((o,i)=>{if(vt[i])o.text=vt[i];});
   }
   const it=document.getElementById('inputTime');if(it&&it.options[0]&&it.options[0].value==='')it.options[0].text=ph?'Time':'Heure';
