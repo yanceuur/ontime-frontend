@@ -54,11 +54,16 @@
 /* PRICING COMPANION PANEL */
 .cell-pricing-side{grid-column:span 2;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;padding:28px;}
 .cell-pricing-side::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(200,169,110,.08) 0%,transparent 70%);pointer-events:none;}
-.pricing-featured{margin-bottom:24px;}
-.pricing-featured-label{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:6px;font-weight:600;}
-.pricing-featured-price{font-family:'Playfair Display',serif;font-size:2.8rem;color:#fff;line-height:1;margin-bottom:4px;}
-.pricing-featured-price span{font-size:1.1rem;color:var(--gold-light);font-weight:300;margin-left:2px;}
-.pricing-featured-route{font-size:.82rem;color:var(--text-muted);font-weight:300;}
+.pricing-featured{margin-bottom:20px;}
+.pricing-featured-label{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:10px;font-weight:600;}
+.pricing-featured-price{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;line-height:1;margin-bottom:6px;}
+.pricing-featured-price span{font-size:.85rem;color:var(--gold-light);font-weight:300;margin-left:4px;}
+.pricing-featured-route{font-size:.88rem;color:var(--text-dim);font-weight:400;}
+
+/* ROUTE MAP */
+.route-map{position:relative;background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.1);border-radius:12px;padding:20px;margin:16px 0 20px;overflow:hidden;}
+.route-map::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(200,169,110,.06) 0%,transparent 60%);pointer-events:none;}
+.route-map svg{width:100%;height:auto;display:block;}
 .pricing-perks{list-style:none;padding:0;margin:0 0 24px;}
 .pricing-perks li{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--text-dim);font-weight:300;}
 .pricing-perks li:last-child{border-bottom:none;}
@@ -118,6 +123,9 @@
 .cell-cta{text-align:center;padding:32px 24px;background:linear-gradient(135deg,rgba(200,169,110,.06),var(--glass));}
 .cell-cta h2{font-family:'Playfair Display',serif;font-size:1.25rem;color:#fff;margin-bottom:6px;}
 .cell-cta p{color:var(--text-muted);font-size:.85rem;margin-bottom:18px;font-weight:300;}
+
+/* ROUTE ANIMATION */
+@keyframes drawRoute{to{stroke-dashoffset:0;}}
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:1200px){
@@ -224,9 +232,50 @@
     <div>
       <div class="pricing-featured">
         <div class="pricing-featured-label">Trajet le plus demandé</div>
-        <div class="pricing-featured-price">80€<span> fixe</span></div>
-        <div class="pricing-featured-route">Paris centre → Aéroport CDG en Berline Economy</div>
+        <div class="pricing-featured-price">80€<span> prix fixe</span></div>
+        <div class="pricing-featured-route">Paris centre → Aéroport CDG · Berline Economy</div>
       </div>
+
+      <!-- ROUTE MAP SVG -->
+      <div class="route-map">
+        <svg viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid subtle background -->
+          <line x1="0" y1="30" x2="320" y2="30" stroke="rgba(200,169,110,.06)" stroke-width=".5"/>
+          <line x1="0" y1="60" x2="320" y2="60" stroke="rgba(200,169,110,.06)" stroke-width=".5"/>
+          <line x1="0" y1="90" x2="320" y2="90" stroke="rgba(200,169,110,.06)" stroke-width=".5"/>
+          <line x1="80" y1="0" x2="80" y2="120" stroke="rgba(200,169,110,.06)" stroke-width=".5"/>
+          <line x1="160" y1="0" x2="160" y2="120" stroke="rgba(200,169,110,.06)" stroke-width=".5"/>
+          <line x1="240" y1="0" x2="240" y2="120" stroke="rgba(200,169,110,.06)" stroke-width=".5"/>
+          <!-- Route dashed line -->
+          <path d="M70 72 C120 72, 140 40, 200 38 Q240 36, 262 42" stroke="#c8a96e" stroke-width="1.5" stroke-dasharray="6 4" opacity=".5"/>
+          <!-- Route solid animated line -->
+          <path d="M70 72 C120 72, 140 40, 200 38 Q240 36, 262 42" stroke="url(#routeGrad)" stroke-width="2" stroke-linecap="round" stroke-dasharray="200" stroke-dashoffset="200" style="animation:drawRoute 2s ease-out forwards .5s"/>
+          <!-- Paris marker -->
+          <circle cx="60" cy="72" r="16" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.2)" stroke-width="1"/>
+          <circle cx="60" cy="72" r="5" fill="#c8a96e"/>
+          <text x="60" y="102" text-anchor="middle" fill="#fff" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="600">Paris</text>
+          <!-- CDG marker -->
+          <circle cx="268" cy="42" r="16" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.2)" stroke-width="1"/>
+          <!-- Plane icon at CDG -->
+          <g transform="translate(260,34)">
+            <path d="M2 8 L6 6 L10 10 L16 4" stroke="#c8a96e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 4 L16 4 L16 8" stroke="#c8a96e" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <text x="268" y="72" text-anchor="middle" fill="#fff" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" font-weight="600">CDG</text>
+          <!-- Duration badge -->
+          <rect x="135" y="10" rx="8" ry="8" width="60" height="20" fill="rgba(10,10,10,.7)" stroke="rgba(200,169,110,.2)" stroke-width="1"/>
+          <text x="165" y="24" text-anchor="middle" fill="#c8a96e" font-family="'Plus Jakarta Sans',sans-serif" font-size="9" font-weight="500">45-75 min</text>
+          <!-- Distance -->
+          <text x="165" y="95" text-anchor="middle" fill="rgba(200,169,110,.35)" font-family="'Plus Jakarta Sans',sans-serif" font-size="8" letter-spacing="1">~30 KM</text>
+          <defs>
+            <linearGradient id="routeGrad" x1="60" y1="0" x2="268" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#c8a96e" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#c8a96e"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
       <ul class="pricing-perks">
         <li><span class="perk-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Prix fixé à la réservation, sans surprise</li>
         <li><span class="perk-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Suivi de vol inclus, retard = 0 € de plus</li>
