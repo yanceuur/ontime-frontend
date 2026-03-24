@@ -1196,7 +1196,7 @@ const statsObserver=new IntersectionObserver((entries)=>{
     if(e.isIntersecting){
       e.target.querySelectorAll('.stat-number').forEach(el=>{
         const text=el.textContent.trim();
-        if(text.includes('/')){return;}
+        if(text.includes('/')||text.includes('.')){return;}
         const num=parseInt(text);if(isNaN(num))return;
         const suffix=text.replace(/[\d]/g,'');
         let current=0;const step=Math.max(1,Math.floor(num/30));
