@@ -265,9 +265,9 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 
 <!-- TOP-RIGHT UTILS -->
 <div class="top-utils" id="topUtils">
-  <a href="tel:+33760554460" class="top-phone">
+  <a href="tel:+33775051999" class="top-phone">
     <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-    07 60 55 44 60
+    07 75 05 19 99
   </a>
   <button class="top-lang" id="langBtn" onclick="toggleLang()">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -284,7 +284,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <a href="tarifs-reservations.html" class="sidebar-link">Tarifs</a>
   <a href="contact.html" class="sidebar-link">Contact</a>
   <a href="reservation.html" class="sidebar-link" style="color:var(--accent-light);">Réserver</a>
-  <a href="tel:+33760554460" class="sidebar-link">07 60 55 44 60</a>
+  <a href="tel:+33775051999" class="sidebar-link">07 75 05 19 99</a>
   <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
 
@@ -314,7 +314,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
     <!-- STEP 1: FORMULAIRE (2-column) -->
     <div id="bookingStep1">
     <div class="booking-title" data-i18n="book-title1">Réservez en ligne</div>
-    <div class="booking-sub" data-i18n="book-sub1">Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 60 55 44 60</strong>.</div>
+    <div class="booking-sub" data-i18n="book-sub1">Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 75 05 19 99</strong>.</div>
 
     <div class="step1-grid">
       <div class="step1-left">
@@ -618,7 +618,7 @@ dateInput.addEventListener('change',updateTimeOptions);
 
 // ═══ BOOKING STATE ═══
 const BACKEND='https://ontime-backend.vercel.app';
-const STRIPE_PK='pk_test_51T4mwLDBDY6q70mKum1sIQyVvfUGEVnGn2TiqdpSizarS9tipNLYhHEY1omlS97251QoBBB6GwUdRE9k4pODLmsf00CiPDhOoU';
+const STRIPE_PK='pk_live_51T4mwCDXXijPgEwkeIWfTDs8qe8ba4A215sD95yEbwmXXeFEHlT9FOTdNZAI2aUq9HfhVSO2K3brLuH6A2Br6plT008tq9aVBc';
 let booking={from:'',to:'',distKm:0,date:'',time:'',pax:1,bags:0,veh:'confort',price:0,firstName:'',lastName:'',phone:'',email:'',flight:''};
 
 // ═══ NOTIFICATIONS ═══
@@ -636,7 +636,7 @@ async function sendBookingNotifications(ref,fn,ln,ph,em){
   try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name:fn+' '+ln,email:em,phone:ph,subject:'🆕 Nouvelle réservation '+ref,message:details})});}catch{}
   try{await fetch(BACKEND+'/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({to:em,name:'ONTIME TRANSFERT',email:em,phone:ph,subject:'Confirmation de votre réservation '+ref,message:'Bonjour '+fn+',\n\nVotre réservation est confirmée.\n\n'+details+'\n\nVotre chauffeur vous sera communiqué la veille.\nPour toute question : 07 60 55 44 60 (WhatsApp)\n\nMerci de votre confiance,\nONTIME TRANSFERT'})});}catch{}
+    body:JSON.stringify({to:em,name:'ONTIME TRANSFERT',email:em,phone:ph,subject:'Confirmation de votre réservation '+ref,message:'Bonjour '+fn+',\n\nVotre réservation est confirmée.\n\n'+details+'\n\nVotre chauffeur vous sera communiqué la veille.\nPour toute question : 07 75 05 19 99 (WhatsApp)\n\nMerci de votre confiance,\nONTIME TRANSFERT'})});}catch{}
 }
 
 // ═══ KNOWN COORDINATES ═══
@@ -1012,7 +1012,7 @@ const i18n={
     'res-trust5':'Professional liability insurance',
     'badge-vtc':'Registered VTC','badge-insurance':'Professional liability insurance','badge-ssl':'SSL Stripe',
     'book-title1':'Book online',
-    'book-sub1':'Fixed price, instant quote. Book at least 4 hours ahead, or call <strong style="color:var(--accent)">07 60 55 44 60</strong>.',
+    'book-sub1':'Fixed price, instant quote. Book at least 4 hours ahead, or call <strong style="color:var(--accent)">07 75 05 19 99</strong>.',
     'lbl-from':'Departure','lbl-to':'Destination',
     'lbl-paxbags':'Passengers &amp; luggage','lbl-pax':'Passengers','lbl-bags':'Luggage',
     'lbl-childseat':'Child seat needed?',
@@ -1055,7 +1055,7 @@ const i18n={
     'res-trust5':'Assurance RC Professionnelle',
     'badge-vtc':'VTC enregistré','badge-insurance':'Assurance RC Pro','badge-ssl':'SSL Stripe',
     'book-title1':'Réservez en ligne',
-    'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 60 55 44 60</strong>.',
+    'book-sub1':'Tarif fixe et immédiat. Réservation minimum 4h avant, sinon appelez le <strong style="color:var(--accent)">07 75 05 19 99</strong>.',
     'lbl-from':'Départ','lbl-to':'Destination',
     'lbl-paxbags':'Passagers &amp; bagages','lbl-pax':'Passagers','lbl-bags':'Bagages',
     'lbl-childseat':'Siège enfant requis ?',
