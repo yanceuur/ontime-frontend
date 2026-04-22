@@ -41,6 +41,7 @@
 .cell-vehicle picture{display:block;overflow:hidden;border-radius:12px;margin-bottom:16px;aspect-ratio:16/9;}
 .cell-vehicle picture .v-img{margin-bottom:0;border-radius:0;}
 #confort .v-img{transform:scale(1.35);transform-origin:55% 60%;}
+#premium .v-img{transform:scale(1.2);transform-origin:center 55%;}
 #van .v-img{object-fit:cover;background:#1a1a1a;}
 .v-tag{display:inline-block;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);border-radius:20px;padding:4px 14px;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:12px;width:fit-content;}
 .v-name{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:4px;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -161,7 +162,7 @@
 
   <!-- BUSINESS -->
   <div class="cell cell-vehicle" id="premium">
-    <picture><source srcset="img/car-classe-s.webp" type="image/webp"><img class="v-img" src="img/car-classe-s.jpg" alt="Mercedes Classe E" loading="lazy" decoding="async" onerror="this.style.background='#1a1a1a';this.src=''"></picture>
+    <picture><img class="v-img" src="img/car-classe-s.jpg" alt="Mercedes Classe E et BMW Série 5" loading="lazy" decoding="async" onerror="this.style.background='#1a1a1a';this.src=''"></picture>
     <span class="v-tag">Berline Luxe</span>
     <div class="v-name" data-i18n="vc2-name">Berline Luxe</div>
     <div class="v-models">Classe E · Série 5</div>
