@@ -38,6 +38,9 @@
 /* VEHICLE CARD */
 .cell-vehicle{display:flex;flex-direction:column;}
 .v-img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-bottom:16px;background:#1a1a1a;}
+.cell-vehicle picture{display:block;overflow:hidden;border-radius:12px;margin-bottom:16px;aspect-ratio:16/9;}
+.cell-vehicle picture .v-img{margin-bottom:0;border-radius:0;}
+#confort .v-img{transform:scale(1.35);transform-origin:55% 60%;}
 #van .v-img{object-fit:cover;background:#1a1a1a;}
 .v-tag{display:inline-block;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.25);border-radius:20px;padding:4px 14px;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;margin-bottom:12px;width:fit-content;}
 .v-name{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:4px;background:linear-gradient(135deg,#fff,var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
