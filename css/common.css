@@ -269,7 +269,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px soli
   .pill-nav{display:none;}
   .top-utils{display:none;}
   .site-logo{display:none;}
-  .hamburger{display:flex;top:50%;transform:translateY(-50%);right:16px;padding:10px;}
+  .hamburger{display:flex;top:15px;right:16px;padding:10px;}
   .mobile-header{display:flex;}
   .bento{grid-template-columns:1fr !important;padding:82px 14px 32px !important;gap:14px !important;max-width:100% !important;}
   .cell{padding:22px;text-align:center;}
