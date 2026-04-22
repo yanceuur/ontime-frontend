@@ -255,18 +255,29 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px soli
 }
 .cell:hover::after{opacity:1;}
 
+/* ─── MOBILE HEADER BAR ─── */
+.mobile-header{display:none;position:fixed;top:0;left:0;right:0;z-index:200;padding:10px 16px;background:rgba(10,10,8,.85);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid rgba(200,169,110,.1);align-items:center;justify-content:space-between;gap:10px;}
+.mobile-header-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.mobile-header-logo svg{width:28px;height:28px;flex-shrink:0;}
+.mobile-header-logo .mh-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:#fff;letter-spacing:1px;line-height:1;}
+.mobile-header-logo .mh-sub{font-size:.58rem;letter-spacing:2.5px;color:var(--accent);text-transform:uppercase;line-height:1;margin-top:2px;}
+.mobile-header-phone{display:flex;align-items:center;gap:6px;padding:7px 13px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;text-decoration:none;border-radius:50px;font-size:.78rem;font-weight:600;box-shadow:0 2px 10px rgba(200,169,110,.3);}
+.mobile-header-phone svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:768px){
   .pill-nav{display:none;}
   .top-utils{display:none;}
   .site-logo{display:none;}
-  .hamburger{display:flex;}
-  .bento{grid-template-columns:1fr;padding:80px 16px 32px;gap:18px;}
-  .cell{padding:24px;}
+  .hamburger{display:flex;top:14px;}
+  .mobile-header{display:flex;}
+  .bento{grid-template-columns:1fr;padding:74px 14px 32px;gap:14px;}
+  .cell{padding:22px;}
   .site-footer{padding:30px 16px 16px;}
   .footer-inner{flex-direction:column;text-align:center;}
 }
 @media(max-width:380px){
-  .bento{padding:70px 12px 24px;}
-  .cell{padding:22px;border-radius:16px;}
+  .bento{padding:68px 12px 24px;}
+  .cell{padding:20px;border-radius:16px;}
+  .mobile-header-phone{font-size:.72rem;padding:6px 11px;}
 }
