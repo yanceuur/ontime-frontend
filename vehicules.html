@@ -58,7 +58,10 @@
 .v-cta svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;}
 
 /* VIP BANNER */
-.cell-vip{grid-column:1/-1;text-align:center;padding:48px 36px;background:linear-gradient(135deg,rgba(200,169,110,.06),var(--glass));}
+.cell-vip{grid-column:1/-1;text-align:center;padding:0;background:linear-gradient(135deg,rgba(200,169,110,.06),var(--glass));overflow:hidden;}
+.vip-img{width:100%;aspect-ratio:21/9;object-fit:cover;display:block;}
+.vip-content{padding:36px;}
+@media(max-width:768px){.vip-img{aspect-ratio:16/9;}.vip-content{padding:28px 20px;}}
 .vip-title{font-family:'Playfair Display',serif;font-size:1.5rem;background:linear-gradient(135deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
 .vip-text{font-size:.88rem;color:var(--text-muted);line-height:1.7;font-weight:300;max-width:500px;margin:0 auto 24px;}
 .vip-cta{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:50px;background:transparent;border:1px solid var(--gold);color:var(--gold);font-weight:600;font-size:.82rem;text-decoration:none;transition:all .3s;}
@@ -198,9 +201,12 @@
 
   <!-- VIP -->
   <div class="cell cell-vip">
-    <div class="vip-title" data-i18n="vc4-name">Sprinter & Van VIP</div>
-    <p class="vip-text" data-i18n="vc4-desc">Pour vos événements, mariages, séminaires ou groupes importants. Véhicules haut de gamme sur mesure, service blanc gants. Devis personnalisé sous 2h.</p>
-    <a href="https://wa.me/33775051999?text=Bonjour%2C%20je%20souhaite%20un%20devis%20VIP%20Sprinter." class="vip-cta" target="_blank" rel="noopener" data-i18n="vc4-cta">Demander un devis VIP</a>
+    <img class="vip-img" src="img/van-vip-interior.jpg" alt="Intérieur luxueux Sprinter Van VIP avec sièges en cuir, ciel étoilé et écran TV" loading="lazy" decoding="async">
+    <div class="vip-content">
+      <div class="vip-title" data-i18n="vc4-name">Sprinter & Van VIP</div>
+      <p class="vip-text" data-i18n="vc4-desc">Pour vos événements, mariages, séminaires ou groupes importants. Véhicules haut de gamme sur mesure, service blanc gants. Devis personnalisé sous 2h.</p>
+      <a href="https://wa.me/33775051999?text=Bonjour%2C%20je%20souhaite%20un%20devis%20VIP%20Sprinter." class="vip-cta" target="_blank" rel="noopener" data-i18n="vc4-cta">Demander un devis VIP</a>
+    </div>
   </div>
 
 </main>
