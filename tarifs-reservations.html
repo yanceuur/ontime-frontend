@@ -41,9 +41,11 @@
 @media(max-width:1024px){.cell-hero .hero-sub{white-space:normal;max-width:620px;}}
 
 /* BLOCK TITLE */
-.b-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.04));border:1px solid rgba(200,169,110,.15);display:inline-flex;align-items:center;justify-content:center;float:left;margin-right:12px;margin-bottom:14px;flex-shrink:0;}
+.b-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.04));border:1px solid rgba(200,169,110,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:0;}
 .b-icon svg{width:18px;height:18px;stroke:var(--gold);stroke-width:1.5;fill:none;}
-.b-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:14px;line-height:40px;display:block;overflow:hidden;}
+.b-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.b-head .b-title{margin-bottom:0;}
+.b-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:#fff;margin-bottom:14px;line-height:1.3;display:block;}
 .b-title em{font-style:italic;color:var(--gold-light);}
 .b-text{color:var(--text-dim);font-size:.85rem;line-height:1.7;font-weight:300;margin-bottom:8px;}
 .b-text:last-child{margin-bottom:0;}
@@ -237,8 +239,7 @@
 
   <!-- ROW 2: PRICE TABLE (span 4) -->
   <div class="cell cell-table">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
-    <div class="b-title">Tarifs <em>indicatifs</em></div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><div class="b-title">Tarifs <em>indicatifs</em></div></div>
     <p class="b-text" style="font-size:.8rem;color:var(--text-muted);margin-bottom:10px;">Depuis Paris intra-muros, de jour. Nuit (22h–6h) +10%, heures de pointe +20%.</p>
     <div class="price-table-wrap">
       <table class="price-table">
@@ -326,16 +327,14 @@
 
   <!-- ROW 3: COMMENT RÉSERVER (span 2) + ACCUEIL (span 2) -->
   <div class="cell span-2">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-    <div class="b-title" data-i18n="tb1-title">Comment <em>réserver</em> ?</div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div><div class="b-title" data-i18n="tb1-title">Comment <em>réserver</em> ?</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Course simple</strong> — <a href="reservation.html">Formulaire en ligne</a>, quelques clics.</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Van / Mise à dispo</strong> — Devis via <strong>WhatsApp</strong> sous 2h.</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Jour même</strong> — Possible <strong>4h avant</strong> minimum.</div></div>
   </div>
 
   <div class="cell span-2">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-    <div class="b-title" data-i18n="tb2-title">Accueil & <em>ponctualité</em></div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="b-title" data-i18n="tb2-title">Accueil & <em>ponctualité</em></div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Pancarte nominative</strong> en aéroport et gare.</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Suivi de vol en temps réel</strong>, aucun supplément.</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>15 min d'attente offertes</strong>. Au-delà : <span class="gold">10 € / 20 min</span>.</div></div>
@@ -343,15 +342,13 @@
 
   <!-- ROW 4: PAIEMENT (span 1) + ANNULATION (span 2) + TARIFS DÉTAILS (span 1) -->
   <div class="cell">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-    <div class="b-title" data-i18n="tb4-title">Paiement <em>sécurisé</em></div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="b-title" data-i18n="tb4-title">Paiement <em>sécurisé</em></div></div>
     <p class="b-text"><strong>Carte bancaire</strong> (Visa, Mastercard) via Stripe. Règlement à la réservation.</p>
     <p class="b-text"><strong>Facture automatique</strong> par email. Idéal notes de frais.</p>
   </div>
 
   <div class="cell span-2">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
-    <div class="b-title" data-i18n="tb6-title">Politique d'<em>annulation</em></div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div><div class="b-title" data-i18n="tb6-title">Politique d'<em>annulation</em></div></div>
     <div class="timeline">
       <div class="tl-item"><div class="tl-dot green">✓</div><div><div class="tl-label" data-i18n="tt1-label">Plus de 24h avant</div><div class="tl-desc" data-i18n="tt1-desc">Remboursement intégral, 100% gratuit.</div></div></div>
       <div class="tl-item"><div class="tl-dot orange">!</div><div><div class="tl-label" data-i18n="tt2-label">Entre 24h et 2h</div><div class="tl-desc" data-i18n="tt2-desc">Frais de 50% du montant.</div></div></div>
@@ -360,8 +357,7 @@
   </div>
 
   <div class="cell">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-    <div class="b-title" data-i18n="tb3-title">Nos <em>tarifs</em></div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="b-title" data-i18n="tb3-title">Nos <em>tarifs</em></div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Forfait fixe</strong> aéroport & gare.</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Au km</strong> en banlieue, prix avant validation.</div></div>
     <div class="info-row"><div class="info-dot"></div><div class="b-text"><strong>Nuit & fériés</strong> : <span class="gold">+10%</span>.</div></div>
@@ -370,8 +366,7 @@
 
   <!-- ROW 5: ENGAGEMENTS (span 2) + CTA (span 2) -->
   <div class="cell span-2">
-    <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <div class="b-title" data-i18n="tb7-title">Nos <em>engagements</em></div>
+    <div class="b-head"><div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="b-title" data-i18n="tb7-title">Nos <em>engagements</em></div></div>
     <div class="engage-grid">
       <div class="engage-item"><span class="engage-check">✓</span><span data-i18n="te1">Ponctualité garantie</span></div>
       <div class="engage-item"><span class="engage-check">✓</span><span data-i18n="te2">Véhicules propres et récents</span></div>
@@ -402,7 +397,7 @@
     </div>
     <div class="footer-links"><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#cgv">CGV</a><a href="mentions-legales.html#cookies">Confidentialité</a><a href="contact.html">Contact</a></div>
   </div>
-  <div class="footer-copy" data-i18n="ft-copy">© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div>
+  <div class="footer-copy" data-i18n="ft-copy">© 2026 ONTIME TRANSFERT — YOYO TRANSPORT SAS. Tous droits réservés.</div></div>
 </footer>
 
 <a href="https://wa.me/33775051999?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20un%20transfert." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
