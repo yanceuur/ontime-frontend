@@ -969,23 +969,37 @@ const SIM_DISTANCES={
 let simMapsLoaded=false, simAcFrom, simAcTo;
 window._simPlaceFrom=null; window._simPlaceTo=null;
 
-function loadSimMaps(){
+async function loadSimMaps(){
   if(simMapsLoaded) return;
   simMapsLoaded=true;
   const s=document.createElement('script');
-  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initSimMap';
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&loading=async&v=weekly';
+  s.async=true;
   document.head.appendChild(s);
+  await new Promise(res=>s.onload=res);
+  initSimMap();
 }
-window.initSimMap=function(){
-  const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
-  const fromEl=document.getElementById('simFrom');
-  const toEl=document.getElementById('simTo');
-  simAcFrom=new google.maps.places.Autocomplete(fromEl,opts);
-  simAcTo=new google.maps.places.Autocomplete(toEl,opts);
-  simAcFrom.addListener('place_changed',()=>{window._simPlaceFrom=simAcFrom.getPlace();});
-  simAcTo.addListener('place_changed',()=>{window._simPlaceTo=simAcTo.getPlace();});
-  fromEl.addEventListener('input',()=>{window._simPlaceFrom=null;});
-  toEl.addEventListener('input',()=>{window._simPlaceTo=null;});
+window.initSimMap=async function(){
+  const{PlaceAutocompleteElement}=await google.maps.importLibrary("places");
+  ['simFrom','simTo'].forEach(id=>{
+    const oldEl=document.getElementById(id);
+    if(!oldEl)return;
+    const ac=new PlaceAutocompleteElement({includedRegionCodes:['fr']});
+    ac.id=id;
+    ac.style.cssText='width:100%;display:block;';
+    oldEl.replaceWith(ac);
+    ac.addEventListener('gmp-select',async(ev)=>{
+      const place=ev.placePrediction.toPlace();
+      await place.fetchFields({fields:['formattedAddress','location','displayName']});
+      const placeData={
+        formatted_address:place.formattedAddress,
+        geometry:{location:{lat:()=>place.location.lat(),lng:()=>place.location.lng()}},
+        name:place.displayName
+      };
+      const placeKey=id==='simFrom'?'_simPlaceFrom':'_simPlaceTo';
+      window[placeKey]=placeData;
+    });
+  });
 };
 ['simFrom','simTo'].forEach(id=>{
   const el=document.getElementById(id);
