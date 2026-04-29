@@ -119,7 +119,17 @@
 .form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
 .form-select option{background:#0a0a0a;color:var(--text);}
-/* Google Places Autocomplete dropdown */
+/* New PlaceAutocompleteElement styling */
+gmp-place-autocomplete{
+  --gmp-mat-color-surface:#0a0a0a;
+  --gmp-mat-color-on-surface:rgba(255,255,255,.85);
+  --gmp-mat-color-on-surface-variant:rgba(255,255,255,.55);
+  --gmp-mat-color-primary:#c8a96e;
+  --gmp-mat-color-outline:rgba(255,255,255,.1);
+  display:block;width:100%;
+}
+gmp-place-autocomplete::part(input){background:#0e0e0e!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:10px!important;padding:13px 14px!important;color:#fff!important;font-family:'Plus Jakarta Sans',sans-serif!important;font-size:.9rem!important;width:100%!important;}
+/* Old Google Places Autocomplete dropdown (legacy fallback) */
 .pac-container{
   background:#111!important;border:1px solid rgba(255,255,255,.08)!important;
   border-radius:12px!important;margin-top:6px!important;padding:6px 0!important;
@@ -672,77 +682,82 @@ const KNOWN_COORDS={
   'La Défense':{lat:48.8920,lng:2.2363}
 };
 
-// ═══ GOOGLE MAPS AUTOCOMPLETE ═══
-let acDep,acArr,mapsLoaded=false;
+// ═══ GOOGLE MAPS AUTOCOMPLETE (NEW PlaceAutocompleteElement) ═══
+let mapsLoaded=false,mapsReady=false;
 const _geo_={};
-function loadMapsScript(){
+async function loadMapsScript(){
   if(mapsLoaded)return;mapsLoaded=true;
   const s=document.createElement('script');
-  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&loading=async&v=weekly&callback=initMap';
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&loading=async&v=weekly';
   s.async=true;
   document.head.appendChild(s);
+  await new Promise(res=>s.onload=res);
+  await initMap();
 }
 ['depAdresseInput','arrAdresseInput'].forEach(id=>{
   const el=document.getElementById(id);
   if(el)el.addEventListener('focus',loadMapsScript,{once:true});
 });
-function initMap(){
-  const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
-  const depInput=document.getElementById('depAdresseInput');
-  const arrInput=document.getElementById('arrAdresseInput');
-  acDep=new google.maps.places.Autocomplete(depInput,opts);
-  acArr=new google.maps.places.Autocomplete(arrInput,opts);
-  acDep.addListener('place_changed',()=>{window._placeDep=acDep.getPlace();});
-  acArr.addListener('place_changed',()=>{window._placeArr=acArr.getPlace();});
-  depInput.addEventListener('input',()=>{window._placeDep=null;});
-  arrInput.addEventListener('input',()=>{window._placeArr=null;});
-  bindEnterSelect(depInput);bindEnterSelect(arrInput);
-  depInput.addEventListener('blur',()=>geocodeFallback(depInput,'_placeDep'));
-  arrInput.addEventListener('blur',()=>geocodeFallback(arrInput,'_placeArr'));
-}
-function bindEnterSelect(input){
-  let _busy=false;
-  input.addEventListener('keydown',function(e){
-    if((e.key==='Enter'||e.keyCode===13)&&!_busy){
-      if(document.querySelector('.pac-item')){
-        e.preventDefault();e.stopPropagation();_busy=true;
-        input.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',keyCode:40,which:40,bubbles:true,cancelable:true}));
-        setTimeout(()=>{input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',keyCode:13,which:13,bubbles:true,cancelable:true}));_busy=false;},30);
-      }
-    }
-  },true);
-}
-function geocodeFallback(input,placeKey){
-  const val=input.value.trim();if(!val)return;
-  setTimeout(()=>{
-    if(window[placeKey]&&window[placeKey].geometry)return;
-    if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
-    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
-      if(status==='OK'&&results[0]){window[placeKey]=results[0];input.value=results[0].formatted_address;}
+async function initMap(){
+  if(mapsReady)return;mapsReady=true;
+  const{PlaceAutocompleteElement}=await google.maps.importLibrary("places");
+  await google.maps.importLibrary("geocoding");
+  ['dep','arr'].forEach(prefix=>{
+    const inputId=prefix+'AdresseInput';
+    const oldInput=document.getElementById(inputId);
+    if(!oldInput)return;
+    const ac=new PlaceAutocompleteElement({includedRegionCodes:['fr']});
+    ac.id=inputId;
+    ac.style.cssText='width:100%;display:block;';
+    // Move existing classes
+    const wrap=oldInput.parentNode;
+    oldInput.replaceWith(ac);
+    // Style the inner input via CSS
+    ac.addEventListener('gmp-select',async(ev)=>{
+      const place=ev.placePrediction.toPlace();
+      await place.fetchFields({fields:['formattedAddress','location','displayName']});
+      const placeData={
+        formatted_address:place.formattedAddress,
+        geometry:{location:place.location},
+        name:place.displayName
+      };
+      window['_place'+prefix.charAt(0).toUpperCase()+prefix.slice(1)]=placeData;
     });
-  },200);
+  });
 }
-function resolveAddress(input,placeKey){
+async function resolveAddress(input,placeKey){
+  if(window[placeKey]&&window[placeKey].geometry)return true;
+  // Get value from PlaceAutocompleteElement
+  const val=(input.value||(input.querySelector&&input.querySelector('input')?.value)||'').trim();
+  if(!val)return false;
+  if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
   return new Promise(resolve=>{
-    if(window[placeKey]&&window[placeKey].geometry){resolve(true);return;}
-    const val=input.value.trim();if(!val){resolve(false);return;}
-    if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
     _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
-      if(status==='OK'&&results[0]){window[placeKey]=results[0];input.value=results[0].formatted_address;resolve(true);}else{resolve(false);}
+      if(status==='OK'&&results[0]){window[placeKey]=results[0];resolve(true);}else{resolve(false);}
     });
   });
 }
 
 // ═══ GET DEPARTURE / ARRIVAL VALUE ═══
+function getAdresseValue(id){
+  const el=document.getElementById(id);
+  if(!el)return '';
+  if(el.tagName==='INPUT')return el.value;
+  // PlaceAutocompleteElement: read from inner input or its value attribute
+  if(el.value)return el.value;
+  const innerInput=el.querySelector('input');
+  if(innerInput)return innerInput.value;
+  return '';
+}
 function getDepValue(){
-  if(depCat==='adresse')return document.getElementById('depAdresseInput').value;
+  if(depCat==='adresse')return getAdresseValue('depAdresseInput');
   if(depCat==='aeroport')return document.getElementById('depAeroportSelect').value;
   if(depCat==='gare')return document.getElementById('depGareSelect').value;
   if(depCat==='lieu')return document.getElementById('depLieuSelect').value;
   return '';
 }
 function getArrValue(){
-  if(arrCat==='adresse')return document.getElementById('arrAdresseInput').value;
+  if(arrCat==='adresse')return getAdresseValue('arrAdresseInput');
   if(arrCat==='aeroport')return document.getElementById('arrAeroportSelect').value;
   if(arrCat==='gare')return document.getElementById('arrGareSelect').value;
   if(arrCat==='lieu')return document.getElementById('arrLieuSelect').value;
