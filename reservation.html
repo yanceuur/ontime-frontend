@@ -682,57 +682,78 @@ const KNOWN_COORDS={
   'La Défense':{lat:48.8920,lng:2.2363}
 };
 
-// ═══ GOOGLE MAPS AUTOCOMPLETE (NEW PlaceAutocompleteElement) ═══
-let mapsLoaded=false,mapsReady=false;
-const _geo_={};
-async function loadMapsScript(){
-  if(mapsLoaded)return;mapsLoaded=true;
-  // Google Maps Bootstrap Loader (required for importLibrary)
-  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({key:"AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E",v:"weekly"});
-  await initMap();
+// ═══ NOMINATIM (OpenStreetMap) AUTOCOMPLETE — gratuit, pas de clé ═══
+const _nomCache_={};
+async function nominatimSearch(query){
+  if(!query||query.length<3)return [];
+  if(_nomCache_[query])return _nomCache_[query];
+  try{
+    const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=fr&addressdetails=1&limit=5&q=${encodeURIComponent(query)}`,{headers:{'Accept-Language':'fr'}});
+    const data=await r.json();
+    _nomCache_[query]=data;
+    return data;
+  }catch(e){return [];}
 }
-['depAdresseInput','arrAdresseInput'].forEach(id=>{
-  const el=document.getElementById(id);
-  if(el)el.addEventListener('focus',loadMapsScript,{once:true});
-});
-async function initMap(){
-  if(mapsReady)return;mapsReady=true;
-  const{PlaceAutocompleteElement}=await google.maps.importLibrary("places");
-  await google.maps.importLibrary("geocoding");
-  ['dep','arr'].forEach(prefix=>{
-    const inputId=prefix+'AdresseInput';
-    const oldInput=document.getElementById(inputId);
-    if(!oldInput)return;
-    const ac=new PlaceAutocompleteElement({includedRegionCodes:['fr']});
-    ac.id=inputId;
-    ac.style.cssText='width:100%;display:block;';
-    // Move existing classes
-    const wrap=oldInput.parentNode;
-    oldInput.replaceWith(ac);
-    // Style the inner input via CSS
-    ac.addEventListener('gmp-select',async(ev)=>{
-      const place=ev.placePrediction.toPlace();
-      await place.fetchFields({fields:['formattedAddress','location','displayName']});
-      const placeData={
-        formatted_address:place.formattedAddress,
-        geometry:{location:place.location},
-        name:place.displayName
-      };
-      window['_place'+prefix.charAt(0).toUpperCase()+prefix.slice(1)]=placeData;
-    });
+function setupNominatimAutocomplete(inputId,placeKey){
+  const input=document.getElementById(inputId);
+  if(!input)return;
+  const wrap=input.parentNode;
+  wrap.style.position='relative';
+  const list=document.createElement('div');
+  list.className='nom-suggest';
+  list.style.cssText='position:absolute;top:100%;left:0;right:0;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;margin-top:4px;max-height:280px;overflow-y:auto;z-index:99999;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);';
+  wrap.appendChild(list);
+  let timer;
+  input.addEventListener('input',()=>{
+    window[placeKey]=null;
+    clearTimeout(timer);
+    const q=input.value.trim();
+    if(q.length<3){list.style.display='none';return;}
+    timer=setTimeout(async()=>{
+      const results=await nominatimSearch(q);
+      if(!results.length){list.style.display='none';return;}
+      list.innerHTML='';
+      results.forEach(r=>{
+        const item=document.createElement('div');
+        item.style.cssText='padding:10px 14px;cursor:pointer;color:rgba(255,255,255,.85);font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.04);';
+        item.textContent=r.display_name;
+        item.addEventListener('mouseenter',()=>item.style.background='rgba(200,169,110,.08)');
+        item.addEventListener('mouseleave',()=>item.style.background='');
+        item.addEventListener('click',()=>{
+          input.value=r.display_name;
+          window[placeKey]={
+            formatted_address:r.display_name,
+            geometry:{location:{lat:()=>parseFloat(r.lat),lng:()=>parseFloat(r.lon)}},
+            name:r.display_name
+          };
+          list.style.display='none';
+        });
+        list.appendChild(item);
+      });
+      list.style.display='block';
+    },350);
   });
+  input.addEventListener('blur',()=>setTimeout(()=>list.style.display='none',200));
+  input.addEventListener('focus',()=>{if(list.children.length)list.style.display='block';});
 }
+setupNominatimAutocomplete('depAdresseInput','_placeDep');
+setupNominatimAutocomplete('arrAdresseInput','_placeArr');
+
 async function resolveAddress(input,placeKey){
   if(window[placeKey]&&window[placeKey].geometry)return true;
-  // Get value from PlaceAutocompleteElement
-  const val=(input.value||(input.querySelector&&input.querySelector('input')?.value)||'').trim();
+  const val=(input.value||'').trim();
   if(!val)return false;
-  if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
-  return new Promise(resolve=>{
-    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
-      if(status==='OK'&&results[0]){window[placeKey]=results[0];resolve(true);}else{resolve(false);}
-    });
-  });
+  const results=await nominatimSearch(val);
+  if(results.length){
+    window[placeKey]={
+      formatted_address:results[0].display_name,
+      geometry:{location:{lat:()=>parseFloat(results[0].lat),lng:()=>parseFloat(results[0].lon)}},
+      name:results[0].display_name
+    };
+    input.value=results[0].display_name;
+    return true;
+  }
+  return false;
 }
 
 // ═══ GET DEPARTURE / ARRIVAL VALUE ═══
@@ -765,19 +786,20 @@ function getLatLng(cat,value,placeObj){
   if(cat==='adresse'&&placeObj&&placeObj.geometry)return{lat:placeObj.geometry.location.lat(),lng:placeObj.geometry.location.lng()};
   return null;
 }
+function haversineKm(a,b){
+  const R=6371;
+  const dLat=(b.lat-a.lat)*Math.PI/180;
+  const dLng=(b.lng-a.lng)*Math.PI/180;
+  const x=Math.sin(dLat/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)**2;
+  // Multiplier 1.3 to approximate driving distance vs straight line
+  return Math.round(R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))*1.3);
+}
 function calcDistance(){
   return new Promise((resolve,reject)=>{
     const depLL=getLatLng(depCat,getDepValue(),window._placeDep);
     const arrLL=getLatLng(arrCat,getArrValue(),window._placeArr);
     if(!depLL||!arrLL){reject('coords');return;}
-    const service=new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix({
-      origins:[new google.maps.LatLng(depLL.lat,depLL.lng)],
-      destinations:[new google.maps.LatLng(arrLL.lat,arrLL.lng)],
-      travelMode:'DRIVING'
-    },(res,status)=>{
-      if(status==='OK'&&res.rows[0].elements[0].status==='OK'){resolve(Math.round(res.rows[0].elements[0].distance.value/1000));}else{reject('api');}
-    });
+    resolve(haversineKm(depLL,arrLL));
   });
 }
 
