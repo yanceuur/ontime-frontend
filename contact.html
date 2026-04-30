@@ -135,9 +135,31 @@ textarea.b2b-input{resize:vertical;min-height:70px;padding-top:10px;padding-left
 .b2b-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
 
 /* CTA CELL */
-.cta-cell{grid-column:1/-1;text-align:center;padding:36px;background:linear-gradient(145deg,rgba(22,19,13,.85),var(--glass));}
-.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.7rem);color:#fff;margin-bottom:8px;}
-.cta-sub{color:var(--text-muted);font-size:.84rem;margin-bottom:20px;font-weight:300;}
+.cta-cell{grid-column:1/-1;text-align:center;padding:48px 36px;background:linear-gradient(145deg,rgba(22,19,13,.85),var(--glass));position:relative;overflow:hidden;}
+.cta-cell::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(200,169,110,.15),transparent 70%);pointer-events:none;}
+.cta-cell::after{content:'';position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:600px;height:200px;background:radial-gradient(ellipse,rgba(200,169,110,.08),transparent 70%);pointer-events:none;}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,1.7rem);color:#fff;margin-bottom:8px;position:relative;}
+.cta-sub{color:var(--text-muted);font-size:.84rem;margin-bottom:24px;font-weight:300;position:relative;}
+.cta-cell .cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 40px;border-radius:60px;
+  background:linear-gradient(135deg,#d4b87a 0%,#c8a96e 50%,#b8964e 100%);
+  color:#0a0a0a;font-weight:700;font-size:.92rem;
+  text-decoration:none;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid rgba(212,184,122,.4);
+  box-shadow:0 8px 30px rgba(200,169,110,.35),inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,letter-spacing .3s;
+  position:relative;overflow:hidden;
+}
+.cta-cell .cta-btn::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);
+  transition:left .6s;
+}
+.cta-cell .cta-btn:hover{transform:translateY(-3px);letter-spacing:1.5px;box-shadow:0 14px 40px rgba(200,169,110,.5),inset 0 1px 0 rgba(255,255,255,.3);}
+.cta-cell .cta-btn:hover::before{left:100%;}
+.cta-cell .cta-btn::after{content:'→';font-size:1.1rem;font-weight:400;transition:transform .3s;}
+.cta-cell .cta-btn:hover::after{transform:translateX(4px);}
 
 /* FOOTER overrides */
 .footer{max-width:1400px;margin:0 auto;}
