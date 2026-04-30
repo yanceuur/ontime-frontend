@@ -34,7 +34,12 @@
 .footer-copy{max-width:1200px;}
 .cell-hero .hero-sub{max-width:none;white-space:nowrap;}
 @media(max-width:1024px){.bento{grid-template-columns:1fr 1fr;}.cell-hero .hero-sub{white-space:normal;max-width:620px;}}
-@media(max-width:768px){.bento{grid-template-columns:1fr;}}
+@media(max-width:768px){
+  .bento{grid-template-columns:1fr;}
+  /* Titre du vehicule a cote du badge (pas en dessous) */
+  .cell-vehicle .v-tag{display:inline-block;vertical-align:middle;margin-bottom:8px;margin-right:10px;}
+  .cell-vehicle .v-name{display:inline-block;vertical-align:middle;margin-bottom:8px;}
+}
 
 /* VEHICLE CARD */
 .cell-vehicle{display:flex;flex-direction:column;}
