@@ -38,6 +38,9 @@
   .bento{grid-template-columns:1fr;}
   /* Cache les badges (BERLINE ECONOMY, BERLINE LUXE, GROUPE) */
   .cell-vehicle .v-tag{display:none;}
+  /* Badges equipement en grille 2 colonnes uniformes */
+  .v-equip{display:grid !important;grid-template-columns:1fr 1fr !important;gap:8px !important;}
+  .v-equip span{justify-content:flex-start;width:100%;padding:8px 12px !important;font-size:.75rem !important;}
 }
 
 /* VEHICLE CARD */
