@@ -278,6 +278,8 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px soli
   .site-logo{display:none;}
   .hamburger{display:flex;top:15px;right:16px;padding:10px;}
   .mobile-header{display:flex;}
+  /* Cache tous les liens vers Blog sur mobile */
+  a[href$="blog.html"],a[href$="/blog"]{display:none !important;}
   .bento{grid-template-columns:1fr !important;padding:82px 14px 32px !important;gap:14px !important;max-width:100% !important;}
   .cell{padding:22px;text-align:center;}
   .cell .hero-badge,.cell .cell-label,.cell .sim-title{margin-left:auto;margin-right:auto;}
