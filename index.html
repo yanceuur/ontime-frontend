@@ -216,7 +216,7 @@
   grid-column:3/5;grid-row:1/2;
   display:flex;flex-direction:column;
   background:linear-gradient(145deg,rgba(200,169,110,.05),rgba(15,12,8,.8));
-  padding:28px;
+  padding:28px;overflow:visible !important;
 }
 .sim-title{
   font-family:'Playfair Display',serif;font-size:1.2rem;
@@ -979,7 +979,11 @@ async function simNominatim(q){
 function simSetupAuto(id,placeKey){
   const input=document.getElementById(id);
   if(!input)return;
-  const wrap=input.parentNode;wrap.style.position='relative';
+  // Wrap input in its own container to position dropdown correctly
+  const wrap=document.createElement('div');
+  wrap.style.cssText='position:relative;display:block;';
+  input.parentNode.insertBefore(wrap,input);
+  wrap.appendChild(input);
   const list=document.createElement('div');
   list.style.cssText='position:absolute;top:100%;left:0;right:0;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;margin-top:4px;max-height:280px;overflow-y:auto;z-index:99999;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);';
   wrap.appendChild(list);
