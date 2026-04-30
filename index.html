@@ -519,9 +519,8 @@
 @media(max-width:768px){
   .bento{grid-template-columns:1fr;padding:90px 14px 40px;gap:12px;}
   .cell-hero,.cell-simulator,.cell-car,.cell-prices,.cell-services,.cell-reviews,.cell-contact{grid-column:1/-1;grid-row:auto;}
-  /* Uniformise le padding horizontal de toutes les cellules sur mobile (largeur identique a cell-prices) */
-  .cell-hero,.cell-simulator,.cell-prices,.cell-services,.cell-reviews,.cell-contact,.cell-cta{padding-left:24px !important;padding-right:24px !important;}
-  .cell-car{padding-left:0 !important;padding-right:0 !important;}
+  /* Uniformise toutes les cellules sur mobile = meme largeur que cell-prices */
+  .cell-hero,.cell-simulator,.cell-car,.cell-prices,.cell-services,.cell-reviews,.cell-contact,.cell-cta{padding-left:24px !important;padding-right:24px !important;width:100% !important;max-width:100% !important;margin-left:0 !important;margin-right:0 !important;box-sizing:border-box !important;}
   .svc-stats-bar{flex-wrap:wrap;}
   .svc-stats-bar .stat-block{min-width:80px;}
   .hero-title{font-size:clamp(1.6rem,6vw,2.2rem);}
