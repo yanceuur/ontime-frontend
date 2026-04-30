@@ -407,6 +407,7 @@
 .svc-mini-card svg{width:18px;height:18px;stroke:var(--accent);stroke-width:1.5;fill:none;opacity:.7;transition:opacity .3s;}
 .svc-mini-card:hover svg{opacity:1;}
 .svc-mini-card span{font-size:.66rem;line-height:1.3;letter-spacing:.3px;}
+.svc-mobile-only{display:none;}
 /* Stats bar inside services */
 .svc-stats-bar{
   display:flex;align-items:center;justify-content:center;
@@ -529,6 +530,7 @@
   }
   /* Carrousel : image fill complete (pas de bandes noires) */
   .bento > .cell-car{padding-left:0 !important;padding-right:0 !important;}
+  .svc-mobile-only{display:flex;}
   .svc-stats-bar{flex-wrap:wrap;}
   .svc-stats-bar .stat-block{min-width:80px;}
   .hero-title{font-size:clamp(1.6rem,6vw,2.2rem);}
@@ -815,7 +817,7 @@
         <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg>
         <span data-i18n="svc5-h">Mise à disposition</span>
       </a>
-      <a href="services.html" class="svc-mini-card">
+      <a href="services.html" class="svc-mini-card svc-mobile-only">
         <svg viewBox="0 0 24 24"><path d="M12 2L9 9H2l5.5 4-2 7L12 16l6.5 4-2-7L22 9h-7z"/></svg>
         <span data-i18n="svc6-h">Transfert Disney</span>
       </a>
