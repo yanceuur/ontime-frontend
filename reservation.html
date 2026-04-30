@@ -47,7 +47,7 @@
 }
 .res-hero-label{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);
+  background:rgba(184,184,184,.1);border:1px solid rgba(184,184,184,.2);
   border-radius:24px;padding:6px 16px;font-size:.65rem;color:var(--accent-light);
   text-transform:uppercase;letter-spacing:2.5px;margin-bottom:16px;
 }
@@ -76,8 +76,8 @@
 .booking-card{
   background:var(--glass);
   backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);
-  border:1px solid rgba(200,169,110,.15);border-radius:24px;padding:36px;
-  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 0 1px rgba(200,169,110,.08);
+  border:1px solid rgba(184,184,184,.15);border-radius:24px;padding:36px;
+  box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 0 1px rgba(184,184,184,.08);
 }
 .booking-close{display:none;}
 .booking-title{
@@ -98,8 +98,8 @@
 .step1-left{}
 .step1-right{
   position:sticky;top:120px;
-  background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(200,169,110,.02));
-  border:1px solid rgba(200,169,110,.12);
+  background:linear-gradient(135deg,rgba(184,184,184,.06),rgba(184,184,184,.02));
+  border:1px solid rgba(184,184,184,.12);
   border-radius:16px;padding:22px;
 }
 .step1-right-title{
@@ -116,15 +116,15 @@
   transition:border-color .25s,box-shadow .25s;
   -webkit-appearance:none;appearance:none;
 }
-.form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(200,169,110,.15);}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(184,184,184,.15);}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
-.form-select option{background:#0a0a0a;color:var(--text);}
+.form-select option{background:#0a1628;color:var(--text);}
 /* New PlaceAutocompleteElement styling */
 gmp-place-autocomplete{
-  --gmp-mat-color-surface:#0a0a0a;
+  --gmp-mat-color-surface:#0a1628;
   --gmp-mat-color-on-surface:rgba(255,255,255,.85);
   --gmp-mat-color-on-surface-variant:rgba(255,255,255,.55);
-  --gmp-mat-color-primary:#c8a96e;
+  --gmp-mat-color-primary:#b8b8b8;
   --gmp-mat-color-outline:rgba(255,255,255,.1);
   display:block;width:100%;
 }
@@ -145,10 +145,10 @@ gmp-place-autocomplete::part(input){background:#0e0e0e!important;border:1px soli
   font-family:'Plus Jakarta Sans','Inter',system-ui,sans-serif!important;
 }
 .pac-item:first-child{border-top:none!important;}
-.pac-item:hover,.pac-item-selected{background:rgba(200,169,110,.08)!important;}
+.pac-item:hover,.pac-item-selected{background:rgba(184,184,184,.08)!important;}
 .pac-item-query{color:#fff!important;font-weight:500!important;font-size:.84rem!important;}
 .pac-icon,.pac-icon-marker{display:none!important;}
-.pac-matched{color:#c8a96e!important;font-weight:600!important;}
+.pac-matched{color:#b8b8b8!important;font-weight:600!important;}
 .pac-item span{color:rgba(255,255,255,.5)!important;font-size:.78rem!important;}
 .pac-item-query span{color:#fff!important;font-size:.84rem!important;}
 .pac-logo::after{display:none!important;}
@@ -157,13 +157,13 @@ gmp-place-autocomplete::part(input){background:#0e0e0e!important;border:1px soli
 .cat-tab{
   flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
   padding:8px 2px;border-radius:8px;cursor:pointer;
-  background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.08);
+  background:rgba(184,184,184,.03);border:1px solid rgba(184,184,184,.08);
   color:var(--text-muted);font-size:.75rem;font-family:'Plus Jakarta Sans',sans-serif;
   letter-spacing:.3px;transition:all .3s;
 }
 .cat-tab svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;transition:all .3s;}
-.cat-tab:hover{border-color:rgba(200,169,110,.2);color:var(--text-dim);}
-.cat-tab.active{background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(200,169,110,.05));border-color:rgba(200,169,110,.35);color:var(--accent);}
+.cat-tab:hover{border-color:rgba(184,184,184,.2);color:var(--text-dim);}
+.cat-tab.active{background:linear-gradient(135deg,rgba(184,184,184,.12),rgba(184,184,184,.05));border-color:rgba(184,184,184,.35);color:var(--accent);}
 .cat-tab.active svg{stroke:var(--accent);}
 .field-wrap{position:relative;}
 .f-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--text-muted);stroke-width:1.5;fill:none;pointer-events:none;}
@@ -177,7 +177,7 @@ gmp-place-autocomplete::part(input){background:#0e0e0e!important;border:1px soli
   -webkit-appearance:none;appearance:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b9cc7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;
 }
-.pax-select option{background:#0a0a0a;color:var(--text);}
+.pax-select option{background:#0a1628;color:var(--text);}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 0;}
 .toggle-row-label{font-size:.78rem;color:var(--text-dim);}
 .toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0;}
@@ -191,7 +191,7 @@ gmp-place-autocomplete::part(input){background:#0e0e0e!important;border:1px soli
   content:'';position:absolute;height:18px;width:18px;left:3px;bottom:2px;border-radius:50%;
   background:var(--text-muted);transition:.3s;
 }
-input:checked+.toggle-slider{background:rgba(200,169,110,.2);border-color:rgba(200,169,110,.35);}
+input:checked+.toggle-slider{background:rgba(184,184,184,.2);border-color:rgba(184,184,184,.35);}
 input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--accent);}
 .child-seat-panel{margin-top:6px;}
 .btn-primary{
@@ -201,7 +201,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   letter-spacing:.3px;transition:all .25s;margin-top:16px;
   font-family:'Plus Jakarta Sans',sans-serif;
 }
-.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,169,110,.3);}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px);box-shadow:0 6px 24px rgba(184,184,184,.3);}
 .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .booking-trust{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;}
 .trust-item{display:flex;align-items:center;gap:5px;font-size:.7rem;color:var(--text-muted);}
@@ -213,7 +213,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text-muted);
   transition:all .3s;
 }
-.step-dot.active{background:rgba(200,169,110,.15);border-color:var(--accent);color:var(--accent);}
+.step-dot.active{background:rgba(184,184,184,.15);border-color:var(--accent);color:var(--accent);}
 .step-dot.done{background:rgba(76,175,80,.15);border-color:rgba(76,175,80,.4);color:#4caf50;}
 .step-line{flex:1;max-width:40px;height:1px;background:rgba(255,255,255,.08);}
 .card-logos-row{display:flex;align-items:center;gap:6px;margin-top:14px;flex-wrap:wrap;}
@@ -223,8 +223,8 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 /* ═══ PRICE DISPLAY (right column) ═══ */
 .price-result-box{
   margin-top:14px;padding:14px 18px;border-radius:12px;
-  background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));
-  border:1px solid rgba(200,169,110,.2);
+  background:linear-gradient(135deg,rgba(184,184,184,.1),rgba(184,184,184,.03));
+  border:1px solid rgba(184,184,184,.2);
   display:none;
 }
 
@@ -254,7 +254,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 <!-- MOBILE HEADER BAR -->
 <header class="mobile-header">
   <a href="index.html" class="mobile-header-logo" aria-label="ONTIME TRANSFERT">
-    <svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/><circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/><line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="22" r="1.8" fill="#c8a96e"/></svg>
+    <svg viewBox="0 0 44 44" fill="none"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#b8b8b8" stroke-width="1.8"/><circle cx="22" cy="22" r="9" fill="none" stroke="rgba(184,184,184,.3)" stroke-width=".8"/><line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="22" x2="28" y2="20" stroke="#b8b8b8" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="22" r="1.8" fill="#b8b8b8"/></svg>
     <div><div class="mh-name">ONTIME</div><div class="mh-sub">TRANSFERT</div></div>
   </a>
   <a href="tel:+33775051999" class="mobile-header-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 75 05 19 99</a>
@@ -263,11 +263,11 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 <!-- ═══ SITE LOGO ═══ -->
 <a href="index.html" class="site-logo" aria-label="ONTIME TRANSFERT - Accueil">
   <svg viewBox="0 0 44 44" fill="none" width="26" height="26">
-    <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/>
-    <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/>
+    <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#b8b8b8" stroke-width="1.8"/>
+    <circle cx="22" cy="22" r="9" fill="none" stroke="rgba(184,184,184,.3)" stroke-width=".8"/>
     <line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
-    <line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
-    <circle cx="22" cy="22" r="1.8" fill="#c8a96e"/>
+    <line x1="22" y1="22" x2="28" y2="20" stroke="#b8b8b8" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="22" cy="22" r="1.8" fill="#b8b8b8"/>
   </svg>
   <div>
     <div class="logo-name">ONTIME</div>
@@ -306,7 +306,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
   <a href="contact.html" class="sidebar-link">Contact</a>
   <a href="reservation.html" class="sidebar-link" style="color:var(--accent-light);">Réserver</a>
   <a href="tel:+33775051999" class="sidebar-link">07 75 05 19 99</a>
-  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(200,169,110,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
+  <button onclick="toggleLang()" style="margin-top:24px;background:none;border:1px solid rgba(184,184,184,.3);color:var(--accent);padding:10px 18px;border-radius:6px;cursor:pointer;font-size:.85rem;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.5px;display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;stroke-width:1.5;fill:none;"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg><span id="sidebarLangBtnText">EN</span></button>
 </aside>
 
 <!-- ═══ HERO ═══ -->
@@ -413,7 +413,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
         <div class="step1-right-title" data-i18n="res-price-title">Votre tarif</div>
 
         <!-- DISTANCE + PRICE DISPLAY -->
-        <div id="priceDisplay" style="display:none;margin-top:0;background:linear-gradient(135deg,rgba(200,169,110,.1),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:14px 18px;">
+        <div id="priceDisplay" style="display:none;margin-top:0;background:linear-gradient(135deg,rgba(184,184,184,.1),rgba(184,184,184,.03));border:1px solid rgba(184,184,184,.2);border-radius:10px;padding:14px 18px;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
             <div><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-dist">Distance estimée</span><br><span id="distKm" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;">—</span> <span style="font-size:.8rem;color:var(--text-muted);">km</span></div>
             <div style="text-align:right;"><span style="font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;" data-i18n="lbl-price-fix">Prix fixe</span><br><span id="priceAmount" style="font-family:'Playfair Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--accent-light),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">—</span></div>
@@ -502,7 +502,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       <input type="text" class="form-input" id="inputFlight" placeholder="Ex: AF1234, TGV 6789" style="padding-left:12px;">
 
       <!-- RECAP -->
-      <div style="margin-top:18px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);border-radius:10px;padding:14px 18px;">
+      <div style="margin-top:18px;background:rgba(184,184,184,.06);border:1px solid rgba(184,184,184,.1);border-radius:10px;padding:14px 18px;">
         <div style="font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;" data-i18n="recap-title">Récapitulatif</div>
         <div style="font-size:.82rem;color:var(--text-dim);line-height:1.8;">
           <span id="recapFrom">—</span> → <span id="recapTo">—</span><br>
@@ -529,7 +529,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
       </div>
       <div class="booking-title" data-i18n="book-title3">Paiement sécurisé</div>
       <div class="booking-sub" data-i18n="book-sub3">Vos données sont protégées par chiffrement SSL via Stripe.</div>
-      <div style="margin-top:14px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.1);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
+      <div style="margin-top:14px;background:rgba(184,184,184,.06);border:1px solid rgba(184,184,184,.1);border-radius:10px;padding:12px 16px;font-size:.82rem;color:var(--text-dim);line-height:1.8;">
         <span id="p3From">—</span> → <span id="p3To">—</span><br>
         <span id="p3Date">—</span> <span data-i18n="recap-at">à</span> <span id="p3Time">—</span> · <span id="p3Veh">—</span><br>
         <div style="margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;">
@@ -565,7 +565,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
         <svg viewBox="0 0 24 24" style="width:32px;height:32px;stroke:#4caf50;stroke-width:1.5;fill:none;"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;margin-bottom:8px;" data-i18n="confirm-title">Réservation confirmée</div>
-      <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--accent);font-weight:600;"></div>
+      <div id="confirmRef" style="display:inline-block;margin:8px auto 12px;padding:6px 16px;border-radius:20px;background:rgba(184,184,184,.1);border:1px solid rgba(184,184,184,.2);font-size:.78rem;letter-spacing:1.5px;color:var(--accent);font-weight:600;"></div>
       <div style="font-size:.85rem;color:var(--text-muted);line-height:1.7;" data-i18n="confirm-note">Vous recevrez un email de confirmation avec les détails de votre chauffeur la veille de la course.</div>
       <div style="margin-top:20px;font-size:.82rem;color:var(--accent);" data-i18n="confirm-thanks">Merci de votre confiance</div>
     </div>
@@ -576,7 +576,7 @@ input:checked+.toggle-slider:before{transform:translateX(19px);background:var(--
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-logo">
-      <svg viewBox="0 0 44 44" fill="none" width="28" height="28"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#c8a96e" stroke-width="1.8"/><circle cx="22" cy="22" r="9" fill="none" stroke="rgba(200,169,110,.3)" stroke-width=".8"/><line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="22" x2="28" y2="20" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="22" r="1.8" fill="#c8a96e"/></svg>
+      <svg viewBox="0 0 44 44" fill="none" width="28" height="28"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" fill="none" stroke="#b8b8b8" stroke-width="1.8"/><circle cx="22" cy="22" r="9" fill="none" stroke="rgba(184,184,184,.3)" stroke-width=".8"/><line x1="22" y1="22" x2="22" y2="15" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><line x1="22" y1="22" x2="28" y2="20" stroke="#b8b8b8" stroke-width="1.5" stroke-linecap="round"/><circle cx="22" cy="22" r="1.8" fill="#b8b8b8"/></svg>
       <span style="font-weight:800;font-size:.95rem;letter-spacing:4px;color:#fff;">ONTIME</span>
       <span style="font-size:.8rem;letter-spacing:3px;color:var(--gold);">TRANSFERT</span>
     </div>
@@ -717,7 +717,7 @@ function setupNominatimAutocomplete(inputId,placeKey){
         const item=document.createElement('div');
         item.style.cssText='padding:10px 14px;cursor:pointer;color:rgba(255,255,255,.85);font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.04);';
         item.textContent=r.display_name;
-        item.addEventListener('mouseenter',()=>item.style.background='rgba(200,169,110,.08)');
+        item.addEventListener('mouseenter',()=>item.style.background='rgba(184,184,184,.08)');
         item.addEventListener('mouseleave',()=>item.style.background='');
         item.addEventListener('click',()=>{
           input.value=r.display_name;
@@ -981,10 +981,10 @@ document.getElementById('btnContinuePay').addEventListener('click',()=>{
           clientSecret:data.clientSecret,
           appearance:{
             theme:'night',
-            variables:{colorPrimary:'#c8a96e',colorBackground:'#0a0a0a',colorText:'#e8e8e8',
+            variables:{colorPrimary:'#b8b8b8',colorBackground:'#0a1628',colorText:'#e8e8e8',
               colorDanger:'#f44336',fontFamily:'Inter, sans-serif',borderRadius:'8px',fontSizeBase:'14px'},
-            rules:{'.Input':{border:'1px solid rgba(200,169,110,.15)',backgroundColor:'rgba(200,169,110,.04)',padding:'13px 12px'},
-              '.Input:focus':{borderColor:'#c8a96e',boxShadow:'0 0 0 1px #c8a96e'},
+            rules:{'.Input':{border:'1px solid rgba(184,184,184,.15)',backgroundColor:'rgba(184,184,184,.04)',padding:'13px 12px'},
+              '.Input:focus':{borderColor:'#b8b8b8',boxShadow:'0 0 0 1px #b8b8b8'},
               '.Label':{color:'#888',fontSize:'12px',textTransform:'uppercase',letterSpacing:'0.5px'}}
           },
           locale:document.documentElement.lang==='en'?'en':'fr'
