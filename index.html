@@ -965,60 +965,29 @@ const SIM_DISTANCES={
   'Aéroport de Beauvais|Paris centre':85,'Aéroport de Beauvais|Aéroport Roissy CDG':80
 };
 
-// Nominatim (OpenStreetMap) Autocomplete for simulator — gratuit, pas de clé
+// Google Maps Places Autocomplete for simulator
+let simMapsLoaded=false, simAcFrom, simAcTo;
 window._simPlaceFrom=null; window._simPlaceTo=null;
-const _simNomCache_={};
-async function simNominatim(q){
-  if(!q||q.length<3)return [];
-  if(_simNomCache_[q])return _simNomCache_[q];
-  try{
-    const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=fr&limit=5&q=${encodeURIComponent(q)}`,{headers:{'Accept-Language':'fr'}});
-    const d=await r.json();_simNomCache_[q]=d;return d;
-  }catch(e){return [];}
+
+function loadSimMaps(){
+  if(simMapsLoaded) return;
+  simMapsLoaded=true;
+  const s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initSimMap&loading=async';
+  s.async=true;
+  document.head.appendChild(s);
 }
-function simSetupAuto(id,placeKey){
-  const input=document.getElementById(id);
-  if(!input)return;
-  // Wrap input in its own container to position dropdown correctly
-  const wrap=document.createElement('div');
-  wrap.style.cssText='position:relative;display:block;';
-  input.parentNode.insertBefore(wrap,input);
-  wrap.appendChild(input);
-  const list=document.createElement('div');
-  list.style.cssText='position:absolute;top:100%;left:0;right:0;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;margin-top:4px;max-height:280px;overflow-y:auto;z-index:99999;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);';
-  wrap.appendChild(list);
-  let timer;
-  input.addEventListener('input',()=>{
-    window[placeKey]=null;clearTimeout(timer);
-    const q=input.value.trim();
-    if(q.length<3){list.style.display='none';return;}
-    timer=setTimeout(async()=>{
-      const results=await simNominatim(q);
-      if(!results.length){list.style.display='none';return;}
-      list.innerHTML='';
-      results.forEach(r=>{
-        const item=document.createElement('div');
-        item.style.cssText='padding:10px 14px;cursor:pointer;color:rgba(255,255,255,.85);font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.04);';
-        item.textContent=r.display_name;
-        item.addEventListener('mouseenter',()=>item.style.background='rgba(200,169,110,.08)');
-        item.addEventListener('mouseleave',()=>item.style.background='');
-        item.addEventListener('click',()=>{
-          input.value=r.display_name;
-          window[placeKey]={formatted_address:r.display_name,geometry:{location:{lat:()=>parseFloat(r.lat),lng:()=>parseFloat(r.lon)}},name:r.display_name};
-          list.style.display='none';
-        });
-        list.appendChild(item);
-      });
-      list.style.display='block';
-    },350);
-  });
-  input.addEventListener('blur',()=>setTimeout(()=>list.style.display='none',200));
-}
-simSetupAuto('simFrom','_simPlaceFrom');
-simSetupAuto('simTo','_simPlaceTo');
-async function loadSimMaps(){return;}
-window.initSimMap=async function(){return;};
-function _unused_old(){
+window.initSimMap=function(){
+  const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
+  const fromEl=document.getElementById('simFrom');
+  const toEl=document.getElementById('simTo');
+  if(!fromEl||!toEl)return;
+  simAcFrom=new google.maps.places.Autocomplete(fromEl,opts);
+  simAcTo=new google.maps.places.Autocomplete(toEl,opts);
+  simAcFrom.addListener('place_changed',()=>{window._simPlaceFrom=simAcFrom.getPlace();});
+  simAcTo.addListener('place_changed',()=>{window._simPlaceTo=simAcTo.getPlace();});
+  fromEl.addEventListener('input',()=>{window._simPlaceFrom=null;});
+  toEl.addEventListener('input',()=>{window._simPlaceTo=null;});
 };
 ['simFrom','simTo'].forEach(id=>{
   const el=document.getElementById(id);
@@ -1043,14 +1012,15 @@ document.querySelectorAll('.sim-quick-picks').forEach(container=>{
   });
 });
 
-// Geocode helper for free-text addresses (Nominatim)
-async function simGeocode(val){
-  const results=await simNominatim(val);
-  if(!results.length)return null;
-  return{
-    formatted_address:results[0].display_name,
-    geometry:{location:{lat:()=>parseFloat(results[0].lat),lng:()=>parseFloat(results[0].lon)}}
-  };
+// Geocode helper for free-text addresses (Google)
+function simGeocode(val){
+  return new Promise((resolve)=>{
+    if(!window.google||!window.google.maps){resolve(null);return;}
+    const gc=new google.maps.Geocoder();
+    gc.geocode({address:val,componentRestrictions:{country:'fr'}},(results,status)=>{
+      if(status==='OK'&&results[0])resolve(results[0]);else resolve(null);
+    });
+  });
 }
 
 // Get coords for a sim input
@@ -1098,6 +1068,11 @@ document.getElementById('btnSimEstimate').addEventListener('click',async()=>{
   let km=SIM_DISTANCES[key];
 
   if(!km){
+    loadSimMaps();
+    await new Promise(r=>{
+      const check=()=>{if(window.google&&window.google.maps)r();else setTimeout(check,200);};
+      check();
+    });
     const fromCoords=await simGetCoords('simFrom','_simPlaceFrom');
     const toCoords=await simGetCoords('simTo','_simPlaceTo');
     if(!fromCoords||!toCoords){
@@ -1105,12 +1080,24 @@ document.getElementById('btnSimEstimate').addEventListener('click',async()=>{
       setTimeout(()=>{btn.textContent=currentLang==='en'?'Estimate price':'Estimer le prix';btn.disabled=false;},2000);
       return;
     }
-    // Haversine distance approximation
-    const R=6371;
-    const dLat=(toCoords.lat-fromCoords.lat)*Math.PI/180;
-    const dLng=(toCoords.lng-fromCoords.lng)*Math.PI/180;
-    const a=Math.sin(dLat/2)**2+Math.cos(fromCoords.lat*Math.PI/180)*Math.cos(toCoords.lat*Math.PI/180)*Math.sin(dLng/2)**2;
-    km=Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))*1.3);
+    try{
+      km=await new Promise((resolve,reject)=>{
+        const svc=new google.maps.DistanceMatrixService();
+        svc.getDistanceMatrix({
+          origins:[new google.maps.LatLng(fromCoords.lat,fromCoords.lng)],
+          destinations:[new google.maps.LatLng(toCoords.lat,toCoords.lng)],
+          travelMode:'DRIVING'
+        },(res,status)=>{
+          if(status==='OK'&&res.rows[0].elements[0].status==='OK')resolve(Math.round(res.rows[0].elements[0].distance.value/1000));else reject('api');
+        });
+      });
+    }catch(e){
+      const R=6371;
+      const dLat=(toCoords.lat-fromCoords.lat)*Math.PI/180;
+      const dLng=(toCoords.lng-fromCoords.lng)*Math.PI/180;
+      const a=Math.sin(dLat/2)**2+Math.cos(fromCoords.lat*Math.PI/180)*Math.cos(toCoords.lat*Math.PI/180)*Math.sin(dLng/2)**2;
+      km=Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))*1.3);
+    }
   }
 
   const fromFinal=document.getElementById('simFrom').value;

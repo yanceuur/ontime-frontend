@@ -682,78 +682,43 @@ const KNOWN_COORDS={
   'La Défense':{lat:48.8920,lng:2.2363}
 };
 
-// ═══ NOMINATIM (OpenStreetMap) AUTOCOMPLETE — gratuit, pas de clé ═══
-const _nomCache_={};
-async function nominatimSearch(query){
-  if(!query||query.length<3)return [];
-  if(_nomCache_[query])return _nomCache_[query];
-  try{
-    const r=await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=fr&addressdetails=1&limit=5&q=${encodeURIComponent(query)}`,{headers:{'Accept-Language':'fr'}});
-    const data=await r.json();
-    _nomCache_[query]=data;
-    return data;
-  }catch(e){return [];}
+// ═══ GOOGLE MAPS PLACES AUTOCOMPLETE ═══
+let acDep,acArr,mapsLoaded=false;
+const _geo_={};
+function loadMapsScript(){
+  if(mapsLoaded)return;mapsLoaded=true;
+  const s=document.createElement('script');
+  s.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAxia9FNvcDXORYUiNmVAQoDL6u9w2nl0E&libraries=places&callback=initMap&loading=async';
+  s.async=true;
+  document.head.appendChild(s);
 }
-function setupNominatimAutocomplete(inputId,placeKey){
-  const input=document.getElementById(inputId);
-  if(!input)return;
-  const wrap=input.parentNode;
-  wrap.style.position='relative';
-  const list=document.createElement('div');
-  list.className='nom-suggest';
-  list.style.cssText='position:absolute;top:100%;left:0;right:0;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:10px;margin-top:4px;max-height:280px;overflow-y:auto;z-index:99999;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);';
-  wrap.appendChild(list);
-  let timer;
-  input.addEventListener('input',()=>{
-    window[placeKey]=null;
-    clearTimeout(timer);
-    const q=input.value.trim();
-    if(q.length<3){list.style.display='none';return;}
-    timer=setTimeout(async()=>{
-      const results=await nominatimSearch(q);
-      if(!results.length){list.style.display='none';return;}
-      list.innerHTML='';
-      results.forEach(r=>{
-        const item=document.createElement('div');
-        item.style.cssText='padding:10px 14px;cursor:pointer;color:rgba(255,255,255,.85);font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.04);';
-        item.textContent=r.display_name;
-        item.addEventListener('mouseenter',()=>item.style.background='rgba(200,169,110,.08)');
-        item.addEventListener('mouseleave',()=>item.style.background='');
-        item.addEventListener('click',()=>{
-          input.value=r.display_name;
-          window[placeKey]={
-            formatted_address:r.display_name,
-            geometry:{location:{lat:()=>parseFloat(r.lat),lng:()=>parseFloat(r.lon)}},
-            name:r.display_name
-          };
-          list.style.display='none';
-        });
-        list.appendChild(item);
-      });
-      list.style.display='block';
-    },350);
-  });
-  input.addEventListener('blur',()=>setTimeout(()=>list.style.display='none',200));
-  input.addEventListener('focus',()=>{if(list.children.length)list.style.display='block';});
-}
-setupNominatimAutocomplete('depAdresseInput','_placeDep');
-setupNominatimAutocomplete('arrAdresseInput','_placeArr');
-
+['depAdresseInput','arrAdresseInput'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el)el.addEventListener('focus',loadMapsScript,{once:true});
+});
+window.initMap=function(){
+  const opts={componentRestrictions:{country:'fr'},fields:['geometry','formatted_address','name']};
+  const depInput=document.getElementById('depAdresseInput');
+  const arrInput=document.getElementById('arrAdresseInput');
+  if(!depInput||!arrInput)return;
+  acDep=new google.maps.places.Autocomplete(depInput,opts);
+  acArr=new google.maps.places.Autocomplete(arrInput,opts);
+  acDep.addListener('place_changed',()=>{window._placeDep=acDep.getPlace();});
+  acArr.addListener('place_changed',()=>{window._placeArr=acArr.getPlace();});
+  depInput.addEventListener('input',()=>{window._placeDep=null;});
+  arrInput.addEventListener('input',()=>{window._placeArr=null;});
+};
 async function resolveAddress(input,placeKey){
   if(window[placeKey]&&window[placeKey].geometry)return true;
   const val=(input.value||'').trim();
   if(!val)return false;
-  const results=await nominatimSearch(val);
-  if(results.length){
-    window[placeKey]={
-      formatted_address:results[0].display_name,
-      geometry:{location:{lat:()=>parseFloat(results[0].lat),lng:()=>parseFloat(results[0].lon)}},
-      name:results[0].display_name
-    };
-    input.value=results[0].display_name;
-    return true;
-  }
-  return false;
+  if(!window.google||!window.google.maps)return false;
+  if(!_geo_.gc)_geo_.gc=new google.maps.Geocoder();
+  return new Promise(resolve=>{
+    _geo_.gc.geocode({address:val,componentRestrictions:{country:'fr'}},function(results,status){
+      if(status==='OK'&&results[0]){window[placeKey]=results[0];resolve(true);}else{resolve(false);}
+    });
+  });
 }
 
 // ═══ GET DEPARTURE / ARRIVAL VALUE ═══
@@ -786,20 +751,28 @@ function getLatLng(cat,value,placeObj){
   if(cat==='adresse'&&placeObj&&placeObj.geometry)return{lat:placeObj.geometry.location.lat(),lng:placeObj.geometry.location.lng()};
   return null;
 }
-function haversineKm(a,b){
-  const R=6371;
-  const dLat=(b.lat-a.lat)*Math.PI/180;
-  const dLng=(b.lng-a.lng)*Math.PI/180;
-  const x=Math.sin(dLat/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)**2;
-  // Multiplier 1.3 to approximate driving distance vs straight line
-  return Math.round(R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))*1.3);
-}
 function calcDistance(){
   return new Promise((resolve,reject)=>{
     const depLL=getLatLng(depCat,getDepValue(),window._placeDep);
     const arrLL=getLatLng(arrCat,getArrValue(),window._placeArr);
     if(!depLL||!arrLL){reject('coords');return;}
-    resolve(haversineKm(depLL,arrLL));
+    if(!window.google||!window.google.maps){
+      // Haversine fallback
+      const R=6371;
+      const dLat=(arrLL.lat-depLL.lat)*Math.PI/180;
+      const dLng=(arrLL.lng-depLL.lng)*Math.PI/180;
+      const x=Math.sin(dLat/2)**2+Math.cos(depLL.lat*Math.PI/180)*Math.cos(arrLL.lat*Math.PI/180)*Math.sin(dLng/2)**2;
+      resolve(Math.round(R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))*1.3));
+      return;
+    }
+    const service=new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+      origins:[new google.maps.LatLng(depLL.lat,depLL.lng)],
+      destinations:[new google.maps.LatLng(arrLL.lat,arrLL.lng)],
+      travelMode:'DRIVING'
+    },(res,status)=>{
+      if(status==='OK'&&res.rows[0].elements[0].status==='OK'){resolve(Math.round(res.rows[0].elements[0].distance.value/1000));}else{reject('api');}
+    });
   });
 }
 
