@@ -41,6 +41,7 @@
   /* Badges equipement en grille 2 colonnes uniformes */
   .v-equip{display:grid !important;grid-template-columns:1fr 1fr !important;gap:8px !important;}
   .v-equip span{justify-content:flex-start;width:100%;padding:8px 12px !important;font-size:.75rem !important;}
+  .v-equip .hide-mobile{display:none !important;}
 }
 
 /* VEHICLE CARD */
@@ -169,7 +170,7 @@
       <span><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg><em data-i18n="vc1-eq2">Chargeurs USB</em></span>
       <span><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><em data-i18n="vc1-eq5">Eau offerte</em></span>
       <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M8.5 8.5L4 4M15.5 8.5L20 4M8.5 15.5L4 20M15.5 15.5L20 20"/></svg><em data-i18n="vc1-eq4">Confiserie offerte</em></span>
-      <span><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><em data-i18n="vc1-eq3">Assurance complète</em></span>
+      <span class="hide-mobile"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><em data-i18n="vc1-eq3">Assurance complète</em></span>
     </div>
     <a href="reservation.html" class="v-cta"><span data-i18n="vc1-cta">Réserver en Berline Economy</span><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
   </div>
